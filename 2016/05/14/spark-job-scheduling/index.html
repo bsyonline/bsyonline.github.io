@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Spark 调度管理 | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="Spark Application 之间的调度每个 Spark 程序会获得一个独立的 JVM 来执行任务和存储数据。当多个 Spark 程序共享集群资源，不同的集群管理器会有不同的调度策略。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark 调度管理">
+<meta property="og:url" content="/2016/05/14/spark-job-scheduling/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="Spark Application 之间的调度每个 Spark 程序会获得一个独立的 JVM 来执行任务和存储数据。当多个 Spark 程序共享集群资源，不同的集群管理器会有不同的调度策略。">
+<meta property="og:updated_time" content="2018-10-21T04:17:05.949Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark 调度管理">
+<meta name="twitter:description" content="Spark Application 之间的调度每个 Spark 程序会获得一个独立的 JVM 来执行任务和存储数据。当多个 Spark 程序共享集群资源，不同的集群管理器会有不同的调度策略。">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2016/05/14
+        <a class="article-title" href="/2016/05/14/spark-job-scheduling/">Spark 调度管理</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-spark-job-scheduling" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2016-05-14T03:50:47.000Z" itemprop="datePublished">2016/05/14</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2016/05/14/spark-job-scheduling/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Spark/" title="Spark">Spark</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Big-Data/" title="Big Data">Big Data</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Spark-Application-之间的调度"><a href="#Spark-Application-之间的调度" class="headerlink" title="Spark Application 之间的调度"></a>Spark Application 之间的调度</h3><p>每个 Spark 程序会获得一个独立的 JVM 来执行任务和存储数据。当多个 Spark 程序共享集群资源，不同的集群管理器会有不同的调度策略。<a id="more"></a></p>
+<p><strong>静态资源分配</strong></p>
+<p>最简单的方式是静态划分所有可用的集群资源。这种方式，每个 Spark 程序被分配它可用的最大资源，并在整个声明周期都占有这些资源。这种方式在 Spark Standalone 、YARN 和 <a href="https://spark.apache.org/docs/1.6.3/running-on-mesos.html#mesos-run-modes" target="_blank" rel="external">coarse-grained Mesos</a> 模式中。</p>
+<ul>
+<li>Standalone mode 模式默认提交的任务是按照 FIFO 的顺序执行，执行期间占有所有可用的节点。通过修改 <code>spark.cores.max</code> 和 <code>spark.executor.memory</code> 参数可以修改程序可使用的节点数和内存。</li>
+<li>YARN 模式通过设置 <code>--num-executors</code> 选项控制 Executor 的数量，使用 <code>--executor-memory</code> 和 <code>--executor-cores</code> 选项控制 Executor 可用的资源。</li>
+</ul>
+<blockquote>
+<p>不管使用何种方式，都不能在程序之间共享内存。</p>
+</blockquote>
+<p><strong>动态资源分配</strong></p>
+<p>Spark 提供了一种按照负载动态分配资源的方式，当程序不在使用资源的时候将资源还给集群，这种特性在多个程序共享集群资源的时候是非常有用的。这个特性是默认关闭的，可以在所有 coarse-grained cluster managers 上设置启用。</p>
+<p>Spark 程序可在等待被调度的任务被挂起的时候动态请求额外的 Executor 。Spark 以轮询的方式请求 Executor ，在任务被挂起到达一定时间时，请求才真正触发。每次触发请求的 Executor 数量以指数递增。这样做的原因是考虑到应用在开始阶段只需要较少的 Executor ，当确实需要大量的 Executor 时，指数递增能够快速提升处理能力。</p>
+<p>相对来时 Spark 的释放策略要简单的多，当闲置超过一定时间 Executor 会被释放。在大多是情况下，任务被挂起说明资源不足，闲置说明资源过剩，所以 Executor 的申请和释放是互斥的。</p>
+<p>静态分配资源时，相关的程序正常退出或出错，Executor 都会退出，两种情况下和 Executor 相关的状态不会再被使用，可以安全的移除。但是动态分配资源时，Executor 退出时程序还在运行，如果程序访问该 Executor 保存的状态，就会重新计算。比如，在 shuffle 期间，Spark 先将 map 写到本地磁盘，然后其他 Executor 可以访问计算结果。在 shuffle 完成之前，Executor 会被移除，完成后，shuffle 的结果将不可访问，如果其他的 Executor 要访问，就需要重新计算。因此，Spark 提供了额外的 shuffle 服务来保存 shuffle 文件，即使 Executor 退出，也可以通过该服务访问 shuffle 文件，因为 shuffle 服务是独立于程序和 Executor 的。</p>
+<h3 id="Application-内的调度"><a href="#Application-内的调度" class="headerlink" title="Application 内的调度"></a>Application 内的调度</h3><p><strong>调度流程</strong></p>
+<p>Spark 是按照 DAG 图来进行的任务调度的。调度可分为两部分： DAGScheduler 和 TaskScheduler 。DAGScheduler 负责 stage 级别的调度， TaskScheduler 负责 task 级别的调度。</p>
+<p>① Spark 程序每一个 action 都会提交给 DAGScheduler 一个 job，DAGScheduler 首先需要逆向遍历 RDD 依赖链，划分出 stage 并确定 stage 之间的依赖关系。Spark 有两种类型的 stage ： ShuffleMapStage 和 ResultStage 。Wide Dependency 会产生 shuffle 操作，shuffle 操作的结果是生成 ShuffleRDD ，其依赖关系是 ShuffleDependency 。Spark 通过 ShuffleDependency 来划分 stage，stage 的边界是从 ShuffleRDD 的父 RDD 开始计算的。</p>
+<blockquote>
+<p>Narrow Dependency 指子 RDD 只依赖父 RDD 的一个或几个 partition 。</p>
+<p>Wide Dependency 指子 RDD 只依赖父 RDD 的所有的 partition 。</p>
+</blockquote>
+<p>② 划分好 stage ，Spark 会生成 FinalStage 并提交。根据依赖关系，判断 FinalStage 的父 stage 结果是否可用，如果父 stage 的结果不可用，则尝试迭代提交父 stage 。如果所有的父 stage 结果都可用，则提交 FinalStage 。③ stage 按 partition 数量拆分出 task 放入 TaskSet 提交给 TaskScheduler ，至此 DAGScheduler 调度结束。④ TaskScheduler 和 TaskSetManager 根据资源情况将 task 调度到最佳的 Executor 上进行计算。⑤ DAGScheduler 和 TaskScheduler 通过回调函数获取 Task 和 TaskSet 的状态，以及 Executor 的状态。当 Task 执行完成后，DAGScheduler 会获取 Task 执行结果。对于非 FinalStage 的 Task ，返回的是 MapStatus 对象，存储的是计算结果的位置信息，而对于 ResultTask 类型的 Task 返回的是结果本身，如果结果比较小，则直接放在 DirectTaskResult 中，如果结果很大，则将结果存储在 BlockManager 中，然后将 BlockId 返回给 DAGScheduler 。 </p>
+<p><strong>调度策略</strong></p>
+<p>在 Spark 程序内部，多个线程提交的任务可以并行执行，是线程安全的。默认的 Spark 任务调度策略是 FIFO 。每个任务被划分到 stage 中，stage 开始时第一个任务获得优先权，然后是第二个，以此类推。如果一个任务没有使用全部资源，下一个任务可以立刻开始执行。如果前边的任务占用了全部的资源，后边的任务只能等待前边的任务完成后再开始执行。</p>
+<p>Spark 可以通过配置 <code>spark.scheduler.mode</code>  为 FAIR 来让任务公平共享资源。在公平模式下，在任务长时间运行时新提交一个较小的任务也能够马上开始执行，不需要等待之前的任务执行完成再开始执行。和 Hadoop Fair scheduler 类似，公平调用支持将作业分组到调度池中，并且为每个调度池分配不同的选项，比如将重要的任务放在优先级高的池中或是将不同用户的任务放在各自的池中。调度池有 3 个配置选项：</p>
+<ul>
+<li>schedulingMode 可配置任务在池内的调度策略。</li>
+<li>weight 可配置池的获得的资源，即优先级。</li>
+<li>minShare 可配置池的最小资源。</li>
+</ul>
+<p>默认情况下，池的属性为 <code>scheduling mode FIFO weight 1 minShare 0</code> 。</p>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2016/05/16/gitlab-installation/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Gitlab 安装
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/11/spark-data-serialization/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Spark 序列化</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

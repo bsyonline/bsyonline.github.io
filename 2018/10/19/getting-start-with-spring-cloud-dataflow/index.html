@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Getting Start with Spring Cloud Dataflow | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="配置环境
+下载 spring cloud dataflow 的 jar 包
+#spring-cloud-dataflow-server-local
+wget https://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-server-local/1.6.3.RELEASE/spring-cloud-da">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting Start with Spring Cloud Dataflow">
+<meta property="og:url" content="/2018/10/19/getting-start-with-spring-cloud-dataflow/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="配置环境
+下载 spring cloud dataflow 的 jar 包
+#spring-cloud-dataflow-server-local
+wget https://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-server-local/1.6.3.RELEASE/spring-cloud-da">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131648605.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131813750.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131904382.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/132043862.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/133611052.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125512120.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125302026.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125349123.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125604831.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125711260.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131950197.png">
+<meta property="og:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131010335.png">
+<meta property="og:updated_time" content="2018-10-21T05:53:22.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Getting Start with Spring Cloud Dataflow">
+<meta name="twitter:description" content="配置环境
+下载 spring cloud dataflow 的 jar 包
+#spring-cloud-dataflow-server-local
+wget https://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-server-local/1.6.3.RELEASE/spring-cloud-da">
+<meta name="twitter:image" content="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131648605.png">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2018/10/19
+        <a class="article-title" href="/2018/10/19/getting-start-with-spring-cloud-dataflow/">Getting Start with Spring Cloud Dataflow</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-getting-start-with-spring-cloud-dataflow" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2018-10-19T03:58:49.000Z" itemprop="datePublished">2018/10/19</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2018/10/19/getting-start-with-spring-cloud-dataflow/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Microservices/" title="Microservices">Microservices</a>,
+  
+    <a href="/tags/Spring-Cloud/" title="Spring Cloud">Spring Cloud</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Java/" title="Java">Java</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a><strong>配置环境</strong></h3><ol>
+<li><p>下载 spring cloud dataflow 的 jar 包</p>
+<pre><code>#spring-cloud-dataflow-server-local
+wget https://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-server-local/1.6.3.RELEASE/spring-cloud-dataflow-server-local-1.6.3.RELEASE.jar
+
+#spring-cloud-dataflow-shell
+wget https://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/1.6.3.RELEASE/spring-cloud-dataflow-shell-1.6.3.RELEASE.jar
+</code></pre></li>
+<li><p>启动服务</p>
+<p>启动 rabbitmq</p>
+<pre><code>docker run --name dataflow-rabbit -p 15672:15672 -p 5672:5672 -d rabbitmq:3.7-management
+</code></pre><p>启动 redis</p>
+<pre><code>docker run --name dataflow-redis -p 6379:6379 -d redis:3.0
+</code></pre><p>启动 mysql</p>
+<pre><code>docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=scdf -p 3306:3306 -d mysql:5.7
+</code></pre><p>启动 spring-cloud-dataflow-server-local</p>
+<pre><code>java -jar spring-cloud-dataflow-server-local-1.6.3.RELEASE.jar --spring.datasource.url=jdbc:mysql://localhost:3306/scdf --spring.datasource.username=root --spring.datasource.password=123456 --spring.datasource.driver-class-name=org.mariadb.jdbc.Driver --spring.rabbitmq.host=127.0.0.1 --spring.rabbitmq.port=5672 --spring.rabbitmq.username=guest --spring.rabbitmq.password=guest
+</code></pre></li>
+<li><p>启动 spring-cloud-dataflow-shell</p>
+<pre><code>$ java -jar spring-cloud-dataflow-shell-1.6.3.RELEASE.jar 
+____                              ____ _                __
+/ ___| _ __  _ __(_)_ __   __ _   / ___| | ___  _   _  __| |
+\___ \| &#39;_ \| &#39;__| | &#39;_ \ / _` | | |   | |/ _ \| | | |/ _` |
+___) | |_) | |  | | | | | (_| | | |___| | (_) | |_| | (_| |
+|____/| .__/|_|  |_|_| |_|\__, |  \____|_|\___/ \__,_|\__,_|
+____ |_|    _          __|___/                 __________
+|  _ \  __ _| |_ __ _  |  ___| | _____      __  \ \ \ \ \ \
+| | | |/ _` | __/ _` | | |_  | |/ _ \ \ /\ / /   \ \ \ \ \ \
+| |_| | (_| | || (_| | |  _| | | (_) \ V  V /    / / / / / /
+|____/ \__,_|\__\__,_| |_|   |_|\___/ \_/\_/    /_/_/_/_/_/
+
+1.6.3.RELEASE
+
+Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type &quot;help&quot;.
+dataflow:&gt;
+</code></pre><p>如果出现 <code>dataflow-unknown:&gt;</code> 需要设置服务器</p>
+<p><code>server-unknown:&amp;gt;dataflow config server http://localhost:9393
+server-unknown:&gt;dataflow config server http://localhost:9393
+Shell mode: classic, Server mode: classic
+dataflow:&gt;</code></p>
+</li>
+</ol>
+<h3 id="使用界面配置-UpperCaseStream"><a href="#使用界面配置-UpperCaseStream" class="headerlink" title="使用界面配置 UpperCaseStream"></a>使用界面配置 UpperCaseStream</h3><p>启动 server 后访问 dashboard <a href="http://localhost:9393/dashboard" target="_blank" rel="external">http://localhost:9393/dashboard</a> 。这时 dashboard 里还没什么内容，spring 提供了一些可用的 app ，我们需要先导入这些 app 。</p>
+<p>可以使用 http 方式导入 <a href="http://bit.ly/Celsius-SR3-stream-applications-rabbit-maven" target="_blank" rel="external">bit.ly/Celsius-SR3-stream-applications-rabbit-maven</a> 。</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131648605.png" alt="mark"></p>
+<p>也可以使用文件导入。</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131813750.png" alt="mark"></p>
+<p>导入成功后就可以看到下面的内容。</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131904382.png" alt="mark"></p>
+<p>接下来就使用导入的 3 个 App 来完成第一个例子。</p>
+<ol>
+<li><p>先创建一个 stream</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/132043862.png" alt="mark"></p>
+</li>
+<li><p>将 http ，transform ，file 三个组件拖拽到面板</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/133611052.png" alt="mark"></p>
+</li>
+<li><p>配置 file 的信息</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125512120.png" alt=""></p>
+</li>
+<li><p>配置 transform 的信息</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125302026.png" alt=""></p>
+</li>
+<li><p>配置 file 的信息</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125349123.png" alt=""></p>
+</li>
+<li><p>将 app 按顺序连接起来</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125604831.png" alt=""></p>
+</li>
+<li><p>最后创建并部署</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/125711260.png" alt=""></p>
+</li>
+<li><p>部署完成在 Runtime 中可以看到 stream 的信息</p>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131950197.png" alt="mark"></p>
+</li>
+<li><p>发送一个 http 请求，然后查看文件可看到结果</p>
+<pre><code>dataflow:&gt;http post --target http://10.0.75.1:61068 --data &quot;hello world&quot;
+&gt; POST (text/plain) http://10.0.75.1:61068 hello world
+&gt; 202 ACCEPTED
+</code></pre></li>
+</ol>
+<p><img src="http://pgu17t3sd.bkt.clouddn.com/pic/20181021/131010335.png" alt="mark"></p>
+<h3 id="官方文档上的-httptest"><a href="#官方文档上的-httptest" class="headerlink" title="官方文档上的 httptest"></a><strong>官方文档上的 httptest</strong></h3><p>上边我们通过 dashboard 部署了一个 stream，接下来我们通过官方文档的 httptest 来看看如何使用 cli 部署 stream 。</p>
+<ol>
+<li><p>创建 stream</p>
+<pre><code>stream create --name httptest --definition &quot;http | log&quot; --deploy
+</code></pre></li>
+<li><p>查看 stream</p>
+<pre><code>dataflow:&gt;stream list
+╔═══════════╤═════════════════╤═════════════════════════════════════════╗
+║Stream Name│Stream Definition│                 Status                  ║
+╠═══════════╪═════════════════╪═════════════════════════════════════════╣
+║httptest   │http | log       │The stream has been successfully deployed║
+╚═══════════╧═════════════════╧═════════════════════════════════════════╝
+</code></pre></li>
+<li><p>查看运行的 App 信息</p>
+<pre><code>dataflow:&gt;runtime apps 
+╔════════════════════╤═══════════╤════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║App Id / Instance Id│Unit Status│                                       No. of Instances / Attributes                                        ║
+╠════════════════════╪═══════════╪════════════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║httptest.http       │ deployed  │                                                     1                                                      ║
+╟┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┼┈┈┈┈┈┈┈┈┈┈┈┼┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╢
+║                    │           │       guid = 54544                                                                                         ║
+║                    │           │        pid = 2424                                                                                          ║
+║                    │           │       port = 54544                                                                                         ║
+║httptest.http-0     │ deployed  │     stderr = /tmp/spring-cloud-deployer-69437306715667832/httptest-1539933007655/httptest.http/stderr_0.log║
+║                    │           │     stdout = /tmp/spring-cloud-deployer-69437306715667832/httptest-1539933007655/httptest.http/stdout_0.log║
+║                    │           │        url = http://127.0.0.1:54544                                                                        ║
+║                    │           │working.dir = /tmp/spring-cloud-deployer-69437306715667832/httptest-1539933007655/httptest.http             ║
+╟────────────────────┼───────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────╢
+║httptest.log        │ deployed  │                                                     1                                                      ║
+╟┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┼┈┈┈┈┈┈┈┈┈┈┈┼┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╢
+║                    │           │       guid = 17251                                                                                         ║
+║                    │           │        pid = 2406                                                                                          ║
+║                    │           │       port = 17251                                                                                         ║
+║httptest.log-0      │ deployed  │     stderr = /tmp/spring-cloud-deployer-69437306715667832/httptest-1539933007348/httptest.log/stderr_0.log ║
+║                    │           │     stdout = /tmp/spring-cloud-deployer-69437306715667832/httptest-1539933007348/httptest.log/stdout_0.log ║
+║                    │           │        url = http://127.0.0.1:17251                                                                        ║
+║                    │           │working.dir = /tmp/spring-cloud-deployer-69437306715667832/httptest-1539933007348/httptest.log              ║
+╚════════════════════╧═══════════╧════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+</code></pre></li>
+<li><p>发一条测试数据</p>
+<pre><code>dataflow:&gt;http post --target http://127.0.0.1:54544 --data &quot;hello world&quot;
+&gt; POST (text/plain) http://127.0.0.1:54544 hello world
+&gt; 202 ACCEPTED
+</code></pre></li>
+<li><p>在 <code>/tmp/spring-cloud-deployer-69437306715667832/httptest-1539933007348/httptest.log/stdout_0.log</code> 中可以看到打印的 hello world 信息。</p>
+</li>
+</ol>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2018/10/19/developing-a-spring-cloud-dataflow-app/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Developing a Spring Cloud Dataflow App
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/12/java-virtual-machine-tools/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Java Virtual Machine Tools</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

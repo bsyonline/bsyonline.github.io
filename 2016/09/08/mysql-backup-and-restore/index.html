@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL 备份与还原 | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="使用 mysqldump 命令
+备份
+mysqldump -uroot -p123456 -h 192.168.201.73 meta &amp;gt; meta_dump_`date +%F`.sql
+压缩备份
+mysqldump -uroot -p123456 -h 192.168.201.73 meta | gzip &amp;gt; backupfile.sql.gz
+还原
+mysql -uroot -p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 备份与还原">
+<meta property="og:url" content="/2016/09/08/mysql-backup-and-restore/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="使用 mysqldump 命令
+备份
+mysqldump -uroot -p123456 -h 192.168.201.73 meta &amp;gt; meta_dump_`date +%F`.sql
+压缩备份
+mysqldump -uroot -p123456 -h 192.168.201.73 meta | gzip &amp;gt; backupfile.sql.gz
+还原
+mysql -uroot -p">
+<meta property="og:updated_time" content="2018-10-21T04:17:05.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL 备份与还原">
+<meta name="twitter:description" content="使用 mysqldump 命令
+备份
+mysqldump -uroot -p123456 -h 192.168.201.73 meta &amp;gt; meta_dump_`date +%F`.sql
+压缩备份
+mysqldump -uroot -p123456 -h 192.168.201.73 meta | gzip &amp;gt; backupfile.sql.gz
+还原
+mysql -uroot -p">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2016/09/08
+        <a class="article-title" href="/2016/09/08/mysql-backup-and-restore/">MySQL 备份与还原</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-mysql-backup-and-restore" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2016-09-08T06:34:13.000Z" itemprop="datePublished">2016/09/08</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2016/09/08/mysql-backup-and-restore/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/MySQL/" title="MySQL">MySQL</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Databases/" title="Databases">Databases</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用 mysqldump 命令</p>
+<p>备份</p>
+<pre><code>mysqldump -uroot -p123456 -h 192.168.201.73 meta &gt; meta_dump_`date +%F`.sql
+</code></pre><p>压缩备份</p>
+<pre><code>mysqldump -uroot -p123456 -h 192.168.201.73 meta | gzip &gt; backupfile.sql.gz
+</code></pre><p>还原</p>
+<pre><code>mysql -uroot -p123456 -h192.168.201.74 meta &lt; backupfile.sql
+</code></pre><p>顺便贴一下 mysqldump 的帮助文档。</p>
+<pre><code>[ops@d20 ~]$ mysqldump
+Usage: mysqldump [OPTIONS] database [tables]
+OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]
+OR     mysqldump [OPTIONS] --all-databases [OPTIONS]
+For more options, use mysqldump --help
+[ops@d20 ~]$ mysqldump --hrlp
+mysqldump: unknown option &#39;--hrlp&#39;
+[ops@d20 ~]$ mysqldump --help
+mysqldump  Ver 10.13 Distrib 5.6.31, for Linux (x86_64)
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Dumping structure and contents of MySQL databases and tables.
+Usage: mysqldump [OPTIONS] database [tables]
+OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]
+OR     mysqldump [OPTIONS] --all-databases [OPTIONS]
+
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf
+The following groups are read: mysqldump client
+The following options may be given as the first argument:
+--print-defaults        Print the program argument list and exit.
+--no-defaults           Don&#39;t read default options from any option file,
+                        except for login file.
+--defaults-file=#       Only read default options from the given file #.
+--defaults-extra-file=# Read this file after the global files are read.
+--defaults-group-suffix=#
+                        Also read groups with concat(group, suffix)
+--login-path=#          Read this path from the login file.
+  -A, --all-databases Dump all the databases. This will be same as --databases
+                      with all databases selected.
+  -Y, --all-tablespaces
+                      Dump all the tablespaces.
+  -y, --no-tablespaces
+                      Do not dump any tablespace information.
+  --add-drop-database Add a DROP DATABASE before each create.
+  --add-drop-table    Add a DROP TABLE before each create.
+                      (Defaults to on; use --skip-add-drop-table to disable.)
+  --add-drop-trigger  Add a DROP TRIGGER before each create.
+  --add-locks         Add locks around INSERT statements.
+                      (Defaults to on; use --skip-add-locks to disable.)
+  --allow-keywords    Allow creation of column names that are keywords.
+  --apply-slave-statements
+                      Adds &#39;STOP SLAVE&#39; prior to &#39;CHANGE MASTER&#39; and &#39;START
+                      SLAVE&#39; to bottom of dump.
+  --bind-address=name IP address to bind to.
+  --character-sets-dir=name
+                      Directory for character set files.
+  -i, --comments      Write additional information.
+                      (Defaults to on; use --skip-comments to disable.)
+  --compatible=name   Change the dump to be compatible with a given mode. By
+                      default tables are dumped in a format optimized for
+                      MySQL. Legal modes are: ansi, mysql323, mysql40,
+                      postgresql, oracle, mssql, db2, maxdb, no_key_options,
+                      no_table_options, no_field_options. One can use several
+                      modes separated by commas. Note: Requires MySQL server
+                      version 4.1.0 or higher. This option is ignored with
+                      earlier server versions.
+  --compact           Give less verbose output (useful for debugging). Disables
+                      structure comments and header/footer constructs.  Enables
+                      options --skip-add-drop-table --skip-add-locks
+                      --skip-comments --skip-disable-keys --skip-set-charset.
+  -c, --complete-insert
+                      Use complete insert statements.
+  -C, --compress      Use compression in server/client protocol.
+  -a, --create-options
+                      Include all MySQL specific create options.
+                      (Defaults to on; use --skip-create-options to disable.)
+  -B, --databases     Dump several databases. Note the difference in usage; in
+                      this case no tables are given. All name arguments are
+                      regarded as database names. &#39;USE db_name;&#39; will be
+                      included in the output.
+  -#, --debug[=#]     This is a non-debug version. Catch this and exit.
+  --debug-check       Check memory and open file usage at exit.
+  --debug-info        Print some debug info at exit.
+  --default-character-set=name
+                      Set the default character set.
+  --delayed-insert    Insert rows with INSERT DELAYED.
+  --delete-master-logs
+                      Delete logs on master after backup. This automatically
+                      enables --master-data.
+  -K, --disable-keys  &#39;/*!40000 ALTER TABLE tb_name DISABLE KEYS */; and
+                      &#39;/*!40000 ALTER TABLE tb_name ENABLE KEYS */; will be put
+                      in the output.
+                      (Defaults to on; use --skip-disable-keys to disable.)
+  --dump-slave[=#]    This causes the binary log position and filename of the
+                      master to be appended to the dumped data output. Setting
+                      the value to 1, will printit as a CHANGE MASTER command
+                      in the dumped data output; if equal to 2, that command
+                      will be prefixed with a comment symbol. This option will
+                      turn --lock-all-tables on, unless --single-transaction is
+                      specified too (in which case a global read lock is only
+                      taken a short time at the beginning of the dump - don&#39;t
+                      forget to read about --single-transaction below). In all
+                      cases any action on logs will happen at the exact moment
+                      of the dump.Option automatically turns --lock-tables off.
+  -E, --events        Dump events.
+  -e, --extended-insert
+                      Use multiple-row INSERT syntax that include several
+                      VALUES lists.
+                      (Defaults to on; use --skip-extended-insert to disable.)
+  --fields-terminated-by=name
+                      Fields in the output file are terminated by the given
+                      string.
+  --fields-enclosed-by=name
+                      Fields in the output file are enclosed by the given
+                      character.
+  --fields-optionally-enclosed-by=name
+                      Fields in the output file are optionally enclosed by the
+                      given character.
+  --fields-escaped-by=name
+                      Fields in the output file are escaped by the given
+                      character.
+  -F, --flush-logs    Flush logs file in server before starting dump. Note that
+                      if you dump many databases at once (using the option
+                      --databases= or --all-databases), the logs will be
+                      flushed for each database dumped. The exception is when
+                      using --lock-all-tables or --master-data: in this case
+                      the logs will be flushed only once, corresponding to the
+                      moment all tables are locked. So if you want your dump
+                      and the log flush to happen at the same exact moment you
+                      should use --lock-all-tables or --master-data with
+                      --flush-logs.
+  --flush-privileges  Emit a FLUSH PRIVILEGES statement after dumping the mysql
+                      database.  This option should be used any time the dump
+                      contains the mysql database and any other database that
+                      depends on the data in the mysql database for proper
+                      restore.
+  -f, --force         Continue even if we get an SQL error.
+  -?, --help          Display this help message and exit.
+  --hex-blob          Dump binary strings (BINARY, VARBINARY, BLOB) in
+                      hexadecimal format.
+  -h, --host=name     Connect to host.
+  --ignore-table=name Do not dump the specified table. To specify more than one
+                      table to ignore, use the directive multiple times, once
+                      for each table.  Each table must be specified with both
+                      database and table names, e.g.,
+                      --ignore-table=database.table.
+  --include-master-host-port
+                      Adds &#39;MASTER_HOST=&lt;host&gt;, MASTER_PORT=&lt;port&gt;&#39; to &#39;CHANGE
+                      MASTER TO..&#39; in dump produced with --dump-slave.
+  --insert-ignore     Insert rows with INSERT IGNORE.
+  --lines-terminated-by=name
+                      Lines in the output file are terminated by the given
+                      string.
+  -x, --lock-all-tables
+                      Locks all tables across all databases. This is achieved
+                      by taking a global read lock for the duration of the
+                      whole dump. Automatically turns --single-transaction and
+                      --lock-tables off.
+  -l, --lock-tables   Lock all tables for read.
+                      (Defaults to on; use --skip-lock-tables to disable.)
+  --log-error=name    Append warnings and errors to given file.
+  --master-data[=#]   This causes the binary log position and filename to be
+                      appended to the output. If equal to 1, will print it as a
+                      CHANGE MASTER command; if equal to 2, that command will
+                      be prefixed with a comment symbol. This option will turn
+                      --lock-all-tables on, unless --single-transaction is
+                      specified too (in which case a global read lock is only
+                      taken a short time at the beginning of the dump; don&#39;t
+                      forget to read about --single-transaction below). In all
+                      cases, any action on logs will happen at the exact moment
+                      of the dump. Option automatically turns --lock-tables
+                      off.
+  --max-allowed-packet=#
+                      The maximum packet length to send to or receive from
+                      server.
+  --net-buffer-length=#
+                      The buffer size for TCP/IP and socket communication.
+  --no-autocommit     Wrap tables with autocommit/commit statements.
+  -n, --no-create-db  Suppress the CREATE DATABASE ... IF EXISTS statement that
+                      normally is output for each dumped database if
+                      --all-databases or --databases is given.
+  -t, --no-create-info
+                      Don&#39;t write table creation info.
+  -d, --no-data       No row information.
+  -N, --no-set-names  Same as --skip-set-charset.
+  --opt               Same as --add-drop-table, --add-locks, --create-options,
+                      --quick, --extended-insert, --lock-tables, --set-charset,
+                      and --disable-keys. Enabled by default, disable with
+                      --skip-opt.
+  --order-by-primary  Sorts each table&#39;s rows by primary key, or first unique
+                      key, if such a key exists.  Useful when dumping a MyISAM
+                      table to be loaded into an InnoDB table, but will make
+                      the dump itself take considerably longer.
+  -p, --password[=name]
+                      Password to use when connecting to server. If password is
+                      not given it&#39;s solicited on the tty.
+  -P, --port=#        Port number to use for connection.
+  --protocol=name     The protocol to use for connection (tcp, socket, pipe,
+                      memory).
+  -q, --quick         Don&#39;t buffer query, dump directly to stdout.
+                      (Defaults to on; use --skip-quick to disable.)
+  -Q, --quote-names   Quote table and column names with backticks (`).
+                      (Defaults to on; use --skip-quote-names to disable.)
+  --replace           Use REPLACE INTO instead of INSERT INTO.
+  -r, --result-file=name
+                      Direct output to a given file. This option should be used
+                      in systems (e.g., DOS, Windows) that use carriage-return
+                      linefeed pairs (\r\n) to separate text lines. This option
+                      ensures that only a single newline is used.
+  -R, --routines      Dump stored routines (functions and procedures).
+  --set-charset       Add &#39;SET NAMES default_character_set&#39; to the output.
+                      (Defaults to on; use --skip-set-charset to disable.)
+  --set-gtid-purged[=name]
+                      Add &#39;SET @@GLOBAL.GTID_PURGED&#39; to the output. Possible
+                      values for this option are ON, OFF and AUTO. If ON is
+                      used and GTIDs are not enabled on the server, an error is
+                      generated. If OFF is used, this option does nothing. If
+                      AUTO is used and GTIDs are enabled on the server, &#39;SET
+                      @@GLOBAL.GTID_PURGED&#39; is added to the output. If GTIDs
+                      are disabled, AUTO does nothing. If no value is supplied
+                      then the default (AUTO) value will be considered.
+  --single-transaction
+                      Creates a consistent snapshot by dumping all tables in a
+                      single transaction. Works ONLY for tables stored in
+                      storage engines which support multiversioning (currently
+                      only InnoDB does); the dump is NOT guaranteed to be
+                      consistent for other storage engines. While a
+                      --single-transaction dump is in process, to ensure a
+                      valid dump file (correct table contents and binary log
+                      position), no other connection should use the following
+                      statements: ALTER TABLE, DROP TABLE, RENAME TABLE,
+                      TRUNCATE TABLE, as consistent snapshot is not isolated
+                      from them. Option automatically turns off --lock-tables.
+  --dump-date         Put a dump date to the end of the output.
+                      (Defaults to on; use --skip-dump-date to disable.)
+  --skip-opt          Disable --opt. Disables --add-drop-table, --add-locks,
+                      --create-options, --quick, --extended-insert,
+                      --lock-tables, --set-charset, and --disable-keys.
+  -S, --socket=name   The socket file to use for connection.
+  --secure-auth       Refuse client connecting to server if it uses old
+                      (pre-4.1.1) protocol.
+                      (Defaults to on; use --skip-secure-auth to disable.)
+  --ssl               Enable SSL for connection (automatically enabled with
+                      other flags).
+  --ssl-ca=name       CA file in PEM format (check OpenSSL docs, implies
+                      --ssl).
+  --ssl-capath=name   CA directory (check OpenSSL docs, implies --ssl).
+  --ssl-cert=name     X509 cert in PEM format (implies --ssl).
+  --ssl-cipher=name   SSL cipher to use (implies --ssl).
+  --ssl-key=name      X509 key in PEM format (implies --ssl).
+  --ssl-crl=name      Certificate revocation list (implies --ssl).
+  --ssl-crlpath=name  Certificate revocation list path (implies --ssl).
+  --ssl-verify-server-cert
+                      Verify server&#39;s &quot;Common Name&quot; in its cert against
+                      hostname used when connecting. This option is disabled by
+                      default.
+  --ssl-mode=name     SSL connection mode.
+  -T, --tab=name      Create tab-separated textfile for each table to given
+                      path. (Create .sql and .txt files.) NOTE: This only works
+                      if mysqldump is run on the same machine as the mysqld
+                      server.
+  --tables            Overrides option --databases (-B).
+  --triggers          Dump triggers for each dumped table.
+                      (Defaults to on; use --skip-triggers to disable.)
+  --tz-utc            SET TIME_ZONE=&#39;+00:00&#39; at top of dump to allow dumping of
+                      TIMESTAMP data when a server has data in different time
+                      zones or data is being moved between servers with
+                      different time zones.
+                      (Defaults to on; use --skip-tz-utc to disable.)
+  -u, --user=name     User for login if not current user.
+  -v, --verbose       Print info about the various stages.
+  -V, --version       Output version information and exit.
+  -w, --where=name    Dump only selected records. Quotes are mandatory.
+  -X, --xml           Dump a database as well formed XML.
+  --plugin-dir=name   Directory for client-side plugins.
+  --default-auth=name Default authentication client-side plugin to use.
+  --enable-cleartext-plugin
+                      Enable/disable the clear text authentication plugin.
+
+Variables (--variable-name=value)
+and boolean options {FALSE|TRUE}  Value (after reading options)
+--------------------------------- ----------------------------------------
+all-databases                     FALSE
+all-tablespaces                   FALSE
+no-tablespaces                    FALSE
+add-drop-database                 FALSE
+add-drop-table                    TRUE
+add-drop-trigger                  FALSE
+add-locks                         TRUE
+allow-keywords                    FALSE
+apply-slave-statements            FALSE
+bind-address                      (No default value)
+character-sets-dir                (No default value)
+comments                          TRUE
+compatible                        (No default value)
+compact                           FALSE
+complete-insert                   FALSE
+compress                          FALSE
+create-options                    TRUE
+databases                         FALSE
+debug-check                       FALSE
+debug-info                        FALSE
+default-character-set             utf8
+delayed-insert                    FALSE
+delete-master-logs                FALSE
+disable-keys                      TRUE
+dump-slave                        0
+events                            FALSE
+extended-insert                   TRUE
+fields-terminated-by              (No default value)
+fields-enclosed-by                (No default value)
+fields-optionally-enclosed-by     (No default value)
+fields-escaped-by                 (No default value)
+flush-logs                        FALSE
+flush-privileges                  FALSE
+force                             FALSE
+hex-blob                          FALSE
+host                              (No default value)
+include-master-host-port          FALSE
+insert-ignore                     FALSE
+lines-terminated-by               (No default value)
+lock-all-tables                   FALSE
+lock-tables                       TRUE
+log-error                         (No default value)
+master-data                       0
+max-allowed-packet                25165824
+net-buffer-length                 1046528
+no-autocommit                     FALSE
+no-create-db                      FALSE
+no-create-info                    FALSE
+no-data                           FALSE
+order-by-primary                  FALSE
+port                              0
+quick                             TRUE
+quote-names                       TRUE
+replace                           FALSE
+routines                          FALSE
+set-charset                       TRUE
+single-transaction                FALSE
+dump-date                         TRUE
+socket                            (No default value)
+secure-auth                       TRUE
+ssl                               FALSE
+ssl-ca                            (No default value)
+ssl-capath                        (No default value)
+ssl-cert                          (No default value)
+ssl-cipher                        (No default value)
+ssl-key                           (No default value)
+ssl-crl                           (No default value)
+ssl-crlpath                       (No default value)
+ssl-verify-server-cert            FALSE
+tab                               (No default value)
+triggers                          TRUE
+tz-utc                            TRUE
+user                              (No default value)
+verbose                           FALSE
+where                             (No default value)
+plugin-dir                        (No default value)
+default-auth                      (No default value)
+enable-cleartext-plugin           FALSE
+</code></pre>
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2016/09/13/linux-crontab-introduction/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Linux 定时任务 crontab 命令详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/07/jmeter-introduction/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Jmeter 使用入门</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

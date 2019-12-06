@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>learning solidity | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="Solidity 是实现智能合约官方的推荐语言之一。Solidity 的语法和 Javascript 类似。
+版本指令每个智能合约的代码都是以版本指令声明开始的。这个是一个空的智能合约。
+pragma solidity ^0.4.23;
+contract HelloWorld {
+}
+状态变量和数据类型状态变量会被永久地保存在合约中，保存在区块链上。
+pragma solidity ^0.4.23">
+<meta property="og:type" content="article">
+<meta property="og:title" content="learning solidity">
+<meta property="og:url" content="/2018/05/05/learning-solidity/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="Solidity 是实现智能合约官方的推荐语言之一。Solidity 的语法和 Javascript 类似。
+版本指令每个智能合约的代码都是以版本指令声明开始的。这个是一个空的智能合约。
+pragma solidity ^0.4.23;
+contract HelloWorld {
+}
+状态变量和数据类型状态变量会被永久地保存在合约中，保存在区块链上。
+pragma solidity ^0.4.23">
+<meta property="og:updated_time" content="2018-10-21T04:17:05.887Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="learning solidity">
+<meta name="twitter:description" content="Solidity 是实现智能合约官方的推荐语言之一。Solidity 的语法和 Javascript 类似。
+版本指令每个智能合约的代码都是以版本指令声明开始的。这个是一个空的智能合约。
+pragma solidity ^0.4.23;
+contract HelloWorld {
+}
+状态变量和数据类型状态变量会被永久地保存在合约中，保存在区块链上。
+pragma solidity ^0.4.23">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2018/05/05
+        <a class="article-title" href="/2018/05/05/learning-solidity/">learning solidity</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-learning-solidity" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2018-05-05T09:08:17.000Z" itemprop="datePublished">2018/05/05</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2018/05/05/learning-solidity/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>,
+  
+    <a href="/tags/Ethereum/" title="Ethereum">Ethereum</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Blockchain/" title="Blockchain">Blockchain</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Solidity 是实现智能合约官方的推荐语言之一。Solidity 的语法和 Javascript 类似。</p>
+<h4 id="版本指令"><a href="#版本指令" class="headerlink" title="版本指令"></a><strong>版本指令</strong></h4><p>每个智能合约的代码都是以版本指令声明开始的。这个是一个空的智能合约。</p>
+<pre><code>pragma solidity ^0.4.23;
+contract HelloWorld {
+}
+</code></pre><h4 id="状态变量和数据类型"><a href="#状态变量和数据类型" class="headerlink" title="状态变量和数据类型"></a><strong>状态变量和数据类型</strong></h4><p>状态变量会被永久地保存在合约中，保存在区块链上。</p>
+<pre><code>pragma solidity ^0.4.23;
+contract HelloWorld {
+        uint a = 100;
+}
+</code></pre><p>上边的例子声明了一个 uint 类型的变量并赋值为 100 。在 Solidity 中 uint 实际上是 uint256 的省略写法。<br>Solidity 还有其他数据类型：布尔类型 bool，整型 uint，uint8，uint32，uint64 … uint256，字符串类型 string，数组类型 []，映射 mapping 等。</p>
+<h5 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h5><p>以太坊区块链由 account (账户)组成。一个帐户的余额是以太（在以太坊区块链上使用的币种），帐户之间可以支付和接受以太币。帐户地址是属于特定用户（或智能合约）的。每个帐户都有一个“地址”，是账户唯一的标识。<br>msg.sender 是当前调用者（或智能合约）的 address，是一个全局变量，并且它总是存在的。</p>
+<pre><code>mapping (address =&gt; uint) favoriteNumber;
+
+function setMyNumber(uint _myNumber) public {
+  // 更新我们的 `favoriteNumber` 映射来将 `_myNumber`存储在 `msg.sender`名下
+  favoriteNumber[msg.sender] = _myNumber;
+  // 存储数据至映射的方法和将数据存储在数组相似
+}
+
+function whatIsMyNumber() public view returns (uint) {
+  // 拿到存储在调用者地址名下的值
+  // 若调用者还没调用 setMyNumber， 则值为 `0`
+  return favoriteNumber[msg.sender];
+}
+</code></pre><h5 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h5><p>映射的定义方式如下：</p>
+<pre><code>//对于金融应用程序，将用户的余额保存在一个 uint类型的变量中：
+mapping (address =&gt; uint) public accountBalance;
+//或者可以用来通过userId 存储/查找的用户名
+mapping (uint =&gt; string) userIdToName;
+</code></pre><p>映射本质上是存储和查找数据所用的键-值对。在第一个例子中，键是一个 address，值是一个 uint，在第二个例子中，键是一个uint，值是一个 string。</p>
+<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a><strong>运算</strong></h4><p>Solidity 支持基本的数学运算：加，减，乘，除，取模，乘方。</p>
+<pre><code>pragma solidity ^0.4.23;
+contract HelloWorld {
+        uint a = 3;
+        uint b = 2;
+        uint c = a + b;
+        uint d = a - b;
+        uint e = a * b;
+        uint f = a / b;
+        uint g = a % b;
+        uint h = a ** b;    // a 的 b 次方
+        uint i = a ^ b;    // a 的 b 次方
+}
+</code></pre><h4 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a><strong>结构体</strong></h4><p>结构体是一种更复杂的数据类型，可以包含多个属性。</p>
+<pre><code>struct  Person {
+        string name;
+        uint age;
+}
+</code></pre><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a><strong>数组</strong></h4><p>Solidity 支持两种数组：静态数组和动态数组。</p>
+<pre><code>pragma solidity ^0.4.23;
+contract HelloWorld {
+        // 固定长度为2的静态数组:
+        uint[2] fixedArray;
+        // 固定长度为5的string类型的静态数组:
+        string[5] stringArray;
+        // 动态数组，长度不固定，可以动态添加元素:
+        uint[] dynamicArray;
+        // 结构体数组
+        Person[] structArray;
+        // 公共数组
+        uint[] public intArray;
+        uint[] numbers;
+        numbers.push(5);
+}
+</code></pre><p>Solidity 会为 public 数组自动创建 getter 方法，其他的合约可以从 public 数组中读取数据（不可写），所以可以用 public 数组存储公共数据。</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a><strong>函数</strong></h4><p>Solidity 中可以通过一下形式创建函数：</p>
+<pre><code>function fun(string _arg1, uint _arg2){
+
+}
+</code></pre><p>虽然函数的属性默认为公共，但是这会易于受到攻击，所以将函数声明为私有，在需要的时候再改为共有是一个好习惯。用 private 就可以声明一个私有函数。</p>
+<pre><code>function _fun(uint _number) private {
+        numbers.push(_number);
+}
+</code></pre><p>以（_）开头是私有函数的命名约定。</p>
+<h5 id="internal-和-external"><a href="#internal-和-external" class="headerlink" title="internal 和 external"></a>internal 和 external</h5><p>除 public 和 private 属性之外，Solidity 还使用了另外两个描述函数可见性的修饰词：internal（内部） 和 external（外部）。internal 和 private 类似，不过， 如果某个合约继承自其父合约，这个合约即可以访问父合约中定义的“内部”函数。external 与 public 类似，只不过这些函数只能在合约之外调用，它们不能被合约内的其他函数调用。<br>声明函数 internal 或 external 类型的语法，与声明 private 和 public类 型相同：</p>
+<pre><code>contract Sandwich {
+        uint private sandwichesEaten = 0;
+
+        function eat() internal {
+                sandwichesEaten++;
+        }
+}
+
+contract BLT is Sandwich {
+        uint private baconSandwichesEaten = 0;
+
+        function eatWithBacon() public returns (string) {
+                baconSandwichesEaten++;
+                // 因为eat() 是internal 的，所以我们能在这里调用
+                eat();
+        }
+}
+</code></pre><p>上边的函数没有返回值，可以通过 returns 定义返回值。</p>
+<pre><code>function fun() public returns (string) {
+        return &quot;abc&quot;;
+}
+</code></pre><p>上边的函数没有改变任何值，所以可以把它定义为 view 。</p>
+<pre><code>function fun() public view returns (string) {
+        return &quot;abc&quot;;
+}
+</code></pre><p>Solidity 里还有一种特殊的函数，pure 函数，即函数不访问应用数据，返回值只依赖于输入参数。</p>
+<pre><code>function _multiply(uint a, uint b) private pure returns (uint) {
+        return a * b;
+}
+</code></pre><h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a><strong>类型转换</strong></h4><p>两种不同数据类型的数据进行运算时会出现类型转换的问题，有时会出现错误。</p>
+<pre><code>uint8 a = 5;
+uint b = 6;
+// 将会抛出错误，因为 a * b 返回 uint, 而不是 uint8
+uint8 c = a * b;
+</code></pre><p>要么将 c 的类型变成 uint，要么将 b 强转成 uint8 。</p>
+<pre><code>uint8 c = a * uint8(b);
+</code></pre><h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a><strong>事件</strong></h4><p>事件是合约和区块链通讯的一种机制。前端应用“监听”某些事件，并做出反应。</p>
+<pre><code>event IntegersAdded(uint x, uint y, uint result);
+function add(uint _x, uint _y) public {
+        uint result = _x + _y;
+        //触发事件，通知app
+        IntegersAdded(_x, _y, result);
+        return result;
+}
+</code></pre><p>同时在前端 javascript 中监听事件。</p>
+<pre><code>var MyContract = web3.eth.contract(abi).at(contractAddress)
+// 监听 `IntegersAdded` 事件, 并且更新UI
+var event = MyContract.add(function(error, result) {
+  if (error) return
+  updateUI()
+})
+</code></pre><h4 id="Require"><a href="#Require" class="headerlink" title="Require"></a><strong>Require</strong></h4><p>在调用函数的过程中，经常需要加上一些前置规则的验证，这就要用到 require 。require 使得函数在执行过程中，当不满足某些条件时抛出错误，并停止执行。</p>
+<pre><code>function sayHiToVitalik(string _name) public returns (string) {
+        // 比较 _name 是否等于 &quot;Vitalik&quot;. 如果不成立，抛出异常并终止程序
+        // (敲黑板: Solidity 并不支持原生的字符串比较, 我们只能通过比较
+        // 两字符串的 keccak256 哈希值来进行判断)
+        require(keccak256(_name) == keccak256(&quot;Vitalik&quot;));
+        // 如果返回 true, 运行如下语句
+        return &quot;Hi!&quot;;
+}
+</code></pre><h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a><strong>继承</strong></h4><p> 当代合约码过于冗长的时候，最好将代码和逻辑分拆到多个不同的合约中，以便于管理，这就要用到继承。</p>
+<pre><code> contract Doge {
+       function catchphrase() public returns (string) {
+               return &quot;So Wow CryptoDoge&quot;;
+        }
+}
+contract BabyDoge is Doge {
+        function anotherCatchphrase() public returns (string) {
+                return &quot;Such Moon BabyDoge&quot;;
+        }
+}
+</code></pre><p>BabyDoge  继承了 Doge ，所以可以访问 Doge 中的所有公有函数。</p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a><strong>接口</strong></h4><p>Solidity 也支持接口，</p>
+<h4 id="import"><a href="#import" class="headerlink" title="import"></a><strong>import</strong></h4><p>通常情况下，当 Solidity 项目中的代码太长的时候我们就把它分成多个文件以便于管理。在 Solidity 中，当你有多个文件并且想把一个文件导入另一个文件时，可以使用 import 语句。</p>
+<pre><code>import &quot;./someothercontract.sol&quot;;
+
+contract newContract is SomeOtherContract {
+
+}
+</code></pre><p>./ 就是同一目录的意思。</p>
+<h4 id="Storage与Memory"><a href="#Storage与Memory" class="headerlink" title="Storage与Memory"></a><strong>Storage与Memory</strong></h4><p>在 Solidity 中，有两个地方可以存储变量 ： storage 或 memory 。Storage 变量是指永久存储在区块链中的变量。 Memory 变量则是临时的，当外部函数对某合约调用完成时，内存型变量即被移除。 状态变量（在函数之外声明的变量）默认为“storage”形式，并永久写入区块链；而在函数内部声明的变量是“memory”型的，它们函数调用结束后消失。<br>大多数时候都用不到这些关键字，默认情况下 Solidity 会自动处理它们。然而也有一些情况下，你需要手动声明存储类型，主要用于处理函数内的 结构体和数组时：</p>
+<pre><code>contract SandwichFactory {
+        struct Sandwich {
+              string name;
+              string status;
+        }
+
+        Sandwich[] sandwiches;
+
+        function eatSandwich(uint _index) public {
+                 // Sandwich mySandwich = sandwiches[_index];
+
+                 // ^ 看上去很直接，不过 Solidity 将会给出警告
+                 // 告诉你应该明确在这里定义 `storage` 或者 `memory`。
+
+                 // 所以你应该明确定义 `storage`:
+                 Sandwich storage mySandwich = sandwiches[_index];
+             // ...这样 `mySandwich` 是指向 `sandwiches[_index]`的指针
+          // 在存储里，另外...
+          mySandwich.status = &quot;Eaten!&quot;;
+          // ...这将永久把 `sandwiches[_index]` 变为区块链上的存储
+
+          // 如果你只想要一个副本，可以使用`memory`:
+          Sandwich memory anotherSandwich = sandwiches[_index + 1];
+          // ...这样 `anotherSandwich` 就仅仅是一个内存里的副本了
+          // 另外
+         anotherSandwich.status = &quot;Eaten!&quot;;
+         // ...将仅仅修改临时变量，对 `sandwiches[_index + 1]` 没有任何影响
+         // 不过你可以这样做:
+          sandwiches[_index + 1] = anotherSandwich;
+         // ...如果你想把副本的改动保存回区块链存储
+        }
+}
+</code></pre>
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2018/05/18/understanding-rpc/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Understanding Remote Procedure Call
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/03/elastic-learning-path/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Elastic Learning Path</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

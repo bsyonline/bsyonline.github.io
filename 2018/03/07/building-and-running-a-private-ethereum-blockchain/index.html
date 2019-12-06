@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Building and Running a Private Ethereum Blockchain | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="本文介绍如何在 Ubuntu 上安装 private ethereum blockchain ，通过安装私链来初步了解区块链，为我们以后编程做好准备。
+安装 ethereum首先，需要搭建 ethereum 环境，推荐使用 ubuntu 来完成第一个试验。本文介绍内容均给予 Ubuntu 16.04 LTS 。安装说明参考：Installation Instructions for Ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building and Running a Private Ethereum Blockchain">
+<meta property="og:url" content="/2018/03/07/building-and-running-a-private-ethereum-blockchain/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="本文介绍如何在 Ubuntu 上安装 private ethereum blockchain ，通过安装私链来初步了解区块链，为我们以后编程做好准备。
+安装 ethereum首先，需要搭建 ethereum 环境，推荐使用 ubuntu 来完成第一个试验。本文介绍内容均给予 Ubuntu 16.04 LTS 。安装说明参考：Installation Instructions for Ubuntu">
+<meta property="og:updated_time" content="2018-10-21T04:17:05.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Building and Running a Private Ethereum Blockchain">
+<meta name="twitter:description" content="本文介绍如何在 Ubuntu 上安装 private ethereum blockchain ，通过安装私链来初步了解区块链，为我们以后编程做好准备。
+安装 ethereum首先，需要搭建 ethereum 环境，推荐使用 ubuntu 来完成第一个试验。本文介绍内容均给予 Ubuntu 16.04 LTS 。安装说明参考：Installation Instructions for Ubuntu">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2018/03/07
+        <a class="article-title" href="/2018/03/07/building-and-running-a-private-ethereum-blockchain/">Building and Running a Private Ethereum Blockchain</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-building-and-running-a-private-ethereum-blockchain" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2018-03-07T03:21:16.000Z" itemprop="datePublished">2018/03/07</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2018/03/07/building-and-running-a-private-ethereum-blockchain/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>,
+  
+    <a href="/tags/Ethereum/" title="Ethereum">Ethereum</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Blockchain/" title="Blockchain">Blockchain</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文介绍如何在 Ubuntu 上安装 private ethereum blockchain ，通过安装私链来初步了解区块链，为我们以后编程做好准备。</p>
+<h4 id="安装-ethereum"><a href="#安装-ethereum" class="headerlink" title="安装 ethereum"></a><strong>安装 ethereum</strong></h4><p>首先，需要搭建 ethereum 环境，推荐使用 ubuntu 来完成第一个试验。本文介绍内容均给予 Ubuntu 16.04 LTS 。安装说明参考：<a href="https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu" target="_blank" rel="external">Installation Instructions for Ubuntu</a></p>
+<pre><code>sudo apt-get install software-properties-common
+sudo add-apt-repository -y ppa:ethereum/ethereum
+sudo apt-get update
+sudo apt-get install ethereum
+</code></pre><p>安装完成后使用 <code>geth version</code> 来查看 ethereum 的版本，不同的版本配置信息略有差异。</p>
+<h4 id="准备工作空间"><a href="#准备工作空间" class="headerlink" title="准备工作空间"></a><strong>准备工作空间</strong></h4><pre><code>cd ~
+mkdir blockchain-samples
+cd blockchain-samples
+mkdir node0
+cd node0
+mkdir config
+mkdir data
+mkdir scripts
+mkdir log
+</code></pre><h4 id="定义创世区块"><a href="#定义创世区块" class="headerlink" title="定义创世区块"></a><strong>定义创世区块</strong></h4><pre><code>cd ~/blockchain-samples/node0/config
+touch genesis-block.json
+</code></pre><p>在 genesis-block.json 中写入以下内容：</p>
+<pre><code>{
+   &quot;config&quot;: {
+        &quot;chainId&quot;: 424242,
+        &quot;homesteadBlock&quot;: 0,
+        &quot;eip155Block&quot;: 0,
+        &quot;eip158Block&quot;: 0
+    },
+    &quot;nonce&quot;: &quot;0x0000000000000042&quot;,
+    &quot;mixhash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
+    &quot;difficulty&quot;: &quot;0x400&quot;,
+    &quot;coinbase&quot;: &quot;0x3333333333333333333333333333333333333333&quot;,
+    &quot;timestamp&quot;: &quot;0x00&quot;,
+    &quot;parentHash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
+    &quot;gasLimit&quot;: &quot;0xffffffff&quot;,
+    &quot;alloc&quot;: {}
+}
+</code></pre><p>这是私链的初始化配置。</p>
+<blockquote>
+<p>不同版本的配置略有差异，如果配置信息不正确，在初始化的时候会出现错误。常见错误有：</p>
+<ul>
+<li>Fatal: invalid genesis file: missing 0x prefix for hex data：这个错误信息意思很明白，就是你的 json 文件中，对于16进制数据，需要加上 0x 前缀</li>
+<li>Fatal: invalid genesis file: hex string has odd length: 从 v1.6 开始，设置的十六进制数值，不能是奇数位， 比如不能是 0x0，而应该是 0x00。</li>
+<li>Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的 json 文件中，缺少 config 部分。看到这个信息，我们不需要把 geth 退回到 v1.5 版本，而是需要加上 config 部分。</li>
+<li>Error: invalid sender undefined: 这个错误不会导致初始化失败，但是会在以后的转账（eth.sendTransaction），或者部署智能合约的时候产生。解决方法就是 chainId 不能设置为 0 。 如果你完全按照 github 上给的官方配置文件，就会产生这个错误。</li>
+</ul>
+</blockquote>
+<h4 id="初始化创世区块"><a href="#初始化创世区块" class="headerlink" title="初始化创世区块"></a><strong>初始化创世区块</strong></h4><p>我们可以使用一段 shell 脚本来执行初始化工作。</p>
+<pre><code>cd ~/blockchain-samples/node0/scripts
+touch init_private_chain.sh
+chmod +x init_private_chain.sh
+</code></pre><p>脚本内容如下：</p>
+<pre><code>#!/bin/sh
+
+DATADIR=/home/$USER/blockchain-samples/node0/data
+GENESIS=/home/$USER/blockchain-samples/node0/config/genesis-block.json
+NETWORKID=42
+IDENTITY=&quot;PrivateChainNode0&quot;
+PORT=30303
+RPCPORT=8000
+
+# Initialize the private blockchain
+geth --networkid $NETWORKID --datadir=$DATADIR --identity $IDENTITY --port $PORT --rpcport $RPCPORT init $GENESIS
+</code></pre><p>执行脚本可以看到初始化成功。</p>
+<h4 id="启动节点"><a href="#启动节点" class="headerlink" title="启动节点"></a><strong>启动节点</strong></h4><p>初始化成功后，我们使用另外一段脚本来启动节点。</p>
+<pre><code>cd ~/blockchain-samples/node0/scripts
+touch start_node_daemon.sh
+chmod +x start_node_daemon.sh
+</code></pre><p>脚本内容如下：</p>
+<pre><code>#!/bin/sh
+PORT=30303
+RPCPORT=8000
+NETWORKID=42
+IDENTITY=&quot;PrivateChainNode0&quot;
+DATADIR=/home/$USER/blockchain-samples/node0/data
+NAT=none
+RPCADDR=&quot;0.0.0.0&quot;
+
+nohup geth --rpc --ws --port $PORT --rpcport $RPCPORT --networkid $NETWORKID --datadir $DATADIR --nat $NAT --identity $IDENTITY --rpcaddr $RPCADDR --wsaddr $RPCADDR --rpccorsdomain * &amp;
+</code></pre><p>执行脚本可以启动区块链节点。如果想作为永久节点，可以使用 nohup 来后台运行。</p>
+<h4 id="创建账户"><a href="#创建账户" class="headerlink" title="创建账户"></a><strong>创建账户</strong></h4><p>先创建个启动命令行的脚本方便以后使用：</p>
+<pre><code>cd ~/blockchain-samples/node0/scripts
+touch start_console.sh
+chmod +x start_console.sh
+</code></pre><p>脚本内容如下：</p>
+<pre><code>#!/bin/sh
+
+PORT=30303
+RPCPORT=8545
+NETWORKID=42
+IDENTITY=&quot;PrivateChainNode0&quot;
+DATADIR=/home/$USER/blockchain-samples/node0/data
+LOGDIR=/home/$USER/blockchain-samples/node0/log
+NAT=none
+RPCADDR=&quot;0.0.0.0&quot;
+
+geth --rpc --rpccorsdomain &quot;*&quot; --rpcapi &quot;db,eth,net,web3&quot; --ws --port $PORT --rpcport $RPCPORT --networkid $NETWORKID --datadir $DATADIR --nat $NAT --identity $IDENTITY --rpcaddr $RPCADDR --wsaddr $RPCADDR console 2&gt;&gt; $LOGDIR/console.log
+</code></pre><p>进入 geth 命令行，执行命令查看账户信息：</p>
+<pre><code>&gt; eth.accounts
+[]
+&gt; personal.newAccount(&quot;rolex&quot;)
+&quot;0x78cd8b9edb6457cbb8455805e0b8e7edad54cebc&quot;
+&gt; eth.accounts
+[&quot;0x78cd8b9edb6457cbb8455805e0b8e7edad54cebc&quot;]
+&gt; eth.accounts
+[&quot;0x78cd8b9edb6457cbb8455805e0b8e7edad54cebc&quot;]
+&gt; personal.newAccount(&quot;123456&quot;)
+&quot;0x9d78bc5b7d1311aa9a4c265a7d7889cc3cd3052a&quot;
+&gt; eth.accounts
+[&quot;0x78cd8b9edb6457cbb8455805e0b8e7edad54cebc&quot;, &quot;0x9d78bc5b7d1311aa9a4c265a7d7889cc3cd3052a&quot;]
+&gt;
+</code></pre><h4 id="挖矿"><a href="#挖矿" class="headerlink" title="挖矿"></a><strong>挖矿</strong></h4><pre><code>&gt; miner.start()
+null
+&gt;
+</code></pre><p>查看日志可以看到如下日志：</p>
+<pre><code>INFO [03-07|16:44:17] Generating DAG in progress               epoch=0 percentage=93 elapsed=2m29.758s
+INFO [03-07|16:44:18] Generating DAG in progress               epoch=0 percentage=94 elapsed=2m31.311s
+INFO [03-07|16:44:20] Generating DAG in progress               epoch=0 percentage=95 elapsed=2m32.813s
+INFO [03-07|16:44:22] Generating DAG in progress               epoch=0 percentage=96 elapsed=2m34.367s
+INFO [03-07|16:44:23] Generating DAG in progress               epoch=0 percentage=97 elapsed=2m35.942s
+INFO [03-07|16:44:25] Generating DAG in progress               epoch=0 percentage=98 elapsed=2m37.509s
+INFO [03-07|16:44:26] Generating DAG in progress               epoch=0 percentage=99 elapsed=2m39.305s
+INFO [03-07|16:44:26] Generated ethash verification cache      epoch=0 elapsed=2m39.308s
+INFO [03-07|16:44:27] Successfully sealed new block            number=1 hash=b09b14…85ce33
+INFO [03-07|16:44:27] 🔨 mined potential block                  number=1 hash=b09b14…85ce33
+INFO [03-07|16:44:27] Commit new mining work                   number=2 txs=0 uncles=0 elapsed=174.747µs
+</code></pre><p>在挖矿完成前查看账户的余额为 0 ，挖矿完成后，只要账户余额不为 0 ，说明挖矿成功。</p>
+<pre><code>&gt; acc0=eth.accounts[0]
+&quot;0x78cd8b9edb6457cbb8455805e0b8e7edad54cebc&quot;
+&gt; eth.getBalance(acc0)
+0
+&gt; eth.getBalance(acc0)
+55000000000000000000
+&gt; eth.getBalance(acc0)
+1.715e+21
+&gt;
+</code></pre><h4 id="交易"><a href="#交易" class="headerlink" title="交易"></a><strong>交易</strong></h4><p>我们创建了两个账户，然后来在挖矿获得的代币被存入默认账户（第一个账户）中，我们可以模拟一次交易，将第一个账户的 1 个代币转账到第二个账户中。</p>
+<pre><code>&gt; amount=web3.toWei(1)
+&quot;1000000000000000000&quot;
+&gt; eth.sendTransaction({from:acc0, to:acc1, value:amount})
+Error: authentication needed: password or unlock
+    at web3.js:3143:20
+    at web3.js:6347:15
+    at web3.js:5081:36
+    at &lt;anonymous&gt;:1:1
+
+&gt;
+</code></pre><p>转账发生错误，提示账户锁定，所以先解锁账户。</p>
+<pre><code>&gt; personal.unlockAccount(acc0)
+Unlock account 0x78cd8b9edb6457cbb8455805e0b8e7edad54cebc
+Passphrase: 
+true
+&gt; eth.sendTransaction({from:acc0, to:acc1, value:amount})
+&quot;0x4af2f15da47d054f167b5f96dfc39c3aa49345111badddca186f24a00204a81f&quot;
+&gt; eth.getBalance(acc1)
+1000000000000000000
+&gt;
+</code></pre><p>如果我们没有启动挖矿，那么当交易完成时，我们查看两个账户的余额时会发现没有余额没有变化。这是因为区块链的交易信息需要由矿工挖矿来确认，从而加入到区块链的大账本中。因此，我们只要再次启动 <code>miner.start()</code> 后在查看账户余额，就可以看到余额的变化了。</p>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/building-a-smart-contract-on-ethereum/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Building a Smart Contract on Ethereum
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/15/unit-test-with-mockito-in-spring-boot/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Unit Test with Mockito in Spring Boot</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

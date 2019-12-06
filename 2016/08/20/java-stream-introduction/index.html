@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java Stream 详解 | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="Java Stream 是 jdk 1.8 加入的新 API ，目的是用来支持函数式编程，位于 java.util.stream 包下。
+Stream 并不是集合，只是提供了针对于集合的函数式操作，如 Map-Rudeuce 转换。Stream 和集合的区别主要体现在一下几点：
+
+不存储数据Stream 不是一个存储数据的数据结构，相反，它是通过一个计算操作的管道从源（数据结构，数组，I/O管道等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Stream 详解">
+<meta property="og:url" content="/2016/08/20/java-stream-introduction/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="Java Stream 是 jdk 1.8 加入的新 API ，目的是用来支持函数式编程，位于 java.util.stream 包下。
+Stream 并不是集合，只是提供了针对于集合的函数式操作，如 Map-Rudeuce 转换。Stream 和集合的区别主要体现在一下几点：
+
+不存储数据Stream 不是一个存储数据的数据结构，相反，它是通过一个计算操作的管道从源（数据结构，数组，I/O管道等">
+<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/stream.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/distinct.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/filter.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/map.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/flatMap.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/peek.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/limit.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/skip.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/reduce.png">
+<meta property="og:updated_time" content="2018-10-21T04:17:05.878Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Stream 详解">
+<meta name="twitter:description" content="Java Stream 是 jdk 1.8 加入的新 API ，目的是用来支持函数式编程，位于 java.util.stream 包下。
+Stream 并不是集合，只是提供了针对于集合的函数式操作，如 Map-Rudeuce 转换。Stream 和集合的区别主要体现在一下几点：
+
+不存储数据Stream 不是一个存储数据的数据结构，相反，它是通过一个计算操作的管道从源（数据结构，数组，I/O管道等">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/stream.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2016/08/20
+        <a class="article-title" href="/2016/08/20/java-stream-introduction/">Java Stream 详解</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-java-stream-introduction" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2016-08-20T07:20:47.000Z" itemprop="datePublished">2016/08/20</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2016/08/20/java-stream-introduction/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Java8/" title="Java8">Java8</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Java/" title="Java">Java</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java Stream 是 jdk 1.8 加入的新 API ，目的是用来支持函数式编程，位于 java.util.stream 包下。</p>
+<p>Stream 并不是集合，只是提供了针对于集合的函数式操作，如 Map-Rudeuce 转换。Stream 和集合的区别主要体现在一下几点：</p>
+<ul>
+<li>不存储数据<br>Stream 不是一个存储数据的数据结构，相反，它是通过一个计算操作的管道从源（数据结构，数组，I/O管道等）传输数据。</li>
+<li>操作并不改变源</li>
+<li>延迟处理<br>多数 Stream 操作，比如过滤、转换等都不是立即执行的，而是在最佳时机执行。例如，查找第一个有三个连续元音的字符串，Stream 操作分为 <em>中间操作</em> 和 <em>最终操作</em> , 中间操作始终是延迟处理的。</li>
+<li>无限的<br>集合的 size 是有限的，Stream 是无限的。limit(n) 或 findFirst() 等短路操作可以让无限的 Stream 在有限的时间内完成计算。</li>
+<li>可消耗的<br>像 Iterator 一样，Stream 中的元素在其生命周期内只能访问一次。</li>
+</ul>
+<h3 id="Stream-操作和管道"><a href="#Stream-操作和管道" class="headerlink" title="Stream 操作和管道"></a>Stream 操作和管道</h3><p>Stream 操作分为中间操作和最终操作，通过管道的被组合起来。一个 Stream 管道包含一个源，0 个或多个中间操作和一个最终操作。<br>中间操作会返回一个新的 Stream , 但并不是立即执行的。比如 filter() 方法不会执行过滤，而是在最终操作执行遍历时才创建一个由符合条件元素构成的新 Stream 。<br>最终操作会产生结果。最终操作被执行后，Stream 管道可以被消耗，并不能再被使用。如果你需要再次遍历相同的数据源，只能获取新的 Stream 。通常最终操作会在返回前完成遍历和计算，除了 iterator() 和 spliterator() 。these are provided as an “escape hatch” to enable arbitrary client-controlled pipeline traversals in the event that the existing operations are not sufficient to the task.<br>中间操作又分为有状态和无状态。无状态操作处理的元素之间彼此是相互独立的，如 filter 和 map 。有状态操作处理新元素则需要用到之前处理的元素的结果，如 distinct 和 sorted 。有状态操作需要针对全部元素处理得到结果，比如排序。所以在并行计算中，管道包含的中间操作需要多次传递和缓存数据。不论顺序还是并行处理，如果管道只包含无状态操作，则可以使用最少的数据缓存单次完成处理。<br>对于无限的 stream ，短路操作是必须的。如果中间操作是短路操作，将会返回一个有限 stream 作为结果，如果最终操作是短路操作，将会在有限时间内结束。</p>
+<h3 id="并行化"><a href="#并行化" class="headerlink" title="并行化"></a>并行化</h3><p>所有的 stream 都可以串行或并行执行，jdk 默认使用串行处理 stream ，如果需要并行，可以指定使用并行方式处理，如 Collection.parallelStream() 。</p>
+<pre><code class="java">int sumOfWeights = widgets.parallelStream()
+                          .filter(b -&gt; b.getColor() == RED)
+                          .mapToInt(b -&gt; b.getWeight())
+                          .sum();
+</code></pre>
+<p>上边代码中，串行和并行的唯一区别就是使用 parallelStream() 代替 stream() 。</p>
+<h3 id="Non-interference"><a href="#Non-interference" class="headerlink" title="Non-interference"></a>Non-interference</h3><p>大多数情况下，stream 操作接受的参数大多是 lambda 表达式，用来描述用户指定的行为。为了保证行为正确，这些参数必须是非干扰和无状态的。</p>
+<h3 id="Stream-语法"><a href="#Stream-语法" class="headerlink" title="Stream 语法"></a>Stream 语法</h3><p>Stream 语法由源，中间操作和最终操作组成。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/stream.jpg" alt=""><br>从上图（图片来自<a href="http://ifeve.com/stream/" target="_blank" rel="external">http://ifeve.com/stream/</a>）可以看出，使用 Stream 的基本步骤：</p>
+<ul>
+<li>创建 Stream<br>红色框中语句生成的是一个包含所有 nums 变量的 Stream 。</li>
+<li>转换 Stream<br>绿色框中语句把一个 Stream 转换成另外一个 Stream ，原 Stream 不变。</li>
+<li>对 Stream 进行聚合（Reduce）操作<br>蓝色框中语句把 Stream 的里面包含的内容按照某种算法来汇聚成一个值。</li>
+</ul>
+<p><strong>创建</strong><br>获得 stream 的方法有如下几种：</p>
+<ul>
+<li>通过 Collection 的 parallelStream() 和 stream() 方法；</li>
+<li>通过 Arrays.stream(Object[]) 方法；</li>
+<li>通过 Stream 的静态工厂方法，如：Stream.of(Object[]), IntStream.range(int, int) or Stream.iterate(Object, UnaryOperator);</li>
+<li>通过 BufferedReader.lines();</li>
+<li>Stream<path></path> 可通过 File 类中的方法获得，如：list(Path dir) 或 lines(Path path) 等；</li>
+<li>Random.ints() 可获得 IntStream ；</li>
+<li>其他一下生成 stream 的方法，如：BitSet.stream(), Pattern.splitAsStream(java.lang.CharSequence), and JarFile.stream() 。</li>
+</ul>
+<p><strong>转换</strong></p>
+<ol>
+<li>distinct:<br>对于 Stream 中包含的元素进行去重操作（去重逻辑依赖元素的 equals 方法），新生成的 Stream 中没有重复的元素。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/distinct.jpg" alt=""></li>
+<li>filter:<br>对于 Stream 中包含的元素使用给定的过滤函数进行过滤操作，新生成的 Stream 只包含符合条件的元素。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/filter.jpg" alt=""></li>
+<li>map:<br>对于 Stream 中包含的元素使用给定的转换函数进行转换操作，新生成的 Stream 只包含转换生成的元素。这个方法有三个对于原始类型的变种方法，分别是：mapToInt，mapToLong 和mapToDouble 。这三个方法也比较好理解，比如 mapToInt 就是把原始 Stream 转换成一个新的 Stream ，这个新生成的 Stream 中的元素都是 int 类型。之所以会有这样三个变种方法，可以免除自动装箱/拆箱的额外消耗。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/map.jpg" alt=""></li>
+<li>flatMap:<br>和 map 类似，不同的是其每个元素转换得到的是 Stream 对象，会把子 Stream 中的元素压缩到父集合中。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/flatMap.jpg" alt=""><br>光从文字描述，感觉 flatMap 还是很难理解，通过程序帮助理解。<br>```java<br>Stream<list<integer>&gt; nums = Stream.of(<pre><code> Arrays.asList(1),
+ Arrays.asList(2, 3),
+ Arrays.asList(4, 5, 6)
+</code></pre>);</list<integer></li>
+</ol>
+<p>nums.flatMap(e -&gt; e.stream()).collect(Collectors.toList()).forEach(e -&gt; System.out.print(e + “,”));</p>
+<pre><code>  输出结果为
+```java
+1,2,3,4,5,6,
+</code></pre><p>  可以看出 flatMap 的作用是将源 Stream 中的 List 结构去掉，用 List 中的元素构成新的 List 。</p>
+<ol>
+<li><p>peek:<br>生成一个包含原 Stream 的所有元素的新 Stream ，同时会提供一个消费函数（ Consumer 实例）。新 Stream 每个元素被消费的时候都会执行给定的消费函数。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/peek.jpg" alt=""></p>
+<p> 文字描述还是没有程序直观</p>
+<pre><code class="java">Stream&lt;List&lt;Integer&gt;&gt; nums = Stream.of(
+     Arrays.asList(1),
+     Arrays.asList(2, 3),
+     Arrays.asList(4, 5, 6)
+);
+nums.peek(e -&gt; System.out.println(e.size())) // 查看每个元素(list)的 size
+     .map(e -&gt; e.get(0))
+     .collect(Collectors.toList())
+     .forEach(System.out::print);
+);
+</code></pre>
+<p> peek 字面意思是窥视，通常也多用在 debug 中查看 Stream 的元素内容。</p>
+</li>
+<li>limit:<br>对一个 Stream 进行截断操作，获取其前 N 个元素，如果原 Stream 中包含的元素个数小于 N ，那就获取其所有的元素。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/limit.jpg" alt=""></li>
+<li>skip:<br>返回一个丢弃原 Stream 的前 N 个元素后剩下元素组成的新 Stream ，如果原 Stream 中包含的元素个数小于 N ，那么返回空 Stream。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/skip.jpg" alt=""></li>
+</ol>
+<p><strong>聚合</strong><br>聚合也叫 fold ，是通过重复的组合操作将一个元素序列合并成单独的结果，比如求 sum 或找到一个数字集合的最大值。Stream 类有多种形式的通用聚合操作，如 reduce() 和 collect() ，还有很多特殊的聚合操作，如 sum() 和 count() ，这些只有 IntStream 、DoubleStream 和 LongSteam 类才有。<br>在 jdk 1.8 以前，要计算 sum 通常使用 for 循环：</p>
+<pre><code class="java">int sum = 0;
+for (int x : numbers) {
+   sum += x;
+}
+</code></pre>
+<p>使用 Stream 可以这样写：</p>
+<pre><code class="java">int sum = numbers.stream().reduce(0, (x,y) -&gt; x + y);
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/reduce.png" alt=""></p>
+<pre><code class="java">int sum = numbers.stream().reduce(0, Integer::sum);
+</code></pre>
+<p>可变聚合<br>可变聚合操作是将输入元素聚合到一个可变的结果容器中，如 Collection 或 StringBuilder 。<br>如果想将 Stream 中的字符串连接成一个长字符串，通常的做法是：</p>
+<pre><code class="java">String concatenated = strings.reduce(&quot;&quot;, String::concat)；
+</code></pre>
+<p>collect() 的一般形式是：</p>
+<pre><code class="java">&lt;R&gt; R collect(Supplier&lt;R&gt; supplier,
+               BiConsumer&lt;R, ? super T&gt; accumulator,
+               BiConsumer&lt;R, R&gt; combiner);
+</code></pre>
+<p>该操作需要 3 个函数：</p>
+<ol>
+<li>Supplier 创建一个新的结果容器的实例；</li>
+<li>accumulator 将输入参数组织到结果容器中；</li>
+<li>combiner 将结果容器中的内容合并生成另一个结果容器。</li>
+</ol>
+<p>将集合中的字符串全转成大写：</p>
+<pre><code class="java">List&lt;String&gt; list = Lists.newArrayList(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);
+List&lt;String&gt; list1 = list.stream().collect(() -&gt; new ArrayList&lt;&gt;(), (c, e) -&gt; c.add(e.toUpperCase()), (c1, c2) -&gt; c1.addAll(c2));
+</code></pre>
+<p>使用标准 Collector 重写：</p>
+<pre><code class="java">List&lt;String&gt; list2 = list.stream().map(String::toUpperCase).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+</code></pre>
+<p>还有更简化的写法，利用 collect() 的重载方法：</p>
+<pre><code class="java">&lt;R, A&gt; R collect(Collector&lt;? super T, A, R&gt; collector);
+</code></pre>
+<pre><code class="java">List&lt;String&gt; list3 = list.stream().map(String::toUpperCase).collect(Collectors.toList());
+</code></pre>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2016/09/05/scala-learning-resources/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Scala 学习资料汇总
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/19/java-reflaction/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Java 反射</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

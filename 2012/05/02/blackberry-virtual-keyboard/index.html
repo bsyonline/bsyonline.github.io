@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>BlackBerry 开发：虚拟键盘 | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="import java.io.InputStream;
+
+import javax.microedition.media.Player;
+import javax.microedition.media.control.VolumeControl;
+
+import net.rim.device.api.system.Application;
+import net.rim.device.api.sys">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BlackBerry 开发：虚拟键盘">
+<meta property="og:url" content="/2012/05/02/blackberry-virtual-keyboard/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="import java.io.InputStream;
+
+import javax.microedition.media.Player;
+import javax.microedition.media.control.VolumeControl;
+
+import net.rim.device.api.system.Application;
+import net.rim.device.api.sys">
+<meta property="og:updated_time" content="2018-10-21T04:17:05.803Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BlackBerry 开发：虚拟键盘">
+<meta name="twitter:description" content="import java.io.InputStream;
+
+import javax.microedition.media.Player;
+import javax.microedition.media.control.VolumeControl;
+
+import net.rim.device.api.system.Application;
+import net.rim.device.api.sys">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2012/05/02
+        <a class="article-title" href="/2012/05/02/blackberry-virtual-keyboard/">BlackBerry 开发：虚拟键盘</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-blackberry-virtual-keyboard" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2012-05-02T07:53:17.000Z" itemprop="datePublished">2012/05/02</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2012/05/02/blackberry-virtual-keyboard/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/BlackBerry/" title="BlackBerry">BlackBerry</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Java/" title="Java">Java</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code class="JAVA">import java.io.InputStream;
+
+import javax.microedition.media.Player;
+import javax.microedition.media.control.VolumeControl;
+
+import net.rim.device.api.system.Application;
+import net.rim.device.api.system.Display;
+import net.rim.device.api.system.KeyListener;
+import net.rim.device.api.ui.Color;
+import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.FieldChangeListener;
+import net.rim.device.api.ui.FocusChangeListener;
+import net.rim.device.api.ui.Graphics;
+import net.rim.device.api.ui.Keypad;
+import net.rim.device.api.ui.Manager;
+import net.rim.device.api.ui.VirtualKeyboard;
+import net.rim.device.api.ui.component.EditField;
+import net.rim.device.api.ui.component.LabelField;
+import net.rim.device.api.ui.component.PasswordEditField;
+import net.rim.device.api.ui.container.HorizontalFieldManager;
+import net.rim.device.api.ui.container.PopupScreen;
+import net.rim.device.api.ui.container.VerticalFieldManager;
+
+public class TestScreen extends PopupScreen implements FieldChangeListener,KeyListener {
+
+
+   PasswordEditField passwd;//输入框
+   VerticalFieldManager vfm;//密码键盘的布局
+   HorizontalFieldManager buttonHfm;//按钮的水平布局
+   VerticalFieldManager numVfm;//数字键盘的垂直布局
+   VerticalFieldManager charVfm;//字母键盘垂直布局
+   VerticalFieldManager bcharVfm;//字母键盘垂直布局
+   VerticalFieldManager signVfm;//符号键盘的水平布局
+   CustomButtonField button1;
+   CustomButtonField button2;
+   CustomButtonField button3;
+   VirtualKeyboard virtKbd;//虚拟键盘
+   CustomButtonField cbf;
+
+   EditField _edit;
+   EditField _edit1;
+
+   public TestScreen(EditField edit,EditField edit1) {
+          super(new VerticalFieldManager()
+          {
+          }
+          );
+          _edit = edit;
+          _edit1 = edit1;
+          virtKbd = this.getVirtualKeyboard();//获得当前屏幕的虚拟键盘
+
+          vfm = new VerticalFieldManager();
+          LabelField label = new LabelField(&quot;密码键盘&quot;);
+          passwd = new PasswordEditField();
+          passwd.setFocusListener(new FocusChangeListener() {
+               public void focusChanged(Field field, int eventType) {
+                       if(eventType == FOCUS_GAINED){
+                            //virtKbd.setVisibility(VirtualKeyboard.HIDE_FORCE);
+                       }
+                  }
+        });
+          buttonHfm = new HorizontalFieldManager();
+          button1 = new CustomButtonField(&quot;数字&quot;, CustomButtonField.BUTTON, Field.FOCUSABLE);
+          button1.setChangeListener(this);
+          button2 = new CustomButtonField(&quot;字母&quot;, CustomButtonField.BUTTON, Field.FOCUSABLE);
+          button2.setChangeListener(this);
+          button3 = new CustomButtonField(&quot;符号&quot;, CustomButtonField.BUTTON, Field.FOCUSABLE);
+          button3.setChangeListener(this);
+          buttonHfm.add(button1);
+          buttonHfm.add(button2);
+          buttonHfm.add(button3);
+          numVfm = new VerticalFieldManager(Manager.FIELD_HCENTER);
+          charVfm = new VerticalFieldManager(Manager.FIELD_HCENTER);
+          bcharVfm = new VerticalFieldManager(Manager.FIELD_HCENTER);
+          signVfm = new VerticalFieldManager(Manager.FIELD_HCENTER);
+
+          String num[] = KeyboardUtil.randomArray(new String[] { &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;,
+                       &quot;9&quot;, &quot;0&quot;, &quot;确定&quot;, &quot;←&quot; });
+          HorizontalFieldManager h1 = new HorizontalFieldManager();
+          HorizontalFieldManager h2 = new HorizontalFieldManager();
+          HorizontalFieldManager h3 = new HorizontalFieldManager();
+          cbf = new CustomButtonField(num[0], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h1.add(cbf);
+          cbf = new CustomButtonField(num[1], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h1.add(cbf);
+          cbf = new CustomButtonField(num[2], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h1.add(cbf);
+          cbf = new CustomButtonField(num[3], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h1.add(cbf);
+          cbf = new CustomButtonField(num[4], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h2.add(cbf);
+          cbf = new CustomButtonField(num[5], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h2.add(cbf);
+          cbf = new CustomButtonField(num[6], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h2.add(cbf);
+          cbf = new CustomButtonField(num[7], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h2.add(cbf);
+          cbf = new CustomButtonField(num[8], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h3.add(cbf);
+          cbf = new CustomButtonField(num[9], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h3.add(cbf);
+          cbf = new CustomButtonField(num[10], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          h3.add(cbf);
+          cbf = new CustomButtonField(num[11], CustomButtonField.SIGN, Field.FOCUSABLE);
+         cbf.setChangeListener(this);
+         h3.add(cbf);
+          numVfm.add(h1);
+          numVfm.add(h2);
+          numVfm.add(h3);
+         //字母键盘
+         HorizontalFieldManager hfm = new HorizontalFieldManager(Manager.FIELD_HCENTER);
+
+           // Rectangular button
+         cbf = new CustomButtonField(&quot;q&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+         cbf.setChangeListener(this);
+           hfm.add(cbf);
+           cbf = new CustomButtonField(&quot;w&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm.add(cbf);
+           cbf = new CustomButtonField(&quot;e&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm.add(cbf);
+           cbf = new CustomButtonField(&quot;r&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm.add(cbf);
+           cbf = new CustomButtonField(&quot;t&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm.add(cbf);
+           cbf = new CustomButtonField(&quot;y&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm.add(cbf);
+           cbf = new CustomButtonField(&quot;u&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm.add(cbf);
+           cbf = new CustomButtonField(&quot;i&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm.add(cbf);
+           cbf = new CustomButtonField(&quot;o&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm.add(cbf);
+           cbf = new CustomButtonField(&quot;p&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm.add(cbf);
+
+           HorizontalFieldManager hfm1 = new HorizontalFieldManager(Manager.FIELD_HCENTER);
+
+           // Rectangular button
+           cbf = new CustomButtonField(&quot;a&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+           cbf = new CustomButtonField(&quot;s&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+           cbf = new CustomButtonField(&quot;d&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+           cbf = new CustomButtonField(&quot;f&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+           cbf = new CustomButtonField(&quot;g&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+           cbf = new CustomButtonField(&quot;h&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+           cbf = new CustomButtonField(&quot;j&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+           cbf = new CustomButtonField(&quot;k&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+           cbf = new CustomButtonField(&quot;l&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+           cbf = new CustomButtonField(&quot;←&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm1.add(cbf);
+
+           HorizontalFieldManager hfm2 = new HorizontalFieldManager(Manager.FIELD_HCENTER);
+           cbf = new CustomButtonField(&quot;↑&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm2.add(cbf);
+           // Rectangular button
+           cbf = new CustomButtonField(&quot;z&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm2.add(cbf);
+           cbf = new CustomButtonField(&quot;x&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm2.add(cbf);
+           cbf = new CustomButtonField(&quot;d&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm2.add(cbf);
+           cbf = new CustomButtonField(&quot;v&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm2.add(cbf);
+           cbf = new CustomButtonField(&quot;b&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm2.add(cbf);
+           cbf = new CustomButtonField(&quot;n&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm2.add(cbf);
+           cbf = new CustomButtonField(&quot;m&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm2.add(cbf);
+           cbf = new CustomButtonField(&quot;确定&quot;, CustomButtonField.RECTANGLE, Field.FOCUSABLE);
+           cbf.setChangeListener(this);
+           hfm2.add(cbf);
+
+           charVfm.add(hfm);
+           charVfm.add(hfm1);
+           charVfm.add(hfm2);
+
+
+
+           /***********************************/
+           //大写字母键盘
+              HorizontalFieldManager bhfm = new HorizontalFieldManager(Manager.FIELD_HCENTER);
+
+                // Rectangular button
+              cbf = new CustomButtonField(&quot;Q&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+              cbf.setChangeListener(this);
+                bhfm.add(cbf);
+                cbf = new CustomButtonField(&quot;W&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm.add(cbf);
+                cbf = new CustomButtonField(&quot;E&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm.add(cbf);
+                cbf = new CustomButtonField(&quot;R&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm.add(cbf);
+                cbf = new CustomButtonField(&quot;T&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm.add(cbf);
+                cbf = new CustomButtonField(&quot;Y&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm.add(cbf);
+                cbf = new CustomButtonField(&quot;U&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm.add(cbf);
+                cbf = new CustomButtonField(&quot;I&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm.add(cbf);
+                cbf = new CustomButtonField(&quot;O&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm.add(cbf);
+                cbf = new CustomButtonField(&quot;P&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm.add(cbf);
+
+                HorizontalFieldManager bhfm1 = new HorizontalFieldManager(Manager.FIELD_HCENTER);
+
+                // Rectangular button
+                cbf = new CustomButtonField(&quot;A&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+                cbf = new CustomButtonField(&quot;S&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+                cbf = new CustomButtonField(&quot;D&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+                cbf = new CustomButtonField(&quot;F&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+                cbf = new CustomButtonField(&quot;G&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+                cbf = new CustomButtonField(&quot;H&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+                cbf = new CustomButtonField(&quot;J&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+                cbf = new CustomButtonField(&quot;K&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+                cbf = new CustomButtonField(&quot;L&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+                cbf = new CustomButtonField(&quot;←&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm1.add(cbf);
+
+                HorizontalFieldManager bhfm2 = new HorizontalFieldManager(Manager.FIELD_HCENTER);
+                cbf = new CustomButtonField(&quot;↓&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm2.add(cbf);
+                // Rectangular button
+                cbf = new CustomButtonField(&quot;Z&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm2.add(cbf);
+                cbf = new CustomButtonField(&quot;X&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm2.add(cbf);
+                cbf = new CustomButtonField(&quot;C&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm2.add(cbf);
+                cbf = new CustomButtonField(&quot;V&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm2.add(cbf);
+                cbf = new CustomButtonField(&quot;B&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm2.add(cbf);
+                cbf = new CustomButtonField(&quot;N&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm2.add(cbf);
+                cbf = new CustomButtonField(&quot;M&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm2.add(cbf);
+                cbf = new CustomButtonField(&quot;确定&quot;, CustomButtonField.BIG, Field.FOCUSABLE);
+                cbf.setChangeListener(this);
+                bhfm2.add(cbf);
+
+                bcharVfm.add(bhfm);
+                bcharVfm.add(bhfm1);
+                bcharVfm.add(bhfm2);
+           /***********************************/
+         //符号键盘
+         String sign[] = new String[] { &quot;!&quot;, &quot;@&quot;, &quot;#&quot;, &quot;$&quot;, &quot;%&quot;, &quot;^&quot;, &quot;&amp;&quot;, &quot;←&quot;,
+                       &quot;(&quot;, &quot;)&quot;, &quot;*&quot;, &quot;确定&quot; };
+         HorizontalFieldManager sh1 = new HorizontalFieldManager();
+         HorizontalFieldManager sh2 = new HorizontalFieldManager();
+         HorizontalFieldManager sh3 = new HorizontalFieldManager();
+          cbf = new CustomButtonField(sign[0], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh1.add(cbf);
+          cbf = new CustomButtonField(sign[1], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh1.add(cbf);
+          cbf = new CustomButtonField(sign[2], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh1.add(cbf);
+          cbf = new CustomButtonField(sign[3], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh1.add(cbf);
+          cbf = new CustomButtonField(sign[4], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh2.add(cbf);
+          cbf = new CustomButtonField(sign[5], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh2.add(cbf);
+          cbf = new CustomButtonField(sign[6], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh2.add(cbf);
+          cbf = new CustomButtonField(sign[7], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh2.add(cbf);
+          cbf = new CustomButtonField(sign[8], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh3.add(cbf);
+          cbf = new CustomButtonField(sign[9], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh3.add(cbf);
+          cbf = new CustomButtonField(sign[10], CustomButtonField.SIGN, Field.FOCUSABLE);
+          cbf.setChangeListener(this);
+          sh3.add(cbf);
+          cbf = new CustomButtonField(sign[11], CustomButtonField.SIGN, Field.FOCUSABLE);
+         cbf.setChangeListener(this);
+         sh3.add(cbf);
+         signVfm.add(sh1);
+         signVfm.add(sh2);
+         signVfm.add(sh3);
+
+
+          vfm.add(label);
+          vfm.add(passwd);
+          vfm.add(buttonHfm);
+          vfm.add(numVfm);
+          add(vfm);
+          Application.getApplication().addKeyListener(this);           
+   }
+
+   protected void paintBackground(Graphics graphics) {
+        graphics.setColor(Color.WHITE);
+   }
+
+   int index = 0;//标识显示的键盘
+   public void fieldChanged(Field field, int context) {
+        play();
+        if(field instanceof CustomButtonField){
+             //virtKbd.setVisibility(VirtualKeyboard.HIDE_FORCE);
+             if(&quot;数字&quot;.equals(((CustomButtonField)field).getText())){
+                  if(index == 1){
+                       vfm.replace(charVfm, numVfm);
+                  }else if(index == 2){
+                       vfm.replace(signVfm, numVfm);
+                  }else if(index == 3){
+                       vfm.replace(bcharVfm, numVfm);
+                  }
+                  index = 0;
+             }else if(&quot;字母&quot;.equals(((CustomButtonField)field).getText())){
+                  if(index == 0){
+                       vfm.replace(numVfm, charVfm);
+                  }else if(index == 2){
+                       vfm.replace(signVfm, charVfm);
+                  }else if(index == 3){
+                       vfm.replace(bcharVfm, charVfm);
+                  }
+                  index = 1;
+             }else if(&quot;符号&quot;.equals(((CustomButtonField)field).getText())){
+                  if(index == 0){
+                       vfm.replace(numVfm, signVfm);
+                  }else if(index == 1){
+                       vfm.replace(charVfm, signVfm);
+                  }else if(index == 3){
+                       vfm.replace(bcharVfm, signVfm);
+                  }
+                  index = 2;
+             }else if(&quot;←&quot;.equals(((CustomButtonField)field).getText())){
+                  if(passwd.getText().length()&gt;0){
+                       passwd.setText(passwd.getText().substring(0, passwd.getText().length()-1));
+                  }
+             }else if(&quot;确定&quot;.equals(((CustomButtonField)field).getText())){
+                  _edit.setText(passwd.getText());
+                  _edit1.setFocus();
+                  this.close();
+             }else if(&quot;↑&quot;.equals(((CustomButtonField)field).getText())){
+                  vfm.replace(charVfm, bcharVfm);
+                  index = 3;
+             }else if(&quot;↓&quot;.equals(((CustomButtonField)field).getText())){
+                  vfm.replace(bcharVfm, charVfm);
+                  index = 1;
+             }else{
+                  passwd.setText(passwd.getText() + ((CustomButtonField)field).getText());
+             }
+             passwd.setFocus();//设置点击按钮失去焦点
+        }
+   }
+
+   public void play(){
+        // create an instance of the player from the InputStream
+        Class clazz;
+        try {
+             clazz = this.getClass();
+            InputStream is = clazz.getResourceAsStream(&quot;notify.wav&quot;);
+            //create an instance of the player from the InputStream
+            Player player = javax.microedition.media.Manager.createPlayer(is, &quot;audio/mpeg&quot;);
+
+             player.realize();
+             player.prefetch();
+             VolumeControl volumeControl = (VolumeControl) player.getControl(&quot;VolumeControl&quot;);
+             volumeControl.setLevel(100);
+             // start the player
+             player.start();
+        } catch (Exception e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+        }
+   }
+
+   protected void sublayout(int width, int height) {
+        layoutDelegate(Display.getWidth()-10, 210);
+        setPosition(-15, 265);
+        setExtent(Display.getWidth()-10, 180);
+   }
+
+
+     public boolean keyChar( char key, int status, int time ) {
+       if(key == Keypad.KEY_ESCAPE){
+            _edit1.setFocus();
+             this.close();
+             return true;
+       }
+
+      return false;
+  }
+
+  public boolean keyDown(int keycode, int time)
+  {
+       if(keycode == Keypad.KEY_ESCAPE){
+            _edit1.setFocus();
+             this.close();
+             return true;
+       }
+      return false;
+  }
+
+  public boolean keyRepeat(int keycode, int time)
+  {
+      return false;
+  }
+
+  public boolean keyStatus(int keycode, int time)
+  {
+      return false;
+  }
+
+  public boolean keyUp(int keycode, int time)
+  {
+      return false;
+  }   
+
+}
+
+/**
+* CustomButtonField.java
+*
+* Copyright � 1998-2010 Research In Motion Ltd.
+*
+* Note: For the sake of simplicity, this sample application may not leverage
+* resource bundles and resource strings.  However, it is STRONGLY recommended
+* that application developers make use of the localization features available
+* within the BlackBerry development platform to ensure a seamless application
+* experience across a variety of languages and geographies.  For more information
+* on localizing your application, please refer to the BlackBerry Java Development
+* Environment Development Guide associated with this release.
+*/
+
+import net.rim.device.api.ui.*;
+import net.rim.device.api.system.*;
+
+/**
+* CustomButtonField - class which creates button fields of various shapes.
+* Demonstrates how to create custom ui fields.
+*/
+public class CustomButtonField extends Field implements DrawStyle {
+   static final int RECTANGLE = 1;
+   static final int SIGN = 2;
+   static final int BIG = 3;
+   static final int BUTTON = 4;
+
+   private String _label;
+   private int _shape;
+   private Font _font;
+   private int _labelHeight;
+   private int _labelWidth;
+
+   /**
+   * Constructs a button with specified label, and default style and shape.
+   */
+   public CustomButtonField(String label) {
+      this(label, RECTANGLE, 0);
+   }
+
+   /**
+   * Constructs a button with specified label and shape, and default style.
+   */
+   public CustomButtonField(String label, int shape) {
+      this(label, shape, Field.FIELD_BOTTOM);
+   }
+
+   /**
+   * Constructs a button with specified label and style, and default shape.
+   */
+   public CustomButtonField(String label, long style) {
+      this(label, RECTANGLE, style);
+   }
+
+   /**
+   * Constructs a button with specified label, shape, and style.
+   */
+   public CustomButtonField(String label, int shape, long style) {
+      super(style);
+
+      _label = label;
+      _shape = shape;
+      _font = getFont();
+      _labelHeight = _font.getHeight();
+      _labelWidth = _font.getAdvance(_label);
+      setMargin(2, 3, 2, 3);
+      // setPadding(2,0,-2,0);
+   }
+
+   /**
+   * @return The text on the button
+   */
+   String getText() {
+        return _label;
+   }
+
+   /**
+   * Field implementation.
+   *
+   * @see net.rim.device.api.ui.Field#getPreferredWidth()
+   */
+   public int getPreferredWidth() {
+      if (_shape == SIGN) {
+         return 83;
+      }
+      if (_shape == BIG) {
+         return _labelWidth + 20;
+      }
+      if (_shape == BUTTON) {
+         return _labelWidth + 78;
+      }
+      return _labelWidth + 22;
+   }
+
+   /**
+   * Field implementation.
+   *
+   * @see net.rim.device.api.ui.Field#getPreferredHeight()
+   */
+   public int getPreferredHeight() {
+      if (_shape == SIGN) {
+         return 30;
+      }
+      return _labelHeight + 10;
+   }
+
+   /**
+   * Field implementation.
+   *
+   * @see net.rim.device.api.ui.Field#drawFocus(Graphics, boolean)
+   */
+   protected void drawFocus(Graphics graphics, boolean on) {
+      graphics.invert(1, 1, getWidth() - 2, getHeight() - 2);
+   }
+
+   /**
+   * Field implementation.
+   *
+   * @see net.rim.device.api.ui.Field#layout(int, int)
+   */
+   protected void layout(int width, int height) {
+      // Update the cached font - in case it has been changed.
+      _font = getFont();
+      _labelHeight = _font.getHeight();
+      _labelWidth = _font.getAdvance(_label);
+
+      // Calc width.
+      width = Math.min(width, getPreferredWidth());
+
+      // Calc height.
+      height = Math.min(height, getPreferredHeight());
+
+      // Set dimensions.
+      setExtent(width, height);
+   }
+
+   /**
+   * Field implementation.
+   *
+   * @see net.rim.device.api.ui.Field#paint(Graphics)
+   */
+   protected void paint(Graphics graphics) {
+      int textX, textY, textWidth;
+      int w = getWidth();
+      int h = getHeight();
+
+      graphics.drawRect(0, 0, w, h);
+
+      textX = 4;
+      textY = 2;
+      textWidth = w - 6;
+
+      graphics.drawText(_label, textX, textY, (int) (getStyle()
+                &amp; DrawStyle.ELLIPSIS | DrawStyle.HALIGN_MASK), textWidth);
+   }
+
+   /**
+   * Overridden so that the Event Dispatch thread can catch this event instead
+   * of having it be caught here.
+   *
+   * @see net.rim.device.api.ui.Field#navigationClick(int, int)
+   */
+   protected boolean navigationClick(int status, int time) {
+      fieldChangeNotify(0);
+      return true;
+   }
+
+}
+</code></pre>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2012/05/14/blackberry-parse-xml/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          BlackBerry 开发：XML 解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/04/22/blackberry-sending-request-to-server/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">BlackBerry 开发：向服务器发请求</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

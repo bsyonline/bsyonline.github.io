@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Developing Smart Contract using Truffle Framework | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="truffle 介绍安装npm install -g truffle
+npm install -g ethereumjs-testrpc
+创建项目cd ~
+cd blockchain-samples
+mkdir truffle-demo
+cd truffle-demo
+truffle init
+在 contracts 下创建合约 HelloWorld.js 
+pragma solidity ^0.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Developing Smart Contract using Truffle Framework">
+<meta property="og:url" content="/2018/03/08/developing-smart-contract-using-truffle-framework/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="truffle 介绍安装npm install -g truffle
+npm install -g ethereumjs-testrpc
+创建项目cd ~
+cd blockchain-samples
+mkdir truffle-demo
+cd truffle-demo
+truffle init
+在 contracts 下创建合约 HelloWorld.js 
+pragma solidity ^0.">
+<meta property="og:updated_time" content="2018-10-21T04:17:05.826Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Developing Smart Contract using Truffle Framework">
+<meta name="twitter:description" content="truffle 介绍安装npm install -g truffle
+npm install -g ethereumjs-testrpc
+创建项目cd ~
+cd blockchain-samples
+mkdir truffle-demo
+cd truffle-demo
+truffle init
+在 contracts 下创建合约 HelloWorld.js 
+pragma solidity ^0.">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2018/03/08
+        <a class="article-title" href="/2018/03/08/developing-smart-contract-using-truffle-framework/">Developing Smart Contract using Truffle Framework</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-developing-smart-contract-using-truffle-framework" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2018-03-08T11:40:18.000Z" itemprop="datePublished">2018/03/08</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2018/03/08/developing-smart-contract-using-truffle-framework/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>,
+  
+    <a href="/tags/Ethereum/" title="Ethereum">Ethereum</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Blockchain/" title="Blockchain">Blockchain</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="truffle-介绍"><a href="#truffle-介绍" class="headerlink" title="truffle 介绍"></a><strong>truffle 介绍</strong></h4><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a><strong>安装</strong></h4><pre><code>npm install -g truffle
+npm install -g ethereumjs-testrpc
+</code></pre><h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a><strong>创建项目</strong></h4><pre><code>cd ~
+cd blockchain-samples
+mkdir truffle-demo
+cd truffle-demo
+truffle init
+</code></pre><p>在 contracts 下创建合约 <code>HelloWorld.js</code> </p>
+<pre><code>pragma solidity ^0.4.17;
+
+contract HelloWorld {
+    function say() constant public returns (string) {
+        return &quot;hello world&quot;;
+    }
+}
+</code></pre><p>在 migrations 下创建 <code>2_initial_helloworld.js</code> </p>
+<pre><code>var helloWorld = artifacts.require(&quot;./HelloWorld.sol&quot;);
+
+module.exports = function(deployer) {
+  deployer.deploy(helloWorld);
+};
+</code></pre><p>在 <code>truffle.js</code> 中添加网路配置</p>
+<pre><code>module.exports = {
+  // See &lt;http://truffleframework.com/docs/advanced/configuration&gt;
+  // to customize your Truffle configuration!
+  networks: {
+    dev: {
+      host: &quot;localhost&quot;, //本地地址，因为是在本机上建立的节点
+      port: 8545,        //Ethereum的rpc监听的端口号，默认是8545
+      network_id: 999    // 自定义网络号
+    }
+  }
+};
+</code></pre><h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a><strong>编译</strong></h4><pre><code>truffle compile
+truffle migrate --network dev --reset
+</code></pre><h4 id="调用合约"><a href="#调用合约" class="headerlink" title="调用合约"></a><strong>调用合约</strong></h4><pre><code>truffle comsole --network dev
+</code></pre><pre><code>truffle(dev)&gt; HelloWorld.deployed().then(instance =&gt; helloworld = instance)
+TruffleContract {
+  constructor: 
+   { [Function: TruffleContract]
+     _static_methods: 
+      { setProvider: [Function: setProvider],
+        new: [Function: new],
+        at: [Function: at],
+        deployed: [Function: deployed],
+        defaults: [Function: defaults],
+        hasNetwork: [Function: hasNetwork],
+        isDeployed: [Function: isDeployed],
+        detectNetwork: [Function: detectNetwork],
+        setNetwork: [Function: setNetwork],
+        resetAddress: [Function: resetAddress],
+        link: [Function: link],
+        clone: [Function: clone],
+        addProp: [Function: addProp],
+        toJSON: [Function: toJSON] },
+     _properties: 
+      { contract_name: [Object],
+        contractName: [Object],
+        abi: [Object],
+        network: [Function: network],
+        networks: [Function: networks],
+        address: [Object],
+        transactionHash: [Object],
+        links: [Function: links],
+        events: [Function: events],
+        binary: [Function: binary],
+        deployedBinary: [Function: deployedBinary],
+        unlinked_binary: [Object],
+        bytecode: [Object],
+        deployedBytecode: [Object],
+        sourceMap: [Object],
+        deployedSourceMap: [Object],
+        source: [Object],
+        sourcePath: [Object],
+        legacyAST: [Object],
+        ast: [Object],
+        compiler: [Object],
+        schema_version: [Function: schema_version],
+        schemaVersion: [Function: schemaVersion],
+        updated_at: [Function: updated_at],
+        updatedAt: [Function: updatedAt] },
+     _property_values: {},
+     _json: 
+      { contractName: &#39;HelloWorld&#39;,
+        abi: [Object],
+        bytecode: &#39;0x6060604052341561000f57600080fd5b6101578061001e6000396000f300606060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063954ab4b214610046575b600080fd5b341561005157600080fd5b6100596100d4565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009957808201518184015260208101905061007e565b50505050905090810190601f1680156100c65780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6100dc610117565b6040805190810160405280600b81526020017f68656c6c6f20776f726c64000000000000000000000000000000000000000000815250905090565b6020604051908101604052806000815250905600a165627a7a72305820fcc0cd665f3f7d4bc38115abb0cab0cd48aa0640db2bdc8e3efcdeea6c35c5fd0029&#39;,
+        deployedBytecode: &#39;0x606060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063954ab4b214610046575b600080fd5b341561005157600080fd5b6100596100d4565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009957808201518184015260208101905061007e565b50505050905090810190601f1680156100c65780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6100dc610117565b6040805190810160405280600b81526020017f68656c6c6f20776f726c64000000000000000000000000000000000000000000815250905090565b6020604051908101604052806000815250905600a165627a7a72305820fcc0cd665f3f7d4bc38115abb0cab0cd48aa0640db2bdc8e3efcdeea6c35c5fd0029&#39;,
+        sourceMap: &#39;26:113:0:-;;;;;;;;;;;;;;;;;&#39;,
+        deployedSourceMap: &#39;26:113:0:-;;;;;;;;;;;;;;;;;;;;;;;;52:85;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;52:85:0;92:6;;:::i;:::-;110:20;;;;;;;;;;;;;;;;;;;;52:85;:::o;26:113::-;;;;;;;;;;;;;;;:::o&#39;,
+        source: &#39;pragma solidity ^0.4.17;\n\ncontract HelloWorld {\n    function say() constant public returns (string) {\n        return &quot;hello world&quot;;\n    }\n}\n&#39;,
+        sourcePath: &#39;/home/rolex/blockchain-samples/dapps/truffle-demo/contracts/HelloWorld.sol&#39;,
+        ast: [Object],
+        legacyAST: [Object],
+        compiler: [Object],
+        networks: [Object],
+        schemaVersion: &#39;2.0.0&#39;,
+        updatedAt: &#39;2018-03-08T11:23:39.505Z&#39; },
+     setProvider: [Function: bound setProvider],
+     new: [Function: bound new],
+     at: [Function: bound at],
+     deployed: [Function: bound deployed],
+     defaults: [Function: bound defaults],
+     hasNetwork: [Function: bound hasNetwork],
+     isDeployed: [Function: bound isDeployed],
+     detectNetwork: [Function: bound detectNetwork],
+     setNetwork: [Function: bound setNetwork],
+     resetAddress: [Function: bound resetAddress],
+     link: [Function: bound link],
+     clone: [Function: bound clone],
+     addProp: [Function: bound addProp],
+     toJSON: [Function: bound toJSON],
+     web3: 
+      Web3 {
+        _requestManager: [Object],
+        currentProvider: [Object],
+        eth: [Object],
+        db: [Object],
+        shh: [Object],
+        net: [Object],
+        personal: [Object],
+        bzz: [Object],
+        settings: [Object],
+        version: [Object],
+        providers: [Object],
+        _extend: [Object] },
+     class_defaults: 
+      { from: &#39;0x78cd8b9edb6457cbb8455805e0b8e7edad54cebc&#39;,
+        gas: 6721975,
+        gasPrice: 100000000000 },
+     currentProvider: 
+      HttpProvider {
+        host: &#39;http://localhost:8545&#39;,
+        timeout: 0,
+        user: undefined,
+        password: undefined,
+        headers: undefined,
+        send: [Function],
+        sendAsync: [Function],
+        _alreadyWrapped: true },
+     network_id: &#39;999&#39; },
+  abi: 
+   [ { constant: true,
+       inputs: [],
+       name: &#39;say&#39;,
+       outputs: [Object],
+       payable: false,
+       stateMutability: &#39;view&#39;,
+       type: &#39;function&#39; } ],
+  contract: 
+   Contract {
+     _eth: 
+      Eth {
+        _requestManager: [Object],
+        getBalance: [Object],
+        getStorageAt: [Object],
+        getCode: [Object],
+        getBlock: [Object],
+        getUncle: [Object],
+        getCompilers: [Object],
+        getBlockTransactionCount: [Object],
+        getBlockUncleCount: [Object],
+        getTransaction: [Object],
+        getTransactionFromBlock: [Object],
+        getTransactionReceipt: [Object],
+        getTransactionCount: [Object],
+        call: [Object],
+        estimateGas: [Object],
+        sendRawTransaction: [Object],
+        signTransaction: [Object],
+        sendTransaction: [Object],
+        sign: [Object],
+        compile: [Object],
+        submitWork: [Object],
+        getWork: [Object],
+        coinbase: [Getter],
+        getCoinbase: [Object],
+        mining: [Getter],
+        getMining: [Object],
+        hashrate: [Getter],
+        getHashrate: [Object],
+        syncing: [Getter],
+        getSyncing: [Object],
+        gasPrice: [Getter],
+        getGasPrice: [Object],
+        accounts: [Getter],
+        getAccounts: [Object],
+        blockNumber: [Getter],
+        getBlockNumber: [Object],
+        protocolVersion: [Getter],
+        getProtocolVersion: [Object],
+        iban: [Object],
+        sendIBANTransaction: [Function: bound transfer] },
+     transactionHash: null,
+     address: &#39;0xd50fb501d6ef3d04cb415e3c0bb5b053d0a7e95f&#39;,
+     abi: [ [Object] ],
+     say: 
+      { [Function: bound ]
+        request: [Function: bound ],
+        call: [Function: bound ],
+        sendTransaction: [Function: bound ],
+        estimateGas: [Function: bound ],
+        getData: [Function: bound ],
+        &#39;&#39;: [Circular] },
+     allEvents: [Function: bound ] },
+  say: 
+   { [Function]
+     call: [Function],
+     sendTransaction: [Function],
+     request: [Function: bound ],
+     estimateGas: [Function] },
+  sendTransaction: [Function],
+  send: [Function],
+  allEvents: [Function: bound ],
+  address: &#39;0xd50fb501d6ef3d04cb415e3c0bb5b053d0a7e95f&#39;,
+  transactionHash: null }
+truffle(dev)&gt; helloworld.say()
+&#39;hello world&#39;
+truffle(dev)&gt;
+</code></pre>
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2018/03/11/adding-a-new-node-to-ethereum-private-blockchain/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Adding a New Node to Ethereum Private Blockchain
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/compiling-solidity-contract-using-command-line/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Compiling Colidity Contract using Command Line</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

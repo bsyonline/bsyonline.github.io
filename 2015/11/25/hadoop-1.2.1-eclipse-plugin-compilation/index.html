@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>编译 hadoop-1.2.1 eclipse 插件 | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="1. 安装需要安装 ant 环境，Ubuntu 默认已经安装了 ant ，如果没有，执行下面命令安装。
+sudo apt-get install ant
+1.1 下载和解压wget https://archive.apache.org/dist/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
+tar -zxf hadoop-1.2.1.tar.gz
+2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译 hadoop-1.2.1 eclipse 插件">
+<meta property="og:url" content="/2015/11/25/hadoop-1.2.1-eclipse-plugin-compilation/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="1. 安装需要安装 ant 环境，Ubuntu 默认已经安装了 ant ，如果没有，执行下面命令安装。
+sudo apt-get install ant
+1.1 下载和解压wget https://archive.apache.org/dist/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
+tar -zxf hadoop-1.2.1.tar.gz
+2">
+<meta property="og:updated_time" content="2018-10-21T04:17:05.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编译 hadoop-1.2.1 eclipse 插件">
+<meta name="twitter:description" content="1. 安装需要安装 ant 环境，Ubuntu 默认已经安装了 ant ，如果没有，执行下面命令安装。
+sudo apt-get install ant
+1.1 下载和解压wget https://archive.apache.org/dist/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
+tar -zxf hadoop-1.2.1.tar.gz
+2">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2015/11/25
+        <a class="article-title" href="/2015/11/25/hadoop-1.2.1-eclipse-plugin-compilation/">编译 hadoop-1.2.1 eclipse 插件</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-hadoop-1.2.1-eclipse-plugin-compilation" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2015-11-25T07:45:46.000Z" itemprop="datePublished">2015/11/25</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2015/11/25/hadoop-1.2.1-eclipse-plugin-compilation/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Hadoop/" title="Hadoop">Hadoop</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Big-Data/" title="Big Data">Big Data</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><p>需要安装 ant 环境，Ubuntu 默认已经安装了 ant ，如果没有，执行下面命令安装。</p>
+<pre><code>sudo apt-get install ant
+</code></pre><h3 id="1-1-下载和解压"><a href="#1-1-下载和解压" class="headerlink" title="1.1 下载和解压"></a>1.1 下载和解压</h3><pre><code>wget https://archive.apache.org/dist/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
+tar -zxf hadoop-1.2.1.tar.gz
+</code></pre><h3 id="2-修改配置文件"><a href="#2-修改配置文件" class="headerlink" title="2. 修改配置文件"></a>2. 修改配置文件</h3><h4 id="2-1-hadoop-1-2-1-src-contrib-eclipse-plugin-build-xml"><a href="#2-1-hadoop-1-2-1-src-contrib-eclipse-plugin-build-xml" class="headerlink" title="2.1 hadoop-1.2.1\src\contrib\eclipse-plugin\build.xml"></a>2.1 <strong>hadoop-1.2.1\src\contrib\eclipse-plugin\build.xml</strong></h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;
+
+&lt;!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the &quot;License&quot;); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+--&gt;
+
+&lt;project default=&quot;jar&quot; name=&quot;eclipse-plugin&quot;&gt;
+
+  &lt;import file=&quot;../build-contrib.xml&quot;/&gt;
+
+  &lt;path id=&quot;eclipse-sdk-jars&quot;&gt;
+    &lt;fileset dir=&quot;${eclipse.home}/plugins/&quot;&gt;
+      &lt;include name=&quot;org.eclipse.ui*.jar&quot;/&gt;
+      &lt;include name=&quot;org.eclipse.jdt*.jar&quot;/&gt;
+      &lt;include name=&quot;org.eclipse.core*.jar&quot;/&gt;
+      &lt;include name=&quot;org.eclipse.equinox*.jar&quot;/&gt;
+      &lt;include name=&quot;org.eclipse.debug*.jar&quot;/&gt;
+      &lt;include name=&quot;org.eclipse.osgi*.jar&quot;/&gt;
+      &lt;include name=&quot;org.eclipse.swt*.jar&quot;/&gt;
+      &lt;include name=&quot;org.eclipse.jface*.jar&quot;/&gt;
+
+      &lt;include name=&quot;org.eclipse.team.cvs.ssh2*.jar&quot;/&gt;
+      &lt;include name=&quot;com.jcraft.jsch*.jar&quot;/&gt;
+    &lt;/fileset&gt;
+  &lt;/path&gt;
+
+  &lt;!-- Override classpath to include Eclipse SDK jars --&gt;
+  &lt;path id=&quot;classpath&quot;&gt;
+    &lt;pathelement location=&quot;${build.classes}&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build/classes&quot;/&gt;
+    &lt;path refid=&quot;eclipse-sdk-jars&quot;/&gt;
+     &lt;fileset dir=&quot;${hadoop.root}/&quot;&gt;
+      &lt;include name=&quot;*.jar&quot;/&gt;
+&lt;/fileset&gt;
+  &lt;/path&gt;
+
+  &lt;!-- Skip building if eclipse.home is unset. --&gt;
+  &lt;target name=&quot;check-contrib&quot; unless=&quot;eclipse.home&quot;&gt;
+    &lt;property name=&quot;skip.contrib&quot; value=&quot;yes&quot;/&gt;
+    &lt;echo message=&quot;eclipse.home unset: skipping eclipse plugin&quot;/&gt;
+  &lt;/target&gt;
+
+&lt;target name=&quot;compile&quot; depends=&quot;init, ivy-retrieve-common&quot; unless=&quot;skip.contrib&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;javac
+     encoding=&quot;${build.encoding}&quot;
+     srcdir=&quot;${src.dir}&quot;
+     includes=&quot;**/*.java&quot;
+     destdir=&quot;${build.classes}&quot;
+     debug=&quot;${javac.debug}&quot;
+     deprecation=&quot;${javac.deprecation}&quot;&gt;
+     &lt;classpath refid=&quot;classpath&quot;/&gt;
+    &lt;/javac&gt;
+  &lt;/target&gt;
+
+  &lt;!-- Override jar target to specify manifest --&gt;
+  &lt;target name=&quot;jar&quot; depends=&quot;compile&quot; unless=&quot;skip.contrib&quot;&gt;
+    &lt;mkdir dir=&quot;${build.dir}/lib&quot;/&gt;
+     &lt;!--
+    &lt;copy file=&quot;${hadoop.root}/build/hadoop-core-${version}.jar&quot; tofile=&quot;${build.dir}/lib/hadoop-core.jar&quot; verbose=&quot;true&quot;/&gt;
+    &lt;copy file=&quot;${hadoop.root}/build/ivy/lib/Hadoop/common/commons-cli-${commons-cli.version}.jar&quot;  todir=&quot;${build.dir}/lib&quot; verbose=&quot;true&quot;/&gt;--&gt;
+     &lt;copy file=&quot;${hadoop.root}/hadoop-core-${version}.jar&quot; tofile=&quot;${build.dir}/lib/hadoop-core.jar&quot; verbose=&quot;true&quot;/&gt;
+    &lt;copy file=&quot;${hadoop.root}/lib/commons-cli-1.2.jar&quot;  todir=&quot;${build.dir}/lib&quot; verbose=&quot;true&quot;/&gt;
+    &lt;copy file=&quot;${hadoop.root}/lib/commons-lang-2.4.jar&quot;  todir=&quot;${build.dir}/lib&quot; verbose=&quot;true&quot;/&gt;
+    &lt;copy file=&quot;${hadoop.root}/lib/commons-configuration-1.6.jar&quot;  todir=&quot;${build.dir}/lib&quot; verbose=&quot;true&quot;/&gt;
+    &lt;copy file=&quot;${hadoop.root}/lib/jackson-mapper-asl-1.8.8.jar&quot;  todir=&quot;${build.dir}/lib&quot; verbose=&quot;true&quot;/&gt;
+    &lt;copy file=&quot;${hadoop.root}/lib/jackson-core-asl-1.8.8.jar&quot;  todir=&quot;${build.dir}/lib&quot; verbose=&quot;true&quot;/&gt;
+    &lt;copy file=&quot;${hadoop.root}/lib/commons-httpclient-3.0.1.jar&quot;  todir=&quot;${build.dir}/lib&quot; verbose=&quot;true&quot;/&gt;
+    &lt;jar
+      jarfile=&quot;${build.dir}/hadoop-${name}-${version}.jar&quot;
+      manifest=&quot;${root}/META-INF/MANIFEST.MF&quot;&gt;
+      &lt;fileset dir=&quot;${build.dir}&quot; includes=&quot;classes/ lib/&quot;/&gt;
+      &lt;fileset dir=&quot;${root}&quot; includes=&quot;resources/ plugin.xml&quot;/&gt;
+    &lt;/jar&gt;
+  &lt;/target&gt;
+
+&lt;/project&gt;
+</code></pre><h4 id="2-2-hadoop-1-2-1-src-contrib-build-contrib-xml"><a href="#2-2-hadoop-1-2-1-src-contrib-build-contrib-xml" class="headerlink" title="2.2 hadoop-1.2.1\src\contrib\build-contrib.xml"></a>2.2 <strong>hadoop-1.2.1\src\contrib\build-contrib.xml</strong></h4><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+
+&lt;!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the &quot;License&quot;); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+--&gt;
+
+&lt;!-- Imported by contrib/*/build.xml files to share generic targets. --&gt;
+
+&lt;project name=&quot;hadoopbuildcontrib&quot; xmlns:ivy=&quot;antlib:org.apache.ivy.ant&quot;&gt;
+
+  &lt;property name=&quot;name&quot; value=&quot;${ant.project.name}&quot;/&gt;
+  &lt;property name=&quot;root&quot; value=&quot;${basedir}&quot;/&gt;
+  &lt;property name=&quot;version&quot; value=&quot;1.2.1&quot;/&gt;
+  &lt;property name=&quot;ivy.version&quot; value=&quot;2.1.0&quot;/&gt;
+  &lt;property name=&quot;eclipse.home&quot; location=&quot;D:/Program Files/eclipse-jee-indigo-SR2-win32-x86_64&quot;/&gt;
+  &lt;property name=&quot;hadoop.root&quot; location=&quot;D:/hadoop/hadoop-1.2.1&quot;/&gt;
+
+  &lt;!-- Load all the default properties, and any the user wants    --&gt;
+  &lt;!-- to contribute (without having to type -D or edit this file --&gt;
+  &lt;property file=&quot;${user.home}/${name}.build.properties&quot; /&gt;
+  &lt;property file=&quot;${root}/build.properties&quot; /&gt;
+  &lt;property file=&quot;${hadoop.root}/build.properties&quot; /&gt;
+
+  &lt;property name=&quot;src.dir&quot;  location=&quot;${root}/src/java&quot;/&gt;
+  &lt;property name=&quot;src.test&quot; location=&quot;${root}/src/test&quot;/&gt;
+  &lt;property name=&quot;src.test.data&quot; location=&quot;${root}/src/test/data&quot;/&gt;
+  &lt;!-- Property added for contrib system tests --&gt;
+  &lt;property name=&quot;build-fi.dir&quot; location=&quot;${hadoop.root}/build-fi&quot;/&gt;
+  &lt;property name=&quot;system-test-build-dir&quot; location=&quot;${build-fi.dir}/system&quot;/&gt;
+  &lt;property name=&quot;src.test.system&quot; location=&quot;${root}/src/test/system&quot;/&gt;
+
+  &lt;property name=&quot;src.examples&quot; location=&quot;${root}/src/examples&quot;/&gt;
+
+  &lt;available file=&quot;${src.examples}&quot; type=&quot;dir&quot; property=&quot;examples.available&quot;/&gt;
+  &lt;available file=&quot;${src.test}&quot; type=&quot;dir&quot; property=&quot;test.available&quot;/&gt;
+
+  &lt;!-- Property added for contrib system tests --&gt;
+  &lt;available file=&quot;${src.test.system}&quot; type=&quot;dir&quot;
+      property=&quot;test.system.available&quot;/&gt;
+
+  &lt;property name=&quot;conf.dir&quot; location=&quot;${hadoop.root}/conf&quot;/&gt;
+  &lt;property name=&quot;test.junit.output.format&quot; value=&quot;plain&quot;/&gt;
+  &lt;property name=&quot;test.output&quot; value=&quot;no&quot;/&gt;
+  &lt;property name=&quot;test.timeout&quot; value=&quot;900000&quot;/&gt;
+  &lt;property name=&quot;build.contrib.dir&quot; location=&quot;${hadoop.root}/build/contrib&quot;/&gt;
+  &lt;property name=&quot;build.dir&quot; location=&quot;${hadoop.root}/build/contrib/${name}&quot;/&gt;
+  &lt;property name=&quot;build.classes&quot; location=&quot;${build.dir}/classes&quot;/&gt;
+  &lt;property name=&quot;build.test&quot; location=&quot;${build.dir}/test&quot;/&gt;
+  &lt;property name=&quot;build.examples&quot; location=&quot;${build.dir}/examples&quot;/&gt;
+  &lt;property name=&quot;hadoop.log.dir&quot; location=&quot;${build.dir}/test/logs&quot;/&gt;
+  &lt;!-- all jars together --&gt;
+  &lt;property name=&quot;javac.deprecation&quot; value=&quot;off&quot;/&gt;
+  &lt;property name=&quot;javac.debug&quot; value=&quot;on&quot;/&gt;
+  &lt;property name=&quot;build.ivy.lib.dir&quot; value=&quot;${hadoop.root}/build/ivy/lib&quot;/&gt;
+
+  &lt;property name=&quot;javadoc.link&quot;
+            value=&quot;http://java.sun.com/j2se/1.4/docs/api/&quot;/&gt;
+
+  &lt;property name=&quot;build.encoding&quot; value=&quot;ISO-8859-1&quot;/&gt;
+
+  &lt;fileset id=&quot;lib.jars&quot; dir=&quot;${root}&quot; includes=&quot;lib/*.jar&quot;/&gt;
+
+  &lt;!-- Property added for contrib system tests --&gt;
+  &lt;property name=&quot;build.test.system&quot; location=&quot;${build.dir}/system&quot;/&gt;
+  &lt;property name=&quot;build.system.classes&quot;
+      location=&quot;${build.test.system}/classes&quot;/&gt;
+
+   &lt;!-- IVY properties set here --&gt;
+  &lt;property name=&quot;ivy.dir&quot; location=&quot;ivy&quot; /&gt;
+  &lt;!-- loglevel take values like default|download-only|quiet --&gt;
+  &lt;property name=&quot;loglevel&quot; value=&quot;quiet&quot;/&gt;
+  &lt;property name=&quot;ivysettings.xml&quot; location=&quot;${hadoop.root}/ivy/ivysettings.xml&quot;/&gt;
+  &lt;loadproperties srcfile=&quot;${ivy.dir}/libraries.properties&quot;/&gt;
+  &lt;loadproperties srcfile=&quot;${hadoop.root}/ivy/libraries.properties&quot;/&gt;
+  &lt;property name=&quot;ivy.jar&quot; location=&quot;${hadoop.root}/ivy/ivy-${ivy.version}.jar&quot;/&gt;
+  &lt;property name=&quot;ivy_repo_url&quot;
+     value=&quot;http://repo2.maven.org/maven2/org/apache/ivy/ivy/${ivy.version}/ivy-${ivy.version}.jar&quot; /&gt;
+  &lt;property name=&quot;build.dir&quot; location=&quot;build&quot; /&gt;
+  &lt;property name=&quot;build.ivy.dir&quot; location=&quot;${build.dir}/ivy&quot; /&gt;
+  &lt;property name=&quot;build.ivy.lib.dir&quot; location=&quot;${build.ivy.dir}/lib&quot; /&gt;
+  &lt;property name=&quot;build.ivy.report.dir&quot; location=&quot;${build.ivy.dir}/report&quot; /&gt;
+  &lt;property name=&quot;common.ivy.lib.dir&quot; location=&quot;${build.ivy.lib.dir}/${ant.project.name}/common&quot;/&gt;
+
+  &lt;!--this is the naming policy for artifacts we want pulled down--&gt;
+  &lt;property name=&quot;ivy.artifact.retrieve.pattern&quot;
+                   value=&quot;${ant.project.name}/[conf]/[artifact]-[revision].[ext]&quot;/&gt;
+
+  &lt;!-- the normal classpath --&gt;
+  &lt;path id=&quot;contrib-classpath&quot;&gt;
+    &lt;pathelement location=&quot;${build.classes}&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build/tools&quot;/&gt;
+    &lt;fileset refid=&quot;lib.jars&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build/classes&quot;/&gt;
+    &lt;fileset dir=&quot;${hadoop.root}/lib&quot;&gt;
+      &lt;include name=&quot;**/*.jar&quot; /&gt;
+    &lt;/fileset&gt;
+    &lt;path refid=&quot;${ant.project.name}.common-classpath&quot;/&gt;
+    &lt;pathelement path=&quot;${clover.jar}&quot;/&gt;
+  &lt;/path&gt;
+
+  &lt;!-- the unit test classpath --&gt;
+  &lt;path id=&quot;test.classpath&quot;&gt;
+    &lt;pathelement location=&quot;${build.test}&quot; /&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build/test/classes&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/src/contrib/test&quot;/&gt;
+    &lt;pathelement location=&quot;${conf.dir}&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build&quot;/&gt;
+    &lt;pathelement location=&quot;${build.examples}&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build/examples&quot;/&gt;
+    &lt;path refid=&quot;contrib-classpath&quot;/&gt;
+  &lt;/path&gt;
+
+  &lt;!-- The system test classpath --&gt;
+  &lt;path id=&quot;test.system.classpath&quot;&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/src/contrib/${name}/src/test/system&quot; /&gt;
+    &lt;pathelement location=&quot;${build.test.system}&quot; /&gt;
+    &lt;pathelement location=&quot;${build.test.system}/classes&quot;/&gt;
+    &lt;pathelement location=&quot;${build.examples}&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build-fi/system/classes&quot; /&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build-fi/system/test/classes&quot; /&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build-fi&quot; /&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build-fi/tools&quot; /&gt;
+    &lt;pathelement location=&quot;${hadoop.home}&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.conf.dir}&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.conf.dir.deployed}&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build/examples&quot;/&gt;
+    &lt;pathelement location=&quot;${hadoop.root}/build-fi/test/classes&quot; /&gt;
+    &lt;path refid=&quot;contrib-classpath&quot;/&gt;
+    &lt;fileset dir=&quot;${hadoop.root}/src/test/lib&quot;&gt;
+      &lt;include name=&quot;**/*.jar&quot; /&gt;
+      &lt;exclude name=&quot;**/excluded/&quot; /&gt;
+    &lt;/fileset&gt;
+    &lt;fileset dir=&quot;${hadoop.root}/build-fi/system&quot;&gt;
+       &lt;include name=&quot;**/*.jar&quot; /&gt;
+       &lt;exclude name=&quot;**/excluded/&quot; /&gt;
+     &lt;/fileset&gt;
+    &lt;fileset dir=&quot;${hadoop.root}/build-fi/test/testjar&quot;&gt;
+      &lt;include name=&quot;**/*.jar&quot; /&gt;
+      &lt;exclude name=&quot;**/excluded/&quot; /&gt;
+    &lt;/fileset&gt;
+    &lt;fileset dir=&quot;${hadoop.root}/build/contrib/${name}&quot;&gt;
+      &lt;include name=&quot;**/*.jar&quot; /&gt;
+      &lt;exclude name=&quot;**/excluded/&quot; /&gt;
+    &lt;/fileset&gt;
+  &lt;/path&gt;
+
+  &lt;!-- to be overridden by sub-projects --&gt;
+  &lt;target name=&quot;check-contrib&quot;/&gt;
+  &lt;target name=&quot;init-contrib&quot;/&gt;
+
+  &lt;!-- ====================================================== --&gt;
+  &lt;!-- Stuff needed by all targets                            --&gt;
+  &lt;!-- ====================================================== --&gt;
+  &lt;target name=&quot;init&quot; depends=&quot;check-contrib&quot; unless=&quot;skip.contrib&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;mkdir dir=&quot;${build.dir}&quot;/&gt;
+    &lt;mkdir dir=&quot;${build.classes}&quot;/&gt;
+    &lt;mkdir dir=&quot;${build.test}&quot;/&gt;
+    &lt;!-- The below two tags  added for contrib system tests --&gt;
+    &lt;mkdir dir=&quot;${build.test.system}&quot;/&gt;
+    &lt;mkdir dir=&quot;${build.system.classes}&quot;/&gt;
+    &lt;mkdir dir=&quot;${build.examples}&quot;/&gt;
+    &lt;mkdir dir=&quot;${hadoop.log.dir}&quot;/&gt;
+    &lt;antcall target=&quot;init-contrib&quot;/&gt;
+  &lt;/target&gt;
+
+
+  &lt;!-- ====================================================== --&gt;
+  &lt;!-- Compile a Hadoop contrib&#39;s files                       --&gt;
+  &lt;!-- ====================================================== --&gt;
+  &lt;target name=&quot;compile&quot; depends=&quot;init, ivy-retrieve-common&quot; unless=&quot;skip.contrib&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;javac
+     encoding=&quot;${build.encoding}&quot;
+     srcdir=&quot;${src.dir}&quot;
+     includes=&quot;**/*.java&quot;
+     destdir=&quot;${build.classes}&quot;
+     debug=&quot;${javac.debug}&quot;
+     deprecation=&quot;${javac.deprecation}&quot;&gt;
+     &lt;classpath refid=&quot;contrib-classpath&quot;/&gt;
+    &lt;/javac&gt;
+  &lt;/target&gt;
+
+
+  &lt;!-- ======================================================= --&gt;
+  &lt;!-- Compile a Hadoop contrib&#39;s example files (if available) --&gt;
+  &lt;!-- ======================================================= --&gt;
+  &lt;target name=&quot;compile-examples&quot; depends=&quot;compile&quot; if=&quot;examples.available&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;javac
+     encoding=&quot;${build.encoding}&quot;
+     srcdir=&quot;${src.examples}&quot;
+     includes=&quot;**/*.java&quot;
+     destdir=&quot;${build.examples}&quot;
+     debug=&quot;${javac.debug}&quot;&gt;
+     &lt;classpath refid=&quot;contrib-classpath&quot;/&gt;
+    &lt;/javac&gt;
+  &lt;/target&gt;
+
+
+  &lt;!-- ================================================================== --&gt;
+  &lt;!-- Compile test code                                                  --&gt;
+  &lt;!-- ================================================================== --&gt;
+  &lt;target name=&quot;compile-test&quot; depends=&quot;compile-examples&quot; if=&quot;test.available&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;javac
+     encoding=&quot;${build.encoding}&quot;
+     srcdir=&quot;${src.test}&quot;
+     includes=&quot;**/*.java&quot;
+     excludes=&quot;system/**/*.java&quot;
+     destdir=&quot;${build.test}&quot;
+     debug=&quot;${javac.debug}&quot;&gt;
+    &lt;classpath refid=&quot;test.classpath&quot;/&gt;
+    &lt;/javac&gt;
+  &lt;/target&gt;
+
+  &lt;!-- ================================================================== --&gt;
+  &lt;!-- Compile system test code                                           --&gt;
+  &lt;!-- ================================================================== --&gt;
+  &lt;target name=&quot;compile-test-system&quot; depends=&quot;compile-examples&quot;
+     if=&quot;test.system.available&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;javac
+       encoding=&quot;${build.encoding}&quot;
+       srcdir=&quot;${src.test.system}&quot;
+       includes=&quot;**/*.java&quot;
+       destdir=&quot;${build.system.classes}&quot;
+       debug=&quot;${javac.debug}&quot;&gt;
+      &lt;classpath refid=&quot;test.system.classpath&quot;/&gt;
+    &lt;/javac&gt;
+  &lt;/target&gt;
+
+  &lt;!-- ====================================================== --&gt;
+  &lt;!-- Make a Hadoop contrib&#39;s jar                            --&gt;
+  &lt;!-- ====================================================== --&gt;
+  &lt;target name=&quot;jar&quot; depends=&quot;compile&quot; unless=&quot;skip.contrib&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;jar
+      jarfile=&quot;${build.dir}/hadoop-${name}-${version}.jar&quot;
+      basedir=&quot;${build.classes}&quot;     
+    /&gt;
+  &lt;/target&gt;
+
+
+  &lt;!-- ====================================================== --&gt;
+  &lt;!-- Make a Hadoop contrib&#39;s examples jar                   --&gt;
+  &lt;!-- ====================================================== --&gt;
+  &lt;target name=&quot;jar-examples&quot; depends=&quot;compile-examples&quot;
+          if=&quot;examples.available&quot; unless=&quot;skip.contrib&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;jar jarfile=&quot;${build.dir}/hadoop-${name}-examples-${version}.jar&quot;&gt;
+      &lt;fileset dir=&quot;${build.classes}&quot;&gt;
+      &lt;/fileset&gt;
+      &lt;fileset dir=&quot;${build.examples}&quot;&gt;
+      &lt;/fileset&gt;
+    &lt;/jar&gt;
+  &lt;/target&gt;
+
+  &lt;!-- ====================================================== --&gt;
+  &lt;!-- Package a Hadoop contrib                               --&gt;
+  &lt;!-- ====================================================== --&gt;
+  &lt;target name=&quot;package&quot; depends=&quot;jar, jar-examples&quot; unless=&quot;skip.contrib&quot;&gt;
+    &lt;mkdir dir=&quot;${dist.dir}/contrib/${name}&quot;/&gt;
+    &lt;copy todir=&quot;${dist.dir}/contrib/${name}&quot; includeEmptyDirs=&quot;false&quot; flatten=&quot;true&quot;&gt;
+      &lt;fileset dir=&quot;${build.dir}&quot;&gt;
+        &lt;include name=&quot;hadoop-${name}-${version}.jar&quot; /&gt;
+      &lt;/fileset&gt;
+    &lt;/copy&gt;
+  &lt;/target&gt;
+
+  &lt;!-- ================================================================== --&gt;
+  &lt;!-- Run unit tests                                                     --&gt;
+  &lt;!-- ================================================================== --&gt;
+  &lt;target name=&quot;test&quot; depends=&quot;compile-test, compile&quot; if=&quot;test.available&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;delete dir=&quot;${hadoop.log.dir}&quot;/&gt;
+    &lt;mkdir dir=&quot;${hadoop.log.dir}&quot;/&gt;
+    &lt;junit
+      printsummary=&quot;yes&quot; showoutput=&quot;${test.output}&quot;
+      haltonfailure=&quot;no&quot; fork=&quot;yes&quot; maxmemory=&quot;512m&quot;
+      errorProperty=&quot;tests.failed&quot; failureProperty=&quot;tests.failed&quot;
+      timeout=&quot;${test.timeout}&quot;&gt;
+
+      &lt;sysproperty key=&quot;test.build.data&quot; value=&quot;${build.test}/data&quot;/&gt;
+      &lt;sysproperty key=&quot;build.test&quot; value=&quot;${build.test}&quot;/&gt;
+      &lt;sysproperty key=&quot;src.test.data&quot; value=&quot;${src.test.data}&quot;/&gt;
+      &lt;sysproperty key=&quot;contrib.name&quot; value=&quot;${name}&quot;/&gt;
+
+      &lt;!-- requires fork=yes for:
+        relative File paths to use the specified user.dir
+        classpath to use build/contrib/*.jar
+      --&gt;
+      &lt;sysproperty key=&quot;user.dir&quot; value=&quot;${build.test}/data&quot;/&gt;
+
+      &lt;sysproperty key=&quot;fs.default.name&quot; value=&quot;${fs.default.name}&quot;/&gt;
+      &lt;sysproperty key=&quot;hadoop.test.localoutputfile&quot; value=&quot;${hadoop.test.localoutputfile}&quot;/&gt;
+      &lt;sysproperty key=&quot;hadoop.log.dir&quot; value=&quot;${hadoop.log.dir}&quot;/&gt;
+      &lt;sysproperty key=&quot;taskcontroller-path&quot; value=&quot;${taskcontroller-path}&quot;/&gt;
+      &lt;sysproperty key=&quot;taskcontroller-ugi&quot; value=&quot;${taskcontroller-ugi}&quot;/&gt;
+      &lt;classpath refid=&quot;test.classpath&quot;/&gt;
+      &lt;formatter type=&quot;${test.junit.output.format}&quot; /&gt;
+      &lt;batchtest todir=&quot;${build.test}&quot; unless=&quot;testcase&quot;&gt;
+        &lt;fileset dir=&quot;${src.test}&quot;
+                 includes=&quot;**/Test*.java&quot; excludes=&quot;**/${test.exclude}.java, system/**/*.java&quot; /&gt;
+      &lt;/batchtest&gt;
+      &lt;batchtest todir=&quot;${build.test}&quot; if=&quot;testcase&quot;&gt;
+        &lt;fileset dir=&quot;${src.test}&quot; includes=&quot;**/${testcase}.java&quot; excludes=&quot;system/**/*.java&quot; /&gt;
+      &lt;/batchtest&gt;
+    &lt;/junit&gt;
+    &lt;antcall target=&quot;checkfailure&quot;/&gt;
+  &lt;/target&gt;
+
+  &lt;!-- ================================================================== --&gt;
+  &lt;!-- Run system tests                                                   --&gt;
+  &lt;!-- ================================================================== --&gt;
+  &lt;target name=&quot;test-system&quot; depends=&quot;compile, compile-test-system, jar&quot;
+     if=&quot;test.system.available&quot;&gt;
+     &lt;delete dir=&quot;${build.test.system}/extraconf&quot;/&gt;
+     &lt;mkdir dir=&quot;${build.test.system}/extraconf&quot;/&gt;
+     &lt;property name=&quot;test.src.dir&quot; location=&quot;${hadoop.root}/src/test&quot;/&gt;
+     &lt;property name=&quot;test.junit.printsummary&quot; value=&quot;yes&quot; /&gt;
+     &lt;property name=&quot;test.junit.haltonfailure&quot; value=&quot;no&quot; /&gt;
+     &lt;property name=&quot;test.junit.maxmemory&quot; value=&quot;512m&quot; /&gt;
+     &lt;property name=&quot;test.junit.fork.mode&quot; value=&quot;perTest&quot; /&gt;
+     &lt;property name=&quot;test.all.tests.file&quot; value=&quot;${test.src.dir}/all-tests&quot; /&gt;
+     &lt;property name=&quot;test.build.dir&quot; value=&quot;${hadoop.root}/build/test&quot;/&gt;
+     &lt;property name=&quot;basedir&quot; value=&quot;${hadoop.root}&quot;/&gt;
+     &lt;property name=&quot;test.timeout&quot; value=&quot;900000&quot;/&gt;
+     &lt;property name=&quot;test.junit.output.format&quot; value=&quot;plain&quot;/&gt;
+     &lt;property name=&quot;test.tools.input.dir&quot; value=&quot;${basedir}/src/test/tools/data&quot;/&gt;
+     &lt;property name=&quot;c++.src&quot; value=&quot;${basedir}/src/c++&quot;/&gt;
+     &lt;property name=&quot;test.include&quot; value=&quot;Test*&quot;/&gt;
+     &lt;property name=&quot;c++.libhdfs.src&quot; value=&quot;${c++.src}/libhdfs&quot;/&gt;
+     &lt;property name=&quot;test.build.data&quot; value=&quot;${build.test.system}/data&quot;/&gt;
+     &lt;property name=&quot;test.cache.data&quot; value=&quot;${build.test.system}/cache&quot;/&gt;
+     &lt;property name=&quot;test.debug.data&quot; value=&quot;${build.test.system}/debug&quot;/&gt;
+     &lt;property name=&quot;test.log.dir&quot; value=&quot;${build.test.system}/logs&quot;/&gt;
+     &lt;patternset id=&quot;empty.exclude.list.id&quot; /&gt;
+        &lt;exec executable=&quot;sed&quot; inputstring=&quot;${os.name}&quot;
+            outputproperty=&quot;nonspace.os&quot;&gt;
+          &lt;arg value=&quot;s/ /_/g&quot;/&gt;
+        &lt;/exec&gt;
+     &lt;property name=&quot;build.platform&quot;
+         value=&quot;${nonspace.os}-${os.arch}-${sun.arch.data.model}&quot;/&gt;
+     &lt;property name=&quot;build.native&quot;
+         value=&quot;${hadoop.root}/build/native/${build.platform}&quot;/&gt;
+     &lt;property name=&quot;lib.dir&quot; value=&quot;${hadoop.root}/lib&quot;/&gt;
+     &lt;property name=&quot;install.c++.examples&quot;
+         value=&quot;${hadoop.root}/build/c++-examples/${build.platform}&quot;/&gt;
+    &lt;condition property=&quot;tests.testcase&quot;&gt;
+       &lt;and&gt;
+         &lt;isset property=&quot;testcase&quot; /&gt;
+       &lt;/and&gt;
+    &lt;/condition&gt;
+     &lt;property name=&quot;test.junit.jvmargs&quot; value=&quot;-ea&quot; /&gt;
+    &lt;macro-system-test-runner test.file=&quot;${test.all.tests.file}&quot;
+                     classpath=&quot;test.system.classpath&quot;
+                     test.dir=&quot;${build.test.system}&quot;
+                     fileset.dir=&quot;${hadoop.root}/src/contrib/${name}/src/test/system&quot;
+                     hadoop.conf.dir.deployed=&quot;${hadoop.conf.dir.deployed}&quot;&gt;
+  &lt;/macro-system-test-runner&gt;
+  &lt;/target&gt;
+
+  &lt;macrodef name=&quot;macro-system-test-runner&quot;&gt;
+    &lt;attribute name=&quot;test.file&quot; /&gt;
+    &lt;attribute name=&quot;classpath&quot; /&gt;
+    &lt;attribute name=&quot;test.dir&quot; /&gt;
+    &lt;attribute name=&quot;fileset.dir&quot; /&gt;
+    &lt;attribute name=&quot;hadoop.conf.dir.deployed&quot; default=&quot;&quot; /&gt;
+    &lt;sequential&gt;
+      &lt;delete dir=&quot;@{test.dir}/data&quot;/&gt;
+      &lt;mkdir dir=&quot;@{test.dir}/data&quot;/&gt;
+      &lt;delete dir=&quot;@{test.dir}/logs&quot;/&gt;
+      &lt;mkdir dir=&quot;@{test.dir}/logs&quot;/&gt;
+      &lt;copy file=&quot;${test.src.dir}/hadoop-policy.xml&quot;
+        todir=&quot;@{test.dir}/extraconf&quot; /&gt;
+      &lt;copy file=&quot;${test.src.dir}/fi-site.xml&quot;
+        todir=&quot;@{test.dir}/extraconf&quot; /&gt;
+      &lt;junit showoutput=&quot;${test.output}&quot;
+        printsummary=&quot;${test.junit.printsummary}&quot;
+        haltonfailure=&quot;${test.junit.haltonfailure}&quot;
+        fork=&quot;yes&quot;
+        forkmode=&quot;${test.junit.fork.mode}&quot;
+        maxmemory=&quot;${test.junit.maxmemory}&quot;
+        dir=&quot;${basedir}&quot; timeout=&quot;${test.timeout}&quot;
+        errorProperty=&quot;tests.failed&quot; failureProperty=&quot;tests.failed&quot;&gt;
+        &lt;jvmarg value=&quot;${test.junit.jvmargs}&quot; /&gt;
+        &lt;sysproperty key=&quot;java.net.preferIPv4Stack&quot; value=&quot;true&quot;/&gt;
+        &lt;sysproperty key=&quot;test.build.data&quot; value=&quot;@{test.dir}/data&quot;/&gt;
+        &lt;sysproperty key=&quot;test.tools.input.dir&quot; value = &quot;${test.tools.input.dir}&quot;/&gt;
+        &lt;sysproperty key=&quot;test.cache.data&quot; value=&quot;${test.cache.data}&quot;/&gt;
+        &lt;sysproperty key=&quot;test.debug.data&quot; value=&quot;${test.debug.data}&quot;/&gt;
+        &lt;sysproperty key=&quot;hadoop.log.dir&quot; value=&quot;@{test.dir}/logs&quot;/&gt;
+        &lt;sysproperty key=&quot;test.src.dir&quot; value=&quot;@{fileset.dir}&quot;/&gt;
+        &lt;sysproperty key=&quot;taskcontroller-path&quot; value=&quot;${taskcontroller-path}&quot;/&gt;
+        &lt;sysproperty key=&quot;taskcontroller-ugi&quot; value=&quot;${taskcontroller-ugi}&quot;/&gt;
+        &lt;sysproperty key=&quot;test.build.extraconf&quot; value=&quot;@{test.dir}/extraconf&quot; /&gt;
+        &lt;sysproperty key=&quot;hadoop.policy.file&quot; value=&quot;hadoop-policy.xml&quot;/&gt;
+        &lt;sysproperty key=&quot;java.library.path&quot;
+          value=&quot;${build.native}/lib:${lib.dir}/native/${build.platform}&quot;/&gt;
+        &lt;sysproperty key=&quot;install.c++.examples&quot; value=&quot;${install.c++.examples}&quot;/&gt;
+        &lt;syspropertyset dynamic=&quot;no&quot;&gt;
+          &lt;propertyref name=&quot;hadoop.tmp.dir&quot;/&gt;
+        &lt;/syspropertyset&gt;
+        &lt;!-- set compile.c++ in the child jvm only if it is set --&gt;
+        &lt;syspropertyset dynamic=&quot;no&quot;&gt;
+          &lt;propertyref name=&quot;compile.c++&quot;/&gt;
+        &lt;/syspropertyset&gt;
+        &lt;!-- Pass probability specifications to the spawn JVM --&gt;
+        &lt;syspropertyset id=&quot;FaultProbabilityProperties&quot;&gt;
+          &lt;propertyref regex=&quot;fi.*&quot;/&gt;
+        &lt;/syspropertyset&gt;
+        &lt;sysproperty key=&quot;test.system.hdrc.deployed.hadoopconfdir&quot;
+                     value=&quot;@{hadoop.conf.dir.deployed}&quot; /&gt;
+        &lt;classpath refid=&quot;@{classpath}&quot;/&gt;
+        &lt;formatter type=&quot;${test.junit.output.format}&quot; /&gt;
+        &lt;batchtest todir=&quot;@{test.dir}&quot; unless=&quot;testcase&quot;&gt;
+          &lt;fileset dir=&quot;@{fileset.dir}&quot;
+            excludes=&quot;**/${test.exclude}.java aop/** system/**&quot;&gt;
+            &lt;patternset&gt;
+              &lt;includesfile name=&quot;@{test.file}&quot;/&gt;
+            &lt;/patternset&gt;
+          &lt;/fileset&gt;
+        &lt;/batchtest&gt;
+        &lt;batchtest todir=&quot;@{test.dir}&quot; if=&quot;testcase&quot;&gt;
+          &lt;fileset dir=&quot;@{fileset.dir}&quot; includes=&quot;**/${testcase}.java&quot;/&gt;
+        &lt;/batchtest&gt;
+      &lt;/junit&gt;
+      &lt;antcall target=&quot;checkfailure&quot;/&gt;
+    &lt;/sequential&gt;
+  &lt;/macrodef&gt;
+
+
+  &lt;target name=&quot;checkfailure&quot; if=&quot;tests.failed&quot;&gt;
+    &lt;touch file=&quot;${build.contrib.dir}/testsfailed&quot;/&gt;
+    &lt;fail unless=&quot;continueOnFailure&quot;&gt;Contrib Tests failed!&lt;/fail&gt;
+  &lt;/target&gt;
+
+  &lt;!-- ================================================================== --&gt;
+  &lt;!-- Clean.  Delete the build files, and their directories              --&gt;
+  &lt;!-- ================================================================== --&gt;
+  &lt;target name=&quot;clean&quot;&gt;
+    &lt;echo message=&quot;contrib: ${name}&quot;/&gt;
+    &lt;delete dir=&quot;${build.dir}&quot;/&gt;
+  &lt;/target&gt;
+
+  &lt;target name=&quot;ivy-probe-antlib&quot; &gt;
+    &lt;condition property=&quot;ivy.found&quot;&gt;
+      &lt;typefound uri=&quot;antlib:org.apache.ivy.ant&quot; name=&quot;cleancache&quot;/&gt;
+    &lt;/condition&gt;
+  &lt;/target&gt;
+
+
+  &lt;target name=&quot;ivy-download&quot; description=&quot;To download ivy &quot; unless=&quot;offline&quot;&gt;
+    &lt;get src=&quot;${ivy_repo_url}&quot; dest=&quot;${ivy.jar}&quot; usetimestamp=&quot;true&quot;/&gt;
+  &lt;/target&gt;
+
+  &lt;target name=&quot;ivy-init-antlib&quot; depends=&quot;ivy-download,ivy-probe-antlib&quot; unless=&quot;ivy.found&quot;&gt;
+    &lt;typedef uri=&quot;antlib:org.apache.ivy.ant&quot; onerror=&quot;fail&quot;
+      loaderRef=&quot;ivyLoader&quot;&gt;
+      &lt;classpath&gt;
+        &lt;pathelement location=&quot;${ivy.jar}&quot;/&gt;
+      &lt;/classpath&gt;
+    &lt;/typedef&gt;
+    &lt;fail &gt;
+      &lt;condition &gt;
+        &lt;not&gt;
+          &lt;typefound uri=&quot;antlib:org.apache.ivy.ant&quot; name=&quot;cleancache&quot;/&gt;
+        &lt;/not&gt;
+      &lt;/condition&gt;
+      You need Apache Ivy 2.0 or later from http://ant.apache.org/
+      It could not be loaded from ${ivy_repo_url}
+    &lt;/fail&gt;
+  &lt;/target&gt;
+
+  &lt;target name=&quot;ivy-init&quot; depends=&quot;ivy-init-antlib&quot;&gt;
+    &lt;ivy:configure settingsid=&quot;${ant.project.name}.ivy.settings&quot; file=&quot;${ivysettings.xml}&quot;/&gt;
+  &lt;/target&gt;
+
+  &lt;target name=&quot;ivy-resolve-common&quot; depends=&quot;ivy-init&quot;&gt;
+    &lt;ivy:resolve settingsRef=&quot;${ant.project.name}.ivy.settings&quot; conf=&quot;common&quot; log=&quot;${loglevel}&quot;/&gt;
+  &lt;/target&gt;
+
+  &lt;target name=&quot;ivy-retrieve-common&quot; depends=&quot;ivy-resolve-common&quot;
+    description=&quot;Retrieve Ivy-managed artifacts for the compile/test configurations&quot;&gt;
+    &lt;ivy:retrieve settingsRef=&quot;${ant.project.name}.ivy.settings&quot;
+      pattern=&quot;${build.ivy.lib.dir}/${ivy.artifact.retrieve.pattern}&quot; sync=&quot;true&quot; log=&quot;${loglevel}&quot;/&gt;
+    &lt;ivy:cachepath pathid=&quot;${ant.project.name}.common-classpath&quot; conf=&quot;common&quot; /&gt;
+  &lt;/target&gt;
+&lt;/project&gt;
+</code></pre><h4 id="2-3-hadoop-1-2-1-src-contrib-eclipse-plugin-META-INF-MANIFEST-MF"><a href="#2-3-hadoop-1-2-1-src-contrib-eclipse-plugin-META-INF-MANIFEST-MF" class="headerlink" title="2.3 hadoop-1.2.1\src\contrib\eclipse-plugin\META-INF\MANIFEST.MF"></a>2.3 <strong>hadoop-1.2.1\src\contrib\eclipse-plugin\META-INF\MANIFEST.MF</strong></h4><pre><code>Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MapReduce Tools for Eclipse
+Bundle-SymbolicName: org.apache.hadoop.eclipse;singleton:=true
+Bundle-Version: 0.18
+Bundle-Activator: org.apache.hadoop.eclipse.Activator
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+org.eclipse.core.runtime,
+org.eclipse.jdt.launching,
+org.eclipse.debug.core,
+org.eclipse.jdt,
+org.eclipse.jdt.core,
+org.eclipse.core.resources,
+org.eclipse.ui.ide,
+org.eclipse.jdt.ui,
+org.eclipse.debug.ui,
+org.eclipse.jdt.debug.ui,
+org.eclipse.core.expressions,
+org.eclipse.ui.cheatsheets,
+org.eclipse.ui.console,
+org.eclipse.ui.navigator,
+org.eclipse.core.filesystem,
+org.apache.commons.logging
+Eclipse-LazyStart: true
+Bundle-ClassPath: classes/,lib/hadoop-core.jar,lib/jackson-core-asl-1.8.8.jar ,lib/jackson-mapper-asl-1.8.8.jar, lib/commons-configuration-1.6.jar,lib/commons-lang-2.4.jar, lib/commons-httpclient-3.0.1.jar,lib/commons-cli-1.2.jar
+Bundle-Vendor: Apache Hadoop
+</code></pre><h3 id="3-编译"><a href="#3-编译" class="headerlink" title="3. 编译"></a>3. 编译</h3><p>配置文件修改完成后，使用ant进行编译（过程需要联网）。</p>
+<pre><code>ant D:\hadoop\hadoop-1.2.1\src\contrib\eclipse-plugin\build.xml
+</code></pre>
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2015/12/16/download-and-operating-zip-in-java/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Java URL下载 zip
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/24/Bloom-Filter/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Bloom Filter</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

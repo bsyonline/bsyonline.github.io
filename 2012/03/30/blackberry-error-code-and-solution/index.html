@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>BlackBerry 开发：黑莓错误代码及解决方法大全 | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="首先，了解几个名词解释以方便对下文的理解。JVM—Java Virtual Machine(Java虚拟机)C++—一种计算机编程语言GC—Gabage Collection JAVA/.NET中的垃圾回收CRC校验—循环冗余校验码（Cyclic Redundancy Check）JIT编译器—（Just-In-Time）JAVA语言编译器
+101 Previous startup failed当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BlackBerry 开发：黑莓错误代码及解决方法大全">
+<meta property="og:url" content="/2012/03/30/blackberry-error-code-and-solution/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="首先，了解几个名词解释以方便对下文的理解。JVM—Java Virtual Machine(Java虚拟机)C++—一种计算机编程语言GC—Gabage Collection JAVA/.NET中的垃圾回收CRC校验—循环冗余校验码（Cyclic Redundancy Check）JIT编译器—（Just-In-Time）JAVA语言编译器
+101 Previous startup failed当">
+<meta property="og:updated_time" content="2018-10-21T04:17:05.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BlackBerry 开发：黑莓错误代码及解决方法大全">
+<meta name="twitter:description" content="首先，了解几个名词解释以方便对下文的理解。JVM—Java Virtual Machine(Java虚拟机)C++—一种计算机编程语言GC—Gabage Collection JAVA/.NET中的垃圾回收CRC校验—循环冗余校验码（Cyclic Redundancy Check）JIT编译器—（Just-In-Time）JAVA语言编译器
+101 Previous startup failed当">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2012/03/30
+        <a class="article-title" href="/2012/03/30/blackberry-error-code-and-solution/">BlackBerry 开发：黑莓错误代码及解决方法大全</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-blackberry-error-code-and-solution" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2012-03-30T07:53:17.000Z" itemprop="datePublished">2012/03/30</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2012/03/30/blackberry-error-code-and-solution/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/BlackBerry/" title="BlackBerry">BlackBerry</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Java/" title="Java">Java</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先，了解几个名词解释以方便对下文的理解。<br>JVM—Java Virtual Machine(Java虚拟机)<br>C++—一种计算机编程语言<br>GC—Gabage Collection JAVA/.NET中的垃圾回收<br>CRC校验—循环冗余校验码（Cyclic Redundancy Check）<br>JIT编译器—（Just-In-Time）JAVA语言编译器</p>
+<h3 id="101-Previous-startup-failed"><a href="#101-Previous-startup-failed" class="headerlink" title="101 Previous startup failed"></a>101 Previous startup failed</h3><p>当jvm（Java虚拟机）启动过程中，前一个启动的项目失败了，设备已经被重置。这个错误表明jvm在启动时找到“启动进行中”这个标志位已经设置了，当前屏幕信息为：有意停止“系统继续重置”这个死循环，来纠正系统当前不正确的启动操作</p>
+<h3 id="102-Invalid-code-in-filesystem"><a href="#102-Invalid-code-in-filesystem" class="headerlink" title="102 Invalid code in filesystem"></a>102 Invalid code in filesystem</h3><p>在文件系统中发现无效的代码。手持设备的系统检查.cod文件的变动时，在一些.cod文件中检测到这个问题。他肯可能是表明生成过程中发生了错 误，即在cod文件中存在一个有问题的签名。如果一些用户操作设备导致这个问题的发生，文件系统的代码被破坏，复位的周期将是连续循环的。唯一的恢复方法 是擦去设备并且恢复一个新的系统。</p>
+<h3 id="103-Cannot-find-starting-address"><a href="#103-Cannot-find-starting-address" class="headerlink" title="103 Cannot find starting address"></a>103 Cannot find starting address</h3><p>找不到启动的地址，用于启动系统的引导cod文件找不到。这个错误表明一个用于引导系统的cod文件没有安装到设备上，或者格式不正确。</p>
+<h3 id="104-Uncaught"><a href="#104-Uncaught" class="headerlink" title="104 Uncaught: "></a>104 Uncaught: <java-type-name></java-type-name></h3><p>非预期：《java模块名》jvm诊断出一个非预期的java代码异常错误抛出，程序可以继续执行，或者手持设备可以用桌面管理器连是USB线安装一个程序调试器来查看这些错误信息。事件日志里应该包含了异常错误的信息</p>
+<h3 id="105-Example-DbRecSize"><a href="#105-Example-DbRecSize" class="headerlink" title="105 Example, DbRecSize"></a>105 Example, DbRecSize</h3><p>举例，DbRecSize文件系统API已经为一种特定的操作返回一种错误状态码，他可能表明在jvm上存在一个无效的或者错误的文件系统</p>
+<h3 id="106-Graphics-system-error"><a href="#106-Graphics-system-error" class="headerlink" title="106 Graphics system error"></a>106 Graphics system error</h3><p>图形系统错误，在设备的图形系统里一个错误发生并被检测到</p>
+<h3 id="107-operator-new-called"><a href="#107-operator-new-called" class="headerlink" title="107 operator new () called"></a>107 operator new () called</h3><p>在jvm里，操作new()回调一个c++类，该函数代码没有被正确的从VMRamObject对象来继承，新操作符需要被正确的继承。提取当前的(-后复位)的BUGDISP</p>
+<h3 id="108-operator-delete-called"><a href="#108-operator-delete-called" class="headerlink" title="108 operator delete () called"></a>108 operator delete () called</h3><p>在jvm里，操作delete()回调一个c++类，，该函数代码没有被正确的从VMRamObject对象来继承，新操作符需要被正确的继承。提取当前的(-后复位)的BUGDISP</p>
+<h3 id="109-PriorityMessageCount-error"><a href="#109-PriorityMessageCount-error" class="headerlink" title="109 PriorityMessageCount error: "></a>109 PriorityMessageCount error: <priority-count></priority-count></h3><p>优先级统计信息计算错误：&lt;优先级计算&gt;当它应该总大于或者等于零时，RimPriorityMessageCount返回的值是负的。这表明在系统中这是一个错误。<br>提取当前(-后复位)的BUGDISP和查看系统事件记录</p>
+<h3 id="110-Non-idle-event-downtime-error"><a href="#110-Non-idle-event-downtime-error" class="headerlink" title="110 Non-idle event downtime error:  "></a>110 Non-idle event downtime error: <down-time> <idle-down-time></idle-down-time></down-time></h3><p>非空闲状态时间事件错误：&lt;时间&gt; &lt;空闲时间&gt;在jvm空闲时间统计时检测到一个错误，代表JVM空闲了很长时间。<br>这通常表明在手持设备或者JVM中发生一个错误。如果计数器空闲了400天以上的设备时间,他也可能出现。</p>
+<h3 id="111-Font-engine-error"><a href="#111-Font-engine-error" class="headerlink" title="111 Font engine error"></a>111 Font engine error</h3><p>字体引擎错误：一个系统设备的字体引擎错误检测到。请查看当前的BUGDISP和事件日志</p>
+<h3 id="112-Java-Native-Assertion-Failure"><a href="#112-Java-Native-Assertion-Failure" class="headerlink" title="112 Java Native Assertion Failure"></a>112 Java Native Assertion Failure</h3><p>Java本地化实例失败。一个本地化代码错误检测到。请查看当前的BUGDISP和事件日志</p>
+<h3 id="200-应用程序管理器抛出一个非预期的线程异常错误，程序无法继续执行。重新复位手持设备。"><a href="#200-应用程序管理器抛出一个非预期的线程异常错误，程序无法继续执行。重新复位手持设备。" class="headerlink" title="200 应用程序管理器抛出一个非预期的线程异常错误，程序无法继续执行。重新复位手持设备。"></a>200 应用程序管理器抛出一个非预期的线程异常错误，程序无法继续执行。重新复位手持设备。</h3><h3 id="201-Crypto-initialization-code-failed"><a href="#201-Crypto-initialization-code-failed" class="headerlink" title="201 Crypto initialization code failed"></a>201 Crypto initialization code failed</h3><p>Crypto初始化代码失败。Crypto模块初始化失败手持设备无法继续</p>
+<h3 id="202-在密匙存储上检测到一个破解攻击行为，程序无法继续"><a href="#202-在密匙存储上检测到一个破解攻击行为，程序无法继续" class="headerlink" title="202 在密匙存储上检测到一个破解攻击行为，程序无法继续"></a>202 在密匙存储上检测到一个破解攻击行为，程序无法继续</h3><h3 id="203-Console-process-died"><a href="#203-Console-process-died" class="headerlink" title="203 Console process died"></a>203 Console process died</h3><p>控制台进程死亡。应用程序管理器控制台进程已经挂起。这看起来非常象执行程序时发生异常错误的现象</p>
+<h3 id="204-Persistent-Content-Exception"><a href="#204-Persistent-Content-Exception" class="headerlink" title="204 Persistent Content Exception"></a>204 Persistent Content Exception</h3><p>本地内存内容异常。一个应用程序试图提交一个文本对象到本地内存里。这个情况将仅仅发生在：如果内容保护服务打开了，然后一个进程试图保存一些文本 标记数据在本地内存里。当这个异常没有被正确处理过，可能说明本地内存已经处于损坏的状态。我们需要重设和回滚到最后正常状态的提交点。说明：这个jvm 异常反映了在Java代码里有一个错误的地方，Jvm仅仅只是简单的诊断这个错误。如果这不是jvm的问题，那么事件日志将包含足够的Java代码错误信 息。</p>
+<h3 id="300-303-Bad-load"><a href="#300-303-Bad-load" class="headerlink" title="300-303 Bad load"></a>300-303 Bad load</h3><p>无效的加载持续，运行应用程序加载器重新给手持设备加载操作系统和应用程序</p>
+<h3 id="310-314-Hardware-failure"><a href="#310-314-Hardware-failure" class="headerlink" title="310-314 Hardware failure"></a>310-314 Hardware failure</h3><p>硬件错误。尝试硬复位手持设备：关机，拿掉电池，等待一会儿，换掉电池看看设备重新启动时会出现什么状况，或者运行应用程序加载器重新给手持设备加载操作系统和应用程序。注意：如果这些办法没有解决这个错误，请联系你的服务提供商</p>
+<h3 id="320-325-AMX-failure"><a href="#320-325-AMX-failure" class="headerlink" title="320-325 AMX failure"></a>320-325 AMX failure</h3><p>AMX 失败。请运行应用程序加载器重新给手持设备加载操作系统和应用程序</p>
+<h3 id="330-339-Application-tasks-failure"><a href="#330-339-Application-tasks-failure" class="headerlink" title="330-339 Application tasks failure"></a>330-339 Application tasks failure</h3><p>应用程序任务失败。请运行应用程序加载器重新给手持设备加载操作系统和应用程序</p>
+<h3 id="340-343-Memory-failure"><a href="#340-343-Memory-failure" class="headerlink" title="340-343 Memory failure"></a>340-343 Memory failure</h3><p>内存错误。您可能看到手持设备报告如下错误代码：<br>Device Error 340<br>Device Error 341<br>Device Error 342<br>Device Error 343<br>原因：内存错误<br>解决：减少你手机里日历约会同步的个数<br>1、在桌面管理器里，双击Intellisync图标，点击配置PIM按钮<br>2、在设备应用程序列表中，选择日历<br>3、点击配置，高级设置，<br>4、在数据范围选项页，完成其中的一个任务来减少你手机里日历约会同步的个数，如果你选择了“调度最佳未来项目选择”的选项，手持设备仅仅只是同步未来的日历约会，如果你点击并输入了一个日期范围的调度项目选项，手持设备仅仅只是同步在选择日期范围内的日历计划约会.<br>5、点击OK保存改变，关闭窗口<br>6、在配置窗口，确定日历程序的复选框选择了，点击OK<br>7、在Intellisync窗口，确认同步PIM复选框已经选择了，然后点击立即同步。设备会减少至少一个以上的日历约会项目。<br>如果你仍然看到这个错误信息。请运行应用程序加载器重新给手持设备加载操作系统和应用程序</p>
+<h3 id="350-359-Software-application-failure"><a href="#350-359-Software-application-failure" class="headerlink" title="350-359 Software application failure"></a>350-359 Software application failure</h3><p>应用程序软件错误，您可能看到手持设备报告如下错误代码：<br>Device Error 350<br>Device Error 352<br>Device Error 353<br>Device Error 354<br>Device Error 355<br>Device Error 356<br>Device Error 357<br>Device Error 358<br>Device Error 359<br>原因：应用程序软件错误<br>解决方案：尝试硬复位手持设备，运行应用程序加载器重新给手持设备加载操作系统和应用程序。在向导窗口，不要选择任何第三方应用程序。在高级选项里，选择清除当前所有已安装的应用程序复选框。</p>
+<h3 id="360-363-Flash-memory-failure"><a href="#360-363-Flash-memory-failure" class="headerlink" title="360-363 Flash memory failure"></a>360-363 Flash memory failure</h3><p>Flash内存错误。尝试硬复位手持设备，运行应用程序加载器重新给手持设备加载操作系统和应用程序。</p>
+<h3 id="365-368-This-one-is-often-followed-by-“OHHH-amp-”"><a href="#365-368-This-one-is-often-followed-by-“OHHH-amp-”" class="headerlink" title="365-368 This one is often followed by “OHHH @&amp;#%!!”"></a>365-368 This one is often followed by “OHHH @&amp;#%!!”</h3><p>这是一个经常跟随 “OHHH @&amp;#%!!”出现的错误，请联系服务提供商</p>
+<h3 id="395-Unclassified-error-code"><a href="#395-Unclassified-error-code" class="headerlink" title="395 Unclassified error code"></a>395 Unclassified error code</h3><p>未分类的错误代码<br>原因：<br>设备395代码表明是一个未分类的错误代码。手持设备安装了第三方应用程序可能导致了这个错误产生<br>解决方案1<br>尝试硬复位手持设备：关机，拿掉电池，等待一会儿，换掉电池看看设备重新启动时会出现什么状况<br>解决方案2<br>清除和重新加载手持设备的数据<br>1、在黑莓桌面管理器里，用备份和还原工具创建你的手机的数据备份文件。如需更多信息，请参考桌面管理器在线帮助里的“手持设备备份信息”。警告：下面的步骤可能清除手持设备的数据<br>2、打开桌面管理器，双击应用程序加载器图标<br>3、单击下一步，出现应用程序选择窗口<br>4、确认必须的应用程序已经选择了，点击下一步<br>5、点击“高级”<br>6、选择“清除所有的应用程序数据和当前已经安装的应用程序”玄虚，点击下一步<br>7、点击完成。当手持设备的操作系统和应用程序重新加载时，手持设备的数据被清除，<br>8、使用备份和还原工具从备份的数据文件还原到手持设备中，如需更多信息，请参考桌面管理器在线帮助里的“手持设备还原信息”。</p>
+<h3 id="400-564-Page-faults"><a href="#400-564-Page-faults" class="headerlink" title="400-564 Page faults"></a>400-564 Page faults</h3><p>页面文件失效。运行应用程序加载器重新给手持设备加载操作系统和应用程序</p>
+<h3 id="410-Radio-failure"><a href="#410-Radio-failure" class="headerlink" title="410 Radio failure"></a>410 Radio failure</h3><p>无线电服务失败。<br>尝试硬复位手持设备，运行应用程序加载器重新给手持设备加载操作系统和应用程序。注意：如果这样都没有解决这个错误，请请联系服务提供商<br>Error:411=电池模块问题,更换电池<br>Error:499=软件问题,重启手持设备.</p>
+<h3 id="501-VM-THREAD-SWITCHED"><a href="#501-VM-THREAD-SWITCHED" class="headerlink" title="501 VM_THREAD_SWITCHED"></a>501 VM_THREAD_SWITCHED</h3><p>线程已经被切换，内部错误，这是在VM中被内部使用的一个错误返回信息。它应该从会不报告为一个设备错误代码。</p>
+<h3 id="502-VM-PROCESS-DEATH"><a href="#502-VM-PROCESS-DEATH" class="headerlink" title="502 VM_PROCESS_DEATH"></a>502 VM_PROCESS_DEATH</h3><p>进程已死（挂起），所有的进程已经退出，最后一个java进程已被终止，没有任何程序可以执行</p>
+<h3 id="503-VM-THREAD-DEATH"><a href="#503-VM-THREAD-DEATH" class="headerlink" title="503 VM_THREAD_DEATH"></a>503 VM_THREAD_DEATH</h3><p>线程已死（挂起），内部错误，这是在VM中被内部使用的一个错误返回信息。它应该从不会报告为一个设备错误代码</p>
+<h3 id="504-VM-THREAD-SWITCH"><a href="#504-VM-THREAD-SWITCH" class="headerlink" title="504 VM_THREAD_SWITCH"></a>504 VM_THREAD_SWITCH</h3><p>线程已经被切换，内部错误，这是在VM中被内部使用的一个错误返回信息。它应该从不会报告为一个设备错误代码</p>
+<h3 id="505-VM-BAD-CODE5-I"><a href="#505-VM-BAD-CODE5-I" class="headerlink" title="505 VM_BAD_CODE5 I"></a>505 VM_BAD_CODE5 I</h3><p>无效的代码：无效字节代码，在JIT编译器里发生一个错误</p>
+<h3 id="506-Uncaught-Exception"><a href="#506-Uncaught-Exception" class="headerlink" title="506 Uncaught Exception"></a>506 Uncaught Exception</h3><p>未知的异常：在初始化VM的java线程的时候一个未知的java异常被抛出，导致了系统被迫结束了唯一活动的线程。事件日志包含了异常的回滚记录!</p>
+<h3 id="507-Unsatisfied-Link"><a href="#507-Unsatisfied-Link" class="headerlink" title="507 Unsatisfied Link"></a>507 Unsatisfied Link</h3><p>在cod文件里有不合适的文件链接关联，可能丢失了cod文件，（原文的英文是如此）<br>Device Error 5059<br>Device Error 5077<br>手持设备没有安装任何应用程序<br>原因1<br>当应用程序加载器工作时，黑莓设备上存在的应用程序已经被清除，但应用程序加载器加载新的应用程序时失败了<br>解决方案<br>1、确认你的电脑上已经正确安装了设备软件<br>2、请直接将您的黑莓设备直接连接到一台笔记本电脑的USB接口处<br>3、如果第三方程序（如：杀毒软件）已经使用了和桌面管理器手持设备的相同的COM端口，关闭第三方程序来释放COM端口<br>4、如果你使用USB数据线链接黑莓设备到你的电脑的串口，请用USB端口直接链接BB<br>5、在桌面管理器里，双击应用程序加载器<br>6、用应用程序加载器安装设备系统软件<br>原因2<br>如果你输入密码错误超过10次，你bb上所有的数据和程序都会被清除<br>解决<br>1、在桌面管理器里，双击应用程序加载器<br>2、用应用程序加载器安装设备系统软件</p>
+<h3 id="508-Invalid-object"><a href="#508-Invalid-object" class="headerlink" title="508 Invalid object"></a>508 Invalid object</h3><p>无效的对象，当vm执行一个调试器命令时检测到一个问题：无效的对象</p>
+<h3 id="509-VM-PPO-INFINITE-LOOP"><a href="#509-VM-PPO-INFINITE-LOOP" class="headerlink" title="509 VM_PPO_INFINITE_LOOP"></a>509 VM_PPO_INFINITE_LOOP</h3><p>在垃圾手机的PPO阶段中发现死循环，在GC的PPO阶段中，最大的迭代总数必须是系统中的文件句柄的最大数字。这个错误表明这个迭代总数已经超过 这个数，因而在PPO循环中或者不正确的文件系统中出现了一个瑕疵。在错误字符串中可以提取到一个特别的16进制整数值，是当前检测到的死循环记录的id 值</p>
+<h3 id="510-Deadlock"><a href="#510-Deadlock" class="headerlink" title="510 Deadlock"></a>510 Deadlock</h3><p>死锁，所有的线程对象都在等待，但一个线程返回结果时已经死锁了。系统不能从这个死锁状态中恢复，因为所有的线程都被锁定了。</p>
+<h3 id="511-Debug-connection-died"><a href="#511-Debug-connection-died" class="headerlink" title="511 Debug connection died"></a>511 Debug connection died</h3><p>调试器连接已经死锁，当调试的时候，vm的问题或者不正确的调试命令发送给vm时，可能导致这个问题发生</p>
+<h3 id="512-GC-Aborted"><a href="#512-GC-Aborted" class="headerlink" title="512 GC Aborted"></a>512 GC Aborted</h3><p>GC（垃圾收集）已经终止，空间垃圾收集器程序被用户操作事件强制终止了，诸如挤压键盘或者移动滚轮操作</p>
+<h3 id="513-needs-running"><a href="#513-needs-running" class="headerlink" title="513  needs running"></a>513 <clinit> needs running</clinit></h3><p><clinit>类需要先运行。此类名<clinit>能继续执行之前要求执行一个opcode，。</clinit></clinit></p>
+<h3 id="514-needs-running"><a href="#514-needs-running" class="headerlink" title="514  needs running"></a>514 <init> needs running</init></h3><p><init>需要运行。一个新的类实例在使用之前必须通过默认构造函数初始化和分配内存空间。</init></p>
+<h3 id="515-Object-group-too-big"><a href="#515-Object-group-too-big" class="headerlink" title="515 Object group too big"></a>515 Object group too big</h3><p>对象组太大。jvm不能正确的获得对象组，不是因为对象太多就是因为对象组太大</p>
+<h3 id="516-Persistent-ids-exhausted"><a href="#516-Persistent-ids-exhausted" class="headerlink" title="516 Persistent ids exhausted"></a>516 Persistent ids exhausted</h3><p>ids固件设备衰竭。当访问一个固件对象时，jvm发现这个本地内存id计数器已经达到最大限制。对象不能被提交，同时报告一个致命的错误。这个错误可能从不会发生，除非这个设备大量使用了数年之久。</p>
+<h3 id="517-Filesystem-corrupt"><a href="#517-Filesystem-corrupt" class="headerlink" title="517 Filesystem corrupt"></a>517 Filesystem corrupt</h3><p>文件系统不正确。在jvm本地内存里检测到一个错误（矛盾）的分配地址</p>
+<h3 id="518-Unexpected-longjmp5"><a href="#518-Unexpected-longjmp5" class="headerlink" title="518 Unexpected longjmp5"></a>518 Unexpected longjmp5</h3><p>意外的longjmp指令。一个垃圾收集器指令方面结束了一个longjmp指令。这可能表明当指令没有中断即将完成操作时，这个标记阶段被这个错误中断了。这个情况应该从不会发生，因为当设备非空闲的时候，这些操作会被执行，同时,<br>仅仅当设备空闲时,垃圾收集器的工作才会被中断</p>
+<h3 id="519-Internal-Error"><a href="#519-Internal-Error" class="headerlink" title="519 Internal Error"></a>519 Internal Error</h3><p>内部服务器错误。Jvm系统丢失或者被禁止</p>
+<h3 id="520-Internal-Return"><a href="#520-Internal-Return" class="headerlink" title="520 Internal Return"></a>520 Internal Return</h3><p>内部返回一个错误，表明一个java方法返回的一种内部的状态需要执行</p>
+<h3 id="521-Dangerous-Wait-An-Object"><a href="#521-Dangerous-Wait-An-Object" class="headerlink" title="521 Dangerous Wait An Object"></a>521 Dangerous Wait An Object</h3><p>一个危险的等待对象。一个线程执行Wait（）方法时被另外一个对象锁定。这个仅仅在基于jvm的模拟器里控制调试应用程序切换时才会检查</p>
+<h3 id="522-Interlaced-synchronization"><a href="#522-Interlaced-synchronization" class="headerlink" title="522 Interlaced synchronization"></a>522 Interlaced synchronization</h3><p>交互式同步错误，对象的线程已经通过一个命令获得了2个锁定，但是，这2个已经取得的锁定类型并不匹配线程被锁定之前的命令。这表明一个即将发生潜在的死锁情况被报告。这个仅仅在基于jvm的模拟器里控制调试应用程序切换时才会检查</p>
+<h3 id="523-System-process-died"><a href="#523-System-process-died" class="headerlink" title="523 System process died"></a>523 System process died</h3><p>系统进程已死（挂起）。一个致命的java程序错误导致系统已经被终止，设备无法继续正常的操作，请复位重新启动手持设备。</p>
+<h3 id="524-LMM-error"><a href="#524-LMM-error" class="headerlink" title="524 LMM error"></a>524 LMM error</h3><p>LMM错误。一个对象被低内存管理器作了回收标记，但内存垃圾收集时他没有被正确释放。这个仅仅在基于jvm的模拟器里控制调试应用程序切换时才会检查</p>
+<h3 id="525-Bad-persistent-object"><a href="#525-Bad-persistent-object" class="headerlink" title="525 Bad persistent object"></a>525 Bad persistent object</h3><p>损坏的本地内存对象。当垃圾收集期间，从本地内存根目录检测到一个自动操作提交到了一个非持久本地对象，这个类型的对象已经记录到事件日志里了</p>
+<h3 id="526-java-lang-Object-not-found"><a href="#526-java-lang-Object-not-found" class="headerlink" title="526 java.lang.Object not found"></a>526 java.lang.Object not found</h3><p>类定义java.lang.Object对象未找到。</p>
+<h3 id="527-java-lang-String-not-found"><a href="#527-java-lang-String-not-found" class="headerlink" title="527 java.lang.String not found"></a>527 java.lang.String not found</h3><p>类定义java.lang.String对象未找到</p>
+<h3 id="528-–529-Corrupt-filesystem"><a href="#528-–529-Corrupt-filesystem" class="headerlink" title="528 –529 Corrupt filesystem"></a>528 –529 Corrupt filesystem</h3><p>错误的文件系统。不可恢复的错误，继续执行的话将会导致所有数据丢失。这个错误信息包含了内部“错误原因”的数字代码。<br>jvm编译器常见错误代码<br>1.根数组引用不是有效的数组引用<br>2.根数组类型不是Object[]<br>3.根数组大小小于1，如Object[0]</p>
+<ol>
+<li>root[0]里的内存不是有效的引用</li>
+<li>root[0]类型不是一个长整型哈希表<br>6.数组头部段包含一个无效的引用</li>
+<li>在本地Object[]的一个项目中包含一个无效的引用<br>8.一个对象类型引用了一个未知的cod文件<br>9.在内存里，一个cod文件中的对象的类型描叙文件大小不匹配</li>
+<li>一个对象里面有一个无效的类型字段引用<br>11.对象中一个引用的类型字段链接到了另一对象的无效类型<br>12.在描叙符中一个本地Object[]丢失!<br>13.在本地内存中对象没有被标记为persis表<br>14.根数组被分割，一个分隔段无效<h3 id="530-VM-PREVENT-GC-OVERFLOW"><a href="#530-VM-PREVENT-GC-OVERFLOW" class="headerlink" title="530 VM_PREVENT_GC_OVERFLOW"></a>530 VM_PREVENT_GC_OVERFLOW</h3>_preventGC 溢出。原始对象的固定值会被保护起来防止被垃圾收集器收走。这个错误表明,<br>数值可能超出了被保护对象的固定的极限。如果设备被重置或者线程回滚事件被记录，这个实际的数值可以提取出来。<h3 id="531-Flash-exhausted"><a href="#531-Flash-exhausted" class="headerlink" title="531 Flash exhausted"></a>531 Flash exhausted</h3>内存已经耗尽用完。jvm无法容许超出内存空间的某些操作。如果jvm无法完成分配需要的内存空间大小，将会报告这个错误<h3 id="532-VM-ASSERTION-FAILED"><a href="#532-VM-ASSERTION-FAILED" class="headerlink" title="532 VM_ASSERTION_FAILED"></a>532 VM_ASSERTION_FAILED</h3>维护任务失败。通常，当设备没有启动允许维护状态时，这个jvm错误一般不会被报告，模拟器在调试状态时可能会报告这个错误，表明一个vm维护操作违反了约定。可以尝试输入BKPT来激活调试器，然后转储这个本地堆栈转交给vm组<h3 id="533-VM-RUN-METHOD"><a href="#533-VM-RUN-METHOD" class="headerlink" title="533 VM_RUN_METHOD"></a>533 VM_RUN_METHOD</h3><method>方法需要使用国际标准的ECMAScript脚本调用方法才能运行<h3 id="534-VM-FAST-RESET-DISABLED"><a href="#534-VM-FAST-RESET-DISABLED" class="headerlink" title="534 VM_FAST_RESET_DISABLED"></a>534 VM_FAST_RESET_DISABLED</h3>快速复位被禁止。内部过去经常用这个代码表示快速复位能力是无效的。请经常使用平台制定的代码<h3 id="535-VM-UNUSED-535"><a href="#535-VM-UNUSED-535" class="headerlink" title="535 VM_UNUSED_535"></a>535 VM_UNUSED_535</h3>未使用的vm错误。错误535意味着内存溢出。导致535错误的一个原因可能是一个运行的线程内存溢出，导致虚拟内存线程计划任务程序终止了。这个错误是已知的，发生在一个启动的队列期间，或如果主事件线程被停止了。<br>解决方案：<br>首先，硬启动手持设备。如果不能解决问题，从你的载体获得并安装最新版的黑莓手持设备ROM软件，然后，运行桌面管理器里的应用程序加载器更新手持设备。或者删除一些铃声和主题文件等等以释放存储空间<h3 id="536-VM-FAST-RESET-BAD-INSTANCE"><a href="#536-VM-FAST-RESET-BAD-INSTANCE" class="headerlink" title="536 VM_FAST_RESET_BAD_INSTANCE"></a>536 VM_FAST_RESET_BAD_INSTANCE</h3>vm快速复位实例检查失败。内部过去经常用这个代码表示：vm结构跳过了错误的地址空间或者vm已经被破坏了<h3 id="537-VM-FAST-RESET-BAD-HEAP"><a href="#537-VM-FAST-RESET-BAD-HEAP" class="headerlink" title="537 VM_FAST_RESET_BAD_HEAP"></a>537 VM_FAST_RESET_BAD_HEAP</h3>快速复位错误，堆检查失败。内部过去经常用这个代码表示：vm堆已经无效了，或者指针堆已经无效</method></li>
+</ol>
+<h3 id="538-VM-FAST-RESET-BAD-IRAM"><a href="#538-VM-FAST-RESET-BAD-IRAM" class="headerlink" title="538 VM_FAST_RESET_BAD_IRAM"></a>538 VM_FAST_RESET_BAD_IRAM</h3><p>快速复位IRAM损害，IRAM检查失败。内部过去经常用这个代码表示：vm的IRAM检查中检测到寄存在IRAM中无效的vm数据结构（线程+本地堆栈），或者指针</p>
+<h3 id="539-VM-FAST-RESET-NOT-IDLE"><a href="#539-VM-FAST-RESET-NOT-IDLE" class="headerlink" title="539 VM_FAST_RESET_NOT_IDLE"></a>539 VM_FAST_RESET_NOT_IDLE</h3><p>快速复位状态非空闲。内部过去经常用这个代码表示：当复位发生时vm正忙，类似这样的问题导致快速复位无法继续</p>
+<h3 id="540-VM-FAST-RESET-MULTIPLE-RESETS"><a href="#540-VM-FAST-RESET-MULTIPLE-RESETS" class="headerlink" title="540 VM_FAST_RESET_MULTIPLE_RESETS"></a>540 VM_FAST_RESET_MULTIPLE_RESETS</h3><p>多重复位错误。内部过去经常用这个代码表示：最近一次复位的时间小于最小复位时间间隔。由于禁止了短时间内多重复位次数，这个可以防止快速复位的死循环</p>
+<h3 id="541-VM-HEAP-COMPACT-INFINITE-LOOP"><a href="#541-VM-HEAP-COMPACT-INFINITE-LOOP" class="headerlink" title="541 VM_HEAP_COMPACT_INFINITE_LOOP"></a>541 VM_HEAP_COMPACT_INFINITE_LOOP</h3><p>在堆压缩中检测到死循环。Vm在内存堆里检测到一个问题，表明这个内存块是无效的。当进行内存堆压缩时，在确认一个可能的死循环时这个问题可以被检 测到，当设备包含了这个错误条件时，bugdisp记录和事件日志可以快速提取这个错误信息。如果可能的话，内存映像将会保存下来。</p>
+<h3 id="542-Transient-memory-leak"><a href="#542-Transient-memory-leak" class="headerlink" title="542 Transient memory leak"></a>542 Transient memory leak</h3><p>瞬间内存泄露。Jvm检测到某些内存没有被释放，这表明发生了内存泄露。希望原因能够尽早检测出来，避免这个情况的发生</p>
+<h3 id="543-VM-FS-MISMATCH"><a href="#543-VM-FS-MISMATCH" class="headerlink" title="543 VM_FS_MISMATCH"></a>543 VM_FS_MISMATCH</h3><p>文件系统不匹配。安装了不兼容的java文件系统。Jvm检测到现有的系统代码和经常用于创建java文件系统的系统代码有不同。这意味着java本地方法可能没有被正确的编译链接，所以，不能肯定系统的完整性。系统无法通过使用vm<br>DLFX和DLPS命令恢复，也不能删除或修理本地内存的错误。这可能清除所有的数据和固件内容，请重新链接编译文件系统，才能匹配新的系统代码。恢复顺序非常<br>重要：1.删除应用程序，2.删除本地内存内容，3.复位设备</p>
+<h3 id="544-VM-SECTION-MAP-OVERFLOW"><a href="#544-VM-SECTION-MAP-OVERFLOW" class="headerlink" title="544 VM_SECTION_MAP_OVERFLOW"></a>544 VM_SECTION_MAP_OVERFLOW</h3><p>一个模块引用超过了255个其他模块。Vm检测到一个模块试图引用超过了255个其他的模块。当错误检测到的时候，文件系统应该立即获取到该错误</p>
+<h3 id="545-VM-INCOMPATIBLE-FILESYS"><a href="#545-VM-INCOMPATIBLE-FILESYS" class="headerlink" title="545 VM_INCOMPATIBLE_FILESYS"></a>545 VM_INCOMPATIBLE_FILESYS</h3><p>Vm检测到一个不兼容的或无效的文件系统存在。当错误检测到的时候，文件系统应该立即获取到该错误</p>
+<h3 id="546-VM-UNUSED-546"><a href="#546-VM-UNUSED-546" class="headerlink" title="546 VM_UNUSED_546"></a>546 VM_UNUSED_546</h3><p>未使用（的内部错误代码）。Vm检测到文件系统中的内存映像是无效的（CRC冗余检查失败），重新复位机器好过复制错误的内存<br>内容</p>
+<h3 id="547-VM-UNUSED-547"><a href="#547-VM-UNUSED-547" class="headerlink" title="547 VM_UNUSED_547"></a>547 VM_UNUSED_547</h3><p>未使用（的内部错误代码）。Vm错误</p>
+<h3 id="548-VM-UNUSED-548"><a href="#548-VM-UNUSED-548" class="headerlink" title="548 VM_UNUSED_548"></a>548 VM_UNUSED_548</h3><p>未使用（的内部错误代码）。Vm错误</p>
+<h3 id="549-VM-UNUSED-549"><a href="#549-VM-UNUSED-549" class="headerlink" title="549 VM_UNUSED_549"></a>549 VM_UNUSED_549</h3><p>未使用（的内部错误代码）。Vm错误</p>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2012/04/04/blackberry-app-invoke-app/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          BlackBerry 开发：APP 启动 APP
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/02/16/blackberry-reading-system-properties/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">BlackBerry 开发：读系统参数</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

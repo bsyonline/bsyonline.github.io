@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>A Guide to MongoDB API and Java Driver | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="查询所有
+db.getCollection(&amp;#39;order&amp;#39;).find()
+查询 customerId=1 的记录
+db.getCollection(&amp;#39;order&amp;#39;).find({&amp;quot;customerId&amp;quot;:1})
+查询 customerId=1 的记录，按 userId 降序排序
+db.getCollection(&amp;#39;order&amp;#39;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Guide to MongoDB API and Java Driver">
+<meta property="og:url" content="/2019/05/25/a-guide-to-mongodb-api-and-java-driver/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="查询所有
+db.getCollection(&amp;#39;order&amp;#39;).find()
+查询 customerId=1 的记录
+db.getCollection(&amp;#39;order&amp;#39;).find({&amp;quot;customerId&amp;quot;:1})
+查询 customerId=1 的记录，按 userId 降序排序
+db.getCollection(&amp;#39;order&amp;#39;)">
+<meta property="og:updated_time" content="2019-08-03T05:07:49.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A Guide to MongoDB API and Java Driver">
+<meta name="twitter:description" content="查询所有
+db.getCollection(&amp;#39;order&amp;#39;).find()
+查询 customerId=1 的记录
+db.getCollection(&amp;#39;order&amp;#39;).find({&amp;quot;customerId&amp;quot;:1})
+查询 customerId=1 的记录，按 userId 降序排序
+db.getCollection(&amp;#39;order&amp;#39;)">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2019/05/25
+        <a class="article-title" href="/2019/05/25/a-guide-to-mongodb-api-and-java-driver/">A Guide to MongoDB API and Java Driver</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-a-guide-to-mongodb-api-and-java-driver" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2019-05-25T04:01:20.000Z" itemprop="datePublished">2019/05/25</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2019/05/25/a-guide-to-mongodb-api-and-java-driver/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/untag/" title="untag">untag</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/uncategory/" title="uncategory">uncategory</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>查询所有</p>
+<pre><code>db.getCollection(&#39;order&#39;).find()
+</code></pre><p>查询 customerId=1 的记录</p>
+<pre><code>db.getCollection(&#39;order&#39;).find({&quot;customerId&quot;:1})
+</code></pre><p>查询 customerId=1 的记录，按 userId 降序排序</p>
+<pre><code>db.getCollection(&#39;order&#39;).find({&quot;customerId&quot;:1}).sort({&quot;userId&quot;:-1})
+</code></pre><p>按 userId 分组</p>
+<pre><code>db.getCollection(&#39;order&#39;).aggregate([
+  {$group:{_id:&quot;$userId&quot;,count:{&quot;$sum&quot;:1}}}
+])
+</code></pre><pre><code>/* 1 */
+{
+    &quot;_id&quot; : 6,
+    &quot;count&quot; : 2.0
+}
+/* 2 */
+{
+    &quot;_id&quot; : 5,
+    &quot;count&quot; : 2.0
+}
+/* 3 */
+{
+    &quot;_id&quot; : 2,
+    &quot;count&quot; : 4.0
+}
+/* 4 */
+{
+    &quot;_id&quot; : 1,
+    &quot;count&quot; : 3.0
+}
+/* 5 */
+{
+    &quot;_id&quot; : 3,
+    &quot;count&quot; : 2.0
+}
+/* 6 */
+{
+    &quot;_id&quot; : 4,
+    &quot;count&quot; : 2.0
+}
+</code></pre><p>使用 java driver</p>
+<pre><code>public void groupByUserId() {
+    MongoCollection&lt;Document&gt; col = mongoClient.getDatabase(database).getCollection(collection);
+    MongoCursor&lt;Document&gt; cursor = col.aggregate(Lists.newArrayList(
+            group(&quot;$userId&quot;, sum(&quot;count&quot;, new BsonInt32(1)))
+    )).iterator();
+    while (cursor.hasNext()) {
+        Document document = cursor.next();
+        System.out.println(new Gson().toJson(document));
+    }
+}
+</code></pre><pre><code>{&quot;_id&quot;:6,&quot;count&quot;:2}
+{&quot;_id&quot;:5,&quot;count&quot;:2}
+{&quot;_id&quot;:2,&quot;count&quot;:4}
+{&quot;_id&quot;:1,&quot;count&quot;:3}
+{&quot;_id&quot;:3,&quot;count&quot;:2}
+{&quot;_id&quot;:4,&quot;count&quot;:2}
+</code></pre><p>按多个字段分组</p>
+<pre><code>db.getCollection(&#39;order&#39;).aggregate([
+  {$group:{_id:{customerId:&quot;$customerId&quot;,userId:&quot;$userId&quot;},count:{&quot;$sum&quot;:1}}}
+])
+</code></pre><pre><code>/* 1 */
+{
+    &quot;_id&quot; : {
+        &quot;customerId&quot; : 4,
+        &quot;userId&quot; : 4
+    },
+    &quot;count&quot; : 1.0
+}
+/* 2 */
+{
+    &quot;_id&quot; : {
+        &quot;customerId&quot; : 3,
+        &quot;userId&quot; : 2
+    },
+    &quot;count&quot; : 1.0
+}
+/* 3 */
+{
+    &quot;_id&quot; : {
+        &quot;customerId&quot; : 2,
+        &quot;userId&quot; : 1
+    },
+    &quot;count&quot; : 1.0
+}
+/* 4 */
+{
+    &quot;_id&quot; : {
+        &quot;customerId&quot; : 1,
+        &quot;userId&quot; : 6
+    },
+    &quot;count&quot; : 2.0
+}
+/* 5 */
+{
+    &quot;_id&quot; : {
+        &quot;customerId&quot; : 1,
+        &quot;userId&quot; : 2
+    },
+    &quot;count&quot; : 3.0
+}
+/* 6 */
+{
+    &quot;_id&quot; : {
+        &quot;customerId&quot; : 1,
+        &quot;userId&quot; : 5
+    },
+    &quot;count&quot; : 2.0
+}
+/* 7 */
+{
+    &quot;_id&quot; : {
+        &quot;customerId&quot; : 1,
+        &quot;userId&quot; : 1
+    },
+    &quot;count&quot; : 2.0
+}
+/* 8 */
+{
+    &quot;_id&quot; : {
+        &quot;customerId&quot; : 1,
+        &quot;userId&quot; : 3
+    },
+    &quot;count&quot; : 2.0
+}
+/* 9 */
+{
+    &quot;_id&quot; : {
+        &quot;customerId&quot; : 1,
+        &quot;userId&quot; : 4
+    },
+    &quot;count&quot; : 1.0
+}
+</code></pre><p>使用 java driver</p>
+<pre><code>public void groupByCustomerAndUser() {
+    MongoCollection&lt;Document&gt; col = mongoClient.getDatabase(database).getCollection(collection);
+    MongoCursor&lt;Document&gt; cursor = col.aggregate(Lists.newArrayList(
+            group(new BasicDBObject(&quot;customerId&quot;, &quot;$customerId&quot;).append(&quot;userId&quot;, &quot;$userId&quot;), sum(&quot;count&quot;, new BsonInt32(1)))
+    )).iterator();
+    while (cursor.hasNext()) {
+        Document document = cursor.next();
+        System.out.println(new Gson().toJson(document));
+    }
+}
+</code></pre><pre><code>{&quot;_id&quot;:{&quot;customerId&quot;:4,&quot;userId&quot;:4},&quot;count&quot;:1}
+{&quot;_id&quot;:{&quot;customerId&quot;:3,&quot;userId&quot;:2},&quot;count&quot;:1}
+{&quot;_id&quot;:{&quot;customerId&quot;:2,&quot;userId&quot;:1},&quot;count&quot;:1}
+{&quot;_id&quot;:{&quot;customerId&quot;:1,&quot;userId&quot;:6},&quot;count&quot;:2}
+{&quot;_id&quot;:{&quot;customerId&quot;:1,&quot;userId&quot;:2},&quot;count&quot;:3}
+{&quot;_id&quot;:{&quot;customerId&quot;:1,&quot;userId&quot;:5},&quot;count&quot;:2}
+{&quot;_id&quot;:{&quot;customerId&quot;:1,&quot;userId&quot;:1},&quot;count&quot;:2}
+{&quot;_id&quot;:{&quot;customerId&quot;:1,&quot;userId&quot;:3},&quot;count&quot;:2}
+{&quot;_id&quot;:{&quot;customerId&quot;:1,&quot;userId&quot;:4},&quot;count&quot;:1}
+</code></pre><p>使用 pipeline ，组合多个操作，按用户去重，查询客户id为1的订单数量</p>
+<pre><code>db.getCollection(&#39;order&#39;).aggregate([
+  {$match:{&quot;customerId&quot;: 1}},
+  {$group:{_id:{customerId:&quot;$customerId&quot;,userId:&quot;$userId&quot;}}},
+  {$group:{_id:&quot;$_id.customerId&quot;,count:{&quot;$sum&quot;:1}}}
+])
+</code></pre><pre><code>/* 1 */
+{
+    &quot;_id&quot; : 1,
+    &quot;count&quot; : 6.0
+}
+</code></pre><p>使用 java driver</p>
+<pre><code>public void findByCustomerDistinctByUser(Integer customerId) {
+    MongoCollection&lt;Document&gt; col = mongoClient.getDatabase(database).getCollection(collection);
+    MongoCursor&lt;Document&gt; cursor = col.aggregate(Lists.newArrayList(
+            match(eq(&quot;customerId&quot;, customerId)),
+            group(new BasicDBObject(&quot;customerId&quot;, &quot;$customerId&quot;).append(&quot;userId&quot;, &quot;$userId&quot;), sum(&quot;count&quot;, new BsonInt32(1))),
+            group(&quot;$_id.customerId&quot;, sum(&quot;count&quot;, new BsonInt32(1)))
+    )).iterator();
+    while (cursor.hasNext()) {
+        Document document = cursor.next();
+        System.out.println(new Gson().toJson(document));
+    }
+}
+</code></pre><pre><code>{&quot;_id&quot;:1,&quot;count&quot;:6}
+</code></pre><p>也可以将查询语句转成 bson 对象，这样写</p>
+<pre><code>public void findByCustomerDistinctByUser1() {
+    MongoCollection&lt;Document&gt; col = mongoClient.getDatabase(database).getCollection(collection);
+    String query1 = &quot;{$match:{\&quot;customerId\&quot;: 1}}&quot;;
+    String query2 = &quot;{$group:{_id:{customerId:\&quot;$customerId\&quot;,userId:\&quot;$userId\&quot;}}}&quot;;
+    String query3 = &quot;{$group:{_id:\&quot;$_id.customerId\&quot;,count:{\&quot;$sum\&quot;:1}}}&quot;;
+    Bson bson1 = (Bson) JSON.parse(query1);
+    Bson bson2 = (Bson) JSON.parse(query2);
+    Bson bson3 = (Bson) JSON.parse(query3);
+    MongoCursor&lt;Document&gt; cursor = col.aggregate(Lists.newArrayList(bson1, bson2, bson3)).iterator();
+    while (cursor.hasNext()) {
+        Document document = cursor.next();
+        System.out.println(new Gson().toJson(document));
+    }
+}
+</code></pre><p>小数据量分页使用 skip() 和 limit()</p>
+<pre><code>MongoCursor&lt;Document&gt; cursor = col.find()
+                .skip(page * pageSize)
+                .limit(pageSize)
+                .iterator();
+</code></pre><p>简单，但是数据量大时有效率问题。因为会把所有记录查出来，从头变例，并且无法使用索引。</p>
+<p>大数据量</p>
+<pre><code>MongoCursor&lt;Document&gt; cursor = col.find(gt(&quot;_id&quot;, new ObjectId(head)))
+                .batchSize(batchSize).limit(limit).iterator();
+</code></pre><p>效率高，但是必须回传当前页的最后一条记录的 id，同理上一页，需要回传当前页的第一条记录id，find 条件需要改成 lt() 。还有一个缺点是不能跳页。</p>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2019/06/02/basic-concepts-of-drools/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          basic concepts of drools
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/19/distributed-lock/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">distributed lock</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Distributed-Computing/">Distributed Computing (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (119)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Algorithm/">Algorithm (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (8)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mutilthreading/"><i class='fa fa-tags'></i>Mutilthreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ribbon/"><i class='fa fa-tags'></i>Ribbon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Data/"><i class='fa fa-tags'></i>Spring Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-Processing/"><i class='fa fa-tags'></i>Stream Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2019 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>
