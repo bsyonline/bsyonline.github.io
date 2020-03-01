@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Netty Websocket Long Connection | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="http://gee.cs.oswego.eduScalable IO in JavaDoug LeaState University of New York at Oswegodl@cs.oswego.eduhttp://gee.cs.oswego.eduhttp://gee.cs.oswego.eduOutline“ Scalable network services“ Event-drive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty Websocket Long Connection">
+<meta property="og:url" content="/2020/01/04/netty-websocket-long-connection/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="http://gee.cs.oswego.eduScalable IO in JavaDoug LeaState University of New York at Oswegodl@cs.oswego.eduhttp://gee.cs.oswego.eduhttp://gee.cs.oswego.eduOutline“ Scalable network services“ Event-drive">
+<meta property="og:updated_time" content="2020-02-23T07:27:28.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Netty Websocket Long Connection">
+<meta name="twitter:description" content="http://gee.cs.oswego.eduScalable IO in JavaDoug LeaState University of New York at Oswegodl@cs.oswego.eduhttp://gee.cs.oswego.eduhttp://gee.cs.oswego.eduOutline“ Scalable network services“ Event-drive">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2020/01/04
+        <a class="article-title" href="/2020/01/04/netty-websocket-long-connection/">Netty Websocket Long Connection</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-netty-websocket-long-connection" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2020-01-04T11:46:06.000Z" itemprop="datePublished">2020/01/04</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2020/01/04/netty-websocket-long-connection/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Netty/" title="Netty">Netty</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Netty/" title="Netty">Netty</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Scalable IO in Java<br>Doug Lea<br>State University of New York at Oswego<br>dl@cs.oswego.edu<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Outline<br>“ Scalable network services<br>“ Event-driven processing<br>“ Reactor pattern<br>Basic version<br>Multithreaded versions<br>Other variants<br>“ Walkthrough of java.nio nonblocking IO APIs<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Network Services<br>“ Web services, Distributed Objects, etc<br>“ Most have same basic structure:<br>Read request<br>Decode request<br>Process service<br>Encode reply<br>Send reply<br>“ But differ in nature and cost of each step<br>XML parsing, File transfer, Web page<br>generation, computational services, …<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Classic Service Designs<br>client<br>client<br>client<br>Server<br>read decode compute encode send<br>read decode compute encode send<br>handler<br>handler<br>read decode compute encode send<br>handler<br>Each handler may be started in its own thread<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Classic ServerSocket Loop<br> class Server implements Runnable {<br> public void run() {<br> try {<br> ServerSocket ss = new ServerSocket(PORT);<br> while (!Thread.interrupted())<br> new Thread(new Handler(ss.accept())).start();<br> // or, single-threaded, or a thread pool<br> } catch (IOException ex) { /<em> … </em>/ }<br> }<br> static class Handler implements Runnable {<br> final Socket socket;<br> Handler(Socket s) { socket = s; }<br> public void run() {<br> try {<br> byte[] input = new byte[MAX_INPUT];<br> socket.getInputStream().read(input);<br> byte[] output = process(input);<br> socket.getOutputStream().write(output);<br> } catch (IOException ex) { /<em> … </em>/ }<br> }<br> private byte[] process(byte[] cmd) { /<em> … </em>/ }<br> }<br>}<br>Note: most exception handling elided from code examples<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Scalability Goals<br>“ Graceful degradation under increasing load<br>(more clients)<br>“ Continuous improvement with increasing<br>resources (CPU, memory, disk, bandwidth)<br>“ Also meet availability and performance goals<br>Short latencies<br>Meeting peak demand<br>Tunable quality of service<br>“ Divide-and-conquer is usually the best<br>approach for achieving any scalability goal<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Divide and Conquer<br>“ Divide processing into small tasks<br>Each task performs an action without blocking<br>“ Execute each task when it is enabled<br>Here, an IO event usually serves as trigger<br>“ Basic mechanisms supported in java.nio<br>Non-blocking reads and writes<br>Dispatch tasks associated with sensed IO events<br>“ Endless variation possible<br>A family of event-driven designs<br>read decode compute encode send<br>handler<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Event-driven Designs<br>“ Usually more efficient than alternatives<br>Fewer resources<br>“ Don’t usually need a thread per client<br>Less overhead<br>“ Less context switching, often less locking<br>But dispatching can be slower<br>“ Must manually bind actions to events<br>“ Usually harder to program<br>Must break up into simple non-blocking actions<br>“ Similar to GUI event-driven actions<br>“ Cannot eliminate all blocking: GC, page faults, etc<br>Must keep track of logical state of service<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Background: Events in AWT<br>Event<br>Event<br>Button<br>public void actionPerformed(…) {<br> doSomething();<br>}<br>ActionListener<br>AWT thread<br>AWT Event Queue<br>Event-driven IO uses similar ideas but in different designs<br>…<br>click!<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Reactor Pattern<br>“ Reactor responds to IO events by dispatching<br>the appropriate handler<br>Similar to AWT thread<br>“ Handlers perform non-blocking actions<br>Similar to AWT ActionListeners<br>“ Manage by binding handlers to events<br>Similar to AWT addActionListener<br>“ See Schmidt et al, Pattern-Oriented Software<br>Architecture, Volume 2 (POSA2)<br>Also Richard Stevens’s networking books, Matt<br>Welsh’s SEDA framework, etc<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Basic Reactor Design<br>client<br>client<br>client<br>read decode compute encode send<br>read decode compute encode send<br>read decode compute encode send<br>Reactor<br>acceptor<br>dispatch<br>Single threaded version<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>java.nio Support<br>“ Channels<br>Connections to files, sockets etc that support<br>non-blocking reads<br>“ Buffers<br>Array-like objects that can be directly read or<br>written by Channels<br>“ Selectors<br>Tell which of a set of Channels have IO events<br>“ SelectionKeys<br>Maintain IO event status and bindings<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Reactor 1: Setup<br> class Reactor implements Runnable {<br>final Selector selector;<br>final ServerSocketChannel serverSocket;<br>Reactor(int port) throws IOException {<br>selector = Selector.open();<br>serverSocket = ServerSocketChannel.open();<br>serverSocket.socket().bind(<br>new InetSocketAddress(port));<br>serverSocket.configureBlocking(false);<br>SelectionKey sk =<br>serverSocket.register(selector,<br>SelectionKey.OP_ACCEPT);<br>sk.attach(new Acceptor());<br>}<br>/<em><br>Alternatively, use explicit SPI provider:<br>SelectorProvider p = SelectorProvider.provider();<br>selector = p.openSelector();<br>serverSocket = p.openServerSocketChannel();
+</em>/<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Reactor 2: Dispatch Loop<br> // class Reactor continued<br>public void run() { // normally in a new<br>Thread<br>try {<br>while (!Thread.interrupted()) {<br>selector.select();<br>Set selected = selector.selectedKeys();<br>Iterator it = selected.iterator();<br>while (it.hasNext())<br>dispatch((SelectionKey)(it.next());<br>selected.clear();<br>}<br>} catch (IOException ex) { /<em> … </em>/ }<br>}<br>void dispatch(SelectionKey k) {<br>Runnable r = (Runnable)(k.attachment());<br>if (r != null)<br>r.run();<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Reactor 3: Acceptor<br> // class Reactor continued<br>class Acceptor implements Runnable { // inner<br>public void run() {<br>try {<br>SocketChannel c = serverSocket.accept();<br>if (c != null)<br>new Handler(selector, c);<br>}<br>catch(IOException ex) { /<em> … </em>/ }<br>}<br>}<br>}<br>client<br>client<br>client<br>read decode compute encode send<br>read decode compute encode send<br>read decode compute encode send<br>Reactor<br>acceptor<br>dispatch<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Reactor 4: Handler setup<br>final class Handler implements Runnable {<br>final SocketChannel socket;<br>final SelectionKey sk;<br>ByteBuffer input = ByteBuffer.allocate(MAXIN);<br>ByteBuffer output = ByteBuffer.allocate(MAXOUT);<br>static final int READING = 0, SENDING = 1;<br>int state = READING;<br>Handler(Selector sel, SocketChannel c)<br>throws IOException {<br>socket = c; c.configureBlocking(false);<br>// Optionally try first read now<br>sk = socket.register(sel, 0);<br>sk.attach(this);<br>sk.interestOps(SelectionKey.OP_READ);<br>sel.wakeup();<br>}<br>boolean inputIsComplete() { /<em> … </em>/ }<br>boolean outputIsComplete() { /<em> … </em>/ }<br>void process() { /<em> … </em>/ }<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Reactor 5: Request handling<br> // class Handler continued<br>public void run() {<br>try {<br>if (state == READING) read();<br>else if (state == SENDING) send();<br>} catch (IOException ex) { /<em> … </em>/ }<br>}<br>void read() throws IOException {<br>socket.read(input);<br>if (inputIsComplete()) {<br>process();<br>state = SENDING;<br>// Normally also do first write now<br>sk.interestOps(SelectionKey.OP_WRITE);<br>}<br>}<br>void send() throws IOException {<br>socket.write(output);<br>if (outputIsComplete()) sk.cancel();<br>}<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Per-State Handlers<br>“ A simple use of GoF State-Object pattern<br>Rebind appropriate handler as attachment<br>class Handler { // …<br>public void run() { // initial state is reader<br>socket.read(input);<br>if (inputIsComplete()) {<br>process();<br>sk.attach(new Sender());<br>sk.interest(SelectionKey.OP_WRITE);<br>sk.selector().wakeup();<br>}<br>}<br>class Sender implements Runnable {<br>public void run(){ // …<br>socket.write(output);<br>if (outputIsComplete()) sk.cancel();<br>}<br>}<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Multithreaded Designs<br>“ Strategically add threads for scalability<br>Mainly applicable to multiprocessors<br>“ Worker Threads<br>Reactors should quickly trigger handlers<br>“ Handler processing slows down Reactor<br>Offload non-IO processing to other threads<br>“ Multiple Reactor Threads<br>Reactor threads can saturate doing IO<br>Distribute load to other reactors<br>“ Load-balance to match CPU and IO rates<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Worker Threads<br>“ Offload non-IO processing to speed up<br>Reactor thread<br>Similar to POSA2 Proactor designs<br>“ Simpler than reworking compute-bound<br>processing into event-driven form<br>Should still be pure nonblocking computation<br>“ Enough processing to outweigh overhead<br>“ But harder to overlap processing with IO<br>Best when can first read all input into a buffer<br>“ Use thread pool so can tune and control<br>Normally need many fewer threads than clients<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Worker Thread Pools<br>client<br>client<br>client<br>read<br>decode compute encode<br>send<br>read<br>decode compute encode<br>send<br>read<br>decode compute encode<br>send<br>Reactor<br>Thread<br>Pool<br>worker<br>threads<br>acceptor<br>queued tasks<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Handler with Thread Pool<br> class Handler implements Runnable {<br> // uses util.concurrent thread pool<br> static PooledExecutor pool = new PooledExecutor(…);<br> static final int PROCESSING = 3;<br> // …<br> synchronized void read() { // …<br> socket.read(input);<br> if (inputIsComplete()) {<br> state = PROCESSING;<br> pool.execute(new Processer());<br> }<br> }<br> synchronized void processAndHandOff() {<br> process();<br> state = SENDING; // or rebind attachment<br> sk.interest(SelectionKey.OP_WRITE);<br> }<br> class Processer implements Runnable {<br> public void run() { processAndHandOff(); }<br> }<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Coordinating Tasks<br>“ Handoffs<br>Each task enables, triggers, or calls next one<br>Usually fastest but can be brittle<br>“ Callbacks to per-handler dispatcher<br>Sets state, attachment, etc<br>A variant of GoF Mediator pattern<br>“ Queues<br>For example, passing buffers across stages<br>“ Futures<br>When each task produces a result<br>Coordination layered on top of join or wait/notify<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Using PooledExecutor<br>“ A tunable worker thread pool<br>“ Main method execute(Runnable r)<br>“ Controls for:<br>The kind of task queue (any Channel)<br>Maximum number of threads<br>Minimum number of threads<br>“Warm” versus on-demand threads<br>Keep-alive interval until idle threads die<br>“ to be later replaced by new ones if necessary<br>Saturation policy<br>“ block, drop, producer-runs, etc<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Multiple Reactor Threads<br>“ Using Reactor Pools<br>Use to match CPU and IO rates<br>Static or dynamic construction<br>“ Each with own Selector, Thread, dispatch loop<br>Main acceptor distributes to other reactors<br>Selector[] selectors; // also create threads<br>int next = 0;<br>class Acceptor { // …<br>public synchronized void run() { …<br>Socket connection = serverSocket.accept();<br>if (connection != null)<br>new Handler(selectors[next], connection);<br>if (++next == selectors.length) next = 0;<br>}<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Using Multiple Reactors<br>client<br>client<br>client<br>read<br>decode compute encode<br>send<br>read<br>decode compute encode<br>send<br>read<br>decode compute encode<br>send<br>mainReactor<br>Thread<br>Pool<br>worker<br>threads<br>acceptor<br>queued tasks<br>subReactor<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Using other java.nio features<br>“ Multiple Selectors per Reactor<br>To bind different handlers to different IO events<br>May need careful synchronization to coordinate<br>“ File transfer<br>Automated file-to-net or net-to-file copying<br>“ Memory-mapped files<br>Access files via buffers<br>“ Direct buffers<br>Can sometimes achieve zero-copy transfer<br>But have setup and finalization overhead<br>Best for applications with long-lived connections<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Connection-Based Extensions<br>“ Instead of a single service request,<br>Client connects<br>Client sends a series of messages/requests<br>Client disconnects<br>“ Examples<br>Databases and Transaction monitors<br>Multi-participant games, chat, etc<br>“ Can extend basic network service patterns<br>Handle many relatively long-lived clients<br>Track client and session state (including drops)<br>Distribute services across multiple hosts<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>API Walkthrough<br>“ Buffer<br>“ ByteBuffer<br>(CharBuffer, LongBuffer, etc not shown.)<br>“ Channel<br>“ SelectableChannel<br>“ SocketChannel<br>“ ServerSocketChannel<br>“ FileChannel<br>“ Selector<br>“ SelectionKey<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Buffer<br> abstract class Buffer {<br> int capacity();<br> int position();<br> Buffer position(int newPosition);<br> int limit();<br> Buffer limit(int newLimit);<br> Buffer mark();<br> Buffer reset();<br> Buffer clear();<br> Buffer flip();<br> Buffer rewind();<br> int remaining();<br> boolean hasRemaining();<br> boolean isReadOnly();<br>}<br>position limit capacity<br>mark<br>a b c<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>ByteBuffer (1)<br> abstract class ByteBuffer extends Buffer {<br> static ByteBuffer allocateDirect(int capacity);<br> static ByteBuffer allocate(int capacity);<br> static ByteBuffer wrap(byte[] src, int offset, int len);<br> static ByteBuffer wrap(byte[] src);<br> boolean isDirect();<br> ByteOrder order();<br> ByteBuffer order(ByteOrder bo);<br> ByteBuffer slice();<br> ByteBuffer duplicate();<br> ByteBuffer compact();<br> ByteBuffer asReadOnlyBuffer();<br> byte get();<br> byte get(int index);<br> ByteBuffer get(byte[] dst, int offset, int length);<br> ByteBuffer get(byte[] dst);<br> ByteBuffer put(byte b);<br> ByteBuffer put(int index, byte b);<br> ByteBuffer put(byte[] src, int offset, int length);<br> ByteBuffer put(ByteBuffer src);<br> ByteBuffer put(byte[] src);<br> char getChar();<br> char getChar(int index);<br> ByteBuffer putChar(char value);<br> ByteBuffer putChar(int index, char value);<br> CharBuffer asCharBuffer();<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>ByteBuffer (2)<br> short getShort();<br> short getShort(int index);<br> ByteBuffer putShort(short value);<br> ByteBuffer putShort(int index, short value);<br> ShortBuffer asShortBuffer();<br> int getInt();<br> int getInt(int index);<br> ByteBuffer putInt(int value);<br> ByteBuffer putInt(int index, int value);<br> IntBuffer asIntBuffer();<br> long getLong();<br> long getLong(int index);<br> ByteBuffer putLong(long value);<br> ByteBuffer putLong(int index, long value);<br> LongBuffer asLongBuffer();<br> float getFloat();<br> float getFloat(int index);<br> ByteBuffer putFloat(float value);<br> ByteBuffer putFloat(int index, float value);<br> FloatBuffer asFloatBuffer();<br> double getDouble();<br> double getDouble(int index);<br> ByteBuffer putDouble(double value);<br> ByteBuffer putDouble(int index, double value);<br> DoubleBuffer asDoubleBuffer();<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Channel<br> interface Channel {<br> boolean isOpen();<br> void close() throws IOException;<br>}<br>interface ReadableByteChannel extends Channel {<br> int read(ByteBuffer dst) throws IOException;<br>}<br>interface WritableByteChannel extends Channel {<br> int write(ByteBuffer src) throws IOException;<br>}<br>interface ScatteringByteChannel extends ReadableByteChannel {<br> int read(ByteBuffer[] dsts, int offset, int length)<br> throws IOException;<br> int read(ByteBuffer[] dsts) throws IOException;<br>}<br>interface GatheringByteChannel extends WritableByteChannel {<br> int write(ByteBuffer[] srcs, int offset, int length)<br> throws IOException;<br> int write(ByteBuffer[] srcs) throws IOException;<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>SelectableChannel</p>
+<p>abstract class SelectableChannel implements Channel {<br> int validOps();<br> boolean isRegistered();<br> SelectionKey keyFor(Selector sel);<br> SelectionKey register(Selector sel, int ops)<br> throws ClosedChannelException;<br> void configureBlocking(boolean block)<br> throws IOException;<br> boolean isBlocking();<br> Object blockingLock();<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>SocketChannel<br> abstract class SocketChannel implements ByteChannel … {<br> static SocketChannel open() throws IOException;<br> Socket socket();<br> int validOps();<br> boolean isConnected();<br> boolean isConnectionPending();<br> boolean isInputOpen();<br> boolean isOutputOpen();<br> boolean connect(SocketAddress remote) throws IOException;<br> boolean finishConnect() throws IOException;<br> void shutdownInput() throws IOException;<br> void shutdownOutput() throws IOException;<br> int read(ByteBuffer dst) throws IOException;<br> int read(ByteBuffer[] dsts, int offset, int length)<br> throws IOException;<br> int read(ByteBuffer[] dsts) throws IOException;<br> int write(ByteBuffer src) throws IOException;<br> int write(ByteBuffer[] srcs, int offset, int length)<br> throws IOException;<br> int write(ByteBuffer[] srcs) throws IOException;<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>ServerSocketChannel</p>
+<p>abstract class ServerSocketChannel extends … {<br> static ServerSocketChannel open() throws IOException;<br> int validOps();<br> ServerSocket socket();<br> SocketChannel accept() throws IOException;<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>FileChannel<br> abstract class FileChannel implements … {<br> int read(ByteBuffer dst);<br> int read(ByteBuffer dst, long position);<br> int read(ByteBuffer[] dsts, int offset, int length);<br> int read(ByteBuffer[] dsts);<br> int write(ByteBuffer src);<br> int write(ByteBuffer src, long position);<br> int write(ByteBuffer[] srcs, int offset, int length);<br> int write(ByteBuffer[] srcs);<br> long position();<br> void position(long newPosition);<br> long size();<br> void truncate(long size);<br> void force(boolean flushMetaDataToo);<br> int transferTo(long position, int count,<br> WritableByteChannel dst);<br> int transferFrom(ReadableByteChannel src,<br> long position, int count);<br> FileLock lock(long position, long size, boolean shared);<br> FileLock lock();<br> FileLock tryLock(long pos, long size, boolean shared);<br> FileLock tryLock();<br> static final int MAP_RO, MAP_RW, MAP_COW;<br> MappedByteBuffer map(int mode, long position, int size);<br>}<br>NOTE: ALL methods throw IOException<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>Selector<br> abstract class Selector {<br> static Selector open() throws IOException;<br> Set keys();<br> Set selectedKeys();<br> int selectNow() throws IOException;<br> int select(long timeout) throws IOException;<br> int select() throws IOException;<br> void wakeup();<br> void close() throws IOException;<br>}<br><a href="http://gee.cs.oswego.edu" target="_blank" rel="external">http://gee.cs.oswego.edu</a><br>SelectionKey<br> abstract class SelectionKey {<br> static final int OP_READ, OP_WRITE,<br> OP_CONNECT, OP_ACCEPT;<br> SelectableChannel channel();<br> Selector selector();<br> boolean isValid();<br> void cancel();<br> int interestOps();<br> void interestOps(int ops);<br> int readyOps();<br> boolean isReadable();<br> boolean isWritable();<br> boolean isConnectable();<br> boolean isAcceptable();<br> Object attach(Object ob);<br> Object attachment();<br>}</p>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2020/01/21/docker-network/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Docker Network
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/04/netty-handler-chain/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Netty Handler Chain</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (110)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Architecture/">Architecture (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Netty/">Netty (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Boot/">Spring Boot (6)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spark/">Spark (14)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring/">Spring (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/"><i class='fa fa-tags'></i>Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrent/"><i class='fa fa-tags'></i>Concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/"><i class='fa fa-tags'></i>Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/"><i class='fa fa-tags'></i>Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drools/"><i class='fa fa-tags'></i>Drools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GC/"><i class='fa fa-tags'></i>GC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/"><i class='fa fa-tags'></i>Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mock/"><i class='fa fa-tags'></i>Mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/"><i class='fa fa-tags'></i>MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multithreading/"><i class='fa fa-tags'></i>Multithreading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/"><i class='fa fa-tags'></i>MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/"><i class='fa fa-tags'></i>Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reactive/"><i class='fa fa-tags'></i>Reactive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/"><i class='fa fa-tags'></i>Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/"><i class='fa fa-tags'></i>Tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2020 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>
