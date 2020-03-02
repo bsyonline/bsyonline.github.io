@@ -18,7 +18,7 @@
         
         <tags>
             
-            <tag> JVM </tag>
+            <tag> Inteview </tag>
             
         </tags>
         
@@ -48,7 +48,7 @@
         
         <tags>
             
-            <tag> Architecture </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -137,7 +137,82 @@
         
         <tags>
             
-            <tag> Data Structure </tag>
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[CAS]]></title>
+      <url>/2020/03/02/cas/</url>
+      <content type="html"><![CDATA[<p>在 Java 并发编程中，为了保证并发安全，一种方式是使用锁，另一种方式是使用 CAS（compare and swap） 。CAS 类似数据库的乐观锁，有 3 个参数，内存地址 V ，旧的预期值 A ，要修改的新值 B ，更新一个变量的时候，只有当变量的预期值 A 和内存地址 V 当中的实际值相同时，才会将内存地址 V 对应的值修改为 B ，如果和预期不相等则更新失败。</p>
+<h4 id="CAS-是如何实现的？"><a href="#CAS-是如何实现的？" class="headerlink" title="CAS 是如何实现的？"></a>CAS 是如何实现的？</h4><p>Unsafe 类中有 3 个 cas 方法：</p>
+<pre><code>public final native boolean compareAndSwapObject(Object var1, long var2, Object var4, Object var5);
+
+public final native boolean compareAndSwapInt(Object var1, long var2, int var4, int var5);
+
+public final native boolean compareAndSwapLong(Object var1, long var2, long var4, long var6);
+</code></pre><p>它们都是本地方法，在 x86 架构的系统中，是 Unsafe 类通过来调用 <strong>copxchg</strong> 指令来完成 CAS 操作的。</p>
+<blockquote>
+<p>compareAndSwapInt() 方法 4 个参数含义：<br>Object var1 需要操作的对象。<br>long var2    需要操作的属性的内存偏移量。<br>int var4    期望值。<br>int var5    更新值。</p>
+</blockquote>
+<h4 id="如何使用-Unsafe"><a href="#如何使用-Unsafe" class="headerlink" title="如何使用 Unsafe"></a>如何使用 Unsafe</h4><p>Unsafe 是 sun.misc 包下的类，如果我们使用 Unsafe.getUnsafe() 来创建实例，则会报 java.lang.SecurityException: Unsafe 。原因是因为 Unsafe 类是 Java 的底层类，必须由 bootstrap classloader 加载，我们的应用是通过 application classloader 加载的，所以会报异常。</p>
+<pre><code>@CallerSensitive
+public static Unsafe getUnsafe() {
+    Class var0 = Reflection.getCallerClass();
+    if (!VM.isSystemDomainLoader(var0.getClassLoader())) {
+        throw new SecurityException(&quot;Unsafe&quot;);
+    } else {
+        return theUnsafe;
+    }
+}
+</code></pre><p>既然不能直接使用，那就只能换一种方式，借鉴 java.util.concurrent.atomic.AtomicInteger ，利用反射来获取 Unsafe 。</p>
+<pre><code>public class UnsafeExample {
+
+    private static Unsafe unsafe;
+    private static long valueOffset;
+    private volatile int value;
+
+    static {
+        try {
+            Field theUnsafeField = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);
+            theUnsafeField.setAccessible(true);
+            unsafe = (Unsafe) theUnsafeField.get(null);
+            valueOffset = unsafe.objectFieldOffset(UnsafeExample.class.getDeclaredField(&quot;value&quot;));
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        //Unsafe unsafe = Unsafe.getUnsafe();
+        System.out.println(unsafe);
+        System.out.println(valueOffset);
+    }
+}
+</code></pre><h4 id="CAS-的优点与问题"><a href="#CAS-的优点与问题" class="headerlink" title="CAS 的优点与问题"></a>CAS 的优点与问题</h4><p>和 Java 的锁相比，CAS 不会阻塞线程，也不会有线程间通信带来的线程切换和唤醒的消耗，在性能上会好于 Java 的锁。但是 CAS 也有一些问题：</p>
+<ol>
+<li>线程自旋造成的 CPU 占用高。</li>
+<li>ABA 问题。</li>
+<li>只能保证单个属性的线程安全，多个属性的线程安全无法使用 CAS 。</li>
+</ol>
+<h4 id="ABA-问题"><a href="#ABA-问题" class="headerlink" title="ABA 问题"></a>ABA 问题</h4><p>CAS 没有加锁，而是通过比较内存地址的值是否和预期相等来判断是否能更新成功。举个例子，比如一个栈中有 ABC 三个元素，栈顶元素是 C ，如果进行 2 次出栈操作，在将 C 入栈，此时栈顶元素还是 C ，但是栈中只有 A 和 C 了。为了避免这种情况，可以使用 <code>AtomicStampedReference&lt;V&gt;</code> 或 <code>AtomicMarkableReference&lt;V&gt;</code> 通过每次操作都添加一个标签来，虽然值相同但是不同的操作标签已经改变，从而避免 ABA 问题。</p>
+<blockquote>
+<p><code>AtomicStampedReference&lt;V&gt;</code> 和 <code>AtomicMarkableReference&lt;V&gt;</code> 内部都维护了一个 pair ，AtomicStampedReference 中的 pair 是 (reference, int) ，AtomicMarkableReference 中的 pair 是 (reference, boolean) 。AtomicMarkableReference 只是标识是否有修改。</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Concurrent </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
             
         </tags>
         
@@ -184,14 +259,14 @@
       
         <categories>
             
-            <category> uncategory </category>
+            <category> Spring Boot </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> untag </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -234,7 +309,7 @@ public class JdbcTemplateAutoConfiguration {
         
         <tags>
             
-            <tag> Spring Boot </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -277,7 +352,7 @@ Start-Class: com.rolex.springbootlearning.SpringBootLearningApplication
         
         <tags>
             
-            <tag> Spring Boot </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -309,6 +384,8 @@ Start-Class: com.rolex.springbootlearning.SpringBootLearningApplication
         
         
         <tags>
+            
+            <tag> Interview </tag>
             
             <tag> GC </tag>
             
@@ -343,9 +420,7 @@ Start-Class: com.rolex.springbootlearning.SpringBootLearningApplication
         
         <tags>
             
-            <tag> GC </tag>
-            
-            <tag> JVM </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -375,7 +450,7 @@ Start-Class: com.rolex.springbootlearning.SpringBootLearningApplication
         
         <tags>
             
-            <tag> GC </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -434,7 +509,7 @@ Start-Class: com.rolex.springbootlearning.SpringBootLearningApplication
         
         <tags>
             
-            <tag> Linux </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -457,7 +532,7 @@ Start-Class: com.rolex.springbootlearning.SpringBootLearningApplication
         
         <tags>
             
-            <tag> GC </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -496,7 +571,7 @@ Start-Class: com.rolex.springbootlearning.SpringBootLearningApplication
         
         <tags>
             
-            <tag> JVM </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -554,14 +629,14 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.221-b11, mixed mode)
         
         <tags>
             
-            <tag> JVM </tag>
+            <tag> Interview </tag>
             
         </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[lock]]></title>
+      <title><![CDATA[Lock]]></title>
       <url>/2020/02/20/lock/</url>
       <content type="html"><![CDATA[<p>Java 锁的种类：</p>
 <ol>
@@ -715,14 +790,14 @@ public void print3() {
       
         <categories>
             
-            <category> Java </category>
+            <category> Concurrent </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Concurrent </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -757,14 +832,14 @@ synchronized (this) {
       
         <categories>
             
-            <category> Java </category>
+            <category> Concurrent </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Concurrent </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -933,7 +1008,7 @@ class Node implements Comparable&lt;Node&gt; {
     </entry>
     
     <entry>
-      <title><![CDATA[kmp search]]></title>
+      <title><![CDATA[KMP Search]]></title>
       <url>/2020/02/12/kmp-search/</url>
       <content type="html"><![CDATA[<p>和 BF 算法不同，KMP 算法按照前缀和后缀找到公共前后缀，构造出一个 prefix table，然后在匹配失败的时候，不是回溯到开头的位置，而是按照 prefix table 的索引位置进行回溯，从而减少回溯次数。</p>
 <p>我们来看看 KMP 的查找过程：<br>目标字符串为 text ，索引记为 i ，需要匹配的字符串为 pattern ，索引记为 j 。根据 pattern 先生成 prefix table 。然后从第一个元素开始匹配。第一个位置匹配， i 和 j 都后移一位。<br><img src="https://s2.ax1x.com/2020/02/12/1bG0IJ.png" alt="20200212213949" border="0" style="width:500px"><br>当第二个位置不匹配，根据 prefix table ，将 pattern 的 0 位置对齐到 text 的 i 位置。<br><img src="https://s2.ax1x.com/2020/02/12/1bGdZF.png" alt="20200212214027" border="0" style="width:500px"><br>然后重新开始匹配，pattern 第一个位置就不匹配，根据 prefix table ，j = -1 ，所以 pattern 整体后移一位。<br><img src="https://s2.ax1x.com/2020/02/12/1bGNrT.png" alt="20200212214046" border="0" style="width:500px"><br>当匹配到 pattern 最后一个位置不匹配，根据 prefix table ，将 pattern 的 0 位置对齐到 text 的 i 位置。<br><img src="https://s2.ax1x.com/2020/02/12/1bGUqU.png" alt="20200212214106" border="0" style="width:500px"><br>pattern 最后一个位置不匹配，根据 prefix table，pattern 的 0 位置对齐到 text 的 i 的位置。<br><img src="https://s2.ax1x.com/2020/02/12/1bGJx0.png" alt="20200212214129" border="0" style="width:500px"><br>继续匹配，当匹配到 pattern 的最后一个位置符合，则找到一个匹配的字符串。<br><img src="https://s2.ax1x.com/2020/02/12/1bGDi9.png" alt="20200212214201" border="0" style="width:500px"><br>继续向后找，找出数组长度则退出，查找完成。</p>
@@ -1032,14 +1107,14 @@ class Node implements Comparable&lt;Node&gt; {
         
         <tags>
             
-            <tag> Data Structure </tag>
+            <tag> Interview </tag>
             
         </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[heapsort]]></title>
+      <title><![CDATA[Heapsort]]></title>
       <url>/2020/02/08/heapsort/</url>
       <content type="html"><![CDATA[<p>堆排序（heapsort） 用到了一种数据结构叫做<strong>堆</strong>。堆由一颗<strong>完全二叉树</strong>构成，且完全二叉树的每一个父节点都大于或小于叶子节点。如果父节点大于叶子节点，就叫做最大堆，反之就叫做最小堆。排序按照升序或降序需要对应用到最大堆或最小堆。</p>
 <blockquote>
@@ -1066,14 +1141,14 @@ class Node implements Comparable&lt;Node&gt; {
         
         <tags>
             
-            <tag> Data Structure </tag>
+            <tag> Interview </tag>
             
         </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[shell sort]]></title>
+      <title><![CDATA[Shell Sort]]></title>
       <url>/2020/02/08/shell-sort/</url>
       <content type="html"><![CDATA[<p>将数分成 n 组，每组分别进行比较，将结果在分成 n/2 组，每组粉笔进行比较，直到分组为 0<br>时间复杂度为 O(n*logn)</p>
 ]]></content>
@@ -1087,7 +1162,7 @@ class Node implements Comparable&lt;Node&gt; {
         
         <tags>
             
-            <tag> Algorithm </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -1108,14 +1183,14 @@ class Node implements Comparable&lt;Node&gt; {
         
         <tags>
             
-            <tag> Algorithm </tag>
+            <tag> Interview </tag>
             
         </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[mergesort]]></title>
+      <title><![CDATA[Mergesort]]></title>
       <url>/2020/02/08/mergesort/</url>
       <content type="html"><![CDATA[<p>归并排序（mergesort）是采用分治法的一种排序算法。它的操作步骤分为两个阶段：拆分和归并。<br>拆分阶段，先将数组分成左右两段，再将左边再分成左右两段，依此执行直到左右两段只有 1 个元素（1 个元素即认为有序）。右边也执行相同操作。<br>归并阶段，从左边开始依次合并直到成为一个完成数组。归并具体步骤如下：</p>
 <ol>
@@ -1185,7 +1260,7 @@ class Node implements Comparable&lt;Node&gt; {
         
         <tags>
             
-            <tag> Data Structure </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -1206,7 +1281,7 @@ class Node implements Comparable&lt;Node&gt; {
         
         <tags>
             
-            <tag> Algorithm </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -1227,7 +1302,7 @@ class Node implements Comparable&lt;Node&gt; {
         
         <tags>
             
-            <tag> Data Structure </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -1248,7 +1323,7 @@ class Node implements Comparable&lt;Node&gt; {
         
         <tags>
             
-            <tag> Data Structure </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -2148,14 +2223,14 @@ fd36f2cec0f3        none                null                local
       
         <categories>
             
-            <category> Java </category>
+            <category> Docker </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Docker </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -2422,7 +2497,7 @@ fd36f2cec0f3        none                null                local
         
         <tags>
             
-            <tag> Netty </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -2457,6 +2532,8 @@ fd36f2cec0f3        none                null                local
         
         
         <tags>
+            
+            <tag> Interview </tag>
             
             <tag> NIO </tag>
             
@@ -2639,7 +2716,7 @@ Master_SSL_Verify_Server_Cert: No
         
         <tags>
             
-            <tag> Spring </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -2730,14 +2807,14 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
       
         <categories>
             
-            <category> Java </category>
+            <category> Concurrent </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Concurrent </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -2745,7 +2822,7 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
     
     <entry>
       <title><![CDATA[面试问题]]></title>
-      <url>/2019/11/07/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/</url>
+      <url>/2019/11/07/interview/</url>
       <content type="html"><![CDATA[<p>Q: 为什么使用微服务？</p>
 <p>A: 1. 解耦，减少人员的冲突，提高开发和测试的效率。2. 更好地做CI/CD。</p>
 <p>Q: 为什么用rabbitmq？</p>
@@ -2787,7 +2864,7 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
         
         <tags>
             
-            <tag> Java </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -2808,7 +2885,7 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
         
         <tags>
             
-            <tag> Spring </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -2830,7 +2907,7 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
         
         <tags>
             
-            <tag> Spring Boot </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -2878,14 +2955,14 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
       
         <categories>
             
-            <category> Java </category>
+            <category> Concurrent </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Concurrent </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -2971,7 +3048,7 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
         
         <tags>
             
-            <tag> GC </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -3027,7 +3104,7 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
         
         <tags>
             
-            <tag> Architecture </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -3234,7 +3311,7 @@ check point
         
         <tags>
             
-            <tag> Java </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -3280,7 +3357,7 @@ check point
         
         <tags>
             
-            <tag> Architecture </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -3575,7 +3652,7 @@ public void reduceWithLock(int num) {
         
         <tags>
             
-            <tag> Java </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -3950,14 +4027,14 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
       
         <categories>
             
-            <category> Java </category>
+            <category> Design Pattern </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Design Pattern </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -5029,7 +5106,7 @@ Server is ready.
         
         <tags>
             
-            <tag> JVM </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -5075,7 +5152,7 @@ Server is ready.
         
         <tags>
             
-            <tag> JVM </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -6552,7 +6629,7 @@ public class HelloWorldClient {
     <entry>
       <title><![CDATA[About Consistency]]></title>
       <url>/2018/05/31/about-consistency/</url>
-      <content type="html"><![CDATA[<p>一致行模型是分布式系统中非常重要的概念，一致性模型有很多分类：</p>
+      <content type="html"><![CDATA[<p>一致性模型是分布式系统中非常重要的概念，一致性模型有很多分类：</p>
 <ul>
 <li>以数据为中心的一致性模型（Data-centric Consistency Models）<ul>
 <li>强一致性/严格一致性/原子一致性（Strict Consistency）</li>
@@ -6625,7 +6702,7 @@ public class HelloWorldClient {
         
         <tags>
             
-            <tag> Blockchain </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -6729,7 +6806,7 @@ public class HelloWorldClient {
         
         <tags>
             
-            <tag> RPC </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -8821,28 +8898,6 @@ curl &#39;localhost:9200/twitter/_search&#39; -d &#39;
         <tags>
             
             <tag> Spark </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[多线程的锁]]></title>
-      <url>/2017/12/13/multi-thread-locks/</url>
-      <content type="html"><![CDATA[<p>锁是多线程并发保证一致性的工具。Java 中有多种锁的实现，可以根据不同场景选择不同的锁。</p>
-<h3 id="按性质分类"><a href="#按性质分类" class="headerlink" title="按性质分类"></a>按性质分类</h3><h4 id="乐观锁-悲观锁"><a href="#乐观锁-悲观锁" class="headerlink" title="乐观锁/悲观锁"></a>乐观锁/悲观锁</h4><h4 id="公平锁-非公平锁"><a href="#公平锁-非公平锁" class="headerlink" title="公平锁/非公平锁"></a>公平锁/非公平锁</h4><h4 id="独享锁-共享锁"><a href="#独享锁-共享锁" class="headerlink" title="独享锁/共享锁"></a>独享锁/共享锁</h4><h4 id="互斥锁-读写锁"><a href="#互斥锁-读写锁" class="headerlink" title="互斥锁/读写锁"></a>互斥锁/读写锁</h4><h4 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h4><h3 id="按设计分类"><a href="#按设计分类" class="headerlink" title="按设计分类"></a>按设计分类</h3><h4 id="分段锁"><a href="#分段锁" class="headerlink" title="分段锁"></a>分段锁</h4><h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>####</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Multithreading </tag>
             
         </tags>
         
@@ -13163,7 +13218,7 @@ sudo docker run -d -p 5000:8080 --name swagger-ui wagger-ui
       
         <categories>
             
-            <category> Java </category>
+            <category> Docker </category>
             
         </categories>
         
@@ -13296,6 +13351,8 @@ try (FileChannel channel = FileChannel.open(Paths.get(&quot;src/c.txt&quot;),
         
         <tags>
             
+            <tag> Interview </tag>
+            
             <tag> NIO </tag>
             
         </tags>
@@ -13376,14 +13433,14 @@ try (FileChannel channel = FileChannel.open(Paths.get(&quot;src/c.txt&quot;),
       
         <categories>
             
-            <category> Java </category>
+            <category> Concurrent </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Multithreading </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -14358,7 +14415,7 @@ Map map = new HashMap(size);
         
         <tags>
             
-            <tag> Data Structures </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -14476,14 +14533,14 @@ instance = memory;     //3：设置instance指向刚分配的内存地址
       
         <categories>
             
-            <category> Java </category>
+            <category> Concurrent </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Concurrent </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -14626,14 +14683,14 @@ public class Client {
       
         <categories>
             
-            <category> Java </category>
+            <category> Design Pattern </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Design Patterns </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -14714,7 +14771,7 @@ long seconds = TimeUnit.MILLISECONDS.toSeconds(diff) % 60;
         
         <tags>
             
-            <tag> Java </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -14736,14 +14793,14 @@ long seconds = TimeUnit.MILLISECONDS.toSeconds(diff) % 60;
       
         <categories>
             
-            <category> Java </category>
+            <category> Concurrent </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Concurrent </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -15128,320 +15185,31 @@ fi
     </entry>
     
     <entry>
-      <title><![CDATA[spring-data-redis示例说明]]></title>
-      <url>/2016/07/15/spring-data-redis/</url>
-      <content type="html"><![CDATA[<p>###1. POM</p>
-<pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;
-    &lt;version&gt;1.6.4.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;redis.clients&lt;/groupId&gt;
-    &lt;artifactId&gt;jedis&lt;/artifactId&gt;
-    &lt;version&gt;2.6.2&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-<p>###2. 配置文件</p>
-<p>####2.1 redis.xml</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-4.0.xsd&quot;&gt;
-
-
-    &lt;context:property-placeholder location=&quot;classpath:config.properties&quot;/&gt;
-    &lt;bean id=&quot;jedisPoolConfig&quot; class=&quot;redis.clients.jedis.JedisPoolConfig&quot;&gt;
-        &lt;property name=&quot;maxTotal&quot; value=&quot;${redis.cache.pool.maxTotal}&quot; /&gt;
-        &lt;property name=&quot;maxIdle&quot; value=&quot;${redis.cache.pool.maxIdle}&quot; /&gt;
-        &lt;property name=&quot;maxWaitMillis&quot; value=&quot;${redis.cache.pool.maxWaitMillis}&quot; /&gt;
-        &lt;property name=&quot;testOnBorrow&quot; value=&quot;${redis.cache.pool.testOnBorrow}&quot; /&gt;
-    &lt;/bean&gt;
-
-    &lt;bean id=&quot;redisTemplate&quot; class=&quot;org.springframework.data.redis.core.RedisTemplate&quot;&gt;
-        &lt;property name=&quot;keySerializer&quot;&gt;
-            &lt;bean class=&quot;org.springframework.data.redis.serializer.StringRedisSerializer&quot;/&gt;
-        &lt;/property&gt;
-        &lt;property name=&quot;valueSerializer&quot;&gt;
-            &lt;bean class=&quot;org.springframework.data.redis.serializer.JdkSerializationRedisSerializer&quot;/&gt;
-        &lt;/property&gt;
-        &lt;property name=&quot;connectionFactory&quot; ref=&quot;jedisConnectionFactory&quot;/&gt;
-    &lt;/bean&gt;
-
-    &lt;bean id=&quot;jedisConnectionFactory&quot; class=&quot;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&quot;&gt;
-        &lt;property name=&quot;hostName&quot; value=&quot;${redis.cache.ip}&quot; /&gt;
-        &lt;property name=&quot;port&quot; value=&quot;${redis.cache.port}&quot; /&gt;
-        &lt;property name=&quot;usePool&quot; value=&quot;${redis.cache.usePool}&quot;/&gt;
-        &lt;property name=&quot;poolConfig&quot; ref=&quot;jedisPoolConfig&quot; /&gt;
-    &lt;/bean&gt;
-
-    &lt;bean id=&quot;queryCacheRepository&quot; class=&quot;com.daas.data.dao.repository.QueryCacheRepository&quot;&gt;&lt;/bean&gt;
-
-&lt;/beans&gt;
-</code></pre>
-<p>####2.2 properties文件</p>
-<p>#redis配置</p>
-<pre><code>redis.cache.pool.maxTotal=1024
-redis.cache.pool.maxIdle=200
-redis.cache.pool.maxWaitMillis=1000
-redis.cache.pool.testOnBorrow=true
-redis.cache.ip=192.168.11.21
-redis.cache.port=6379
-redis.cache.usePool=true
-</code></pre><p>###3. 类</p>
-<p>####3.1 实体类</p>
-<pre><code class="java">/*
- * @(#)QueryCache.java    1.0 2016/3/8
- *
- */
-package com.daas.data.engine.entity.redis;
-
-import java.io.Serializable;
-
-/**
- * Created with IntelliJ IDEA.
- * User: rolex
- * Date: 2016/3/8
- * version: 1.0
- */
-public class QueryCache implements Serializable{
-
-    String id;
-    String value;
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-}
-</code></pre>
-<p>####3.2 查询类</p>
-<pre><code class="java">/*
- * @(#)QueryCacheRepository.java    1.0 2016/3/8
- *
- */
-package com.daas.data.dao.repository;
-
-import com.daas.data.engine.entity.redis.QueryCache;
-import org.springframework.data.redis.core.RedisTemplate;
-
-import javax.annotation.Resource;
-
-/**
- * Created with IntelliJ IDEA.
- * User: rolex
- * Date: 2016/3/8
- * version: 1.0
- */
-public class QueryCacheRepository {
-
-    @Resource
-    private RedisTemplate&lt;String, QueryCache&gt; redisTemplate;
-
-    public void set(QueryCache qc){
-        redisTemplate.opsForValue().set(qc.getId(), qc);
-
-    }
-
-    public QueryCache get(String id){
-        return redisTemplate.opsForValue().get(id);
-    }
-}
-</code></pre>
-<p>####3.3 测试类</p>
-<pre><code class="java">/*
- * @(#)DataBusinessTest.java    1.0 2016/3/4
- *
- */
-package com.daas.data.business;
-
-import com.daas.data.dao.repository.QueryCacheRepository;
-import com.daas.data.engine.entity.redis.QueryCache;
-import org.elasticsearch.search.aggregations.InternalAggregation;
-import org.hamcrest.core.IsEqual;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.annotation.Resource;
-import java.io.IOException;
-
-import static org.junit.Assert.assertThat;
-
-
-/**
- * Created with IntelliJ IDEA.
- * User: rolex
- * Date: 2016/3/4
- * version: 1.0
- */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(&quot;classpath:redis-test.xml&quot;)
-public class RedisServiceTest {
-
-
-    @Resource
-    QueryCacheRepository queryCacheRepository;
-
-    @Before
-    public void before() {
-        QueryCache qc = new QueryCache();
-        qc.setId(&quot;123&quot;);
-        qc.setValue(&quot;test&quot;);
-        queryCacheRepository.set(qc);
-    }
-
-    @Test
-    public void testGet() throws IOException {
-        QueryCache qc = queryCacheRepository.get(&quot;123&quot;);
-        System.out.println(qc.getValue());
-        assertThat(qc.getValue(), new IsEqual(&quot;test&quot;));
-
-    }
-
-}
-</code></pre>
+      <title><![CDATA[Windows 安装 compass and scss]]></title>
+      <url>/2016/07/15/installing-compass-and-scss-on-windows/</url>
+      <content type="html"><![CDATA[<h3 id="1-安装ruby"><a href="#1-安装ruby" class="headerlink" title="1. 安装ruby"></a>1. 安装ruby</h3><p>compass 是 ruby 的插件，需要先安装 ruby 环境。</p>
+<ol>
+<li>下载ruby</li>
+</ol>
+<p><a href="http://rubyinstaller.org/" target="_blank" rel="external">http://rubyinstaller.org/</a></p>
+<ol>
+<li>添加环境变量<br>安装完成后添加环境变量<pre><code>RUBY_HOME=D:\Ruby23-x64
+path=$path;%RUBY_HOME%\bin
+</code></pre>执行ruby -v 显示版本号则安装成功。</li>
+</ol>
+<h3 id="2-添加证书"><a href="#2-添加证书" class="headerlink" title="2. 添加证书"></a>2. 添加证书</h3><ol>
+<li>下载证书</li>
+</ol>
+<p>从<a href="http://curl.haxx.se/ca/cacert.pem" target="_blank" rel="external">http://curl.haxx.se/ca/cacert.pem</a>下载证书，保存到ruby安装目录。</p>
+<ol>
+<li>添加环境变量<pre><code>SSL_CERT_FILE=D:\Ruby23-x64\cacert.pem
+</code></pre><h3 id="3-修改源"><a href="#3-修改源" class="headerlink" title="3. 修改源"></a>3. 修改源</h3><pre><code>gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+gem sources -l
+</code></pre><h3 id="4-安装compass"><a href="#4-安装compass" class="headerlink" title="4. 安装compass"></a>4. 安装compass</h3><pre><code>gem install compass
+</code></pre>sass -v显示版本号则安装成功。正常情况compass和scss都会安装。</li>
+</ol>
 ]]></content>
-      
-        <categories>
-            
-            <category> Spring </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Redis </tag>
-            
-            <tag> Spring </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Ubuntu14.04 + ssh 镜像]]></title>
-      <url>/2016/07/15/docker-ubuntu14.04-with-ssh/</url>
-      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir ubuntu
-cd ubuntu
-touch Dockerfile run.sh sources.list authorized_keys
-</code></pre><p><strong><em>Dockerfile</em></strong></p>
-<pre><code>FROM ubuntu:14.04
-
-MAINTAINER rolex
-
-RUN rm /etc/apt/sources.list
-
-ADD sources.list /etc/apt/sources.list
-
-RUN apt-get update
-
-
-
-RUN sudo apt-get install -y openssh-server
-RUN mkdir -p /var/run/sshd
-RUN mkdir -p /root/.ssh
-
-RUN sed -ri &#39;s/session required pam_loginuid.so/#session required pam_loginuid.so/g&#39; /etc/pam.d/sshd
-
-ADD authorized_keys /root/.ssh/authorized_keys
-ADD run.sh /run.sh
-RUN chmod 755 /run.sh
-
-RUN groupadd dockerone
-RUN useradd -g dockerone dockerone
-RUN echo &quot;dockerone:dockerone&quot; | chpasswd
-
-RUN echo &quot;root:dockerone&quot; | chpasswd
-
-EXPOSE 22
-
-CMD [&quot;/run.sh&quot;]
-</code></pre><p><strong><em>run.sh</em></strong></p>
-<pre><code>#!/bin/bash
-
-/usr/sbin/sshd -D
-</code></pre><p><strong><em>sources.list</em></strong></p>
-<pre><code>deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse
-</code></pre><p><strong><em>authorized_keys</em></strong></p>
-<pre><code>ssh-keygen -t rsa
-cat ~/.ssh/id_rsa.pub &gt; authorized_keys
-</code></pre><h3 id="2-创建镜像"><a href="#2-创建镜像" class="headerlink" title="2. 创建镜像"></a>2. 创建镜像</h3><pre><code>sudo docker build -t ubuntu_14.04 .
-</code></pre><h3 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h3><pre><code>sudo docker run -d -p 10122:22 ubuntu_14.04
-
-ssh dockerone@localhost -p 10122
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Docker </tag>
-            
-            <tag> Ubuntu </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[IDEA + Maven + Jetty 热部署]]></title>
-      <url>/2016/07/15/jetty-hot-deployment/</url>
-      <content type="html"><![CDATA[<p>####1. 集成</p>
-<p>pom.xml</p>
-<pre><code>&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
-            &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
-            &lt;version&gt;8.1.15.v20140411&lt;/version&gt;
-            &lt;configuration&gt;
-                &lt;connectors&gt;
-                    &lt;!-- 修改端口 --&gt;
-                    &lt;connector implementation=&quot;org.eclipse.jetty.server.nio.SelectChannelConnector&quot;&gt;
-                        &lt;port&gt;8080&lt;/port&gt;
-                    &lt;/connector&gt;
-                &lt;/connectors&gt;
-                &lt;stopKey&gt;exit&lt;/stopKey&gt;
-                &lt;stopPort&gt;9090&lt;/stopPort&gt;
-                &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;
-                &lt;webAppConfig&gt;
-                    &lt;!-- 热部署 --&gt;
-                    &lt;defaultsDescriptor&gt;src/main/resources/webdefault.xml&lt;/defaultsDescriptor&gt;
-                    &lt;contextPath&gt;/redis-doc&lt;/contextPath&gt;
-                &lt;/webAppConfig&gt;
-            &lt;/configuration&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;
-</code></pre>]]></content>
       
         <categories>
             
@@ -15452,9 +15220,9 @@ ssh dockerone@localhost -p 10122
         
         <tags>
             
-            <tag> Meven </tag>
+            <tag> Compass </tag>
             
-            <tag> Jetty </tag>
+            <tag> Scss </tag>
             
         </tags>
         
@@ -15666,30 +15434,372 @@ public void shouldIndexSingleBookEntity(){
     </entry>
     
     <entry>
-      <title><![CDATA[Windows 安装 compass and scss]]></title>
-      <url>/2016/07/15/installing-compass-and-scss-on-windows/</url>
-      <content type="html"><![CDATA[<h3 id="1-安装ruby"><a href="#1-安装ruby" class="headerlink" title="1. 安装ruby"></a>1. 安装ruby</h3><p>compass 是 ruby 的插件，需要先安装 ruby 环境。</p>
-<ol>
-<li>下载ruby</li>
-</ol>
-<p><a href="http://rubyinstaller.org/" target="_blank" rel="external">http://rubyinstaller.org/</a></p>
-<ol>
-<li>添加环境变量<br>安装完成后添加环境变量<pre><code>RUBY_HOME=D:\Ruby23-x64
-path=$path;%RUBY_HOME%\bin
-</code></pre>执行ruby -v 显示版本号则安装成功。</li>
-</ol>
-<h3 id="2-添加证书"><a href="#2-添加证书" class="headerlink" title="2. 添加证书"></a>2. 添加证书</h3><ol>
-<li>下载证书</li>
-</ol>
-<p>从<a href="http://curl.haxx.se/ca/cacert.pem" target="_blank" rel="external">http://curl.haxx.se/ca/cacert.pem</a>下载证书，保存到ruby安装目录。</p>
-<ol>
-<li>添加环境变量<pre><code>SSL_CERT_FILE=D:\Ruby23-x64\cacert.pem
-</code></pre><h3 id="3-修改源"><a href="#3-修改源" class="headerlink" title="3. 修改源"></a>3. 修改源</h3><pre><code>gem sources --remove https://rubygems.org/
-gem sources -a https://ruby.taobao.org/
-gem sources -l
-</code></pre><h3 id="4-安装compass"><a href="#4-安装compass" class="headerlink" title="4. 安装compass"></a>4. 安装compass</h3><pre><code>gem install compass
-</code></pre>sass -v显示版本号则安装成功。正常情况compass和scss都会安装。</li>
-</ol>
+      <title><![CDATA[Elasticsearch 添加 head 插件]]></title>
+      <url>/2016/07/15/docker-elasticsearch-head-plugin/</url>
+      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir dockerfiles/elasticsearch
+touch Dockerfile
+wget -O elasticsearch-head-master.zip -c https://codeload.github.com/mobz/elasticsearch-head/zip/master
+</code></pre><p><strong><em>Dockerfile</em></strong></p>
+<pre><code>FROM elasticsearch
+MAINTAINER rolex
+
+ADD elasticsearch-head-master.zip /elasticsearch-head-master.zip
+
+RUN /usr/share/elasticsearch/bin/plugin install file:/elasticsearch-head-master.zip
+
+RUN rm -f /elasticsearch-head-master.zip
+
+EXPOSE 9200 9300
+
+CMD [/usr/share/elasticsearch/bin/elasticsearch]
+</code></pre><h3 id="2-创建docker镜像"><a href="#2-创建docker镜像" class="headerlink" title="2. 创建docker镜像"></a>2. 创建docker镜像</h3><pre><code>sudo docker build -t elasticsearch-2.3 .
+</code></pre><h3 id="3-启动"><a href="#3-启动" class="headerlink" title="3. 启动"></a>3. 启动</h3><pre><code>sudo docker run elasticsearch-2.3 --publish=[19200:9200,19300:9300]
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Elastic </tag>
+            
+            <tag> Docker </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[spring-data-redis示例说明]]></title>
+      <url>/2016/07/15/spring-data-redis/</url>
+      <content type="html"><![CDATA[<p>###1. POM</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;
+    &lt;version&gt;1.6.4.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;redis.clients&lt;/groupId&gt;
+    &lt;artifactId&gt;jedis&lt;/artifactId&gt;
+    &lt;version&gt;2.6.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>###2. 配置文件</p>
+<p>####2.1 redis.xml</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd&quot;&gt;
+
+
+    &lt;context:property-placeholder location=&quot;classpath:config.properties&quot;/&gt;
+    &lt;bean id=&quot;jedisPoolConfig&quot; class=&quot;redis.clients.jedis.JedisPoolConfig&quot;&gt;
+        &lt;property name=&quot;maxTotal&quot; value=&quot;${redis.cache.pool.maxTotal}&quot; /&gt;
+        &lt;property name=&quot;maxIdle&quot; value=&quot;${redis.cache.pool.maxIdle}&quot; /&gt;
+        &lt;property name=&quot;maxWaitMillis&quot; value=&quot;${redis.cache.pool.maxWaitMillis}&quot; /&gt;
+        &lt;property name=&quot;testOnBorrow&quot; value=&quot;${redis.cache.pool.testOnBorrow}&quot; /&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id=&quot;redisTemplate&quot; class=&quot;org.springframework.data.redis.core.RedisTemplate&quot;&gt;
+        &lt;property name=&quot;keySerializer&quot;&gt;
+            &lt;bean class=&quot;org.springframework.data.redis.serializer.StringRedisSerializer&quot;/&gt;
+        &lt;/property&gt;
+        &lt;property name=&quot;valueSerializer&quot;&gt;
+            &lt;bean class=&quot;org.springframework.data.redis.serializer.JdkSerializationRedisSerializer&quot;/&gt;
+        &lt;/property&gt;
+        &lt;property name=&quot;connectionFactory&quot; ref=&quot;jedisConnectionFactory&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id=&quot;jedisConnectionFactory&quot; class=&quot;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&quot;&gt;
+        &lt;property name=&quot;hostName&quot; value=&quot;${redis.cache.ip}&quot; /&gt;
+        &lt;property name=&quot;port&quot; value=&quot;${redis.cache.port}&quot; /&gt;
+        &lt;property name=&quot;usePool&quot; value=&quot;${redis.cache.usePool}&quot;/&gt;
+        &lt;property name=&quot;poolConfig&quot; ref=&quot;jedisPoolConfig&quot; /&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id=&quot;queryCacheRepository&quot; class=&quot;com.daas.data.dao.repository.QueryCacheRepository&quot;&gt;&lt;/bean&gt;
+
+&lt;/beans&gt;
+</code></pre>
+<p>####2.2 properties文件</p>
+<p>#redis配置</p>
+<pre><code>redis.cache.pool.maxTotal=1024
+redis.cache.pool.maxIdle=200
+redis.cache.pool.maxWaitMillis=1000
+redis.cache.pool.testOnBorrow=true
+redis.cache.ip=192.168.11.21
+redis.cache.port=6379
+redis.cache.usePool=true
+</code></pre><p>###3. 类</p>
+<p>####3.1 实体类</p>
+<pre><code class="java">/*
+ * @(#)QueryCache.java    1.0 2016/3/8
+ *
+ */
+package com.daas.data.engine.entity.redis;
+
+import java.io.Serializable;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: rolex
+ * Date: 2016/3/8
+ * version: 1.0
+ */
+public class QueryCache implements Serializable{
+
+    String id;
+    String value;
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+}
+</code></pre>
+<p>####3.2 查询类</p>
+<pre><code class="java">/*
+ * @(#)QueryCacheRepository.java    1.0 2016/3/8
+ *
+ */
+package com.daas.data.dao.repository;
+
+import com.daas.data.engine.entity.redis.QueryCache;
+import org.springframework.data.redis.core.RedisTemplate;
+
+import javax.annotation.Resource;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: rolex
+ * Date: 2016/3/8
+ * version: 1.0
+ */
+public class QueryCacheRepository {
+
+    @Resource
+    private RedisTemplate&lt;String, QueryCache&gt; redisTemplate;
+
+    public void set(QueryCache qc){
+        redisTemplate.opsForValue().set(qc.getId(), qc);
+
+    }
+
+    public QueryCache get(String id){
+        return redisTemplate.opsForValue().get(id);
+    }
+}
+</code></pre>
+<p>####3.3 测试类</p>
+<pre><code class="java">/*
+ * @(#)DataBusinessTest.java    1.0 2016/3/4
+ *
+ */
+package com.daas.data.business;
+
+import com.daas.data.dao.repository.QueryCacheRepository;
+import com.daas.data.engine.entity.redis.QueryCache;
+import org.elasticsearch.search.aggregations.InternalAggregation;
+import org.hamcrest.core.IsEqual;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.Resource;
+import java.io.IOException;
+
+import static org.junit.Assert.assertThat;
+
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: rolex
+ * Date: 2016/3/4
+ * version: 1.0
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(&quot;classpath:redis-test.xml&quot;)
+public class RedisServiceTest {
+
+
+    @Resource
+    QueryCacheRepository queryCacheRepository;
+
+    @Before
+    public void before() {
+        QueryCache qc = new QueryCache();
+        qc.setId(&quot;123&quot;);
+        qc.setValue(&quot;test&quot;);
+        queryCacheRepository.set(qc);
+    }
+
+    @Test
+    public void testGet() throws IOException {
+        QueryCache qc = queryCacheRepository.get(&quot;123&quot;);
+        System.out.println(qc.getValue());
+        assertThat(qc.getValue(), new IsEqual(&quot;test&quot;));
+
+    }
+
+}
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> Spring </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Redis </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[创建 tomcat 镜像]]></title>
+      <url>/2016/07/15/docker-tomcat-image/</url>
+      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><p>1.1 创建制作 docker 镜像的工作目录和文件</p>
+<pre><code>mkdir dorckerfiles
+cd dockerfiles
+touch Dockerfile run.sh
+</code></pre><p><strong><em>Dockerfile</em></strong></p>
+<pre><code>FROM ubuntu_14.04
+
+MAINTAINER rolex
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN echo &quot;Asia/Beijing&quot; &gt; /etc/timezone &amp;&amp; dpkg-reconfigure -f noninteractive tzdata
+
+RUN apt-get install -yq --no-install-recommends wget pwgen ca-certificates &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+ENV CATALINA_HOME /tomcat
+ENV JAVA_HOME /jdk
+
+ADD apache-tomcat-8.0.35 /tomcat
+ADD jdk1.8.0_74 /jdk
+
+#ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
+ADD run.sh /run.sh
+
+RUN chmod +x /*.sh
+RUN chmod +x /tomcat/bin/*.sh
+
+EXPOSE 8080
+
+CMD [&quot;/run.sh&quot;]
+</code></pre><p><strong><em>run.sh</em></strong></p>
+<pre><code>#!/bin/bash
+
+/user/sbin/sshd -D &amp;
+exec ${CATALINA_HOME}/bin/catalina.sh run
+</code></pre><p>1.2 下载 tomcat 和 jdk</p>
+<h3 id="2-制作镜像"><a href="#2-制作镜像" class="headerlink" title="2. 制作镜像"></a>2. 制作镜像</h3><pre><code>sudo docker build -t tomcat8_on_ubuntu .
+</code></pre><h3 id="3-运行镜像"><a href="#3-运行镜像" class="headerlink" title="3. 运行镜像"></a>3. 运行镜像</h3><pre><code>sudo docker run -p 32700:8080 tomcat8_on_ubuntu
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Docker </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[IDEA + Maven + Jetty 热部署]]></title>
+      <url>/2016/07/15/jetty-hot-deployment/</url>
+      <content type="html"><![CDATA[<p>####1. 集成</p>
+<p>pom.xml</p>
+<pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
+            &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;8.1.15.v20140411&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;connectors&gt;
+                    &lt;!-- 修改端口 --&gt;
+                    &lt;connector implementation=&quot;org.eclipse.jetty.server.nio.SelectChannelConnector&quot;&gt;
+                        &lt;port&gt;8080&lt;/port&gt;
+                    &lt;/connector&gt;
+                &lt;/connectors&gt;
+                &lt;stopKey&gt;exit&lt;/stopKey&gt;
+                &lt;stopPort&gt;9090&lt;/stopPort&gt;
+                &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;
+                &lt;webAppConfig&gt;
+                    &lt;!-- 热部署 --&gt;
+                    &lt;defaultsDescriptor&gt;src/main/resources/webdefault.xml&lt;/defaultsDescriptor&gt;
+                    &lt;contextPath&gt;/redis-doc&lt;/contextPath&gt;
+                &lt;/webAppConfig&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Meven </tag>
+            
+            <tag> Jetty </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[使用 docker + redis 学习 redis-cli]]></title>
+      <url>/2016/07/15/docker-build-redis/</url>
+      <content type="html"><![CDATA[<p>有时我们不想在自己机器上安装redis环境又想快速开始redis-cli实践，如果安装了docker环境，那么redis的环境将非常容易搭建。</p>
+<h3 id="1-下载redis的docker镜像"><a href="#1-下载redis的docker镜像" class="headerlink" title="1. 下载redis的docker镜像"></a>1. 下载redis的docker镜像</h3><pre><code class="shell">sudo docker pull redis
+</code></pre>
+<h3 id="2-启动redis-server"><a href="#2-启动redis-server" class="headerlink" title="2. 启动redis server"></a>2. 启动redis server</h3><pre><code class="shell">sudo docker run -d --name redisone redis redis-server
+</code></pre>
+<h3 id="3-启动redis-cli"><a href="#3-启动redis-cli" class="headerlink" title="3. 启动redis cli"></a>3. 启动redis cli</h3><pre><code class="shell">sudo docker run -it --link redisone redis redic-cli -h redisone -p 6379
+</code></pre>
 ]]></content>
       
         <categories>
@@ -15701,9 +15811,83 @@ gem sources -l
         
         <tags>
             
-            <tag> Compass </tag>
+            <tag> Redis </tag>
             
-            <tag> Scss </tag>
+            <tag> Docker </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Ubuntu14.04 + ssh 镜像]]></title>
+      <url>/2016/07/15/docker-ubuntu14.04-with-ssh/</url>
+      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir ubuntu
+cd ubuntu
+touch Dockerfile run.sh sources.list authorized_keys
+</code></pre><p><strong><em>Dockerfile</em></strong></p>
+<pre><code>FROM ubuntu:14.04
+
+MAINTAINER rolex
+
+RUN rm /etc/apt/sources.list
+
+ADD sources.list /etc/apt/sources.list
+
+RUN apt-get update
+
+
+
+RUN sudo apt-get install -y openssh-server
+RUN mkdir -p /var/run/sshd
+RUN mkdir -p /root/.ssh
+
+RUN sed -ri &#39;s/session required pam_loginuid.so/#session required pam_loginuid.so/g&#39; /etc/pam.d/sshd
+
+ADD authorized_keys /root/.ssh/authorized_keys
+ADD run.sh /run.sh
+RUN chmod 755 /run.sh
+
+RUN groupadd dockerone
+RUN useradd -g dockerone dockerone
+RUN echo &quot;dockerone:dockerone&quot; | chpasswd
+
+RUN echo &quot;root:dockerone&quot; | chpasswd
+
+EXPOSE 22
+
+CMD [&quot;/run.sh&quot;]
+</code></pre><p><strong><em>run.sh</em></strong></p>
+<pre><code>#!/bin/bash
+
+/usr/sbin/sshd -D
+</code></pre><p><strong><em>sources.list</em></strong></p>
+<pre><code>deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse
+</code></pre><p><strong><em>authorized_keys</em></strong></p>
+<pre><code>ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub &gt; authorized_keys
+</code></pre><h3 id="2-创建镜像"><a href="#2-创建镜像" class="headerlink" title="2. 创建镜像"></a>2. 创建镜像</h3><pre><code>sudo docker build -t ubuntu_14.04 .
+</code></pre><h3 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h3><pre><code>sudo docker run -d -p 10122:22 ubuntu_14.04
+
+ssh dockerone@localhost -p 10122
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Docker </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
         
@@ -15827,133 +16011,6 @@ sudo apt-get install plank
         <tags>
             
             <tag> Ubuntu </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[创建 tomcat 镜像]]></title>
-      <url>/2016/07/15/docker-tomcat-image/</url>
-      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><p>1.1 创建制作 docker 镜像的工作目录和文件</p>
-<pre><code>mkdir dorckerfiles
-cd dockerfiles
-touch Dockerfile run.sh
-</code></pre><p><strong><em>Dockerfile</em></strong></p>
-<pre><code>FROM ubuntu_14.04
-
-MAINTAINER rolex
-
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN echo &quot;Asia/Beijing&quot; &gt; /etc/timezone &amp;&amp; dpkg-reconfigure -f noninteractive tzdata
-
-RUN apt-get install -yq --no-install-recommends wget pwgen ca-certificates &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*
-
-ENV CATALINA_HOME /tomcat
-ENV JAVA_HOME /jdk
-
-ADD apache-tomcat-8.0.35 /tomcat
-ADD jdk1.8.0_74 /jdk
-
-#ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
-ADD run.sh /run.sh
-
-RUN chmod +x /*.sh
-RUN chmod +x /tomcat/bin/*.sh
-
-EXPOSE 8080
-
-CMD [&quot;/run.sh&quot;]
-</code></pre><p><strong><em>run.sh</em></strong></p>
-<pre><code>#!/bin/bash
-
-/user/sbin/sshd -D &amp;
-exec ${CATALINA_HOME}/bin/catalina.sh run
-</code></pre><p>1.2 下载 tomcat 和 jdk</p>
-<h3 id="2-制作镜像"><a href="#2-制作镜像" class="headerlink" title="2. 制作镜像"></a>2. 制作镜像</h3><pre><code>sudo docker build -t tomcat8_on_ubuntu .
-</code></pre><h3 id="3-运行镜像"><a href="#3-运行镜像" class="headerlink" title="3. 运行镜像"></a>3. 运行镜像</h3><pre><code>sudo docker run -p 32700:8080 tomcat8_on_ubuntu
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Docker </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[使用 docker + redis 学习 redis-cli]]></title>
-      <url>/2016/07/15/docker-build-redis/</url>
-      <content type="html"><![CDATA[<p>有时我们不想在自己机器上安装redis环境又想快速开始redis-cli实践，如果安装了docker环境，那么redis的环境将非常容易搭建。</p>
-<h3 id="1-下载redis的docker镜像"><a href="#1-下载redis的docker镜像" class="headerlink" title="1. 下载redis的docker镜像"></a>1. 下载redis的docker镜像</h3><pre><code class="shell">sudo docker pull redis
-</code></pre>
-<h3 id="2-启动redis-server"><a href="#2-启动redis-server" class="headerlink" title="2. 启动redis server"></a>2. 启动redis server</h3><pre><code class="shell">sudo docker run -d --name redisone redis redis-server
-</code></pre>
-<h3 id="3-启动redis-cli"><a href="#3-启动redis-cli" class="headerlink" title="3. 启动redis cli"></a>3. 启动redis cli</h3><pre><code class="shell">sudo docker run -it --link redisone redis redic-cli -h redisone -p 6379
-</code></pre>
-]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Docker </tag>
-            
-            <tag> Redis </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Elasticsearch 添加 head 插件]]></title>
-      <url>/2016/07/15/docker-elasticsearch-head-plugin/</url>
-      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir dockerfiles/elasticsearch
-touch Dockerfile
-wget -O elasticsearch-head-master.zip -c https://codeload.github.com/mobz/elasticsearch-head/zip/master
-</code></pre><p><strong><em>Dockerfile</em></strong></p>
-<pre><code>FROM elasticsearch
-MAINTAINER rolex
-
-ADD elasticsearch-head-master.zip /elasticsearch-head-master.zip
-
-RUN /usr/share/elasticsearch/bin/plugin install file:/elasticsearch-head-master.zip
-
-RUN rm -f /elasticsearch-head-master.zip
-
-EXPOSE 9200 9300
-
-CMD [/usr/share/elasticsearch/bin/elasticsearch]
-</code></pre><h3 id="2-创建docker镜像"><a href="#2-创建docker镜像" class="headerlink" title="2. 创建docker镜像"></a>2. 创建docker镜像</h3><pre><code>sudo docker build -t elasticsearch-2.3 .
-</code></pre><h3 id="3-启动"><a href="#3-启动" class="headerlink" title="3. 启动"></a>3. 启动</h3><pre><code>sudo docker run elasticsearch-2.3 --publish=[19200:9200,19300:9300]
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Elastic </tag>
-            
-            <tag> Docker </tag>
             
         </tags>
         
@@ -18655,7 +18712,7 @@ hive&gt; exit;
         
         <tags>
             
-            <tag> Algorithm </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -19088,7 +19145,7 @@ chmod 0600 ~/.ssh/authorized_keys
         
         <tags>
             
-            <tag> Http </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -20196,14 +20253,14 @@ public class Algo0326 {
       
         <categories>
             
-            <category> Java </category>
+            <category> Concurrent </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Multithreading </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -20475,7 +20532,7 @@ service vsftpd restart
         
         <tags>
             
-            <tag> Algorithm </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -20496,7 +20553,7 @@ service vsftpd restart
         
         <tags>
             
-            <tag> Algorithm </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -20593,7 +20650,7 @@ println binarySearch(s, 80)
         
         <tags>
             
-            <tag> Algorithm </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -20790,7 +20847,7 @@ class BinaryTree {
         
         <tags>
             
-            <tag> Tree </tag>
+            <tag> Interview </tag>
             
         </tags>
         
@@ -22477,17 +22534,28 @@ public class BitmapBackgroundButtonField extends Field {
     </entry>
     
     <entry>
-      <title></title>
-      <url>/java/java.html</url>
-      <content type="html"><![CDATA[<div class="container">
-  <ul class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li class="active">Archive</li>
-  </ul>
-<div id="main">
-  
-</div>
-</div>
+      <title><![CDATA[Contact]]></title>
+      <url>/contact/index.html</url>
+      <content type="html"><![CDATA[<h2>Let us help</h2>
+<p>Lorem ipsum sdolor sic amit, bolero carles.</p>
+<!-- BEGIN FORM-->
+<form action="#" role="form">
+  <div class="form-group">
+    <label for="contacts-name">Name</label>
+    <input type="text" class="form-control" id="contacts-name">
+  </div>
+  <div class="form-group">
+    <label for="contacts-email">Email</label>
+    <input type="email" class="form-control" id="contacts-email">
+  </div>
+  <div class="form-group">
+    <label for="contacts-message">Message</label>
+    <textarea class="form-control" rows="5" id="contacts-message"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Send</button>
+  <button type="button" class="btn btn-default">Cancel</button>
+</form>
+<!-- END FORM-->
 ]]></content>
     </entry>
     
@@ -22586,6 +22654,88 @@ public class BitmapBackgroundButtonField extends Field {
 
       </div>
 
+    </div>
+  </div>
+  <!-- END CONTENT -->
+</div>
+<!-- END SIDEBAR & CONTENT -->
+]]></content>
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/java/java.html</url>
+      <content type="html"><![CDATA[<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li class="active">Archive</li>
+  </ul>
+<div id="main">
+  
+</div>
+</div>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Login]]></title>
+      <url>/login/index.html</url>
+      <content type="html"><![CDATA[<!-- BEGIN SIDEBAR & CONTENT -->
+<div class="row margin-bottom-40">
+  <br><br>
+  <!-- BEGIN CONTENT -->
+  <div class="col-md-12 col-sm-12">
+    <div class="content-form-page">
+      <div class="row">
+	<div class="col-md-7 col-sm-7">
+	  <form class="form-horizontal form-without-legend" role="form">
+	    <div class="form-group">
+	      <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
+	      <div class="col-lg-8">
+		<input type="text" class="form-control" id="email">
+	      </div>
+	    </div>
+	    <div class="form-group">
+	      <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
+	      <div class="col-lg-8">
+		<input type="text" class="form-control" id="password">
+	      </div>
+	    </div>
+	    <div class="row">
+	      <div class="col-lg-8 col-md-offset-4 padding-left-0">
+		<a href="page-forgotton-password.html">Forget Password?</a>
+	      </div>
+	    </div>
+	    <div class="row">
+	      <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
+		<button type="submit" class="btn btn-primary">Login</button>
+	      </div>
+	    </div>
+	    <div class="row">
+	      <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 padding-right-30">
+		<hr>
+		<div class="login-socio">
+		  <p class="text-muted">or login using:</p>
+		  <ul class="social-icons">
+		    <li><a href="javascript:;" data-original-title="facebook" class="facebook" title="facebook" target="_blank" rel="external"></a></li>
+		    <li><a href="javascript:;" data-original-title="Twitter" class="twitter" title="Twitter" target="_blank" rel="external"></a></li>
+		    <li><a href="javascript:;" data-original-title="Google Plus" class="googleplus" title="Google Plus" target="_blank" rel="external"></a></li>
+		    <li><a href="javascript:;" data-original-title="Linkedin" class="linkedin" title="LinkedIn" target="_blank" rel="external"></a></li>
+		  </ul>
+		</div>
+	      </div>
+	    </div>
+	  </form>
+	</div>
+	<div class="col-md-4 col-sm-4 pull-right">
+	  <div class="form-info">
+	    <h2><em>Important</em> Information</h2>
+	    <p>Duis autem vel eum iriure at dolor vulputate velit esse vel molestie at dolore.</p>
+
+	    <button type="button" class="btn btn-default">More details</button>
+	  </div>
+	</div>
+      </div>
     </div>
   </div>
   <!-- END CONTENT -->
@@ -22949,99 +23099,6 @@ public class BitmapBackgroundButtonField extends Field {
   </div>
 </div>
 
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Contact]]></title>
-      <url>/contact/index.html</url>
-      <content type="html"><![CDATA[<h2>Let us help</h2>
-<p>Lorem ipsum sdolor sic amit, bolero carles.</p>
-<!-- BEGIN FORM-->
-<form action="#" role="form">
-  <div class="form-group">
-    <label for="contacts-name">Name</label>
-    <input type="text" class="form-control" id="contacts-name">
-  </div>
-  <div class="form-group">
-    <label for="contacts-email">Email</label>
-    <input type="email" class="form-control" id="contacts-email">
-  </div>
-  <div class="form-group">
-    <label for="contacts-message">Message</label>
-    <textarea class="form-control" rows="5" id="contacts-message"></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Send</button>
-  <button type="button" class="btn btn-default">Cancel</button>
-</form>
-<!-- END FORM-->
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Login]]></title>
-      <url>/login/index.html</url>
-      <content type="html"><![CDATA[<!-- BEGIN SIDEBAR & CONTENT -->
-<div class="row margin-bottom-40">
-  <br><br>
-  <!-- BEGIN CONTENT -->
-  <div class="col-md-12 col-sm-12">
-    <div class="content-form-page">
-      <div class="row">
-	<div class="col-md-7 col-sm-7">
-	  <form class="form-horizontal form-without-legend" role="form">
-	    <div class="form-group">
-	      <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
-	      <div class="col-lg-8">
-		<input type="text" class="form-control" id="email">
-	      </div>
-	    </div>
-	    <div class="form-group">
-	      <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
-	      <div class="col-lg-8">
-		<input type="text" class="form-control" id="password">
-	      </div>
-	    </div>
-	    <div class="row">
-	      <div class="col-lg-8 col-md-offset-4 padding-left-0">
-		<a href="page-forgotton-password.html">Forget Password?</a>
-	      </div>
-	    </div>
-	    <div class="row">
-	      <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-		<button type="submit" class="btn btn-primary">Login</button>
-	      </div>
-	    </div>
-	    <div class="row">
-	      <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 padding-right-30">
-		<hr>
-		<div class="login-socio">
-		  <p class="text-muted">or login using:</p>
-		  <ul class="social-icons">
-		    <li><a href="javascript:;" data-original-title="facebook" class="facebook" title="facebook" target="_blank" rel="external"></a></li>
-		    <li><a href="javascript:;" data-original-title="Twitter" class="twitter" title="Twitter" target="_blank" rel="external"></a></li>
-		    <li><a href="javascript:;" data-original-title="Google Plus" class="googleplus" title="Google Plus" target="_blank" rel="external"></a></li>
-		    <li><a href="javascript:;" data-original-title="Linkedin" class="linkedin" title="LinkedIn" target="_blank" rel="external"></a></li>
-		  </ul>
-		</div>
-	      </div>
-	    </div>
-	  </form>
-	</div>
-	<div class="col-md-4 col-sm-4 pull-right">
-	  <div class="form-info">
-	    <h2><em>Important</em> Information</h2>
-	    <p>Duis autem vel eum iriure at dolor vulputate velit esse vel molestie at dolore.</p>
-
-	    <button type="button" class="btn btn-default">More details</button>
-	  </div>
-	</div>
-      </div>
-    </div>
-  </div>
-  <!-- END CONTENT -->
-</div>
-<!-- END SIDEBAR & CONTENT -->
 ]]></content>
     </entry>
     
