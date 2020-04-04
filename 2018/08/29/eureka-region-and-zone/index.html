@@ -7,18 +7,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>eureka region and zone | BSYONLINE</title>
+  <title>Eureka Region and Zone | BSYONLINE</title>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="eureka region and zone">
+  <meta name="description" content="Region 和 Zone 是 AWS 的概念，Region 可以理解为地区，Zone 可以理解为机房。参考 Eureka 的架构图：
+us-east-1 为 Region ，us-east-1 下有 3 个 Zone : us-east-1c ，us-east-1d ，us-east-1e 。每个 Zone 中有 Eureka Server 和 Eureka Client ，Eureka Cli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eureka Region and Zone">
 <meta property="og:url" content="/2018/08/29/eureka-region-and-zone/index.html">
 <meta property="og:site_name" content="BSYONLINE">
-<meta property="og:updated_time" content="2020-02-23T07:39:56.964Z">
+<meta property="og:description" content="Region 和 Zone 是 AWS 的概念，Region 可以理解为地区，Zone 可以理解为机房。参考 Eureka 的架构图：
+us-east-1 为 Region ，us-east-1 下有 3 个 Zone : us-east-1c ，us-east-1d ，us-east-1e 。每个 Zone 中有 Eureka Server 和 Eureka Client ，Eureka Cli">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/22/84w60K.png">
+<meta property="og:updated_time" content="2020-03-23T04:06:02.240Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="eureka region and zone">
+<meta name="twitter:title" content="Eureka Region and Zone">
+<meta name="twitter:description" content="Region 和 Zone 是 AWS 的概念，Region 可以理解为地区，Zone 可以理解为机房。参考 Eureka 的架构图：
+us-east-1 为 Region ，us-east-1 下有 3 个 Zone : us-east-1c ，us-east-1d ，us-east-1e 。每个 Zone 中有 Eureka Server 和 Eureka Client ，Eureka Cli">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/03/22/84w60K.png">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
   
@@ -121,7 +129,7 @@
 	<span style='margin-right:10px'>
 	
         2018/08/29
-        <a class="article-title" href="/2018/08/29/eureka-region-and-zone/">eureka region and zone</a>
+        <a class="article-title" href="/2018/08/29/eureka-region-and-zone/">Eureka Region and Zone</a>
     
 	</span>
 <div>
@@ -147,9 +155,9 @@
 	<li class="hidden-xs"><i class="fa fa-tags"></i> 
 	  
   
-    <a href="/tags/Microservices/" title="Microservices">Microservices</a>,
+    <a href="/tags/Spring-Cloud/" title="Spring Cloud">Spring Cloud</a>,
   
-    <a href="/tags/Spring-Cloud/" title="Spring Cloud">Spring Cloud</a>
+    <a href="/tags/Microservices/" title="Microservices">Microservices</a>
   
 
 
@@ -166,7 +174,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Region 和 Zone 是 AWS 的概念，Region 可以理解为地区，Zone 可以理解为机房。参考 Eureka 的架构图：<br><img src="https://s1.ax1x.com/2020/03/22/84w60K.png" alt="84w60K.png" border="0" style="width:600px;"></p>
+<p>us-east-1 为 Region ，us-east-1 下有 3 个 Zone : us-east-1c ，us-east-1d ，us-east-1e 。每个 Zone 中有 Eureka Server 和 Eureka Client ，Eureka Client 优先向同一个 Zone 中的 Eureka Server 注册，除非当前 Zone 中的 Eureka Server 不可用，才会向远端的 Zone 中的 Eureka Server 注册。Eureka Client 虽然只向各自 Zone 中的 Eureka Server 注册，但是 Eureka Server 之间会同步注册信息，所以 Eureka Client 之间依旧可以相互调用。<br>Practice 参考 <a href="../../../../2020/03/22/building-eureka-server-with-region-and-zone/">Building Eureka Server with Region and Zone</a></p>
+
       
     </div>
   </div>
@@ -180,7 +190,7 @@
     <a href="/2018/08/29/eureka-server-self-preservation-mode/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
       <div class="article-nav-title" style="margin-bottom: 20px;">
         
-          eureka server self preservation mode
+          Eureka Server Self Preservation Mode
         
       </div>
     </a>
@@ -209,15 +219,11 @@
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -225,15 +231,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -241,11 +239,23 @@
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -253,7 +263,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -274,6 +284,10 @@
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

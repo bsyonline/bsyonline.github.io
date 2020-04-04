@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[Learning about Java Virtual Machine (JVM)]]></title>
       <url>/2099/08/13/learning-about-java-virtual-machine/</url>
-      <content type="html"><![CDATA[<p><a href="../../../..//2018/08/13/jvm-architecture/">JVM Architecture</a><br><a href="../../../..//2018/09/12/java-virtual-machine-tools/">Java Virtual Machine Tools</a><br><a href="../../../..//2020/02/21/default-jvm-options/">Default JVM Options</a><br><a href="../../../..//2020/02/21/jvm-options/">JVM Options</a><br><a href="../../../..//2018/08/27/garbage-collection-basics/">Garbage Collection Basics</a><br><a href="../../../..//2020/02/23/garbage-collection-steps/">Garbage Collection Steps</a><br><a href="../../../..//2020/02/23/cms-garbage-collector/">CMS Garbage Collector</a><br><a href="../../../..//2020/02/23/g1-garbage-collector/">G1 Garbage Collector</a><br><a href="../../../..//2020/02/21/gc-details/">GC Details</a></p>
+      <content type="html"><![CDATA[<p><a href="../../../..//2018/08/13/jvm-architecture/">JVM Architecture</a><br><a href="../../../..//2018/09/12/java-virtual-machine-tools/">Java Virtual Machine Tools</a><br><a href="../../../..//2020/02/21/default-jvm-options/">Default JVM Options</a><br><a href="../../../..//2020/02/21/jvm-options/">JVM Options</a><br><a href="../../../..//2018/08/27/garbage-collection-basics/">Garbage Collection Basics</a><br><a href="../../../..//2020/02/23/garbage-collection-steps/">Garbage Collection Steps</a><br><a href="../../../..//2020/02/23/cms-garbage-collector/">CMS Garbage Collector</a><br><a href="../../../..//2020/02/23/g1-garbage-collector/">G1 Garbage Collector</a><br><a href="../../../..//2020/02/21/gc-details/">GC Details</a><br><a href="../../../..//2020/03/26/jit-at-a-glance/">JIT at a Glance</a><br><a href="../../../../2020/03/27/escape-analysis/">Escape Analysis</a></p>
 ]]></content>
       
         <categories>
@@ -57,11 +57,16 @@
     <entry>
       <title><![CDATA[Microservices Learning Path]]></title>
       <url>/2099/06/16/microservices-learning-path/</url>
-      <content type="html"><![CDATA[<p><img src="https://spring.io/img/homepage/diagram-distributed-systems.svg" style="width: 600px"></p>
-<h4 id="Spring-Cloud-Fundamental"><a href="#Spring-Cloud-Fundamental" class="headerlink" title="Spring Cloud Fundamental"></a>Spring Cloud Fundamental</h4><p>I. Netflix/eureka</p>
-<p><a href="../../../../2018/08/29/eureka-architecture/">Eureka Architecture</a><br><a href="../../../../2018/08/29/eureka-data-structure/">Eureka Data Structure</a><br><a href="../../../../2018/08/29/communication-between-eureka-server-and-client/">Communication Between Eureka Server And Client</a><br><a href="../../../../2018/08/29/cache-in-eureka-server/">Cache in Eureka Server</a><br><a href="../../../../2018/08/29/synchronization-between-eureka-server-nodes/">Synchronization Between Eureka Server Nodes</a><br><a href="../../../../2018/08/29/eureka-server-self-preservation-mode/">Eureka Server Self Preservation Mode</a><br><a href="../../../../2018/08/29/eureka-region-and-zone/">Eureka Region and Zone</a></p>
-<p>II. Netflix/zuul</p>
-<h4 id="Spring-Cloud-Practice"><a href="#Spring-Cloud-Practice" class="headerlink" title="Spring Cloud Practice"></a>Spring Cloud Practice</h4><h5 id="Service-Registration-and-Discovery"><a href="#Service-Registration-and-Discovery" class="headerlink" title="Service Registration and Discovery"></a><a href="../../../../2018/06/16/service-registration-and-discovery/">Service Registration and Discovery</a></h5><h5 id="Proxying-Routing-and-Filtering-using-Zuul"><a href="#Proxying-Routing-and-Filtering-using-Zuul" class="headerlink" title="Proxying Routing and Filtering using Zuul"></a><a href="../../../../2018/06/17/proxying-routing-and-filtering-using-zuul/">Proxying Routing and Filtering using Zuul</a></h5><h5 id="Client-Side-Loadbalancing-with-Spring-Cloud-Ribbon"><a href="#Client-Side-Loadbalancing-with-Spring-Cloud-Ribbon" class="headerlink" title="Client Side Loadbalancing with Spring Cloud Ribbon"></a><a href="../../../../2018/06/30/client-side-loadbalancing-with-spring-cloud-ribbon/">Client Side Loadbalancing with Spring Cloud Ribbon</a></h5><h5 id="Services-Communication-using-Feign"><a href="#Services-Communication-using-Feign" class="headerlink" title="Services Communication using Feign"></a><a href="../../../../2018/06/20/services-communication-using-feign/">Services Communication using Feign</a></h5><h5 id="About-RPC"><a href="#About-RPC" class="headerlink" title="About RPC"></a><a href="../../../../2018/05/18/about-rpc/">About RPC</a></h5><h5 id="Getting-Started-with-gRPC"><a href="#Getting-Started-with-gRPC" class="headerlink" title="Getting Started with gRPC"></a><a href="../../../../2018/06/09/getting-started-with-grpc/">Getting Started with gRPC</a></h5><h5 id="Spring-Cloud-with-gRPC"><a href="#Spring-Cloud-with-gRPC" class="headerlink" title="Spring Cloud with gRPC"></a><a href="../../../../2018/06/09/spring-cloud-with-grpc/">Spring Cloud with gRPC</a></h5><h5 id="Configuration-Management-with-Spring-Cloud-Config"><a href="#Configuration-Management-with-Spring-Cloud-Config" class="headerlink" title="Configuration Management with Spring Cloud Config"></a><a href="../../../../2018/06/26/configuration-management-with-spring-cloud-config/">Configuration Management with Spring Cloud Config</a></h5><h5 id="Dynamic-Configuration-Management-with-Spring-Cloud-Bus"><a href="#Dynamic-Configuration-Management-with-Spring-Cloud-Bus" class="headerlink" title="Dynamic Configuration Management with Spring Cloud Bus"></a><a href="../../../../2018/06/27/dynamic-configuration-management-with-spring-cloud-bus/">Dynamic Configuration Management with Spring Cloud Bus</a></h5><h5 id="Circuit-Breaker-using-Spring-Cloud-Hystrix"><a href="#Circuit-Breaker-using-Spring-Cloud-Hystrix" class="headerlink" title="Circuit Breaker using Spring Cloud Hystrix"></a><a href="../../../../2018/06/30/circuit-breaker-using-spring-cloud-hystrix/">Circuit Breaker using Spring Cloud Hystrix</a></h5><h5 id="Monitoring-and-Integrating-Hystrix-using-Hystrix-Dashboard-and-Turbine"><a href="#Monitoring-and-Integrating-Hystrix-using-Hystrix-Dashboard-and-Turbine" class="headerlink" title="Monitoring and Integrating Hystrix using Hystrix Dashboard and Turbine"></a><a href="../../../../2018/07/01/monitoring-and-integrating-hystrix-using-hystrix-dashboard-and-turbine/">Monitoring and Integrating Hystrix using Hystrix Dashboard and Turbine</a></h5><h5 id="Tracing-with-Spring-Cloud-Sleuth-and-Zipkin"><a href="#Tracing-with-Spring-Cloud-Sleuth-and-Zipkin" class="headerlink" title="Tracing with Spring Cloud Sleuth and Zipkin"></a><a href="../../../../2018/07/02/tracing-with-spring-cloud-sleuth-and-zipkin/">Tracing with Spring Cloud Sleuth and Zipkin</a></h5>]]></content>
+      <content type="html"><![CDATA[<h4 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/eureka-data-structure/">Eureka Data Structure</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/communication-between-eureka-server-and-client/">Communication Between Eureka Server And Client</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/synchronization-between-eureka-server-nodes/">Synchronization Between Eureka Server Nodes</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/eureka-server-self-preservation-mode/">Eureka Server Self Preservation Mode</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/eureka-region-and-zone/">Eureka Region and Zone</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/16/service-registration-and-discovery/">Service Registration and Discovery</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/22/building-eureka-server-with-peer-awareness/">Building Eureka Server with Peer Awareness</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/22/building-eureka-server-with-region-and-zone/">Building Eureka Server with Region and Zone</a> <font color="blue">(Practice)</font></p>
+<h4 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/17/routing-and-filtering-with-zuul/">Routing and Filtering with Zuul</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/24/gazing-at-zuul/">Gazing at Zuul</a> <font color="red">(Fundamental)</font></p>
+<h4 id="Ribbon"><a href="#Ribbon" class="headerlink" title="Ribbon"></a>Ribbon</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/30/client-side-loadbalancing-with-spring-cloud-ribbon/">Client Side Loadbalancing with Spring Cloud Ribbon</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/23/gazing-at-ribbon/">Gazing at Ribbon</a> <font color="red">(Fundamental)</font></p>
+<h4 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/20/services-communication-using-feign/">Services Communication using Feign</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/24/gazing-at-feign/">Gazing at Feign</a> <font color="red">(Fundamental)</font></p>
+<h4 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/30/circuit-breaker-using-spring-cloud-hystrix/">Circuit Breaker using Spring Cloud Hystrix</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/24/gazing-at-hystrix/">Gazing at Hystrix</a> <font color="red">(Fundamental)</font></p>
+<h4 id="Sleuth-and-Zipkin"><a href="#Sleuth-and-Zipkin" class="headerlink" title="Sleuth and Zipkin"></a>Sleuth and Zipkin</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/07/02/tracing-with-spring-cloud-sleuth-and-zipkin/">Tracing with Spring Cloud Sleuth and Zipkin</a> <font color="blue">(Practice)</font></p>
+<h4 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/26/configuration-management-with-spring-cloud-config/">Configuration Management with Spring Cloud Config</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/27/dynamic-configuration-management-with-spring-cloud-bus/">Dynamic Configuration Management with Spring Cloud Bus</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/07/01/monitoring-and-integrating-hystrix-using-hystrix-dashboard-and-turbine/">Monitoring and Integrating Hystrix using Hystrix Dashboard and Turbine</a> <font color="blue">(Practice)</font></p>
+<h4 id="gRPC"><a href="#gRPC" class="headerlink" title="gRPC"></a>gRPC</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/05/18/about-rpc/">About RPC</a> <font color="red">(Fundamental)</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/09/getting-started-with-grpc/">Getting Started with gRPC</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/09/spring-cloud-with-grpc/">Spring Cloud with gRPC</a> <font color="blue">(Practice)</font></p>
+]]></content>
       
         <categories>
             
@@ -72,30 +77,9 @@
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
             
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Blockchain Learning Path]]></title>
-      <url>/2099/05/05/blockchain-learning-path/</url>
-      <content type="html"><![CDATA[<p><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20180520/174447525.png" style="width: 600px;"></p>
-<h4 id="区块链的基本概念"><a href="#区块链的基本概念" class="headerlink" title="区块链的基本概念"></a>区块链的基本概念</h4><h4 id="区块链的技术栈"><a href="#区块链的技术栈" class="headerlink" title="区块链的技术栈"></a>区块链的技术栈</h4><h4 id="以太坊"><a href="#以太坊" class="headerlink" title="以太坊"></a>以太坊</h4><h4 id="超级账本"><a href="#超级账本" class="headerlink" title="超级账本"></a>超级账本</h4>]]></content>
-      
-        <categories>
-            
-            <category> Blockchain </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Blockchain </tag>
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -123,6 +107,27 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Blockchain Learning Path]]></title>
+      <url>/2099/05/05/blockchain-learning-path/</url>
+      <content type="html"><![CDATA[<p><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20180520/174447525.png" style="width: 600px;"></p>
+<h4 id="区块链的基本概念"><a href="#区块链的基本概念" class="headerlink" title="区块链的基本概念"></a>区块链的基本概念</h4><h4 id="区块链的技术栈"><a href="#区块链的技术栈" class="headerlink" title="区块链的技术栈"></a>区块链的技术栈</h4><h4 id="以太坊"><a href="#以太坊" class="headerlink" title="以太坊"></a>以太坊</h4><h4 id="超级账本"><a href="#超级账本" class="headerlink" title="超级账本"></a>超级账本</h4>]]></content>
+      
+        <categories>
+            
+            <category> Blockchain </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Blockchain </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Data Structure and Algorithm]]></title>
       <url>/2099/02/08/data-structure-and-algorithm/</url>
       <content type="html"><![CDATA[<p><a href="../../../../2015/11/11/sorting/">Sorting</a></p>
@@ -144,16 +149,1500 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Understanding MySQL Explain]]></title>
+      <url>/2020/04/01/understanding-mysql-explain/</url>
+      <content type="html"><![CDATA[<p>Explain 会展示 MySQL 优化器关于语句执行计划的信息，也就是说会解释 MySQL 将如何处理语句。<br>我们先来试一下。</p>
+<pre><code>mysql&gt; explain select * from t_user where name=&#39;tom&#39;;
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------+
+| id | select_type | table  | partitions | type | possible_keys | key    | key_len | ref   | rows | filtered | Extra |
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------+
+|  1 | SIMPLE      | t_user | NULL       | ref  | i_name        | i_name | 202     | const |    1 |   100.00 | NULL  |
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------+
+</code></pre><p>Explain 结果显示了 12 列（黑体是我们需要重点关注的列）。</p>
+<ol>
+<li>id：序号。</li>
+<li><strong>select_type</strong>：select 的类型。</li>
+<li>table：这行记录属于哪个表。</li>
+<li>partitions：匹配的分区。</li>
+<li><strong>type</strong>：查找的类型。</li>
+<li>possible_keys：可能选择的索引。</li>
+<li>key：实际选择的索引。</li>
+<li>key_len：选择的索引的长度。</li>
+<li><strong>ref</strong>：与索引比较的列。</li>
+<li>rows：读取的行数。</li>
+<li>filtered：按条件过滤的行数占比。</li>
+<li><strong>Extra</strong>：附加信息。 </li>
+</ol>
+<h5 id="select-type"><a href="#select-type" class="headerlink" title="select_type"></a>select_type</h5><p>select_type 有以下一些值：</p>
+<ol>
+<li>SIMPLE：简单SELECT（不使用 UNION 或子查询）。</li>
+<li>PRIMARY：最外层 SELECT 。</li>
+<li>UNION：UNION 中第二个及以后的 SELECT 语句。</li>
+<li>DEPENDENT UNION：UNION 中的第二个及以后的 SELECT 语句，依赖外层查询。</li>
+<li>UNION RESULT：UNION 的结果。</li>
+<li>SUBQUERY：子查询中第一个 SELECT 语句。</li>
+<li>DEPENDENT SUBQUERY：子查询中第一个 SELECT 语句，依赖外部查询。</li>
+<li>DERIVED：derived 表</li>
+<li>MATERIALIZED：</li>
+<li>UNCACHEABLE SUBQUERY：子查询结果无法缓存，必须针对外部查询的每一行重新进行评估。</li>
+<li>UNCACHEABLE UNION：UNION 中的第二个及以后的 SELETE 语句，并且这个 UNION 属于 UNCACHEABLE SUBQUERY 。</li>
+</ol>
+<h5 id="type"><a href="#type" class="headerlink" title="type"></a>type</h5><ol>
+<li>system：该表只有一行记录。</li>
+<li>const：全表最多只有一行匹配。<pre><code>mysql&gt; explain select * from t_user where id=1;
++----+-------------+--------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
+| id | select_type | table  | partitions | type  | possible_keys | key     | key_len | ref   | rows | filtered | Extra |
++----+-------------+--------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
+|  1 | SIMPLE      | t_user | NULL       | const | PRIMARY       | PRIMARY | 4       | const |    1 |   100.00 | NULL  |
++----+-------------+--------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
+</code></pre></li>
+<li>eq_ref：A 表中的每一行，B 表中只有一行匹配。（存疑）</li>
+<li>ref：</li>
+<li>fulltext：使用 fulltext 索引进行连接。</li>
+<li>ref_or_null：类似 ref ，但是还会搜索包含 NULL 的行。<pre><code>mysql&gt; explain select * from t_user where skill=&#39;aaa&#39; or skill is null;
++----+-------------+--------+------------+-------------+---------------+---------+---------+-------+------+----------+-----------------------+
+| id | select_type | table  | partitions | type        | possible_keys | key     | key_len | ref   | rows | filtered | Extra                 |
++----+-------------+--------+------------+-------------+---------------+---------+---------+-------+------+----------+-----------------------+
+|  1 | SIMPLE      | t_user | NULL       | ref_or_null | i_skill       | i_skill | 43      | const |    2 |   100.00 | Using index condition |
++----+-------------+--------+------------+-------------+---------------+---------+---------+-------+------+----------+-----------------------+
+</code></pre></li>
+<li>index_merge：<pre><code>mysql&gt; explain select * from t_user where name=&#39;user1&#39; or skill is null;
++----+-------------+--------+------------+-------------+----------------+----------------+---------+------+------+----------+------------------------------------------+
+| id | select_type | table  | partitions | type        | possible_keys  | key            | key_len | ref  | rows | filtered | Extra                                    |
++----+-------------+--------+------------+-------------+----------------+----------------+---------+------+------+----------+------------------------------------------+
+|  1 | SIMPLE      | t_user | NULL       | index_merge | i_name,i_skill | i_name,i_skill | 202,43  | NULL |    2 |   100.00 | Using union(i_name,i_skill); Using where |
++----+-------------+--------+------------+-------------+----------------+----------------+---------+------+------+----------+------------------------------------------+
+</code></pre></li>
+<li>unique_subquery：</li>
+<li>index_subquery：</li>
+<li>range：</li>
+<li>index：</li>
+<li>ALL</li>
+</ol>
+<h5 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h5><ol>
+<li></li>
+<li>const row not found</li>
+<li>Deleting all rows</li>
+<li>Distinct</li>
+<li>FirstMatch</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> MySQL </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Deep in Overload and Override]]></title>
+      <url>/2020/03/29/deep-in-overload-and-override/</url>
+      <content type="html"><![CDATA[<p>封装，继承，多态是面向对象的 3 个特征。多态又可以分为静态多态 (overload) 和动态多态 (override) 。</p>
+<h4 id="Overload"><a href="#Overload" class="headerlink" title="Overload"></a>Overload</h4><p>Overload 通过参数类型来选择方法，我们通过一个例子来感受以下。</p>
+<pre><code>public class OverloadExample {
+
+    public void sayHello(Human guy) {
+        System.out.println(&quot;hello, guy&quot;);
+    }
+
+    public void sayHello(Man guy) {
+        System.out.println(&quot;hello, gentleman&quot;);
+    }
+
+    public void sayHello(Woman guy) {
+        System.out.println(&quot;hello, lady&quot;);
+    }
+
+    public static void main(String[] args) {
+        Human man = new Man(); // 静态类型是Human，动态类型是Man
+        Human woman = new Woman();
+        OverloadExample oe = new OverloadExample();
+        /*
+            重载是根据静态类型来判断的
+         */
+        oe.sayHello(man);
+        oe.sayHello(woman);
+    }
+
+    static class Human {
+    }
+
+    static class Man extends Human {
+    }
+
+    static class Woman extends Human {
+    }
+}
+
+运行结果：
+hello, guy
+hello, guy
+hello, gentleman
+hello, lady
+</code></pre><p>接下来我们来分析以下为什么。<code>Human man = new Man();</code> Human 是静态类型，Man 是实际类型，变量本身的静态类型不会被改变，所以是编译期可知的，而实际类型是在运行时确定的。编译器在重载时是通过参数的静态类型来判断的。通过 javap 可以看到编译的字节码。</p>
+<pre><code> #13 = Methodref          #11.#57        // com/rolex/microlabs/jvm/OverloadExample.sayHello:(Lcom/rolex/microlabs/jvm/OverloadExample$Human;)V
+
+ 26: invokevirtual #13                 // Method sayHello:(Lcom/rolex/microlabs/jvm/OverloadExample$Human;)V
+ 29: aload_3
+ 30: aload_2
+ 31: invokevirtual #13                 // Method sayHello:(Lcom/rolex/microlabs/jvm/OverloadExample$Human;)V
+</code></pre><p>这种通过静态类型来寻找方法的方式叫做<strong>静态分派</strong>，Overload 就是典型场景。静态类型可能会匹配多个方法，这时编译器会选择一个最合适。比如下面这个例子。</p>
+<pre><code>public class OverloadExample1 {
+    public static void sayHello(char arg) {
+        System.out.println(&quot;hello char&quot;);
+    }
+
+    public static void sayHello(int arg) {
+        System.out.println(&quot;hello int&quot;);
+    }
+
+    public static void sayHello(long arg) {
+        System.out.println(&quot;hello long&quot;);
+    }
+
+    public static void sayHello(float arg) {
+        System.out.println(&quot;hello float&quot;);
+    }
+
+    public static void sayHello(double arg) {
+        System.out.println(&quot;hello double&quot;);
+    }
+
+    public static void sayHello(Character arg) {
+        System.out.println(&quot;hello Character&quot;);
+    }
+
+    public static void sayHello(Serializable arg) {
+        System.out.println(&quot;hello Serializable&quot;);
+    }
+
+    public static void sayHello(Comparable arg) {
+        System.out.println(&quot;hello Comparable&quot;);
+    }
+
+    public static void sayHello(Object arg) {
+        System.out.println(&quot;hello Object&quot;);
+    }
+
+    public static void sayHello(char... arg) {
+        System.out.println(&quot;hello char...&quot;);
+    }
+
+    public static void sayHello(int... arg) {
+        System.out.println(&quot;hello int...&quot;);
+    }
+
+    public static void main(String[] args) {
+        sayHello(&#39;a&#39;);
+    }
+}
+</code></pre><p>根据 <code>&#39;a&#39;</code> 的类型，最匹配的当然是 char 。如果没有 char ，则会匹配 int ，因为 char 通过类型转化，也可以用 int 表示。如果 int 也没有，则再进行一次类型转化，来匹配 long 。依次类推，可以依次匹配 float 和 double 。如果 float 和 double 都没有，则会匹配 Character ，因为 Character 是 char 的包装类，通过自动装箱可以进行类型转化。如果 Character 也么有，则会匹配 Serializable 和 Comparable ，因为 Character 实现了 Serializable 和 Comparable ，它们的优先级是相同的，编译器就不知道该如何匹配了，会报编译错误。如果没有 Serializable 和 Comparable ，则会继续匹配 Object 因为 Object 是 Character 的父类。最后如果 Object 也没有，就会作为一个可变参数进行匹配。</p>
+<h4 id="Override"><a href="#Override" class="headerlink" title="Override"></a>Override</h4><pre><code>public class OverrideExample {
+    public static void main(String[] args) {
+        Human man = new Man();
+        Human woman = new Woman();
+        Man man1 = new Man();
+        Woman woman1 = new Woman();
+        man.sayHello();
+        woman.sayHello();
+        man1.sayHello();
+        woman1.sayHello();
+    }
+
+    static class Human {
+        public void sayHello() {
+            System.out.println(&quot;hello, guy&quot;);
+        }
+    }
+
+    static class Man extends Human {
+        public void sayHello() {
+            System.out.println(&quot;hello, gentleman&quot;);
+        }
+    }
+
+    static class Woman extends Human {
+        public void sayHello() {
+            System.out.println(&quot;hello, lady&quot;);
+        }
+    }
+}
+
+执行结果：
+hello, gentleman
+hello, lady
+hello, gentleman
+hello, lady
+</code></pre><p>在编译 <code>man.sayHello()</code> 时，编译器并不知道最终是调用 Man 的 sayHello() ，我们可以通过 javap 查看。</p>
+<pre><code>#6 = Methodref          #14.#39        // com/rolex/microlabs/jvm/OverrideExample$Human.sayHello:()V
+#7 = Methodref          #2.#39         // com/rolex/microlabs/jvm/OverrideExample$Man.sayHello:()V
+#8 = Methodref          #4.#39         // com/rolex/microlabs/jvm/OverrideExample$Woman.sayHello:()V
+
+34: invokevirtual #6                  // Method com/rolex/microlabs/jvm/OverrideExample$Human.sayHello:()V
+37: aload_2
+38: invokevirtual #6                  // Method com/rolex/microlabs/jvm/OverrideExample$Human.sayHello:()V
+41: aload_3
+42: invokevirtual #7                  // Method com/rolex/microlabs/jvm/OverrideExample$Man.sayHello:()V
+45: aload         4
+47: invokevirtual #8                  // Method com/rolex/microlabs/jvm/OverrideExample$Woman.sayHello:()V
+</code></pre><p>编译的指令是相同的，但是最终执行的结果却不一样。这和 invokevirtual 指令的执行过程有关。invokevirtual 指令会首先从操作数栈顶对象开始找，如果找到匹配的方法，则返回。如果没有找到，则继续按照继承关系从下往上依次查找，直到找到为止。这种根据运行时实际类型进行方法匹配叫做<strong>动态分派</strong>。</p>
+<blockquote>
+<p>由于查找是在运行时进行的，为了性能考虑，JVM 并不会按照这种方式进行查找，而是通过虚方法表的方式进行查找。</p>
+</blockquote>
+<p>不论是静态分派还是动态分派，Java 在进行方法匹配时可检查的不外乎对象的类型和方法的参数，这叫做方法的<strong>宗量</strong>。通过宗量的数量，又可以分为单分派和多分派。在 Overload 中，编译器需要看方法参数的静态类型，还要看调用的是哪个对象的方法，所以 Overload 是<strong>静态多分派</strong>。在 Override 中，方法的参数是固定的，只需要看匹配的是哪个对象中的方法，所以 Override 是<strong>动态单分派</strong>。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> JVM </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Escape Analysis]]></title>
+      <url>/2020/03/27/escape-analysis/</url>
+      <content type="html"><![CDATA[<p>什么是逃逸分析<br>逃逸分析是 JVM 中使用的一种优化技术。逃逸分析算法是利用连通图来构建对象和引用对象之间的可达性，以此进行数据流分析的方法，在论文 Escape Analysis for Java 中有介绍。</p>
+<p>逃逸的种类<br>逃逸分析针对的对象的分析，对象的逃逸状态有 3 种：</p>
+<ol>
+<li>GlobalEscape ，全局逃逸<br>当对象符合以下条件，认为是全局逃逸：<br> 1）对象作为方法的返回结果。<br> 2）存储在全局变量或静态变量中的对象。<br> 3）重写了 finalize() 方法的对象。</li>
+<li>ArgEscape ，参数逃逸<br>对象作为参数传递或被参数引用，但是没有发生全局逃逸。</li>
+<li>NoEscape 没有逃逸</li>
+</ol>
+<p>利用逃逸分析，JVM 可以对代码进行优化：</p>
+<ol>
+<li>栈上分配<br>如果对象没有逃逸，可以将对象分配在方法的栈上而不用在堆中创建对象，这样当方法执行完，栈帧弹出，对象就自动被回收，可以加快内存回收，减少 GC 。</li>
+<li>锁消除<br>当 JVM 认为一个对象只在当前线程内部使用，那么就会优化掉对象的同步锁。<pre><code>public static void m1() {
+ synchronized (new Object()) {
+     System.out.println(&quot;m1&quot;);
+ }
+}
+public static void optimizedM1() {
+ System.out.println(&quot;m1&quot;);
+}
+</code></pre>上边的例子只是为了说明，因为实际中我们应该不会对 new Object() 进行加锁。实际中最常见的还有在一个方法内部使用 StringBuffer.append() ，StringBuffer 的方法是 synchronized ，如果对象没有逃逸，JVM 会帮我们优化掉 synchronized 。</li>
+<li>标量替换<br>标量不能再拆分，比如基本类型，聚合量可以被拆分，比如对象。将对象分解成标量，使用标量代替对象就叫做标量替换。如果对象没有逃逸，就可以用标量代替，变量只存储在栈上，就不用在堆中创建对象，既减少了内存占用又提高了运行速度。<pre><code>class Point {
+ int x;
+ int y;
+}
+public void optimizedShow() {
+ int x = 1;
+ int y = 2;
+ System.out.println(&quot;point=(&quot; + x + &quot;, &quot; + y + &quot;)&quot;);
+}
+public void show() {
+ Point point = new Point();
+ point.x = 1;
+ point.y = 2;
+ System.out.println(&quot;point=(&quot; + point.x + &quot;, &quot; + point.y + &quot;)&quot;);
+}
+</code></pre></li>
+<li><p>锁粗化<br>加锁操作是很消耗资源的，如果在循环内部进行多次，会将锁的范围扩大到循环外。</p>
+<pre><code>public static void m1() {
+ for (int i = 0; i &lt; 5_000_000; i++) {
+     synchronized (new Object()) {
+
+     }
+ }
+}
+public static void optimizedM1() {
+ synchronized (new Object()) {
+     for (int i = 0; i &lt; 5_000_000; i++) {
+
+     }
+ }
+}
+</code></pre></li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> JVM </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[JIT at a Glance]]></title>
+      <url>/2020/03/26/jit-at-a-glance/</url>
+      <content type="html"><![CDATA[<h4 id="JIT-是什么？"><a href="#JIT-是什么？" class="headerlink" title="JIT 是什么？"></a>JIT 是什么？</h4><p>JIT(Just-In-Time Compilation) 即时编译，是一段代码在第一次将要被执行之前，进行的编译。属于动态编译（运行时编译）的范畴，与之相对的是 AOT(ahead-of-time Compilation)  也叫静态编译。</p>
+<p>java 文件经过 javac 编译成字节码文件，再由 JVM 的解释器 interpreter 解释执行。当 JVM 发现某段代码执行地非常频繁，就会认为这段代码是热点代码 (hot spot code) 。JVM 就会将这些代码编译成机器指令，这样就可以直接调用机器指令执行，而不用再进行解释执行。这个将热点代码编译成机器指令的过程就是 JIT 编译，是通过 JIT 编译器来完成的。</p>
+<p>什么样的代码算热点代码?</p>
+<ol>
+<li>被多次调用的代码，如果调用次数到达阈值，就会被加入到编译队列中等待编译，这种编译叫标准编译。</li>
+<li>循环体，如果方法中有很长的循环，当计数器到达阈值，整个方法也会被编译，这种编译叫栈上替换 (On Stack Replacement, OSR) 。</li>
+</ol>
+<p>为什么 JIT 不是针对所有代码，而只是热点代码？<br>因为 JIT 也是有成本的。</p>
+<ol>
+<li>首先是时间成本，JIT 编译可能非常耗时，并且不是 100% 能够获取运行速度提升，即便获得运行速度提升，也不一定能抵消 JIT 编译的时间消耗，而且有些代码可能就只执行一次，所以相对来说还是解释执行的成本更低。</li>
+<li>其次是空间成本，将字节码编译成机器码会占用更多的空间。</li>
+</ol>
+<p>所以只有热点代码才值得进行 JIT 编译。</p>
+<h4 id="JIT-编译器"><a href="#JIT-编译器" class="headerlink" title="JIT 编译器"></a>JIT 编译器</h4><p>HotSpotVM 中，解释器和 JIT 编译器都属于执行引擎。JIT 编译器有两种，一个是 Client Compiler ，简称 C1 ，另一个是 Server Compiler ，简称 C2 。JVM 会根据运行模式选择 C1 或 C2 搭配解释器一起使用。默认使用的是 Server Compiler ，通过 <code>-client</code> 或 <code>-server</code> 选项可以指定使用哪种编译器。C1 编译器主要针对客户端程序设计，优化程度小，启动速度快。C2 编译器主要针对长时间执行的程序，更加关注代码的执行时间，所以会对代码进行更大程度的优化，因此启动时间比 C1 长。为了利用各自的优势，达到启动时间和执行效率之间的平衡，从 jdk1.6 开始引入了分层编译 (tiered compilation) ，并在 jdk1.7 作为默认策略。<br>分层编译是如何分层的？</p>
+<ol>
+<li>第 0 层，解释器解释执行。可以触发第 1 层编译。</li>
+<li>第 1 层，C1 编译，进行简单的优化，将字节码编译成机器码。可以触发第 2 层编译。</li>
+<li>第 2 层及以上，C2 编译，进行耗时较长的优化，可能会进行激进的优化。</li>
+</ol>
+<p>解释器和 JIT 是如何配合工作的？<br>HotSpotVM 为每个方法准备了两个计数器：Invocation Counter 和 Back Edge Counter 。解释器首先解释执行字节码，每执行一次某个方法，对应的计数器加 1 ，当达到阈值，触发 C1 编译，C1 将字节码编译成机器指令，只进行简单的优化。随着执行次数增多，优化会升级，触发 C2 编译，在 C2 编译过程中 JVM 可能会进行一些激进优化（大多数情况下能够提升运行速度的优化），但不一定成功。当出现罕见陷阱 (Uncommon Trap) 即优化失败时，通过逆优化 (deopimization) 进行回退，继续由解释器解释执行。编译过程需要花费时间，程序在运行期间不会等待编译完成，编译是异步进行的，编译完成后会替换代码，再下一次执行时使用。</p>
+<p>Java 为什么要有 JIT ，为什么不在 javac 阶段就进行优化?<br>这是由于 javac 本身就是这么设计的，至于为什么这么设计，一是因为 Java 有一些动态特性导致在 javac  阶段进行优化难度很大，所以干脆不进行优化。举个例子：<br>有一个类 Foo 有两个方法 m1 和 m2  。</p>
+<pre><code>class Foo {
+    public String m1() {
+        return m2();
+    }
+    public String m2() {
+        return null;
+    }
+}
+
+Foo foo = new Foo();
+foo.m1();
+</code></pre><p>对于这样的类，我们能不能在 javac 编译时将 m1 优化成 return null 呢？不能。<br>因为我们无法确定会不会在其他时刻会出现一个 Bar 类。</p>
+<pre><code>class Bar extends Foo {
+    public String m2(){
+        return &quot;bar&quot;
+    }
+}
+
+Foo foo = new Bar();
+foo.m1();
+</code></pre><p>此时 <code>m1()</code> 就不应该为 null 了。显然在 javac 编译时想要确定这个问题是十分困难的。二是将优化放在 JIT ，可以让其他运行在 JVM 上的其他语言也可以享受到优化的收益。</p>
+<p>有 JIT 比没有 JIT 要快么?<br>其实不一定，还要具体问题具体分析。如果没有 JIT ，那么执行过程是 <code>字节码-&gt;解释器解释执行-&gt;结果</code>，有 JIT 的过程是 <code>字节码-&gt;JIT 编译-&gt;执行编译后的代码-&gt;结果</code>。经过 JIT 编译之后的代码执行要比解释器解释执行要快，但是 JIT 编译也是需要耗时的，并不一定 JIT 编译的时间要肯定小于解释执行的时间。</p>
+<p>JIT 进行了哪些优化？</p>
+<ol>
+<li>公共子表达式消除<br>如果一个表达式 E 已经计算得到结果 R ，并且再后续再次出现 E 时它的参数没有发生变化，则可以直接使用 R 代替 E 。</li>
+<li>方法内联<br>方法内联是在编译过程中遇到方法调用时，将目标方法的方法体纳入编译范围之中，并取代原方法调用的优化手段。比如 getter/setter 方法，如果没有内联，在调用 getter/setter 方法时，程序需要保存当前方法的执行位置，并创建 getter/setter 的栈帧入栈，执行完调用后再出栈，恢复到当前方法继续执行。如果有内联，会将方法调用优化成字段访问，从而提高程序运行速度。内联发生在 C2 阶段，由 jit compiler 解析字节码生成 IR 图，并在 IR 图上进行优化，如果进行方法内联，就将 IR 图中的对应节点替换成目标方法的 IR 图，然后对新的 IR 图进行进一步优化。 </li>
+<li><a href="../../../../2020/03/27/escape-analysis/">逃逸分析</a></li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> JVM </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Gazing at Hystrix]]></title>
+      <url>/2020/03/25/gazing-at-hystrix/</url>
+      <content type="html"></content>
+      
+        <categories>
+            
+            <category> Spring Cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spring Cloud </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Gazing at Zuul]]></title>
+      <url>/2020/03/24/gazing-at-zuul/</url>
+      <content type="html"><![CDATA[<p>ZuulServlet 在 service 中顺序执行 preRoute() ，route() ，postRoute() 。具体的 route 动作是通过聚合 ZuulRunner ，在 ZuulRunner 中使用 FilterProcessor 来执行。<br>首先执行的是 pre 类型的 filter 。默认的 preFilter 有 5 个：</p>
+<ol>
+<li>ServletDetectionFilter ，第一个 preFilter ，order 是 -3 ，用来判断 isDispatcherServletRequest 。</li>
+<li>Servlet30WrapperFilter ，第二个 preFilter ，order 是 -2 ，用来包装 request 请求。</li>
+<li>FormBodyWrapperFilter ，第三个 preFilter ，order 是 -1 ，用来对请求进行 FormBodyRequestWrapper 包装，以便后续的 filter 能够拿到流的信息。</li>
+<li>DebugFilter ，第四个 preFilter ，order 是 1 ，用于 debug 开启时设置 debug 开关，打印 debug 信息。开启 bebug 之后，debug 信息会放在 X-Zuul-Debug-Header 中。</li>
+<li>PreDecorationFilter ，第五个 preFilter ，order 是 5 ，用来做一些预处理，比如 set requestURI ，比如添加一些 request header 信息。</li>
+</ol>
+<p>然后会执行 route 类型的 filter 。默认的 routeFilter 有 3 个：</p>
+<ol>
+<li>RibbonRoutingFilter ，第一个 routeFilter ，order 是 10 ，针对通过 serviceId 进行路由的请求。</li>
+<li>SimpleHostRoutingFilter ，第二个 routeFilter ，order 是 100 ，针对通过 url 进行路由的请求。</li>
+<li>SendForwardFilter ，第三个 routeFilter ，order 是 500 ，用来处理 request.getRequestDispatcher() 的请求。</li>
+</ol>
+<p>最后执行 post 类型的 filter 。默认的 postFilter 有 1 个：</p>
+<ol>
+<li>SendResponseFilter ，第一个 postFilter ，order 是 1000 ，当头信息不为空，或有响应流信息，或有响应体的时候对 response 进行处理，将数据发回客户端。</li>
+</ol>
+<p>正常情况下不会执行 error 类型的 filter 。</p>
+<blockquote>
+<p>filter 的 order 表示 filter 的执行顺序，越小越早执行。需要注意，如果顺序错了，可能导致结果有问题，比如我们如果要在 preFilter 中重写 url ，应该放在 PreDecorationFilter 之后，因为 PreDecorationFilter 中会 set request 信息，如果我们在此之前 rewrite 了 url ，在这一步又会被覆盖成原始的。</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Spring Cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spring Cloud </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Gazing at Feign]]></title>
+      <url>/2020/03/24/gazing-at-feign/</url>
+      <content type="html"><![CDATA[<p>Feign 的工作流程：</p>
+<ol>
+<li>启动时 ReflectiveFeign 通过 jdk 动态代理方式生成 FeignClient 的代理。<br><img src="https://s1.ax1x.com/2020/03/24/8qynjP.png" alt="8qynjP.png" border="0" style="width:700px"></li>
+<li>调用 invoke() 时，生成 RequestTemplate 封装了 uri ，请求参数等信息。<br><img src="https://s1.ax1x.com/2020/03/24/8qw3tI.png" alt="20200324150653" border="0" style="width:600px"></li>
+<li>在 executeAndDecode() 中用 RequestTemplate 构造出 Request 对象。<br><img src="https://s1.ax1x.com/2020/03/24/8qwnXD.png" alt="20200324150745" border="0" style="width:700px"></li>
+<li>调用 LoadBalancerFeignClient.execute() 去发送 http 请求。<br><img src="https://s1.ax1x.com/2020/03/24/8qwQ7d.png" alt="20200324151551" border="0" style="width:700px"></li>
+<li>获得 response 之后，根据 code 来进行 decode 将报文组装成对象。<br><img src="https://s1.ax1x.com/2020/03/24/8qwm6O.png" alt="20200324151750" border="0" style="width:650px"></li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Spring Cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spring Cloud </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Gazing at Ribbon]]></title>
+      <url>/2020/03/23/gazing-at-ribbon/</url>
+      <content type="html"><![CDATA[<p>通过自动装配扫描 spring.factories 中的 LoadBalancerAutoConfiguration 用来构造 LoadBalancerInterceptor 实例。在进行 http 调用的时候进行拦截。如果 server 有多个，会根据 IRule 来选择 server 。默认使用 aroundRobin ，server 存在 ArrayList 中，有一个计数器记录 nextIndex，用 nextIndex 对 server 数量取余来获取 server 的 index 。拿到 server 的 ip 和 port后，在 RibbonLoadBalancerClient 的 reconstructURI 中将服务名替换成 ip 和 port ，构造成新的 url ，通过 LoadBalancerRequest.apply() 发起真正的 http 调用。</p>
+<p>Ribbon 在 RibbonClientConfiguration 中进行了默认配置。有 3 个配置：</p>
+<ol>
+<li>IRule ，负载均衡的规则，默认 ZoneAvoidanceRule 。获取所有可用的 zone ，如果当前 zone 可用，就使用当前 zone 中的 server ，不再看其他的 zone 。如果 server 有多个默认使用 aroundRobin 来选择 server 。</li>
+<li>IPing ，向服务发起 Ping 操作，默认 DummyPing 什么都不做。</li>
+<li>ILoadBalancer ，使用 IRule 和 IPing 配置进行 loadbalance 。默认使用 ZoneAwareLoadBalancer 。</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Spring Cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spring Cloud </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Building Eureka Server with Region and Zone]]></title>
+      <url>/2020/03/22/building-eureka-server-with-region-and-zone/</url>
+      <content type="html"><![CDATA[<p>Eureka Region 和 Zone 的架构参考 <a href="../../../../2018/08/29/eureka-region-and-zone/">Eureka Region and Zone</a> 。</p>
+<p>按照 Region 和 Zone 的架构来构建，有一个 Region us-east-1 ，us-east-1 下有 3 个 Zone ：us-east-1c ，us-east-1d ，us-east-1e 。各个 Zone 下有一个 Eureka Server 和 Application Service ，另外在 us-east-1c 下还有一个 Application Client 。Application Client 和 Application Service 都会注册到 Eureka Server 上，Application Client 会调用 Application Service 。当服务正常时，Application Client 会优先调用相同 us-east-1c 下的 Application Service ，当 us-east-1c 下的 Application Service 下线，Application Client 会调用 us-east-1d 和 us-east-1e 中的 Application Service 。<br>配置文件比之前多了 Region 和 Zone 的信息。<br>eureka-server-01</p>
+<pre><code>server:
+  port: 8761
+spring:
+  application:
+    name: eureka-server-01
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就失效
+    metadata-map:
+      zone: us-east-1c #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1c,us-east-1d,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1000 #剔除时间间隔
+</code></pre><p>eureka-server-02</p>
+<pre><code>server:
+  port: 8762
+spring:
+  application:
+    name: eureka-server-02
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就失效
+    metadata-map:
+      zone: us-east-1d #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1d,us-east-1c,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1000 #剔除时间间隔
+</code></pre><p>eureka-server-03</p>
+<pre><code>server:
+  port: 8763
+spring:
+  application:
+    name: eureka-server-03
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就失效
+    metadata-map:
+      zone: us-east-1e #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1e,us-east-1c,us-east-1d #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1000 #剔除时间间隔
+</code></pre><p>application-service-01</p>
+<pre><code>server:
+  port: 10003
+spring:
+  application:
+    name: application-service
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就剔除服务
+    metadata-map:
+      zone: us-east-1c #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1c,us-east-1d,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+</code></pre><p>application-service-02</p>
+<pre><code>server:
+  port: 10004
+spring:
+  application:
+    name: application-service
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就剔除服务
+    metadata-map:
+      zone: us-east-1d #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1d,us-east-1c,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+</code></pre><p>application-service-03</p>
+<pre><code>server:
+  port: 10005
+spring:
+  application:
+    name: application-service
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就剔除服务
+    metadata-map:
+      zone: us-east-1e #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1e,us-east-1c,us-east-1d #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+</code></pre><p>application-client-01</p>
+<pre><code>server:
+  port: 8081
+spring:
+  application:
+    name: application-client
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就剔除服务
+    metadata-map:
+      zone: us-east-1c #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1c,us-east-1d,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+</code></pre><p>通过 metadata-map.zone 标识服务属于哪个 Zone ，<code>prefer-same-zone-eureka: true</code> 会优先调用相同 Zone 的服务。availability-zones 的 Zone 列表应优先将自己 Zone 写在前边，因为 Eureka 在查找服务时是按顺序找的。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Spring Cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spring Cloud </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Building Eureka Server with Peer Awareness]]></title>
+      <url>/2020/03/22/building-eureka-server-with-peer-awareness/</url>
+      <content type="html"><![CDATA[<p>构建一个 Eureka Server Standalone 非常简单，可以参考 <a href="../../../../2018/06/16/service-registration-and-discovery/">Service Registration and Discovery</a> 。<br>Eureka Server 也支持部署多个节点，步骤和单节点类似，只是配置文件略有修改。如果我们有 3 个对等的节点，配置文件是这样的：<br>eureka01</p>
+<pre><code>server:
+  port: 8761
+spring:
+  application:
+    name: eureka01
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://eureka01:8761/eureka/,http://eureka02:8762/eureka/,http://eureka03:8763/eureka/
+  server:
+    enable-self-preservation: false
+</code></pre><p>eureka02</p>
+<pre><code>server:
+  port: 8762
+spring:
+  application:
+    name: eureka02
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://eureka01:8761/eureka/,http://eureka02:8762/eureka/,http://eureka03:8763/eureka/
+</code></pre><p>eureka03</p>
+<pre><code>server:
+  port: 8763
+spring:
+  application:
+    name: eureka03
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://eureka01:8761/eureka/,http://eureka02:8762/eureka/,http://eureka03:8763/eureka/
+</code></pre><p>Eureka Server 之间是对等的，所以可以将自己作为 Client 注册到其他的 Eureka Server 上，defaultZone 可以不用区分，启动的时候会过滤掉自己。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Spring Cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spring Cloud </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[MySQL Log]]></title>
+      <url>/2020/03/21/mysql-log/</url>
+      <content type="html"><![CDATA[<h4 id="Bin-Log"><a href="#Bin-Log" class="headerlink" title="Bin Log"></a>Bin Log</h4><p>Bin Log 是 MySQL Server 层的一种日志，用来保存数据库的更改（表的更改和数据的更改）事件。Bin Log 不会记录 select 操作。Bin Log 的作用主要用来做复制。<br>Bin Log 有 3 种格式：</p>
+<ol>
+<li>statement ，记录每一条会修改数据的 sql 。日志量少，但是需要额外保存 sql 执行时的信息。</li>
+<li>row ，记录修改的记录。日志量大，每一行数据的修改都会保存。</li>
+<li>mixed 。</li>
+</ol>
+<p>可以通过命令查看 MySQL 的 Bin Log 格式：</p>
+<pre><code>mysql&gt; show global variables like &#39;%binlog_format&#39;;
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| binlog_format | ROW   |
++---------------+-------+
+</code></pre><p>Bin Log 为什么不合适做异常恢复？<br>Bin Log 是通过 Bin Log 文件来恢复数据，这些数据是持久化到磁盘的，而异常掉电时，内存中的数据是没有写到磁盘的，所以内存中的这些数据是无法通过 Bin Log 来恢复的，会造成数据丢失。<br>Redo Log 记录的是内存中还没有写到磁盘的数据，所以 Redo Log 用来做异常恢复不会造成内存中的数据丢失。</p>
+<h4 id="Redo-Log"><a href="#Redo-Log" class="headerlink" title="Redo Log"></a>Redo Log</h4><p>Redo Log 是一种基于磁盘的数据结构，用来保证崩溃恢复期间未提交事务数据的正确性。Redo Log 包括两部分：Redo Log Buffer 和 Redo Log File 。事务日志先写到 Redo Log Buffer ，再刷到 Redo Log File 。有 3 种方式：</p>
+<ol>
+<li>每次提交都会将 Redo Log Buffer 中的数据写到 OS Buffer 并写入 Redo Log File 。默认。</li>
+<li>每次提交日志会写入 Redo Log Buffer，每秒从 Redo Log Buffer 刷到 OS Buffer 并写入 Redo Log File 。</li>
+<li>每次提交日志会写入 OS Buffer ，每秒从 OS Buffer 写入 Redo Log File 。</li>
+</ol>
+<p>Redo Log 是以 block 为存储单位，包括 block header ，block tailer 和 block body 。</p>
+<p>Redo Log 和 Bin Log 的区别</p>
+<ol>
+<li>Bin Log 是 Server 层的日志，Redo Log 是 InnoDb 引擎的日志。</li>
+<li>Bin Log 是逻辑日志，Redo Log 是物理日志。</li>
+<li>Bin Log 是每次提交写入，Redo Log 是先写入 Redo Log Buffer ，然后再写入。</li>
+<li>Bin Log 是追加写，Redo Log 是循环写。</li>
+</ol>
+<h4 id="Undo-Log"><a href="#Undo-Log" class="headerlink" title="Undo Log"></a>Undo Log</h4><p>Undo Log 是 Undo Log Record 的集合。Undo Log Record 包含事务回滚到最近一次修改的信息。每个事务有独立的 Undo Log 。Undo Log 存在于 Undo Log Segment ，Undo Log Segment 存在于 rollback segments 。<br>当事务提交时，Undo Log 不会立刻删除，会放在删除列表中，通过 purge 删除。<br>MySQL 利用 Undo Log 和 MVCC 来实现 RC 和 RR 隔离级别。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> MySQL </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[MVCC]]></title>
+      <url>/2020/03/19/mvcc/</url>
+      <content type="html"><![CDATA[<p>数据库有 4 种隔离级别，MySQL 默认为 Repeatable Read 。如果有两个事务并发操作 t1 表，效果如下： </p>
+<p><img src="https://s1.ax1x.com/2020/03/20/8cPaex.png" alt="8cPaex.png" border="0" style="width:350px"><br>Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之前是相同的，等 Client2 提交之后才能看到 Client1 插入的记录。<br>如果将 MySQL 的隔离级别改成 Read Commited ，效果又会有不同。<br><img src="https://s1.ax1x.com/2020/03/20/8c9xbV.png" alt="8c9xbV.png" border="0" style="width:600px"><br>这就是不可重复读的现象。</p>
+<p>透过现象看本质，当数据库的隔离级别为 RC 时，会出现不可重复读，通过修改隔离级别为 RR ，可以避免不可重复读。在 MySQL 中，RC 和 RR 隔离级别是通过 MVCC 实现的。MVCC (Multi-Version Concurrency Control) 是 InnoDB 使用的一种并发控制协议，只作用于 RC RR 两个级别。</p>
+<h4 id="MVCC-的作用"><a href="#MVCC-的作用" class="headerlink" title="MVCC 的作用"></a>MVCC 的作用</h4><p>你一定想问，MVCC 有什么用呢？我们知道如果要实现并发，第一个想到的就是加锁。如果加锁，那么当 Client1 开启了事务，Client2 就无法获得锁，就会阻塞，这样性能就会很差。MVCC 并不会加锁，而是允许 Client2 在 Client1 事务期间依旧是可读的，这样就提高了读写的并发度。</p>
+<h4 id="MVCC-是如何实现的"><a href="#MVCC-是如何实现的" class="headerlink" title="MVCC 是如何实现的"></a>MVCC 是如何实现的</h4><p>对于 t1 表，我们看到的是这样的：</p>
+<pre><code>mysql&gt; desc t1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(4)      | NO   | PRI | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+</code></pre><p>实际在 MySQL 中的样子这样的：</p>
+<p><img src="https://s1.ax1x.com/2020/03/20/86OpNR.png" alt="20200320100637" border="0" style="width:500px"></p>
+<p>MySQL 会增加 3 个隐藏列：</p>
+<ol>
+<li>DB_TRX_ID：表示插入或更新的的最后一个事务 id 。</li>
+<li>DB_ROLL_PTR：回滚指针，指向 Undo Log 的记录。</li>
+<li>DB_ROW_ID：id 行，单调递增。</li>
+</ol>
+<p>每次开启事务，都会生成对应的 Undo Log 。在事务中做的任何修改都会在 Undo Log 中保存下来，类似链表。然后在 select 的时候会生成对应查询视图 ReadView 。<strong>ReadView 由当前未提交的事务 id 列表和最大事务 id 组成</strong>。用 select 的结果的 DB_TRX_ID 和 ReadView 比较来判断事务的状态，从而确定返回的结果集。比较规则如下：</p>
+<ol>
+<li>当 DB_TRX_ID 小于 ReadView 的最小 ID ，则说明事务已经提交，则数据是可见的。</li>
+<li>当 DB_TRX_ID 大于等于 ReadView 的最小 ID 小于等于 ReadView 的最大 ID 时，<br> 2.1) 如果 DB_TRX_ID 等于当前的 DB_TRX_ID ，说明是自己的事务，则数据可见。<br> 2.2) 如果 DB_TRX_ID 在 ReadView 的未完成事务列表中，说明事务未提交，则数据不可见。如果不在，则说明事务已提交，数据可见。</li>
+</ol>
+<p><strong>在 RR 隔离级别下，ReadView 会延用事务第一次生成的 ReadView ，而 RC 隔离级别下，每次查询会生成新的 ReadView </strong>。<br>有了上边的概念，我们来分析一下前边的例子，假设 t1 表中有一条记录 id=1 name=’A’ ，是由 DB_TRX_ID=100 的事务插入的。</p>
+<h5 id="在-RR-级别下"><a href="#在-RR-级别下" class="headerlink" title="在 RR 级别下"></a>在 RR 级别下</h5><p>&ensp;&ensp;1)  Client1 开启了事务，假设它的 DB_TRX_ID=200 ，插入 id=2 的记录，MySQL 会将 id=1 这条记录拷贝到 Undo Log 中，然后将 DB_ROLL_PTR 指向 Undo Log 中的这条记录，这样就形成一个版本链。<br>&ensp;&ensp;2)  当 Client1 查询时，会生成查询视图 ReadView([200],200) ，从版本链的最后一条记录，即 id=2 的记录开始比较。DB_TRX_ID=200 等于当前的 DB_TRX_ID ，所以数据是可见的。DB_TRX_ID=100 小于 ReadView 中最小的事务 id ，说明它是已经提交的事务，所以数据也是可见的。所以最终 Client1 查询会返回 2 条记录。<br>&ensp;&ensp;3)  当 Client2 开启事务 DB_TRX_ID=300 ，执行查询时，也会生成对应的查询视图 ReadView([200],300) 。然后从版本链的最后一条记录开始比较，DB_TRX_ID=200 大于等于 ReadView 的最小 ID 且不等于当前 DB_TRX_ID ，说明事务未提交，所以数据不可见。DB_TRX_ID=100 小于 ReadView 中最小的事务 ID ，说明它是已经提交的事务，所以数据是可见的。所以最终 Client2 查询只会返回 1 条记录。<br>&ensp;&ensp;4)  当 Client1 提交事务之后，Client2 再次查询，由于隔离级别是 RR ，会延用第一次的 ReadView([200],300)，所以虽然 DB_TRX_ID=200 已经提交了，但是按照 ReadView 比较还是大于等于最小的事务 ID 所以依旧不可见，最终只返回 1 条记录。</p>
+<h5 id="在-RC-级别下"><a href="#在-RC-级别下" class="headerlink" title="在 RC 级别下"></a>在 RC 级别下</h5><p>与此类似，我们再来看看 RC 级别。<br>&ensp;&ensp;1)  Client1 和上边是相同的。<br>&ensp;&ensp;2)  当 Client2 开启事务 DB_TRX_ID=300 ，执行查询时，会生成对应的查询视图 ReadView([200],300) 。然后从版本链的最后一条记录开始比较，DB_TRX_ID=200 大于等于 ReadView 的最小 ID 且不等于当前 DB_TRX_ID ，说明事务未提交，所以数据不可见。DB_TRX_ID=100 小于 ReadView([200],300) 中最小的事务 ID，说明它是已经提交的事务，所以数据也是可见的。所以最终 Client2 查询只会返回 1 条记录。<br>&ensp;&ensp;3)  当 Client1 提交事务之后，由于隔离级别是 RC ，会重新生成一个新的 ReadView([300],300)，DB_TRX_ID=200 和 DB_TRX_ID=100 对于 ReadView([300],300) 来说都是小于最小的事务 ID ，所以数据是可见的，因此最终会返回 2 条记录。</p>
+<blockquote>
+<p>MVCC 只作用于 RC 和 RR ，那 RU 和 Serializable 是如何实现的？<br>RU 每次都读最新记录。<br>Serializable 通过互斥锁。</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[One Question One Answer for Redis]]></title>
+      <url>/2020/03/17/one-question-one-answer-for-redis/</url>
+      <content type="html"><![CDATA[<p>Q: Redis 有哪些数据类型，及应用场景。<br>A: 数据类型有 8 种：</p>
+<ol>
+<li>string，简单的 KV 缓存。</li>
+<li>list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 <code>lrange list 0 9</code>。可以用来实现队列，如 lpush 和 rpop</li>
+<li>set，应用场景需要没有重复的元素。</li>
+<li>zset，无重复且有序。</li>
+<li>hash，可以用来存储简单对象。</li>
+<li>bitmap，可以用来实现 bloomfilter 。</li>
+<li>hyperloglog，可以用来进行大数据量统计，比如 UV 。但是不精确。</li>
+<li>geo，可以用来进行地理信息计算。</li>
+</ol>
+<p>还有一些功能也列一下：</p>
+<ol>
+<li>pub/sub，可以用来实现消息队列。</li>
+<li>lua，利用它的原子性。</li>
+<li>Pipeline，一次提交多条命令，一次返回多个结果，减少交互次数。</li>
+<li>transaction，使用 multi ，exec ， discard 和 watch 实现。弱事务，可以保证全部执行，单不能同时成功，失败了不会回滚。</li>
+</ol>
+<p>Q: Redis 底层数据结构有哪些？<br>A: 可变字节数组 (simple dynamic string, SDS) ，链表 (list) ，双哈希表 (dict) ，跳跃表 (zskiplist) ，intset ，ziplist ，quicklist ，zipmap 。</p>
+<p>Q: Redis 为什么快？<br>A:  </p>
+<ol>
+<li>单进程单线程模型，没有上下文切换。</li>
+<li>使用多路复用无阻塞 I/O 模型。</li>
+<li>内存计算。</li>
+<li>数据结构简单，查找和操作的时间复杂度都是 O(1) 。</li>
+</ol>
+<p>Q: Redis 是怎么样持久化的？<br>A: Redis 有两种持久化方式：</p>
+<ol>
+<li>RDB，全量镜像方式，通过 fork 和 copy on write 方式实现，备份时间长，恢复速度快，可以分成多个文件存储，时间间隔长。</li>
+<li>AOF，增量日志方式，对每条命令都生成日志，以 append-on 方式写文件，写入速度快，数据量大，频率高。</li>
+</ol>
+<p>Q: Redis 的高可用是怎么做的？<br>A: 通过哨兵模式，只少 3 个节点，如果 master 挂了，slave 会被提升为 master 。哨兵模式只能保证高可用，不能保证数据不丢。</p>
+<p>Q: Redis 主从之间是如何进行数据同步的？<br>A: 如果新加一个 salve 节点到集群，master 会生成一个 RDB 的镜像快照，将 RDB 发给 slave ，salve 将 RDB 保存到本地，然后加载到内存。如果在数据同步期间有增量数据，等 salve 通过 RDB 恢复了再把增量的部分发给 salve 。如果网络断了，会自动重连，网络恢复之后会重发。</p>
+<p>Q: 哨兵模式 master 挂了如何进行选主？<br>A: 先看优先级，优先级相同，看复制偏移量，及数据完整性，偏移量相同，取 id 最小的。</p>
+<p>Q: Redis key 的过期的 key 是怎么删除的？<br>A: 如果 redis 中的 key 过期了，就会返回 nil 。但是这个 key 并没有被立刻删除。Redis 的失效的 key 的删除策略有 2 种：</p>
+<ol>
+<li>被动删除(passive)：当再次访问这个 key 时发现它已经过期，则删除。</li>
+<li>主动删除(active)：有些 key 失效之后可能再也不会被访问，所以无法被动删除，只能主动删除。Redis 会从过期的集合中随机挑一些 key 删除，如果失效 key 大于 25% ，主动删除会一直进行。如果还删不掉，就只能等 LRU 了。</li>
+</ol>
+<p>Q: 内存淘汰策略是怎样的？<br>A: noeviction，allkeys-LRU，volatile-LRU，allkeys-Random，volatile-Random，volatile-ttl 。</p>
+<p>Q:<br>A:<br>Q:<br>A:<br>Q:<br>A:<br>Q:<br>A: </p>
+]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Proxy Pattern]]></title>
+      <url>/2020/03/14/proxy-pattern/</url>
+      <content type="html"><![CDATA[<p>代理模式属于结构模式。代理模式的作用是可以在调用 target 时扩展 target 的功能。</p>
+<h4 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h4><p>有一个接口 Image 及它的实现。</p>
+<pre><code>public interface Image {
+    void display();
+}
+
+public class JPEGImage implements Image {
+    String imageFilePath;
+
+    public JPEGImage(String imageFilePath) {
+        this.imageFilePath = imageFilePath;
+    }
+
+    @Override
+    public void display() {
+        System.out.println(&quot;display image&quot; + imageFilePath);
+    }
+}
+</code></pre><p>我们可以在通过代理 JPEGImage 在调用 display() 的时候扩展一些功能。</p>
+<pre><code>public class ImageProxy implements Image {
+
+    private JPEGImage target;
+
+    public ImageProxy(String imageFilePath) {
+        this.target = new JPEGImage(imageFilePath);
+    }
+
+    @Override
+    public void display() {
+        System.out.println(&quot;proxy start&quot;);
+        target.display();
+        System.out.println(&quot;proxy end&quot;);
+    }
+}
+
+public class ImageViewer {
+    public static void main(String[] args) {
+        ImageProxy imageProxy1 = new ImageProxy(&quot;sample/photo1.jpeg&quot;);
+        imageProxy1.display();
+    }
+}
+</code></pre><p><img src="https://s1.ax1x.com/2020/03/14/8QEoid.png" alt="static proxy" border="0" style="width:200px"><br>静态代理的缺点是，一个对象对应有一个代理对象，如果对象很多，对应和代理对象也就有很多。</p>
+<h4 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h4><p>动态代理分为 jdk 动态代理和 cglib 代理。</p>
+<h5 id="jdk-动态代理"><a href="#jdk-动态代理" class="headerlink" title="jdk 动态代理"></a>jdk 动态代理</h5><p>jdk 动态代理利用 Java 反射通过 InvocationHandler 实现。</p>
+<pre><code>public class ImageProxy {
+
+    Image target;
+
+    public ImageProxy(Image target) {
+        this.target = target;
+    }
+
+    public Object getProxyInstance() {
+        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                System.out.println(&quot;proxy start&quot;);
+                Object obj = method.invoke(target, args);
+                System.out.println(&quot;proxy end&quot;);
+                return obj;
+            }
+        });
+    }
+}
+
+public class ImageViewer {
+    public static void main(String[] args) {
+        Image jpegImage1 = new PNGImage(&quot;sample/photo1.png&quot;);
+        Image imageProxy1 = (Image) new ImageProxy(jpegImage1).getProxyInstance();
+        imageProxy1.display();
+    }
+}
+</code></pre><p><img src="https://s1.ax1x.com/2020/03/14/8QE4de.png" alt="dynamic proxy" border="0" style="width:300px"><br>jdk 动态代理特点：需要实现接口，通过 Java 反射实现。</p>
+<h5 id="cglib-代理"><a href="#cglib-代理" class="headerlink" title="cglib 代理"></a>cglib 代理</h5><p>加入 cglib 依赖。</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;cglib&lt;/groupId&gt;
+    &lt;artifactId&gt;cglib&lt;/artifactId&gt;
+    &lt;version&gt;3.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><pre><code>public class ImageProxy implements MethodInterceptor {
+
+    GIFImage target;
+
+    public ImageProxy(GIFImage target) {
+        this.target = target;
+    }
+
+    public Object getProxyInstance() {
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(target.getClass());
+        enhancer.setCallback(this);
+        return enhancer.create(new Class[]{String.class}, new Object[]{target.imageFilePath});
+    }
+
+    @Override
+    public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+        System.out.println(&quot;proxy start&quot;);
+        Object obj = methodProxy.invokeSuper(o, args);
+        System.out.println(&quot;proxy end&quot;);
+        return obj;
+    }
+}
+</code></pre><p><img src="https://s1.ax1x.com/2020/03/14/8Q3RyQ.png" alt="8Q3RyQ.png" border="0" style="width:500px"><br>cglib 特点：不需要接口，利用继承，被代理的类和方法不能是 final ，利用字节码技术 asm 实现。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Design Pattern </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Cache]]></title>
+      <url>/2020/03/11/cache/</url>
+      <content type="html"><![CDATA[<h4 id="哪些地方可以使用缓存？"><a href="#哪些地方可以使用缓存？" class="headerlink" title="哪些地方可以使用缓存？"></a>哪些地方可以使用缓存？</h4><ol>
+<li>数据库缓存<br>在数据库内部也是支持缓存的，比如 MySQL 。不过这种方式并不是太好，首先缓存涉及到更新，会消耗数据库的性能，另一方面，查询是按照 sql 语句作为 key ，缓存的命中率不高，也失去了缓存的意义，所以在 MySQL5.7.20 之后就弃用缓存了。</li>
+<li>本地缓存<br>本地缓存是速度非常快的，可以利用一些本地缓存技术实现，如 Caffeine，GuavaCache，EhCache 等，也可以结合一些 ORM 框架使用 。但是本地缓存只能单机使用，多台机器之间不能共享。在某些场景下会有缓存不一致的问题，比如 <a href="../../../../2020/02/01/mybatis-cache/">MyBitas 的二级缓存</a>。</li>
+<li>分布式缓存<br>分布式缓存是用的最多的一种方案，利用独立的中间件来缓存数据，和应用程序以及数据库都是独立的。常用的技术有 redis ，Memcached 。</li>
+<li>Nginx 缓存<br>Nginx 可以缓存用户请求过的 url 对应的 response 响应，当用户再次请求，可以直接返回缓存内容。</li>
+<li>页面缓存<br>比如静态化，ajax 等。</li>
+</ol>
+<h4 id="缓存更新的方式"><a href="#缓存更新的方式" class="headerlink" title="缓存更新的方式"></a>缓存更新的方式</h4><ol>
+<li>Cache Aside ，同时更新缓存和数据库。<br>应用程序先从 cache 取数据，没有得到，则从数据库中取数据，成功后放到缓存中。如果需要更新数据，先更新数据库，成功后再让缓存失效。简单，但是同时操作 cache 和数据库，可能会有数据不一致。推荐先操作数据库，再删除缓存。</li>
+<li>Read/Write Through ，先更新缓存，缓存负责同步更新数据库。<br>只操作缓存，但是实现比较复杂。</li>
+<li>Write Behind Caching ，先更新缓存，缓存定时异步更新数据库。<br>异步操作，可能会造成数据丢失。</li>
+</ol>
+<h4 id="缓存常见问题"><a href="#缓存常见问题" class="headerlink" title="缓存常见问题"></a>缓存常见问题</h4><ol>
+<li>缓存击穿<br>热点 key 失效后，大量的请求查询热点 key，导致数据库压力增大。</li>
+<li>缓存穿透<br>查询一个不存在的 key ，导致总会查询数据库。</li>
+<li>缓存雪崩<br>大量缓存设置了相同的失效时间，同一时间失效。</li>
+</ol>
+<p>解决缓存问题的方案有很多种，可以综合使用：</p>
+<ol>
+<li>随机设置缓存失效时间。</li>
+<li>热点 key 永久不失效。</li>
+<li>使用锁，保证并发时只有获得锁的请求可以访问数据库并重建缓存。</li>
+<li>使用分段锁，保证不会有大量的线程阻塞。</li>
+<li>缓存没查询到时返回默认提示。</li>
+<li>查询备份缓存。 </li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Architecture </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Understanding happens-before]]></title>
+      <url>/2020/03/10/happens-before/</url>
+      <content type="html"><![CDATA[<p>在学习 java.util.concurrent 的过程中，经常看到一个词就是 happens-before 。happens-before 表示了两个操作之间的顺序关系， A happens-before B 就是说 A 在 B 之前执行，则 A 的执行结果对 B 是可见的。为了方便 A happens-before B 可以用 hb(A,B) 表示。</p>
+<h5 id="为什么需要-happens-before"><a href="#为什么需要-happens-before" class="headerlink" title="为什么需要 happens-before"></a><strong>为什么需要 happens-before</strong></h5><p>了解过 JMM 模型都知道，线程在操作主内存中的变量时并不会直接在主内存中修改，而是将主内存中的数据拷贝到自己的工作内存，在多线程环境下就会面临可见性的问题。还有就是我们的代码在编译的时候编译器会对代码进行指令优化，有可能改变指令的顺序，从而导致结果和预期不一致。这些问题是非常复杂的，并且没有办法枚举出每一种情况，面对这样的情况，于是提出了一些通用的规则，这就是 happens-before 。</p>
+<h5 id="happens-before-规则"><a href="#happens-before-规则" class="headerlink" title=" happens-before 规则"></a><strong> happens-before 规则</strong></h5><ol>
+<li>如果线程 t1 对 A 解锁之后，线程 t2 又对 A 加锁，那么 t1 对 A 的操作对 t2 都是可见的。</li>
+<li>对于一个 volatile 变量 A ，如果线程 t1 修改了 A 之后，线程 t2 读取了 A ，那么 t1 的修改对 t2 是可见的。</li>
+<li>线程的 start() 在其他方法之前执行。</li>
+<li>如果线程 t1 成功执行 t1.join() 之后执行线程 t2 那么 t1 中的操作对 t2 都是可见的。</li>
+<li>如果线程 t1 执行了两个操作 A 和 B ，那么 A 中的操作对 B 都是可见的。 </li>
+<li>happens-before 具有传递性，如果 hb(A,B) , hb(B,C) , 那么可以得到 hb(A,C) 。 </li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Concurrent </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Future]]></title>
+      <url>/2020/03/09/future/</url>
+      <content type="html"><![CDATA[<p>Future 是一个可终止的异步计算接口，它提供了一种异步计算方式。Future 代表了异步计算的结果，当计算没有完成，获取结果会被阻塞，直到计算完成。FutureTask 是 Future 接口的实现，可以接收 Runnable 和 Callable 对象，也可以使用 Executor.submit() 执行。</p>
+<pre><code>public class FutureExample {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        long start = System.currentTimeMillis();
+        FutureTask&lt;Integer&gt; f1 = new FutureTask((Callable&lt;Integer&gt;) () -&gt; {
+            Thread.sleep(2000);
+            return 10;
+        });
+        FutureTask&lt;Integer&gt; f2 = new FutureTask((Callable&lt;Integer&gt;) () -&gt; {
+            Thread.sleep(3000);
+            return 20;
+        });
+        FutureTask&lt;Integer&gt; f3 = new FutureTask((Callable&lt;Integer&gt;) () -&gt; {
+            Thread.sleep(5000);
+            return 20;
+        });
+        new Thread(f1).start();
+        new Thread(f2).start();        
+        new Thread(f3).start();
+        foo();
+        f3.cancel(true);
+        System.out.println(&quot;--&quot;);
+        while (!f1.isDone() || !f2.isDone()) {
+            System.out.println(&quot;f1&quot; + (f1.isDone() ? &quot;完成，&quot; : &quot;未完成，&quot;) + &quot;f2&quot; + (f2.isDone() ? &quot;完成&quot; : &quot;未完成&quot;));
+            Thread.sleep(300);
+        }
+        System.out.println(&quot;f1&quot; + (f1.isDone() ? &quot;完成，&quot; : &quot;未完成，&quot;) + &quot;f2&quot; + (f2.isDone() ? &quot;完成&quot; : &quot;未完成&quot;));
+        int result = f1.get() + f2.get();
+        System.out.println(&quot;f3 cancelled state: &quot;+f3.isCancelled());
+        System.out.println(&quot;result=&quot; + result + &quot;, costs &quot; + (System.currentTimeMillis() - start) + &quot;ms&quot;);
+    }
+
+    static void foo() throws InterruptedException {
+        System.out.println(&quot;同步执行foo&quot;);
+        Thread.sleep(1000);
+        System.out.println(&quot;foo done&quot;);
+    }
+}
+</code></pre><p>执行结果</p>
+<pre><code>同步执行foo
+foo done
+--
+f1未完成，f2未完成
+f1未完成，f2未完成
+f1未完成，f2未完成
+f1未完成，f2未完成
+f1完成，f2未完成
+f1完成，f2未完成
+f1完成，f2未完成
+f1完成，f2完成
+f3 cancelled state: true
+result=30, costs 3146ms
+</code></pre><p>在上面的例子就是 FutureTask 的用法。主线程执行 foo() ，f1 ，f2 f3 是三个异步任务，执行完成后通过 future.get() 获取直接结果，如果 f1 或 f2 没有执行完，future.get() 会阻塞，直到任务完成。通过 future.isDone() 可以查看任务是否完成。在 f3 任务之前完成之前可以通过 future.cancel() 终止任务，任务完成后则无法终止。<br>接下来我们来分析一下 Future 是如何工作的。<br>首先看看 FutureTask 中定义的属性和构造器。<br><img src="https://s2.ax1x.com/2020/03/09/8Cif4x.png" alt="8Cif4x.png" border="0" style="width:300px"><br>FutureTask 有两个构造器，一个接收 Callable 一个接收 Runnable 。<br><img src="https://s2.ax1x.com/2020/03/09/8Ci58K.png" alt="8Ci58K.png" border="0" style="width:450px"><br>Runnable 最终通过 RunnableAdapter 构造成为 Callable 。<br><img src="https://s2.ax1x.com/2020/03/09/8Ck9W6.png" alt="8Ck9W6.png" border="0" style="width:600px"><br>由于 FutureTask 实现了 Runnable 接口，所以任务启动后首先会执行 run() 方法。在 run() 方法中，任务的初始状态为 NEW ，通过 CAS 将当前线程赋值为 runner 。然后在 run() 方法中执行 callable.call() 。<br><img src="https://s2.ax1x.com/2020/03/09/8CEKsS.png" alt="8CEKsS.png" border="0" style="width:600px"><br>不管是成功还是异常，都会通过 CAS 更新状态，将结果或异常交给 outcome 。<br><img src="https://s2.ax1x.com/2020/03/09/8CE2QK.png" alt="8CE2QK.png" border="0" style="width:600px"><br>再来看如何获取结果。根据状态，如果完成就直接获取结果，如果没有完成，则执行 awaitDone() 。<br><img src="https://s2.ax1x.com/2020/03/10/8CmgtH.png" alt="8CmgtH.png" border="0" style="width:600px"><br>如果一个任务没有执行完，在第一次循环中将构造一个包含当前线程的 WaitNode ，第二次循环将 WaitNode 加入到队列，第三次循环才 park 线程。当任务执行完成后，调用 finishCompletion() 唤醒线程，再重新获取结果。<br>cancel() 操作就比较简单了，更新状态，唤醒线程而已。<br><img src="https://s2.ax1x.com/2020/03/10/8CncrV.png" alt="8CncrV.png" border="0" style="width:600px"></p>
+<p>总结一下：FutureTask 实现了 Runnable 接口，在 run() 方法中调用 callable.call() ，将结果保存到 outcome 。通过 get() 获取结果，如果任务没有执行完，则通过自旋将当前线程加入到 waiter 队列的头部，然后 park 线程。等到任务执行完成，通过 finishCompletion() 唤醒 waiter 队列中的线程，再次获取结果。</p>
+<blockquote>
+<p>我们注意到，在 FutureTask 中声明的 outcome 并没有用 volatile 修饰，那是如何保证在多线程环境下修改了 outcome 立刻对其他线程可见的呢？<br>这实际是利用了 <a href="../../../../2020/03/10/happens-before/">happens-before</a> 规则。通过刚才的分析我们可以知道:</p>
+<ol>
+<li>state 是 volatile 的。</li>
+<li><code>outcome = v</code> happens-before <code>state == NORMAL</code> 。</li>
+<li><code>state == NORMAL</code> happens-before <code>get outcome</code> 。</li>
+</ol>
+<p>所以利用 happens-before 的传递性可以保证 <code>outcome = v</code> happens-before <code>get outcome</code> 。</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Concurrent </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[BlockingQueue]]></title>
+      <url>/2020/03/07/blockingqueue/</url>
+      <content type="html"><![CDATA[<p>BlockingQueue 是 java.util.concurrent 包中的接口，实现了 Collection 和 Queue 接口，提供了 3 类操作。<br>BlockingQueue 操作</p>
+<p><table style="font-size:12px;color:#333333;border-width: 1px;border-color: #666666;border-collapse: collapse;"><tr><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;"></th><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">Throws exception</th><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">Special value</th><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">Blocks</th><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">Times out</th></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">Insert</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">add(e)</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">offer(e)</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">put(e)</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">offer(e, time, unit)</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">Remove</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">remove()</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">poll()</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">take()</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">poll(time, unit)</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">Examine</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">element()</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">peek()</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">not applicable</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;">not applicable</td></tr></table><br>和普通的 queue 相比，BlockingQueue 满时 put 元素和 BlockingQueue 为空时 take 元素都会阻塞。下面我们就以 LinkedBlockingQueue 为例来看看具体实现。<br>首先在 LinkedBlockingQueue 中定义了一些属性。<br><img src="https://s2.ax1x.com/2020/03/07/3jTjvd.png" alt="3jTjvd.png" border="0" style="width:400px"><br>通过这些属性定义，我们大概可以猜到元素在是以 Node 的形式保存在队列中，并且入队和出队操作都会用锁，元素个数也是通过 AtomicInteger 来保存，所以 LinkedBlockingQueue 是一个线程安全的队列。<br>接下来我们主要看看两个 block 操作：</p>
+<ol>
+<li>put(e)<br><img src="https://s2.ax1x.com/2020/03/07/3jqyM4.png" alt="3jqyM4.png" border="0" style="width:500px"><br>put() 中有 3 处判断:<br>1) 当元素个数小于 capacity 则继续执行，如果等于 capacity 则执行阻塞 notFull 线程。<br>2) 添加完元素之后，如果元素个数小于 capacity 则唤醒 notFull 线程。<br>3) 释放锁之前元素个数为 c+1 ，如果 c==0 那么说明队列中有一个元素，所以唤醒 notEmpty 线程。</li>
+<li>take()<br><img src="https://s2.ax1x.com/2020/03/07/3jjU6U.png" alt="3jjU6U.png" border="0" style="width:350px"><br>和 put(e) 类似，take() 方法也是有 2 处判断：<br>1) 当元素个数等于 0 ，则阻塞 notEmpty 线程。<br>2) 当元素个数大于 0 ，则唤醒 notEmpty 线程。<br>3) take 元素个数会减少，在释放锁之前做了 take 操作，所以释放锁之后队列实际是小于 capacity 的，所以唤醒 notFull 线程。</li>
+</ol>
+<p>总结一下：</p>
+<ol>
+<li><strong>LinkedBlockingQueue 有两把锁 putLock 和 takeLock ，有两个 condition 条件 notFull 和 notEmpty 。</strong></li>
+<li><strong>元素添加或删除操作先获取锁，再操作链表。</strong></li>
+<li><strong>如果队列满时阻塞 notFull 线程，反之则唤醒 notFull 线程。</strong></li>
+<li><strong>如果队列中没有元素时，阻塞 notEmpty 线程，反之则唤醒 notEmpty 线程。</strong></li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Concurrent </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[LockSupport]]></title>
+      <url>/2020/03/06/locksupport/</url>
+      <content type="html"><![CDATA[<p>在 java.util.concurrent 中大量使用了 LockSuport 来阻塞和唤醒线程。LockSupport 的 park/unpark 都是通过 Unsafe 类来实现的。</p>
+<pre><code>// 用于 debug 
+public static void park(Object blocker) {
+    Thread t = Thread.currentThread();
+    setBlocker(t, blocker);
+    UNSAFE.park(false, 0L);
+    setBlocker(t, null);
+}
+
+public static void park() {
+    UNSAFE.park(false, 0L);
+}
+
+public static void unpark(Thread thread) {
+    if (thread != null)
+        UNSAFE.unpark(thread);
+}
+</code></pre><p>LockSupport 有一个 permit 的概念，park 时，permit 置为 0 ，unpark 或 interrupt 时，permit 置为 1 。</p>
+<pre><code>public class LockSupportExample {
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            LockSupport.park();
+            LockSupport.park();
+            LockSupport.park();
+        });
+        t1.start();
+        Thread.sleep(3000);
+        LockSupport.unpark(t1);
+        Thread.sleep(3000);
+        Thread.interrupted();
+    }
+}
+</code></pre><p>如果同一个线程调用多次 park() 第一次执行完线程会阻塞，第二次不会执行，直到 unpark() 或 interrupt 之后 permit 恢复，才会执行后续的 park() 。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Concurrent </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[CountDownLatch]]></title>
+      <url>/2020/03/06/countdownlatch/</url>
+      <content type="html"><![CDATA[<p>CountDownLatch 是 java.util.concurrent 包中提供的一个倒计时器工具类。基本用法如下：</p>
+<pre><code>public class CountDownLatchTest {
+    public static void main(String[] args) throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(3);
+        for (int i = 0; i &lt; 3; i++) {
+            new Thread(() -&gt; {
+                System.out.println(Thread.currentThread().getName() + &quot; task done&quot;);
+                latch.countDown();
+            }, &quot;t&quot; + i).start();
+        }
+        latch.await();
+        System.out.println(&quot;all thread wake up&quot;);
+    }
+}
+</code></pre><p>接下来我们来看看每一步都做了什么。</p>
+<ol>
+<li>初始化 CountDownLatch 。<pre><code>public CountDownLatch(int count) {
+ if (count &lt; 0) throw new IllegalArgumentException(&quot;count &lt; 0&quot;);
+ this.sync = new Sync(count);
+}
+//
+Sync(int count) {
+ setState(count);
+}
+</code></pre>可以看到我们创建的计数 count 通过 setState 保存到 AQS 的 state 中。</li>
+<li>await()<br>首先判断 state ，因为是倒计数器，所以是判断 state 是不是等于 0 。如果不为 0 ，将包含主线程信息的 node 节点加入到 AQS 队列，然后再进行循环。第一次循环会再判断一下计数器是否到 0 了，如果还没有到 0 ，说明任务还没有就绪，那就将 node 的 waitStatus 标记为需要 signal 来唤醒。然后进行第二次循环，如果还没有到 0 ，则 park 主线程。</li>
+<li>countDown()<br>每执行一次 countDown() 方法，会通过 CAS 将 state-1 ，直到 state=0 才执行 doReleaseShared() 。当最后一次 countDown() 执行，AQS 队列中有两个节点，一个是虚拟的 node 节点 head ，另一个是包含主线程信息的 node 节点。取出 head 节点，并且由于 waitStatus 是 signal ，会执行 unparkSuccessor() 。在 unparkSuccessor 中会 unpark head.next 即包含主线程信息的节点。</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Concurrent </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Condition]]></title>
+      <url>/2020/03/05/condition/</url>
+      <content type="html"><![CDATA[<p>Condition 是 java.util.concurrent 包中提供的接口，Condition 可以用来阻塞和唤醒线程，如果有多个线程，还可以指定唤醒某个线程。具体用法我们可以看一个例子：</p>
+<pre><code>public class ConditionTest {
+
+    public static void main(String[] args) throws InterruptedException {
+        ReentrantLock reentrantLock = new ReentrantLock();
+        Condition condition = reentrantLock.newCondition();
+        Thread t1 = new Thread(() -&gt; {
+            reentrantLock.lock();
+            try {
+                condition.await();
+                System.out.println(Thread.currentThread().getName() + &quot; wake up&quot;);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                reentrantLock.unlock();
+            }
+        }, &quot;t1&quot;);
+        t1.start();
+        Thread.sleep(1000);
+        Thread t2 = new Thread(() -&gt; {
+            reentrantLock.lock();
+            try {
+                condition.await();
+                System.out.println(Thread.currentThread().getName() + &quot; wake up&quot;);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                reentrantLock.unlock();
+            }
+        }, &quot;t2&quot;);
+        t2.start();
+        Thread.sleep(1000);
+        new Thread(() -&gt; {
+            reentrantLock.lock();
+            condition.signalAll();
+            reentrantLock.unlock();
+        }, &quot;t5&quot;).start();
+    }
+}
+</code></pre><p>这个例子展示了 Condition 的用法，我们来看一下每一步都做了什么。</p>
+<ol>
+<li>首先 lock.newCondition() 返回的是 sync.newCondition() sync 继承自 AQS ，最终创建了一个 AQS 的 ConditionObject() 对象。ConditionObject 中包含了两个引用 firstWaiter 和 lastWaiter ，其类型是 AbstractQueuedSynchronizer.Node ，Node 中又包含了一个指针 nextWaiter ，这样就可以来构建一个链表。</li>
+<li>当调用 await() 方法时，先创建一个包含当前线程的 node 节点 n1 ，然后如果 condition queue 的 lastWaiter 节点 t 为空，说明condition queue 中没有节点，就将 firstWaiter 节点指向 n1 ，否则就将 lastWaiter.nextWaiter 指向 n1 。<br><img src="https://s2.ax1x.com/2020/03/06/3bd2sf.png" alt="20200306102035" border="0" style="width:500px"></li>
+<li>当调用 signal() 方法时，从 condition queue 中取出 firstWaiter 节点 n1 执行 doSignal() 。在 doSignal() 中，先将 firstWaiter 指向 n1.next 节点，如果 n1.next 为空，就将 lastWaiter 置空。然后将 condition queue 的节点 n1 取出来，加入到 AQS 队列中。<br><img src="https://s2.ax1x.com/2020/03/06/3bdRL8.png" alt="20200306101634" border="0" style="width:500px"></li>
+<li>当执行 unlock() 方法，就可以从 AQS 队列中执行出队操作，从而 unpark 线程。</li>
+</ol>
+<blockquote>
+<p>signal() 和 signalAll() 的区别：<br>signal() 方法是从 condition queue 中取出 firstWaiter 节点执行 transferForSignal() 操作。signalAll() 方法是遍历 condition queue 执行 transferForSignal() 直到 firstWaiter 为空。</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Concurrent </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ReentrantLock]]></title>
+      <url>/2020/03/03/reentrantlock/</url>
+      <content type="html"><![CDATA[<p>ReentrantLock 可以创建公平锁和非公平锁，默认是非公平锁。公平锁由 FairSync 实现，非公平锁由 NonfairSync 实现，它们都是 Sync 的子类，Sync 又是 AbstractQueuedSynchronizer 的子类。ReentrantLock 的基本用法如下：</p>
+<pre><code>ReentrantLock reentrantLock = new ReentrantLock();
+reentrantLock.lock();
+try {
+    // todo
+} finally {
+    reentrantLock.unlock();
+}
+</code></pre><p>下面我们就来分析一下每一步都做了什么。</p>
+<h5 id="加锁"><a href="#加锁" class="headerlink" title="加锁"></a><strong>加锁</strong></h5><p><img src="https://s2.ax1x.com/2020/03/05/3Hhs4x.png" alt="3Hhs4x.png" border="0"><br>从代码来看，公平锁和非公平锁的 lock 都是执行 acquire() 方法，区别在于非公平锁在 acquire() 前先进行一次 CAS 操作，成功了就不执行 acquire() ， 不成功才执行 acquire() 。这个 acquire() 是父类 AbstractQueuedSynchronizer 中的方法。<br><img src="https://s2.ax1x.com/2020/03/05/3H4Uit.png" alt="3H4Uit.png" border="0" style="width:350px"><br>公平锁和非公平锁的 tryAcquire() 分别有各自的实现。<br><img src="https://s2.ax1x.com/2020/03/05/3HRjbR.png" alt="3HRjbR.png" border="0"><br>比较两个 tryAcquire() 方法发现，公平锁多了一个 hasQueuedPredecessors() 的判断。在公平锁中，当线程执行 tryAcquire() 时，如果可以进行加锁时，先执行 !hasQueuedPredecessors() 的判断。<br><img src="https://s2.ax1x.com/2020/03/05/3HW3rj.png" alt="3HW3rj.png" border="0" style="width:450px"><br>如果当前线程之前有排队的线程则返回 true ，如果队列为空或队列的 head 就是当前线程则返回 false 。这是一个取反判断，所以当队列中有排队的线程，那么就不再执行 compareAndSetState() 操作了。换句话说就是如果有线程在排队，那么就不执行加锁的操作，直接判定加锁失败。这样就回到 AbstractQueuedSynchronizer 的 acquire() 中，继续执行 acquireQueued() 操作，即加入到 AQS 队列中。<br>相对于公平锁来说，非公平锁没有执行 hasQueuedPredecessors() 判断，如果可以进行加锁，则直接进行加锁，加锁成功返回 true ，加锁失败返回 false ，再执行 acquireQueued() 入队操作。<br>总结一下，<strong>非公平锁比公平锁多了两次获取锁的机会</strong>。</p>
+<h5 id="入队"><a href="#入队" class="headerlink" title="入队"></a><strong>入队</strong></h5><p>入队操作包含两步：</p>
+<ol>
+<li>addWaiter()<br>首先将当前线程封装成 Node 节点 n ，如果队列没有初始化，则通过 enq() 方法来初始化队列，会进行两次循环，第一次循环初始化一个空节点 t ，将 head 和 tail 都指向该 t ，第二次循环将 tail 指向 n ，将 t.next 指向 n ，这样就将线程加入到 AQS 队列中。<br><img src="https://s2.ax1x.com/2020/03/05/3HjMWQ.png" alt="3HjMWQ.png" border="0" style="width:600px"></li>
+<li>acquireQueued()<br>这个方法会判断线程是否会阻塞。判断逻辑放在 acquireQueued() 方法的死循环中。当线程加入到 AQS 队列中后，并不会马上阻塞，会在第一次循环中 再次尝试获取锁，如果获取锁失败，就将线程的 waitStatus 条件标记为需要 signal 来唤醒。第二次循环，还是获取锁失败之后，才真正 park 该线程，然后跳出循环。<br><img src="https://s2.ax1x.com/2020/03/05/3HX0qP.png" alt="3HX0qP.png" border="0"></li>
+</ol>
+<h5 id="解锁"><a href="#解锁" class="headerlink" title="解锁"></a><strong>解锁</strong></h5><p>解锁就很简单了，从 AQS 对列中获取 head.next 然后 unpark 。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Concurrent </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[AQS]]></title>
+      <url>/2020/03/03/aqs/</url>
+      <content type="html"><![CDATA[<p>AQS(AbstractQueuedSynchronizer) 是 java.util.concurrent.locks 包中提供的同步框架。AQS 是一个抽象类，java.util.concurrent 中很多并发工具类都是基于 AQS 实现的。AQS 比较复杂，但是我们可以先比较概括的来描述一下 AQS 。简单来说，AQS 维护了一个 state 属性和一个由双向链表构成的同步队列。线程通过 CAS 操作 state 获取锁，获取锁失败的线程被构造成 Node 放到同步队列中阻塞。当锁被释放，再将队列中的线程唤醒来重新获取锁。AQS 中提供了很多获取和释放资源的操作，子类继承和扩展这些方法来完成具体的功能，AQS 比较抽象和难以理解，我们可以通过学习具体场景的类来学习 AQS 。</p>
+<p><a href="../../../../2020/03/03/reentrantlock/">ReentrantLock</a><br><a href="../../../../2020/03/05/condition/">Condition</a><br><a href="../../../../2020/03/06/countdownlatch/">CountDownLatch</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Concurrent </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[CAS]]></title>
       <url>/2020/03/02/cas/</url>
-      <content type="html"><![CDATA[<p>在 Java 并发编程中，为了保证并发安全，一种方式是使用锁，另一种方式是使用 CAS（compare and swap） 。CAS 类似数据库的乐观锁，有 3 个参数，内存地址 V ，旧的预期值 A ，要修改的新值 B ，更新一个变量的时候，只有当变量的预期值 A 和内存地址 V 当中的实际值相同时，才会将内存地址 V 对应的值修改为 B ，如果和预期不相等则更新失败。</p>
+      <content type="html"><![CDATA[<p>在 Java 并发编程中，为了保证并发安全，一种方式是使用锁，另一种方式是使用 CAS（compare and swap） 。CAS 有 3 个参数，内存地址 V ，旧的预期值 A ，要修改的新值 B ，更新一个变量的时候，只有当变量的预期值 A 和内存地址 V 当中的实际值相同时，才会将内存地址 V 对应的值修改为 B ，如果和预期不相等则更新失败。</p>
 <h4 id="CAS-是如何实现的？"><a href="#CAS-是如何实现的？" class="headerlink" title="CAS 是如何实现的？"></a>CAS 是如何实现的？</h4><p>Unsafe 类中有 3 个 cas 方法：</p>
 <pre><code>public final native boolean compareAndSwapObject(Object var1, long var2, Object var4, Object var5);
 
 public final native boolean compareAndSwapInt(Object var1, long var2, int var4, int var5);
 
 public final native boolean compareAndSwapLong(Object var1, long var2, long var4, long var6);
-</code></pre><p>它们都是本地方法，在 x86 架构的系统中，是 Unsafe 类通过来调用 <strong>copxchg</strong> 指令来完成 CAS 操作的。</p>
+</code></pre><p>它们都是本地方法，在 x86 架构的系统中，是 Unsafe 类通过来调用 <strong>cmpxchg</strong> 指令来完成 CAS 操作的。</p>
 <blockquote>
 <p>compareAndSwapInt() 方法 4 个参数含义：<br>Object var1 需要操作的对象。<br>long var2    需要操作的属性的内存偏移量。<br>int var4    期望值。<br>int var5    更新值。</p>
 </blockquote>
@@ -461,16 +1950,8 @@ Start-Class: com.rolex.springbootlearning.SpringBootLearningApplication
       <url>/2020/02/22/monitoring-linux-performence/</url>
       <content type="html"><![CDATA[<p>程序在 Linux 服务器上运行，我们需要对程序的运行状态和系统健康状况进行监控，那么如何做呢？下面一组命令可以帮助到我们。</p>
 <ol>
-<li><strong>top</strong>，监控 CPU 。<br><img src="https://s2.ax1x.com/2020/02/27/3wTtfg.png" alt="3wTtfg.png" border="0" style="width:550px"><br>这里我们主要关注两个地方：<ol>
-<li>是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，<code>(1m+5m+15m)/3*100%</code> 可以作为衡量系统负载的指标，一般不要超过 60% 。</li>
-<li>是 %CPU 。可以可以看出 CPU 占用情况和对应的的进程 id 。</li>
-</ol>
-</li>
-<li><strong>vmstat</strong>，也可以用来监控 CPU 资源。<br><img src="https://s2.ax1x.com/2020/02/27/3wqi9O.png" alt="3wqi9O.png" border="0" style="width:550px"><br>也是关注两块：<ol>
-<li>procs，如果 r 的平均值大于系统 CPU 核数的 2 倍说明负载过高。<br>r 表示进行 CPU 处理的进程数。<br>b 表示进行 I/O 处理的进程数。</li>
-<li>cpu，如果 us + sy 大于 80% 说明 CPU 资源不足。<br>us 表示用户进程消耗 CPU 时间百分比。<br>sy 表示内核进程消耗 CPU 时间百分比。</li>
-</ol>
-</li>
+<li><strong>top</strong>，监控 CPU 。<br><img src="https://s2.ax1x.com/2020/02/27/3wTtfg.png" alt="3wTtfg.png" border="0" style="width:550px"><br>这里我们主要关注两个地方：<br>1) 是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，<code>(1m+5m+15m)/3*100%</code> 可以作为衡量系统负载的指标，一般不要超过 60% 。<br>2) 是 %CPU 。可以看出 CPU 占用情况和对应的的进程 id 。</li>
+<li><strong>vmstat</strong>，也可以用来监控 CPU 资源。<br><img src="https://s2.ax1x.com/2020/02/27/3wqi9O.png" alt="3wqi9O.png" border="0" style="width:550px"><br>也是关注两块：<br>1) procs，如果 r 的平均值大于系统 CPU 核数的 2 倍说明负载过高。<br> r 表示进行 CPU 处理的进程数。<br> b 表示进行 I/O 处理的进程数。<br>2) cpu，如果 us + sy 大于 80% 说明 CPU 资源不足。<br> us 表示用户进程消耗 CPU 时间百分比。<br> sy 表示内核进程消耗 CPU 时间百分比。</li>
 <li><strong>pidstat</strong>，可以监控具体进程的 CPU 资源。<br><img src="https://s2.ax1x.com/2020/02/27/3wj0oR.png" alt="3wj0oR.png" border="0" style="width:500px"><br>也可以监控内存资源。<br><img src="https://s2.ax1x.com/2020/02/27/3wvyAs.png" alt="3wvyAs.png" border="0" style="width:500px"></li>
 <li><strong>free</strong>，可以监控内存。<br><img src="https://s2.ax1x.com/2020/02/27/3wxebQ.png" alt="3wxebQ.png" border="0" style="width:600px"><br>一般 free 小于 20% 说明内存不足。</li>
 <li><strong>df</strong>，可以查看磁盘占用情况。<br><img src="https://s2.ax1x.com/2020/02/27/3wxvR0.png" alt="3wxvR0.png" border="0" style="width:400px"></li>
@@ -816,7 +2297,7 @@ synchronized void method(){
 synchronized (this) {
 
 }
-</code></pre><p>synchronized 具有以下特点：</p>
+</code></pre><p>不论是同步方法还是同步代码块，在 JVM 中都是通过管程 (Monitor) 来支持的。同步方法是隐式的，通过 ACC_SYNCHRONIZED 访问标识来声明。同步代码则是在 javac 编译器在字节码中添加 monitorenter 和 monitorexit 指令来实现的。无论正常退出还是异常结束， monitorenter 都必须有 monitorexit 与之对应。<br>synchronized 具有以下特点：</p>
 <ol>
 <li><strong>非公平锁</strong></li>
 <li><strong>可重入</strong>：是指在如果一个线程获得了锁进入了 synchronized 方法，那么该方法内部调用的其他方法可以直接获得该对象的锁。</li>
@@ -1114,6 +2595,26 @@ class Node implements Comparable&lt;Node&gt; {
     </entry>
     
     <entry>
+      <title><![CDATA[Bucket Sort]]></title>
+      <url>/2020/02/08/bucket-sort/</url>
+      <content type="html"></content>
+      
+        <categories>
+            
+            <category> Data Structure and Algorithm </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Heapsort]]></title>
       <url>/2020/02/08/heapsort/</url>
       <content type="html"><![CDATA[<p>堆排序（heapsort） 用到了一种数据结构叫做<strong>堆</strong>。堆由一颗<strong>完全二叉树</strong>构成，且完全二叉树的每一个父节点都大于或小于叶子节点。如果父节点大于叶子节点，就叫做最大堆，反之就叫做最小堆。排序按照升序或降序需要对应用到最大堆或最小堆。</p>
@@ -1334,8 +2835,7 @@ class Node implements Comparable&lt;Node&gt; {
       <url>/2020/02/03/mybatis-execution-flow/</url>
       <content type="html"><![CDATA[<ol>
 <li>实例化 org.mybatis.spring.SqlSessionFactoryBean 。</li>
-<li>通过 buildSqlSessionFactory() 构造 Configuration ，解析 xml 将 statement ，resultMap 等信息加入到 context ，同时将 sql 进行绑定放到 SqlSource 。</li>
-<li>org.apache.ibatis.builder.MapperBuilderAssistant.addMappedStatement 将 context 中的 statement 信息构造成 MappedStatement ，放到 Configuration 。</li>
+<li>解析 xml 构造 Configuration 和 Context 。<br> 2.1 将 statement ，resultMap 等信息加入到 context 。<br> 2.2 将 sql 进行绑定到 SqlSource 。<br> 2.3 将 statement 信息构造成 MappedStatement ，放到 Configuration 。</li>
 <li>创建查询接口 mapper 的代理对象 org.apache.ibatis.binding.MapperProxy ，通过“包名+类名+方法名”从 Map 中取出对应的 sql 语句执行。</li>
 </ol>
 ]]></content>
@@ -1348,6 +2848,8 @@ class Node implements Comparable&lt;Node&gt; {
         
         
         <tags>
+            
+            <tag> Interview </tag>
             
             <tag> MyBatis </tag>
             
@@ -1544,7 +3046,7 @@ public void testCache(){
 2020-02-01 11:57:18.053 DEBUG 2680 --- [           main] com.rolex.microlabs.dao.UserDao.findAll  : ==&gt; Parameters: 
 2020-02-01 11:57:18.056 DEBUG 2680 --- [           main] com.rolex.microlabs.dao.UserDao.findAll  : &lt;==      Total: 4
 [User(id=3, name=alice, age=29, gender=Female, skill=Java), User(id=4, name=jim, age=29, gender=Male, skill=CPP), User(id=5, name=alice, age=19, gender=Female, skill=Java), User(id=6, name=jim, age=20, gender=Male, skill=CPP)]
-</code></pre><p>很显然一级缓存失效了。<br>我们来分析一下缓存失效的原因。我们在使用 springboot 集成 mybatis 时，从始至终都没有发现 mybatis 的一个重要的对象 SqlSession 。原因是因为 spring 在集成 mybatis 时，将 SqlSession 进行了封装，而在使用时通过代理对象创建。所以我们没有办法直接操作 SqlSession 。正是因为 SqlSession 完全由 spring 容器管理，所以 spring 在 SqlSessionTemplate.SqlSessionInterceptor.invoke() 方法中每次执行完 invoke() 方法后，都在 finally 中将 SqlSession 关闭了，所以一级缓存就失效了。</p>
+</code></pre><p>很显然一级缓存失效了。<br>我们来分析一下缓存失效的原因。我们在使用 springboot 集成 mybatis 时，从始至终都没有发现 mybatis 的一个重要的对象 SqlSession 。原因是因为 spring 在集成 mybatis 时，将 SqlSession 进行了封装，而在使用时通过代理对象创建。所以我们没有办法直接操作 SqlSession 。<strong>正是因为 SqlSession 完全由 spring 容器管理，所以 spring 在 SqlSessionTemplate.SqlSessionInterceptor.invoke() 方法中每次执行完 invoke() 方法后，都在 finally 中将 SqlSession 关闭了，所以一级缓存就失效了。</strong></p>
 <p>不过我们还可以通过配置使用二级缓存。在 UserMapper.xml 中加入 <cache> 配置，我们会发现第二次查询使用了缓存。</cache></p>
 <pre><code>2020-02-01 12:35:35.413 DEBUG 20624 --- [           main] com.rolex.microlabs.dao.UserDao.findAll  : ==&gt;  Preparing: select id, name, age, gender, skill from t_user 
 2020-02-01 12:35:35.463 DEBUG 20624 --- [           main] com.rolex.microlabs.dao.UserDao.findAll  : ==&gt; Parameters: 
@@ -2873,7 +4375,15 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
     <entry>
       <title><![CDATA[spring bean life cycle]]></title>
       <url>/2019/11/07/spring-bean-life-cycle/</url>
-      <content type="html"><![CDATA[<p>construction<br>setName<br>setBeanFactory<br>beforeInitialization<br>initialization<br>postInitialization<br>destory</p>
+      <content type="html"><![CDATA[<p><img src="https://s1.ax1x.com/2020/04/04/GwMsOK.png" alt="GwMsOK.png" border="0" style="width:500px;"></p>
+<p>Spring bean 的生命周期有 4 个阶段：</p>
+<ol>
+<li>Instantation 阶段</li>
+<li>PopulateBean 阶段</li>
+<li>Initailization 阶段</li>
+<li>Destory 阶段</li>
+</ol>
+<p>Instantation 之前会执行 postProcessBeforeInstantiation 。<br>Instantation 之后会执行 postProcessAfterInstantiation 和 postProcessProperties 。<br>Initailization 之前执行 postProcessBeforeInitialization 。<br>Initailization 之后执行 postProcessAfterInitialization 。</p>
 ]]></content>
       
         <categories>
@@ -2894,8 +4404,11 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
     <entry>
       <title><![CDATA[spring boot life cycle]]></title>
       <url>/2019/11/07/spring-boot-life-cycle/</url>
-      <content type="html"><![CDATA[<p>构造springapplication<br>判断springapplication的类型<br>加载applicationContextIniatializer<br>加载applicationListener<br>推断引导类<br>加载外部配置</p>
-<p>加载arguments<br>加载listeners<br>加载Env<br>加载context<br>注册shutdownHook</p>
+      <content type="html"><![CDATA[<p>spring boot 启动流程</p>
+<ol>
+<li>实例化 SpringApplication<br> 1.1 扫描 ApplicationContextInitializer 的配置并实例化（通过 SpringFactoriesLoader 加载 spring.factories 中的配置）<br> 1.2 扫描 ApplicationListener 的配置并实例化（通过 SpringFactoriesLoader 加载 spring.factories 中的配置）</li>
+<li>执行 SpringApplication.run() 方法<br> 2.1 创建并启动 stopwatch<br> 2.2 扫描 SpringApplicationRunListener 并将实例化后的 EventPublishingRunListener 加入到 RunListener 集合<br> 2.3 遍历 RunListener 集合，启动 runListener ，创建一个 SpringBootStartingEvent 加入到事件广播<br> 2.4 包装命令行的参数<br> 2.5 配置环境变量<br> &ensp;&ensp;&ensp;&ensp;2.5.1 根据 applicationType 获取环境变量<br> &ensp;&ensp;&ensp;&ensp;2.5.2 配置自定义环境变量，比如命令行的参数<br> 2.6 打印 banner<br> 2.7 根据 applicationType 实例化 ConfigurableApplicationContext 类<br> 2.8 扫描 SpringBootExceptionReporter 的配置并实例化，将 failureAnalyzer 加入到 exceptionReporter 集合<br> 2.9 准备 context<br> &ensp;&ensp;&ensp;&ensp;2.9.1 set 环境变量<br> &ensp;&ensp;&ensp;&ensp;2.9.2 做一些后置处理<br> &ensp;&ensp;&ensp;&ensp;2.9.3 遍历 Initializer 集合执行每个 initializer 的 initialize() 方法<br> &ensp;&ensp;&ensp;&ensp;2.9.4 创建一个 ApplicationContextInitializedEvent 加入到事件广播<br> &ensp;&ensp;&ensp;&ensp;2.9.5 创建 beanDefinitionLoader<br> &ensp;&ensp;&ensp;&ensp;2.9.6 ApplicationListener 和 Context 互相 set，然后创建一个 ApplicationPreparedEvent 加入到事件广播<br> 2.10 refreshContext<br> &ensp;&ensp;&ensp;&ensp;2.10.1 调用 super.refresh()<br> &ensp;&ensp;&ensp;&ensp;2.10.1.1 prepareRefresh<br> &ensp;&ensp;&ensp;&ensp;2.10.1.2 prepareBeanFactory<br> &ensp;&ensp;&ensp;&ensp;2.10.1.3 postProcessBeanFactory<br> &ensp;&ensp;&ensp;&ensp;2.10.1.4 invokeBeanFactoryPostProcessors<br> &ensp;&ensp;&ensp;&ensp;2.10.1.5 registerBeanPostProcessors<br> &ensp;&ensp;&ensp;&ensp;2.10.1.6 initApplicationEventMulticaster<br> &ensp;&ensp;&ensp;&ensp;2.10.1.7 onRefresh 创建 webserver<br> &ensp;&ensp;&ensp;&ensp;2.10.1.8 registerListeners<br> &ensp;&ensp;&ensp;&ensp;2.10.1.9 finishBeanFactoryInitialization<br> &ensp;&ensp;&ensp;&ensp;2.10.1.10 finishRefresh<br> &ensp;&ensp;&ensp;&ensp;2.10.1.10.1 启动 webserver<br> &ensp;&ensp;&ensp;&ensp;2.10.1.10.2 创建一个 ServletWebServerInitializedEvent 加入到事件广播<br> &ensp;&ensp;&ensp;&ensp;2.10.2 registerShutdownHook<br> 2.11 afterRefresh 什么都没有做<br> 2.12 创建一个 ApplicationStartedEvent 加入到事件广播<br> 2.13 创建一个 ApplicationReadyEvent 加入到事件广播  </li>
+</ol>
 ]]></content>
       
         <categories>
@@ -2916,26 +4429,22 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
     <entry>
       <title><![CDATA[Thread Pool]]></title>
       <url>/2019/11/07/thread-pool/</url>
-      <content type="html"><![CDATA[<p>线程创建销毁耗费资源，所以使用线程池来重用。<br>本质上是维护两个队列，一个存放预先创建的线程，一个存放提交给线程的任务，工作线程不断从队列中获取任务来执行。<br>JDK 提供了 ThreadPoolExecutor 来创建线程池。</p>
-<pre><code>public ThreadPoolExecutor(int corePoolSize,
-                              int maximumPoolSize,
-                              long keepAliveTime,
-                              TimeUnit unit,
-                              BlockingQueue&lt;Runnable&gt; workQueue,
-                              RejectedExecutionHandler handler) {
-</code></pre><p>corePoolSize 是线程池大小</p>
-<p>maximumPoolSize 是线程池最大线程数</p>
-<p>keepAliveTime 是线程存活的时间</p>
-<p>workQueue 任务等待队列</p>
-<p>handler 线程数量超过线程池大小后的处理策略</p>
-<p>我们通过一个例子来说明上述参数和线程池运行的关系。</p>
+      <content type="html"><![CDATA[<p>线程池可以重用线程资源，减少线程创建销毁的资源耗费。JDK 提供了 ThreadPoolExecutor 来创建线程池。</p>
+<pre><code>public ThreadPoolExecutor(int corePoolSize,                  // 线程池初始大小
+                          int maximumPoolSize,               // 线程池最大线程数
+                          long keepAliveTime,                // 线程存活的时间
+                          TimeUnit unit,                     // 时间单位
+                          BlockingQueue&lt;Runnable&gt; workQueue, // 任务等待队列
+                          ThreadFactory threadFactory,       // 线程工厂用来创建线程
+                          RejectedExecutionHandler handler   // 线程数量超过线程池大小后的处理策略
+                          ) {}
+</code></pre><h4 id="线程池参数效果"><a href="#线程池参数效果" class="headerlink" title="线程池参数效果"></a>线程池参数效果</h4><p>我们要创建一个核心线程数 5 ，最大线程数 20 ，队列大小是 10 的一个线程池。</p>
 <pre><code>ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 20,
-            5, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(5));
-</code></pre><p>首先我们创建了一个核心线程数 5 ，最大线程数 20 ，队列大小是 10 的一个线程池。</p>
-<p>如果我们提交 10 个任务，那么首先会将前 5 个任务交给 5 个线程执行，同时 5 个线程进入队列等待。这时队列有 5 个线程工作，5 个任务等待。</p>
+            5, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(5), Executors.defaultThreadFactory(), defaultHandler);
+</code></pre><p>如果我们提交 10 个任务，那么首先会将前 5 个任务交给 5 个线程执行，同时 5 个线程进入队列等待。这时队列有 5 个线程工作，5 个任务等待。</p>
 <p>如果我们提交 15 个任务，那么首先会将前 5 个任务交给 5 个线程执行，同时 5 个线程进入队列等待，再新创建 5 个线程来执行 11-15 号任务。这时队列有 10 个线程工作，5 个任务等待。</p>
 <p>如果我们提交 50 个任务，那么首先会将前 5 个任务交给 5 个线程执行，同时 5 个线程进入队列等待，再新创建 15 个线程来执行任务，剩下的 25 个任务会丢弃掉。这时队列有 20 个线程工作，5 个任务等待，等任务执行完，超过线程存活时间，线程会被销毁，剩下 5 个线程。</p>
-<p>除了使用 new ThreadPoolExecutor ，Executors 提供了一些静态方法用来创建线程池，如：</p>
+<h4 id="jdk-提供的线程池"><a href="#jdk-提供的线程池" class="headerlink" title="jdk 提供的线程池"></a>jdk 提供的线程池</h4><p>除了使用 new ThreadPoolExecutor ，Executors 提供了一些静态方法用来创建线程池，如：</p>
 <pre><code>Executor executor = Executors.newSingleThreadExecutor();
 //new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue&lt;Runnable&gt;()));
 </code></pre><pre><code>Executor executor = Executors.newFixedThreadPool(5);
@@ -3255,15 +4764,15 @@ check point
     </entry>
     
     <entry>
-      <title><![CDATA[Destributed Transations]]></title>
-      <url>/2019/08/03/destributed-transations/</url>
+      <title><![CDATA[Distributed Transations]]></title>
+      <url>/2019/08/03/distributed-transations/</url>
       <content type="html"><![CDATA[<p>我们通常说的事务是指本地事务，即对一个数据库进行的操作，并且这些操作满足事务的 4 个特性。事务的 4 个特性分别是：<br>Aotmicity（原子性），Consistency（一致性），Isolation（隔离性），Durability（持久性）。在一个事务中的所有操作要么同时成功，要么同时失败，这是原子性，一旦执行成功 commit 或是执行失败 rollback 那么这个结果必须是持久的。在事务开始和结束之间，存在着中间状态，这些中间状态是对事务之外是隔离的，换句话说，在事务结束之前，对数据进行的任何修改对事务之外都是不可见的，这就是隔离性。在事务结束之后，数据必须是完整并且一致的。</p>
 <p>在传统的架构体系中经常使用本地事务来保证数据一致性。但是随着分布式系统的发展，出现了越来越多的跨多个数据库进行操作的情况。在这种情况下，本地事务就无法保证数据一致性，分布式事务应运而生。分布式事务是针对本地事务来说的，它的目的就是解决在分布式环境下，跨多个数据库操作的数据一致性问题。分布式事务可分为刚性分布式事务和柔性分布式事务。</p>
 <h4 id="刚性分布式事务"><a href="#刚性分布式事务" class="headerlink" title="刚性分布式事务"></a>刚性分布式事务</h4><p>刚性分布式事务是和本地事务一样，都满足 ACID 特性的，是强一致性的。提到刚性事务，最据代表性的就是 XA 模型。XA 模型是 X/Open 提出的一种分布式事务模型。XA 模型有 3 个组成部分：</p>
 <p>​    <strong>AP</strong>（Application Program）：定义事务边界</p>
 <p>​    <strong>RM</strong>（Resource Manager）：管理计算机共享资源</p>
 <p>​    <strong>TM</strong>（Transation Manager）：负责全局事务，分配事务唯一id，监控事务的执行进度，负责事务的提交，回滚，失败恢复</p>
-<p>基于 XA 模型，衍生出多种实现，2PC（two phase commit）就是其标准实现。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20190805/2pc.jpg" style="width:400px"><br>2PC 过程如下：</p>
+<p>基于 XA 模型，衍生出多种实现，2PC（two phase commit）就是其标准实现。<br><img src="https://s2.ax1x.com/2020/03/11/8AVSxA.png" alt="8AVSxA.png" border="0" style="width:400px"><br>2PC 过程如下：</p>
 <p>​    第一阶段，AP 发起事务 commit ，TM 发起 prepare 投票，当 RM 都同意后，进行第二阶段。</p>
 <p>​    第二阶段，TM 最终执行 commit 。如果 commit 过程出现异常，则根据 recover 进行补偿。</p>
 <p>刚性分布式事务的优点是强一致性，但是缺点也很明显，由于要保证数据一致性，那么 TM 要挨个询问 RM 收集投票结果，如果 RM 数量很多，那么在所有 RM 投票完成之前，RM 的资源都是被锁定的，所以会导致全局的资源锁定，处理的性能及其低下。为了提高可用性，出现了柔性分布式事务。</p>
@@ -3276,7 +4785,7 @@ check point
 <p>TCC 是 2PC 的一种变形，是 <strong>T</strong>ry-<strong>C</strong>onfirm-<strong>C</strong>ancel 的缩写。TCC 的执行过程和 2PC 类似，首先 try 阶段尝试执行业务，完成资源检查，预留资源。第二阶段，不用进行业务检查，直接进行 confirm ，执行成功，事务结束，如果 confirm 失败，则进行重试。如果在某一方的 try 失败了，则进行 cancel 来释放 try 阶段预留的资源。</p>
 <p>我们通过一个简单的例子来感受一下。假设一个下订单-减库存-支付的场景，各业务方需要针对 TCC 进行改造，比如预留库存，在 try 阶段不能真正扣减库存，所以在数据库里需要增加一个预留库存的字段，再比如支付模块也需要增加字段来预存支付金额。如果 try 阶段预留资源都成功了，那么再将预留字段更新到实际扣减库存字段或扣减金额字段，并清空预留资源字段。一般经过 try 阶段的检查， confirm 基本上都能成功。如果 comfirm  不成功，可能是网络抖动，进行重试即可。如果支付模块在 try 阶段预减金额失败了，那么就进行 cancel ，库存模块按照 try 阶段预留的资源进行释放。通过举例，我们可以看出，TCC 很灵活，但是缺点是和业务耦合性高，因为 try-confirm-cancel 3 个阶段都交由业务方来实现。</p>
 <p><strong>Saga</strong></p>
-<p>Saga 是另一种著名分布式事务模型。1987 年论文 sagas 讲述了一种长事务的处理方案，即 saga 模型。Saga 模型的主要思想就是把一个分布式事务拆分成多个本地事务，每个 saga 子事务 <code>T1,T2,...Tn</code> 都有对应的补偿模块 <code>C1,C2,...Cn-1</code> 。当所有子事务都执行成功，那么它的执行顺序是 <code>T1,T2,...Tn</code> 。如果 Tj 执行失败了，那么它的执行顺序是 <code>T1,T2,...Tj,Cj-1,...C2,C1,(0&lt;j&lt;n)</code> 。<br>由于 saga 模型没有 try 阶段，所以当执行失败，需要通过进行恢复。Saga 定义了两种恢复方式：向前恢复和向后恢复。向前恢复就是认为事务一定会执行成功而进行重试。向后恢复就是执行回滚+补偿，实际当中使用较多的是向后恢复。<br>我们还是以下单-减库存-支付这一场景来进行说明。首先我们需要定义两张事务表，事务状态表和事务调用表，这两张表和业务 DB 是独立的。</p>
+<p>Saga 是另一种著名分布式事务模型。1987 年论文 sagas 讲述了一种长事务的处理方案，即 saga 模型。Saga 模型的主要思想就是把一个分布式事务拆分成多个本地事务，每个 saga 子事务 <code>T1,T2,...Tn</code> 都有对应的补偿模块 <code>C1,C2,...Cn-1</code> 。当所有子事务都执行成功，那么它的执行顺序是 <code>T1,T2,...Tn</code> 。如果 Tj 执行失败了，那么它的执行顺序是 <code>T1,T2,...Tj,Cj-1,...C2,C1,(0&lt;j&lt;n)</code> 。<br>由于 saga 模型没有 try 阶段，所以当执行失败，需要通过补偿模块进行恢复。Saga 定义了两种恢复方式：向前恢复和向后恢复。向前恢复就是认为事务一定会执行成功而进行重试。向后恢复就是执行回滚+补偿，实际当中使用较多的是向后恢复。<br>我们还是以下单-减库存-支付这一场景来进行说明。首先我们需要定义两张事务表，事务状态表和事务调用表，这两张表和业务 DB 是独立的。</p>
 <p>事务状态表</p>
 <table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr></table>
 
@@ -3297,7 +4806,7 @@ check point
 <p>Saga 是一种同步串行的方式，接下来我们介绍异步消息的分布式事务实现。说到异步消息，自然少不了消息中间件。通过 MQ 进行消息传递，就需要有一套机制来保证消息可靠。<br>第一种方式是通过异步消息方式来实现：</p>
 <p>1.先发送一个 prepare 消息给 MQ Server 。<br>2.MQ Server 收到消息返回一个 ack 。<br>3.执行本地事务。<br>4.本地事务成功向 MQ Server 发送一个 commit 消息。本地事务失败则向 MQ Server 发送一个 cancel 消息。<br>5.如果长时间没有收到 prepare 消息的确认，MQ Server 则需要向 Client 申请回查。<br>6.Client 收到回查申请后，调用本地服务的回查接口查看本地事务是否成功，如果成功，发送 commit 消息，如果本地消息失败，则发送 cancel 消息。</p>
 <p>以上就是异步消息的操作步骤，这种方式其实也是 2PC 的变形。这种方式实现起来对 MQ 的要求较高，并且需要业务方提供回查接口，对业务入侵较大。</p>
-<p>另一种方式是通过本地消息表来实现：<br>1.执行本地事务同时将消息先写到本地消息表中，由于执行本地操作和写消息在同一个事务中，所以可以保证同时成功或失败。<br>2.将消息从表中读出来，写到 MQ 。<br>3.MQ 收到消息，返回 ack 。<br>4.收到 ack 后删除本地消息。</p>
+<p>另一种方式是通过本地消息表来实现：<br>1.执行本地事务同时将消息先写到本地消息表中，由于执行本地操作和写消息在同一个事务中，所以可以保证同时成功或失败。<br>2.将消息从表中读出来，写到 MQ 。<br>3.MQ 收到消息，返回 confirm 。<br>4.收到 confirm 后删除本地消息。</p>
 <p>这种方式对业务没有入侵并且实现简单，但是其中有一些细节需要注意。如果从消息表读出消息的服务部署了多个，那么都从消息表去读，就会产生大量的重复消息，所以可以使用分布式锁进行控制，获得锁的服务才能从消息表读，这样就可以避免重复消息。由于消息可能会产生重复，所以在消费端需要处理幂等。</p>
 <p>通过上边的讲解，我们对分布式事务的几种实现方式有了简单的认识。在实际使用中，我们其实应该避免出现分布式事务，尽量让核心步骤先执行，不重要的步骤异步执行。如果实在无法避免，那么可以通过柔性分布式事务来处理，同步场景下使用 Saga ，异步场景下使用本地消息表。</p>
 ]]></content>
@@ -3336,8 +4845,8 @@ check point
 <ol>
 <li>利用数据库约束<br>由于请求最终都是操作数据库，所以最终都会反映到数据库的 CRUD 操作，所以我们可以利用数据库主键或唯一索引来保证唯一。</li>
 <li>去重表<br>单独维护一张表保存去重字段，比如订单号，在业务操作之前先插入订单号，插入订单号和业务处理在同一个事务中，同时成功提交或者回滚。这种方案是第一种方式的变形，好处是业务无关，多个业务可以共享一张表。</li>
-<li>乐观锁<br>在进行更新和删除操作时比较常用。可以利用 version 字段，如<pre><code>update t1 set age++, version++ where id=1 and version=1
-</code></pre>也可以使用业务字段，如<pre><code>update t1 set age++ where id=1 and age=19
+<li>乐观锁<br>在进行更新和删除操作时比较常用。可以利用 version 字段，如<pre><code>update t1 set age=age+1, version=version+1 where id=1 and version=1
+</code></pre>也可以使用业务字段，如<pre><code>update t1 set age=age+1 where id=1 and age=19
 </code></pre><blockquote>
 <p>在进行更新和删除操作时，最好使用绝对值，不要使用相对值。</p>
 </blockquote>
@@ -3373,8 +4882,8 @@ check point
     </entry>
     
     <entry>
-      <title><![CDATA[One Question One Answer for DB Index]]></title>
-      <url>/2019/07/28/one-question-one-answer-for-db-index/</url>
+      <title><![CDATA[One Question One Answer for MySQL]]></title>
+      <url>/2019/07/28/one-question-one-answer-for-mysql/</url>
       <content type="html"><![CDATA[<p>Q: 什么是索引</p>
 <p>A: 索引是关系数据库中的一种存储数据结构，针对数据库表的一列或多列进行排序，从而快速定位，加速检索。</p>
 <p>Q: MySQL有哪些索引</p>
@@ -3401,22 +4910,47 @@ check point
 <p>A: 在使用非主键索引查询时，通过索引查到主键，然后在通过主键进行一次查询，这个过程叫做回表。使用非主键索引进行查询时，可以使用索引覆盖（covering index）来避免回表。</p>
 <p>Q: 什么是索引下推</p>
 <p>A:</p>
-<p>Q:</p>
-<p>A:</p>
-<p>Q:</p>
-<p>A:</p>
-<p>Q:</p>
-<p>A:</p>
-<p>Q:</p>
-<p>A:</p>
-<p>Q:</p>
-<p>A:</p>
-<p>Q:</p>
-<p>A:</p>
-<p>Q:</p>
-<p>A:</p>
-<p>Q:</p>
-<p>A:</p>
+<p>Q: InnoDB 和 MyISAM 的区别。</p>
+<p>A: <table style="font-size:12px;color:#333333;border-width: 1px;border-color: #666666;border-collapse: collapse;"><tr><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;"></th><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">InnoDB</th><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">MyISAM</th></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持事务</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">不支持</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">锁</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">行级锁</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">表级锁</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持MVCC</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">不支持</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持外键</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">不支持</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持全文索引</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">不支持</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">索引</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">聚簇索引</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">非聚簇索引</td></tr></table></p>
+<p>Q: 什么情况下应该或不应该使用索引。</p>
+<p>A: </p>
+<ol>
+<li>记录数较少，不用使用索引。</li>
+<li>频繁写的表，不应该使用索引。</li>
+<li>数据重复且分布平均，比如性别字段，不应该使用索引。</li>
+</ol>
+<p>Q: 隔离级别</p>
+<p>A: 隔离级别有 4 种：</p>
+<ol>
+<li>Read Uncommitted: 最低级别，任何情况都无法保证。</li>
+<li>Read Committed: 可避免脏读的发生。</li>
+<li>Repeatable Read: 可避免脏读、不可重复读的发生。</li>
+<li>Serializable: 可避免脏读、不可重复读、幻读的发生。</li>
+</ol>
+<p>Q: 什么是 MVCC ?</p>
+<p>A: MVCC (Multi-Version Concurrency Control) 是 InnoDB 使用的一种并发控制协议。在 RC RR 两种隔离级别下，select 会查询版本链中的数据，从而实现读写并发。与之相对的是 LBCC (Lock-Based Concurrency Control) 。</p>
+<p>Q: SQL语言包括哪几类？</p>
+<p>A: DDL ，DCL ，DML ，DQL ，TPL 。</p>
+<p>Q: 脏读、幻读、不可重复读</p>
+<p>A: 脏读：事务 T1 将某一值修改，然后事务 T2 读取该值，然后 T1 回滚，导致 T2 所读取到的数据是无效的。<br>幻读：事务 T1 修改了全表数据，然后事务 T2 插入了一条新记录，对 T1 来说还有一条记录没有改。<br>不可重复读：事务 T1 查询一次，然后事务 T2 修改了一条记录，然后 T1 再次查询，两次查询得到的结果不一致。</p>
+<p>Q: delete、drop、truncate 区别？</p>
+<p>A: 删除表用 drop ，删除表中的全部数据用 truncate ，删除表的部分数据用 delete 。drop 和 truncate 是 DDL ，不能回滚，delete 是 DML ，可以回滚。</p>
+<p>Q: MySQL 有哪些锁？</p>
+<p>A: MySQL 锁分为 lock 和 latch 。lock 针对的是事务，用来锁定数据库中的对象，latch 针对的是线程，用来保证并发的正确性。latch 是一种轻量级锁，又分为互斥锁 (mutex) 和 读写锁 (rw-lock) 。lock 又分为 表锁，页锁，行锁。行锁里又分 record lock (行锁，锁定一行)，gap lock (间隙锁，锁定范围行) ，next-key lock (临键锁，record lock + gap lock) 。<br>按模式分成共享锁和独占锁。<br>按使用机制分：乐观锁和悲观锁。</p>
+<p>Q: 什么是 ACID？</p>
+<p>A: 事务要么同时成功要么同时失败，这是原子性 atomic 。成功了 commit 失败了 rollback ，不管 commit 还是 rollback ，一旦执行，结果就是不可变的，这是持久性 Durability 。在事务开始和结束之间，存在中间状态，这些中间状态对事务之外是不可见的，这是隔离性 isolation 。事务前后数据必须是完整一致的，不能存在中间状态，这是一致性 consistency 。</p>
+<p>Q: 什么是 B+ 树？</p>
+<p>A: B+ 树是一种出度很大，高度很小，已排序的 n 叉树，在 MySQL 中，</p>
+<p>Q: AUTO_INCREMENT 的原理？</p>
+<p>A: 传统的方式，MySQL 会维护一个计数器来记录当前最大的 id 值，当新增一条记录时，先获取 AUTO-INC 锁直到语句结束。AUTO-INC 是一个表级锁，性能不好，所以有了改进方式。如果能确定插入行数，则使用轻量级的互斥锁，如果是批量插入，还是使用 AUTO-INC 锁。</p>
+<p>Q: 组合索引和几个单个的索引有什么区别？</p>
+<p>A: 组合索引在进行多个条件查询时可以根据最左前缀规则进行索引，单个索引在多个查询条件时，索引可能只会使用一个索引（实际还要看查询计划）。</p>
+<p>Q: 临时表有什么用，什么时候删除？</p>
+<p>A: 临时表用于保存临时数据，连接断开时会删除临时表。</p>
+<p>Q: 数据库的3个范式时什么？</p>
+<p>A: 第一范式：关系中的每个属性都不可再分。第二范式：要有主键。第三范式：消除冗余。</p>
+<p>Q: MySQL 主从复制是怎么做的？</p>
+<p>A: 当有从库连接到主库时，主库会创建一个线程将 Bin Log 发送到从库。从库创建线程接收 Bin Log 并回放 sql 。</p>
 ]]></content>
       
         <categories>
@@ -3427,6 +4961,8 @@ check point
         
         
         <tags>
+            
+            <tag> Interview </tag>
             
             <tag> MySQL </tag>
             
@@ -4470,9 +6006,9 @@ dataflow:&gt;</code></p>
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -4859,30 +6395,6 @@ Server is ready.
     </entry>
     
     <entry>
-      <title><![CDATA[Eureka Architecture]]></title>
-      <url>/2018/08/29/eureka-architecture/</url>
-      <content type="html"><![CDATA[<p><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20180829/210836060.png" style="width:600px;"></p>
-<p>上图为 Eureka 的架构图，从图中可以看到有两类角色：Eureka Server 和 Eureka Client 。Client 又分为 Application Service 和 Application Client 。Eureka Client 通过 API 向 Eureka Server 注册并保持通信，Application Client 通过 API 获取注册信息，并通过远程调用来访问 Application Service 。 </p>
-]]></content>
-      
-        <categories>
-            
-            <category> Spring Cloud </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Microservices </tag>
-            
-            <tag> Spring Cloud </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Eureka Data Structure]]></title>
       <url>/2018/08/29/eureka-data-structure/</url>
       <content type="html"><![CDATA[<p>在 Eureka Server 中，使用了双层 ConcurrentHashMap 来存储 Eureka Client 的注册信息。</p>
@@ -4904,9 +6416,9 @@ Server is ready.
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -5005,18 +6517,21 @@ Server is ready.
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[synchronization between eureka server nodes]]></title>
+      <title><![CDATA[Synchronization between Eureka Server Nodes]]></title>
       <url>/2018/08/29/synchronization-between-eureka-server-nodes/</url>
-      <content type="html"></content>
+      <content type="html"><![CDATA[<p>多个 Eureka Server 可以构成集群，集群搭建方式参考 <a href="../../../../2020/03/22/building-eureka-server-with-peer-awareness/">Building Eureka Server with Peer Awareness</a> 。</p>
+<p>Eureka Server 使用 peer to peer 的方式来同步数据，即每个 Server Node 都作为 Client 向其他 Server 注册信息。Eureka Server 收到 Eureka Client 的请求（注册，续约，注销）之后，会将自己当作 Client 向其他 Eureka Server 发送请求同步数据。多个 Eureka Server 之间进行数据同步，就可能会存在同一个 Eureka Client 的信息存在多份，Eureka Server 会通过 lastDirtyTimestamp 来获取最新的数据。如果这个过程出现了网络异常，数据同步失败，那么会在下一次心跳的时候再进行复制。当发生网络分区时， Eureka Server 依旧可以提供服务注册，如果大面积心跳接收失败，会进入自我保护模式。当网络恢复后，会自动恢复。</p>
+<p>再来看下源码，就以 heartbeat 为例：<br><img src="https://s1.ax1x.com/2020/03/22/85XrVI.png" alt="85XrVI.png" border="0"><br>会创建一个 ReplicationTask ，通过 TaskProcessor 异步执行任务进行数据同步。如果响应 404 ，说明对方没有该注册信息，则向对方注册，同样也是任务放到线程队列由 TaskProcessor 来执行。如果信息的 timestamp 不一致，则根据 timestamp 判断是否进行 override 。<br><img src="https://s1.ax1x.com/2020/03/22/8ISec8.png" alt="8ISec8.png" border="0"></p>
+]]></content>
       
         <categories>
             
@@ -5027,18 +6542,19 @@ Server is ready.
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[eureka server self preservation mode]]></title>
+      <title><![CDATA[Eureka Server Self Preservation Mode]]></title>
       <url>/2018/08/29/eureka-server-self-preservation-mode/</url>
-      <content type="html"></content>
+      <content type="html"><![CDATA[<p>Eureka Client 可以向 Eureka Server 注册信息，并通过心跳来维持注册信息有效，当 Eureka Client 进行显示的注销或一段时间内 Eureka Server 没有收到心跳时，Eureka Server 会删除掉该 Eureka Client 的注册信息。当发生网络分区时，Eureka Server 长时间无法收到 Eureka Client 的心跳信息，如果 3 次心跳异常数量超出阈值，会进入自我保护模式。目的是为了保护注册信息不会被 Eureka Server 删除而导致大面积注册信息失效，并且在 Eureka Server 之间同步时不会影响其他的 Server Node 。默认情况下，Eureka Server 会开启自我保护机制，当失效的服务数量大于 15% 时，会进入自我保护模式，直到恢复到阈值之上或自我保护被关闭。</p>
+]]></content>
       
         <categories>
             
@@ -5049,18 +6565,20 @@ Server is ready.
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[eureka region and zone]]></title>
+      <title><![CDATA[Eureka Region and Zone]]></title>
       <url>/2018/08/29/eureka-region-and-zone/</url>
-      <content type="html"></content>
+      <content type="html"><![CDATA[<p>Region 和 Zone 是 AWS 的概念，Region 可以理解为地区，Zone 可以理解为机房。参考 Eureka 的架构图：<br><img src="https://s1.ax1x.com/2020/03/22/84w60K.png" alt="84w60K.png" border="0" style="width:600px;"></p>
+<p>us-east-1 为 Region ，us-east-1 下有 3 个 Zone : us-east-1c ，us-east-1d ，us-east-1e 。每个 Zone 中有 Eureka Server 和 Eureka Client ，Eureka Client 优先向同一个 Zone 中的 Eureka Server 注册，除非当前 Zone 中的 Eureka Server 不可用，才会向远端的 Zone 中的 Eureka Server 注册。Eureka Client 虽然只向各自 Zone 中的 Eureka Server 注册，但是 Eureka Server 之间会同步注册信息，所以 Eureka Client 之间依旧可以相互调用。<br>Practice 参考 <a href="../../../../2020/03/22/building-eureka-server-with-region-and-zone/">Building Eureka Server with Region and Zone</a></p>
+]]></content>
       
         <categories>
             
@@ -5071,9 +6589,9 @@ Server is ready.
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -5103,7 +6621,7 @@ Server is ready.
 <li><p><a href="../../../../2020/02/23/g1-garbage-collector">G1 收集器</a></p>
 </li>
 </ul>
-<p>G1 是面向服务端的收集器，</p>
+<h4 id="串行，并行和并发"><a href="#串行，并行和并发" class="headerlink" title="串行，并行和并发"></a>串行，并行和并发</h4><p>串行：应用和 GC 是顺序执行的，在 GC 的时候应用需要停止，只有一个线程在 GC 。<br>并行：应用和 GC 是顺序执行的，在 GC 的时候应用需要停止，有多个线程在 GC 。<br>并发：应用和 GC 是同时执行的，可能同时执行，也可能交替执行。</p>
 ]]></content>
       
         <categories>
@@ -5125,30 +6643,53 @@ Server is ready.
       <title><![CDATA[JVM Architecture]]></title>
       <url>/2018/08/13/jvm-architecture/</url>
       <content type="html"><![CDATA[<p>Java Virtual Mechine （JVM）包含三部分，分别是：类加载器子系统、运行时数据区和执行引擎。</p>
-<p><img src="https://linksredirect.com/?pub_id=29254CL26369&source=js&url=http%3A//javainterviewpoint-7ac9.kxcdn.com/wp-content/uploads/2016/01/JVM-Architecture.png" style="width:600px"></p>
+<p><img src="https://s2.ax1x.com/2020/03/11/8A2ZHH.png" alt="8A2ZHH.png" border="0" style="width:500px"></p>
 <h4 id="类加载子系统"><a href="#类加载子系统" class="headerlink" title="类加载子系统"></a><strong>类加载子系统</strong></h4><p>类加载是将 <code>.class</code> 文件加载到虚拟机内存并创建对象的整个过程。类加载子系统提供 Java 的类动态加载功能，它有三个主要阶段：加载、链接和初始化。  </p>
 <p><strong>加载</strong></p>
-<p>JVM 可以通过 Bootstrap ClassLoader 、Extention ClassLoader 和 Application ClassLoader 来加载类。</p>
-<ul>
-<li>Bootstrap ClassLoader 负责加载 rt.jar</li>
-<li>Extention ClassLoader 负责加载 \lib </li>
-<li>Application ClassLoader 负责加载应用程序级别的类，即系统类路径 <code>classpath</code> 下的类</li>
-</ul>
-<p>类加载器在加载类时使用委托算法。委托算法的原理是：如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行，如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器，如果父类加载器可以完成类加载任务，就成功返回，倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载。<br>注意：除了顶层的类加载器，每个类加载器都要有父类加载器，这些加载器之间并不是继承关系，而是组合关系。<br>使用这种委托算法的优点有二：</p>
-<ul>
+<p>加载是 JVM 通过一个类的完全限定名来获取类的二进制字节流，将字节流代表的静态存储结构转化为方法区中的运行时数据结构，然后在内存中生成一个代表这个类的 Class 对象作为访问入口的过程。<br>在 Java 中有多种途径可以获取类的二进制字节流：</p>
+<ol>
+<li>从 zip 中获取，jar ，ear ，war 都属于这类。</li>
+<li>从网络中获取，比如 applet 。</li>
+<li>通过动态代理生成。</li>
+<li>通过文件生成，比如 jsp 被编译成 class 。</li>
+<li>等等。</li>
+</ol>
+<p>加载既可以通过系统提供的类加载器加载，也可以通过自定义的类加载器加载。系统提供的类加载器有 3 个：Bootstrap ClassLoader 、Extention ClassLoader 和 Application ClassLoader 。</p>
+<ol>
+<li>Bootstrap ClassLoader 负责加载 \lib 下的类。</li>
+<li>Extention ClassLoader 负责加载 \lib\ext 下的类。</li>
+<li>Application ClassLoader 负责加载应用程序级别的类，即系统类路径 <code>classpath</code> 下的类。</li>
+</ol>
+<p>类加载器在加载类时使用委托算法。委托算法的原理是：如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行，如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器，如果父类加载器可以完成类加载任务，就成功返回，倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载。</p>
+<blockquote>
+<p>除了顶层的类加载器，每个类加载器都要有父类加载器，这些加载器之间并不是继承关系，而是组合关系。</p>
+</blockquote>
+<p>使用这种委托算法的优点有二：</p>
+<ol>
 <li>防止重复加载，父加载器加载过的类子类加载器就不用再加载一次</li>
 <li>安全，Java API 定义的类不会被篡改，因为父类已经加载了 Java 核心类，如果我们要加载自己修改的核心类，父加载器将不会加载。</li>
-</ul>
+</ol>
 <p><strong>链接</strong></p>
 <p>链接包含三个步骤：验证、准备和解析。</p>
-<ul>
-<li>验证目的在于确保 Class 文件的字节流中包含信息符合当前虚拟机要求，不会危害虚拟机自身安全。主要包括四种验证，文件格式验证，元数据验证，字节码验证，符号引用验证。</li>
-<li>为类变量（即 <code>static</code> 修饰的字段变量）分配内存并且设置该类变量的初始值为 0 （如 <code>static int i=5;</code> 这里只将 i 初始化为 0 ，至于 5 的值将在初始化时赋值），这里不包含用 <code>final</code> 修饰的 <code>static</code>，因为 <code>final</code> 在编译的时候就会分配了，注意这里不会为实例变量分配初始化，类变量会分配在方法区中，而实例变量是会随着对象一起分配到 Java 堆中。</li>
-<li>解析主要将常量池中的符号引用替换为直接引用的过程。符号引用就是一组符号来描述目标，可以是任何字面量，而直接引用就是直接指向目标的指针、相对偏移量或一个间接定位到目标的句柄。</li>
-</ul>
+<ol>
+<li>验证<br>验证的目的在于确保 Class 文件的字节流中包含信息符合当前虚拟机要求，不会危害虚拟机自身安全。虽然一些非法的操作（比如将一个类型转成一个不存在的类型，或者将代码跳转到不存在行）在编译期间编译器拒绝编译，但是 JVM 并没有限制字节码一定要由 java 编译器编译生成，所以理论上甚至可以通过直接编写生成 class 文件，所以验证是非常重要的。<br>验证包括四种：<br>&nbsp;&nbsp;&nbsp;&nbsp;1) 文件格式验证，验证是否符合 class 文件格式规范。<br>&nbsp;&nbsp;&nbsp;&nbsp;2) 元数据验证，对元数据信息进行语义分析，比如是否有父类，是否可以继承等。<br>&nbsp;&nbsp;&nbsp;&nbsp;3) 字节码验证，通过数据流和控制流分析程序的合法性，比如在栈上放一个 int 类型的数据，使用时按 long 类型加载。<br>&nbsp;&nbsp;&nbsp;&nbsp;4) 符号引用验证，对类自身信息以外的信息进行校验，比如常量池。</li>
+<li>准备<br>准备是为类变量（即 <code>static</code> 修饰的字段变量）分配内存并且设置类变量的初始值的阶段。例如 <code>static int i=5;</code> 这里只将 i 初始化为 0 ，至于 5 的值将在初始化时赋值。这里不包含用 <code>final</code> 修饰的 <code>static</code>，因为 <code>final</code> 在编译的时候就会分配了，注意这里不会为实例变量分配初始化，类变量会分配在方法区中，而实例变量是会随着对象一起分配到 Java 堆中。</li>
+<li>解析<br>解析是将常量池中的符号引用替换为直接引用的过程。<strong>符号引用</strong>就是一组符号来描述目标，可以是任何字面量，而<strong>直接引用</strong>就是直接指向目标的指针、相对偏移量或一个间接定位到目标的句柄。<blockquote>
+<p>符号引用转化成直接引用分为两种：在解析阶段转化叫静态解析，运行期转化叫动态连接。</p>
+</blockquote>
+</li>
+</ol>
 <p><strong>初始化</strong></p>
-<p>初始化是类加载的最后阶段，将为所有静态变量分配原始值，并执行静态块。</p>
-<h4 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a><strong>运行时数据区</strong></h4><p><strong>程序寄存器（Program Counter）</strong><br>线程私有。<br>存储当前线程执行程序的字节码指令的行号。<br>JVM 未规定异常。<br><strong>虚拟机栈（Java Vitrual Machine Stacks）</strong><br>线程私有。<br>存储使用栈帧来保存局部变量表、操作数栈、动态链接、方法出口等。<br>JVM 规定了两种异常：StackOutOfMemoryError 和 OutOfMemoryError 。<br><strong>本地方法栈（Native Methon Stack）</strong><br>本地方法栈和虚拟机栈类似，区别是本地方法栈用于执行本地方法。<br><strong>堆（Java Heap）</strong><br>堆是共享的，是 Java 内存最大的区域。Java 内存回收主要发生在堆，按照分代收集算法进行内存回收。堆内存可以细分为新生代和老年代。新生代又分为 Eden 、From Survivor 和 To Survivor 。堆是逻辑连续的，物理可以不连续。<br>JVM 规定的异常为 OutOfMemoryError 。<br><strong>方法区（Method Area）</strong><br>线程共享的。<br>存储已被 JVM 加载的类信息、常量、静态变量、及时编译器编译后的代码。<br>JVM 规定的异常为 OutOfMemoryError 。</p>
+<p>初始化是类加载的最后阶段，将为所有静态变量分配原始值，并执行静态块。<br>在 JVM 规范中规定，有且只有 5 种情况必须进行初始化：</p>
+<ol>
+<li>遇到 new ，getstatic ，putstatic 和 invokestatic 4 个字节码指令时如果没有初始化，则必须进行初始化。也就是在使用 new 实例化对象时，读写类的静态变量时，以及调用静态方法时。</li>
+<li>使用反射调用时。</li>
+<li>在初始化一个类且它的父类还没有被初始化时。</li>
+<li>虚拟机启动执行主类时。</li>
+<li>使用 MethodHandle 解析 REF_getStatic ，REF_putStatic 和 REF_invokeStatic 的方法句柄时。</li>
+</ol>
+<h4 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a><strong>运行时数据区</strong></h4><p><strong>程序寄存器（Program Counter）</strong><br>线程私有。<br>存储当前线程执行程序的字节码指令的行号。<br>JVM 未规定异常。<br><strong>虚拟机栈（Java Vitrual Machine Stacks）</strong><br>线程私有。<br>存储使用栈帧来保存局部变量表、操作数栈、动态链接、方法出口等。</p>
+<p>JVM 规定了两种异常：StackOutOfMemoryError 和 OutOfMemoryError 。<br><strong>本地方法栈（Native Methon Stack）</strong><br>本地方法栈和虚拟机栈类似，区别是本地方法栈用于执行本地方法。<br><strong>堆（Java Heap）</strong><br>堆是共享的，是 Java 内存最大的区域。Java 内存回收主要发生在堆，按照分代收集算法进行内存回收。堆内存可以细分为新生代和老年代。新生代又分为 Eden 、From Survivor 和 To Survivor 。堆是逻辑连续的，物理可以不连续。<br>JVM 规定的异常为 OutOfMemoryError 。<br><strong>方法区（Method Area）</strong><br>线程共享的。<br>存储已被 JVM 加载的类信息、常量、静态变量、及时编译器编译后的代码。<br>JVM 规定的异常为 OutOfMemoryError 。</p>
 <h4 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a><strong>执行引擎</strong></h4><p>执行引擎用来执行分配给运行时数据区的字节码。<br>执行引擎分为：解释器、JIT 编译器和垃圾回收器。<br><strong>解释器</strong><br>解释会读取字节码，解释并逐行执行。解释器解释的速度很快但是执行速度很慢，而且一个方法被调用多次，解释过程也会进行多次。<br><strong>JIT 编译器</strong><br>JIT 编译器使用解释器进行字节码转换，遇到重复的代码，JIT 编译器会将整个字节码编译成机器码。机器码将用于重复方法的调用，从而提高性能。<br><strong>垃圾回收器</strong><br>垃圾回收器用于收集 <code>new</code> 产生的对象。垃圾回收可以通过 <code>System.gc()</code> 来触发，但是不一定会立刻执行。不是用 <code>new</code> 生成的对象可以使用 <code>finalize()</code> 进行回收。</p>
 ]]></content>
       
@@ -5217,9 +6758,9 @@ Server is ready.
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -5273,9 +6814,9 @@ Server is ready.
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -5447,9 +6988,9 @@ public RibbonApplicationContextInitializer ribbonApplicationContextInitializer()
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -5562,9 +7103,9 @@ public class OrderServiceFallbackFactory implements FallbackFactory&lt;OrderClie
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -5609,9 +7150,9 @@ public void refresh() {
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -5737,9 +7278,9 @@ public class OrderController {
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -5803,9 +7344,9 @@ public interface StoreClient {
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
             <tag> Feign </tag>
             
@@ -5814,8 +7355,8 @@ public interface StoreClient {
     </entry>
     
     <entry>
-      <title><![CDATA[Proxying Routing and Filtering using Zuul]]></title>
-      <url>/2018/06/17/proxying-routing-and-filtering-using-zuul/</url>
+      <title><![CDATA[Routing and Filtering with Zuul]]></title>
+      <url>/2018/06/17/routing-and-filtering-with-zuul/</url>
       <content type="html"><![CDATA[<p>在微服务架构中系统为客户端应用程序提供一个独特的入口 —— API 网关是一种非常常见的微服务模式。API 网关实现代理、路由、流量控制，同时为用户提供了统一的界面，而屏蔽了微服务内部的细节。<br>使用 API 网关的优点：</p>
 <ul>
 <li>集中处理逻辑，比如鉴权、速率限定、监控等；</li>
@@ -6066,9 +7607,9 @@ public class ErrorHandlerController implements ErrorController {
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
         </tags>
         
@@ -6093,8 +7634,8 @@ public class ErrorHandlerController implements ErrorController {
 <li>注册中心维护着所有服务的访问信息，服务之间要通信，首先要访问注册中心，那么注册中心就会成为瓶颈，所以如果采用主从模式在每个客户端维护一份副本，那么服务就不用每次都去访问注册中心了。这样虽然解决了注册中心的瓶颈问题，但是需要主从之间进行同步；</li>
 <li>作为主节点，如果注册服务关闭，那么其他副本也就无法同步，所以主节点还要解决单点问题，比如使用分布式机器来提供服务。</li>
 </ol>
-<p>综上看来，实现一个服务注册和发现的程序还是比较复杂的。不过，有很多优秀的框架已经实现了这些功能，比如 Spring Cloud Eureka。</p>
-<h4 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a><strong>Spring Cloud Eureka</strong></h4><p>Eureka 是 netflix 开源的产品，通过和 Spring Cloud 集成，通过 Java 注解声明式的注册和调用服务变得非常简单，以下以 Greenwich.SR1 为例说明。</p>
+<p>综上看来，实现一个服务注册和发现的程序还是比较复杂的。不过，有很多优秀的框架已经实现了这些功能，比如 Eureka。</p>
+<h4 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a><strong>Eureka</strong></h4><p>Eureka 是 netflix 开源的产品，通过和 Spring Cloud 集成，通过 Java 注解声明式的注册和调用服务变得非常简单，以下以 Greenwich.SR1 为例说明。</p>
 <p>1.加入 maven 配置</p>
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
@@ -6109,18 +7650,16 @@ public class RegisterCenterApplication {
     }
 }
 </code></pre><p>3.修改配置文件</p>
-<pre><code>spring:
-  application: eureka-server
-server:
+<pre><code>server:
   port: 8761
 eureka:
   instance:
-    hostname: eureka-server
+    hostname: localhost
   client:
-    register-with-eureka: false
-    fetch-registry: false
-  server:
-    wait-time-in-ms-when-sync-empty: 0
+    registerWithEureka: false #不对外提供服务调用
+    fetchRegistry: false #不拉取注册信息
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 </code></pre><p>简单三步即可实现一个注册发现服务。启动服务访问 <a href="http://localhost:8761/" target="_blank" rel="external">http://localhost:8761/</a> 即可看到界面。<br>此时还没有任何服务注册到 Eureka ，我们接下来就来看看如何将服务注册到 Eureka 。</p>
 <p>我们再创建另一个应用 eureka-client 注册到 eureka server 上。<br>1.添加 maven 配置</p>
 <pre><code>&lt;dependency&gt;
@@ -6159,9 +7698,9 @@ eureka:
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
             <tag> Eureka </tag>
             
@@ -6332,9 +7871,9 @@ public class ProductService {
         
         <tags>
             
-            <tag> Microservices </tag>
-            
             <tag> Spring Cloud </tag>
+            
+            <tag> Microservices </tag>
             
             <tag> gRPC </tag>
             
@@ -13296,9 +14835,9 @@ public static void main(String[] args) throws Exception {
 <li>position<br>position 指示了 Buffer 中下一个可操作的数据的位置。</li>
 <li>mark<br>临时的 position 。</li>
 </ul>
-<p>以上边代码为例。当 new 一个 ByteBuffer 时，首先将 capacity 和 limit 的大小都设置为 8 ，mark 为 -1， position 为 0 ，初始化完成 capacity 的大小就不变了。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/buffer init_12.png" alt=""><br>有了 Buffer 就可以开始写数据了。从 Chanel 读 5 个字节到 Buffer 中，position 变为 5 。</p>
-<p><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/buffer_write_1.png" alt=""><br>现在要从 Buffer 中将数据写到 Chanel 中，需要执行 flip() 方法。执行 flip() 方法后，position 变为 0， limit 变为 5 。</p>
-<p><img src="https://raw.githubusercontent.com/bsyonline/pic/master/buffer_flip_1.png" alt=""><br>如果 Buffer 中写了 3 个字节到 Chanel 中，如果执行 clear() 方法，剩余的 2 个字节将被丢弃，Buffer 可重新读入数据。如果想保留 2 个字节后续处理，可执行 compact() ，Buffer 将拷贝 2 个字节到起始位置，将 position 置为 2 ，limit 置为 8 。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/buffer_compact.png" alt=""></p>
+<p>以上边代码为例。当 new 一个 ByteBuffer 时，首先将 capacity 和 limit 的大小都设置为 8 ，mark 为 -1， position 为 0 ，初始化完成 capacity 的大小就不变了。</p>
+<p><img src="https://s1.ax1x.com/2020/03/16/8J1BrT.png" alt="8J1BrT.png" border="0" style="width:400px"><br>有了 Buffer 就可以开始写数据了。从 Chanel 读 5 个字节到 Buffer 中，position 变为 5 。<br><img src="https://s1.ax1x.com/2020/03/16/8J1Y5j.png" alt="8J1Y5j.png" border="0" style="width:400px"><br>现在要从 Buffer 中将数据写到 Chanel 中，需要执行 flip() 方法。执行 flip() 方法后，position 变为 0， limit 变为 5 。</p>
+<p><img src="https://s1.ax1x.com/2020/03/16/8J14sK.png" alt="8J14sK.png" border="0" style="width:400px"><br>如果 Buffer 中写了 3 个字节到 Chanel 中，如果执行 clear() 方法，剩余的 2 个字节将被丢弃，Buffer 可重新读入数据。如果想保留 2 个字节后续处理，可执行 compact() ，Buffer 将拷贝 2 个字节到起始位置，将 position 置为 2 ，limit 置为 8 。<br><img src="https://s1.ax1x.com/2020/03/16/8J1LRI.png" alt="8J1LRI.png" border="0" style="width:400px"></p>
 <h3 id="大文件处理"><a href="#大文件处理" class="headerlink" title="大文件处理"></a>大文件处理</h3><blockquote>
 <p>关于 NIO MappedByteBuffer 的例子，我在测试的时候并没有得到和网上资料相同的结果，还不知道原因</p>
 </blockquote>
@@ -14412,7 +15951,7 @@ Map map = new HashMap(size);
 <pre><code class="java">Map map = Maps.newHashMapWithExpectedSize(1000);
 </code></pre>
 <p><strong>Key 的设计</strong><br>我们知道 Map 获取元素是通过 Key 来比较的，Integer/String 这些常见的类型都可以作为 key 。这些类都有一个共同的特点，即重写了 hashCode() 和 equals() 方法，保证了 key 的离散，并且这些类是 final 的，保证不会有子类重写这些方法。如果需要使用自定义对象类型的 key ，最好还是要重写 hashcode 和 equals 方法来保证元素分布是离散的。</p>
-<p><strong>几种同步的 HashMap 的区别</strong><br>Hashtable 对方法加 synchronized 。<br>Collections.synchronizedMap(new HashMap&lt;&gt;()); 使用 synchronized 代码块。<br>ConcurrentHashMap 利用分段锁，java8 之前是先根据 hash 定位到 segment 然后在 segment 内部使用 lock 加锁。Java8 是对 Node<k,v>[] 的元素（链表的第一个元素）加 synchronized 。</k,v></p>
+<p><strong>几种同步的 HashMap 的区别</strong><br>Hashtable 对方法加 synchronized 。<br>Collections.synchronizedMap(new HashMap&lt;&gt;()); 使用 synchronized 代码块。<br>ConcurrentHashMap 利用分段锁，java8 之前是先根据 hash 定位到 segment 然后在 segment 内部使用 lock 加锁。Java8 是对 Node<k,v>[] 的元素（链表的第一个元素）用 CAS 加锁，在链表内部使用 synchronized 进行同步。</k,v></p>
 ]]></content>
       
         <categories>
@@ -15194,205 +16733,123 @@ fi
     </entry>
     
     <entry>
-      <title><![CDATA[spring-data-elasticsearch 示例说明]]></title>
-      <url>/2016/07/15/spring-data-elasticsearch/</url>
-      <content type="html"><![CDATA[<h3 id="POM依赖"><a href="#POM依赖" class="headerlink" title="POM依赖"></a>POM依赖</h3><pre><code>&lt;properties&gt;
-    &lt;java-version&gt;1.7&lt;/java-version&gt;
-    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-    &lt;spring.version&gt;4.1.2.RELEASE&lt;/spring.version&gt;
-    &lt;elasticsearch.version&gt;1.4.4&lt;/elasticsearch.version&gt;
-    &lt;spring-data-elasticsearch.version&gt;1.3.4.RELEASE&lt;/spring-data-elasticsearch.version&gt;
-&lt;/properties&gt;
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.elasticsearch&lt;/groupId&gt;
-        &lt;artifactId&gt;elasticsearch&lt;/artifactId&gt;
-        &lt;version&gt;${elasticsearch.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-data-elasticsearch&lt;/artifactId&gt;
-        &lt;version&gt;${spring-data-elasticsearch.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</code></pre><h3 id="spring-配置文件"><a href="#spring-配置文件" class="headerlink" title="spring 配置文件"></a>spring 配置文件</h3><ol>
-<li><p>beans.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd&quot;&gt;
- &lt;context:annotation-config /&gt;
- &lt;!-- 自动扫描所有注解该路径 --&gt;
- &lt;!-- &lt;context:component-scan base-package=&quot;com.sf.heros.mq.*&quot; /&gt; --&gt;
- &lt;context:property-placeholder location=&quot;classpath:/config.properties&quot; /&gt;
+      <title><![CDATA[Ubuntu 16.04 软件安装及配置]]></title>
+      <url>/2016/07/15/ubuntu-16.04-software-installation-and-configuration/</url>
+      <content type="html"><![CDATA[<h3 id="0-更新源"><a href="#0-更新源" class="headerlink" title="0. 更新源"></a>0. 更新源</h3><pre><code>sudo cp /etc/apt/sources.list /etc/apt/sources.list_bak
+</code></pre><pre><code>deb http://mirrors.sohu.com/ubuntu/ xenial-updates main restricted
+deb-src http://mirrors.sohu.com/ubuntu/ xenial-updates main restricted
+deb http://mirrors.sohu.com/ubuntu/ xenial universe
+deb-src http://mirrors.sohu.com/ubuntu/ xenial universe
+deb http://mirrors.sohu.com/ubuntu/ xenial-updates universe
+deb-src http://mirrors.sohu.com/ubuntu/ xenial-updates universe
+deb http://mirrors.sohu.com/ubuntu/ xenial multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ xenial multiverse
+deb http://mirrors.sohu.com/ubuntu/ xenial-updates multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ xenial-updates multiverse
+deb http://mirrors.sohu.com/ubuntu/ xenial-backports main restricted universe multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ xenial-backports main restricted universe multiverse
 
- &lt;import resource=&quot;elasticsearch.xml&quot; /&gt;
-&lt;/beans&gt;
-</code></pre></li>
-<li><p>elasticsearch.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xmlns:elasticsearch=&quot;http://www.springframework.org/schema/data/elasticsearch&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch-1.0.xsd
-     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd&quot;&gt;
+deb http://mirror.bjtu.edu.cn/ubuntu/ xenial main multiverse restricted universe
+deb http://mirror.bjtu.edu.cn/ubuntu/ xenial-backports main multiverse restricted universe
+deb http://mirror.bjtu.edu.cn/ubuntu/ xenial-proposed main multiverse restricted universe
+deb http://mirror.bjtu.edu.cn/ubuntu/ xenial-security main multiverse restricted universe
+deb http://mirror.bjtu.edu.cn/ubuntu/ xenial-updates main multiverse restricted universe
+deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial main multiverse restricted universe
+deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial-backports main multiverse restricted universe
+deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial-proposed main multiverse restricted universe
+deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial-security main multiverse restricted universe
+deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial-updates main multiverse restricted universe
+</code></pre><pre><code>sudo apt-get update
+</code></pre><p>###1. 安装搜狗输入法</p>
+<blockquote>
+<p>sudo apt-get install fcitx libssh2-1</p>
+</blockquote>
+<p>####1.1 下载deb包</p>
+<p>####1.2 安装</p>
+<blockquote>
+<p>sudo dpkg -i sogoupinyin_2.0.0.0072_amd64.deb</p>
+<p>####1.3 设置<br>打开语言支持，键盘输入法系统选择fcitx。<br>    打开fcitx配置，添加搜狗输入法，注销后生效。</p>
+</blockquote>
+<p>###2. 安装Unity Tweak Tool<br>启动器图标单击收起。minimize single window applications on click</p>
+<p>###3. 删除libreoffice</p>
+<blockquote>
+<p>sudo apt-get remove libreoffice-common</p>
+<p>###4. 删除Amazon的链接<br>sudo apt-get remove unity-webapps-common</p>
+<p>###5. 深度清理用不上的应用程序<br>sudo apt-get remove thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku  landscape-client-ui-install</p>
+<p>sudo apt-get remove onboard deja-dup</p>
+</blockquote>
+<p>###6. 安装Terminator</p>
+<p>###7. 安装WPS Office</p>
+<pre><code>sudo dpkg -i wps-office_10.1.0.5444~a20_amd64.deb
+</code></pre><p>wps不能输入中文</p>
+<pre><code>sudo gedit /usr/bin/wps
 
- &lt;elasticsearch:transport-client id=&quot;client&quot; cluster-name=&quot;daas&quot; cluster-nodes=&quot;192.168.11.11:9300&quot;/&gt;
-
- &lt;bean name=&quot;elasticsearchTemplate&quot; class=&quot;org.springframework.data.elasticsearch.core.ElasticsearchTemplate&quot;&gt;
-     &lt;constructor-arg name=&quot;client&quot; ref=&quot;client&quot;/&gt;
- &lt;/bean&gt;
- &lt;bean name=&quot;entQueryService&quot; class=&quot;com.rolex.se.sample.service.EntQueryService&quot;&gt;
-     &lt;property name=&quot;repository&quot; ref=&quot;entQueryRepository&quot;/&gt;
-     &lt;property name=&quot;elasticsearchTemplate&quot; ref=&quot;elasticsearchTemplate&quot;/&gt;
- &lt;/bean&gt;
-
- &lt;elasticsearch:repositories base-package=&quot;com.rolex.se.sample.dao&quot;/&gt;
-&lt;/beans&gt;
-</code></pre><h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3></li>
-<li>实体类<br>```java<br>import org.springframework.data.annotation.Id;<br>import org.springframework.data.elasticsearch.annotations.*;</li>
-</ol>
-<p>import java.util.*;</p>
-<p>@Document(indexName = “pen”,type = “pen” , shards = 1, replicas = 0, indexStoreType = “memory”, refreshInterval = “-1”)<br>public class Pen {</p>
-<pre><code>@Id
-private String id;
-private String name;
-private Long price;
-@Field(type = FieldType.String, index = FieldIndex.not_analyzed)
-private Set&lt;String&gt; type = new HashSet&lt;String&gt;();
-
-public Set&lt;String&gt; getType() {
-    return type;
-}
-
-public void setType(Set&lt;String&gt; type) {
-    this.type = type;
-}
-
-public Pen(){}
-
-public Pen(String id, String name) {
-    this.id = id;
-    this.name = name;
-}
-
-public String getId() {
-    return id;
-}
-
-public void setId(String id) {
-    this.id = id;
-}
-
-public String getName() {
-    return name;
-}
-
-public void setName(String name) {
-    this.name = name;
-}
-
-public Long getPrice() {
-    return price;
-}
-
-public void setPrice(Long price) {
-    this.price = price;
-}
-</code></pre><p>}</p>
-<pre><code>
-2. 查询类
-```java
-import org.springframework.data.elasticsearch.entities.Pen;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
-
-public interface PenRepository extends ElasticsearchRepository&lt;Pen,String&gt; {
-}
-</code></pre><ol>
-<li>测试类<br>```java<br>import org.elasticsearch.index.query.BoolQueryBuilder;<br>import org.elasticsearch.index.query.QueryBuilders;<br>import org.junit.Before;<br>import org.junit.Test;<br>import org.junit.runner.RunWith;<br>import org.springframework.data.elasticsearch.entities.Pen;<br>import org.springframework.test.context.ContextConfiguration;<br>import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</li>
-</ol>
-<p>import javax.annotation.Resource;<br>import java.util.*;</p>
-<p>@RunWith(SpringJUnit4ClassRunner.class)<br>@ContextConfiguration(“classpath:/springContext-test.xml”)<br>public class PenRepositoryTest {</p>
-<pre><code>@Resource
-private PenRepository penRepository;
-
-@Before
-public void emptyData(){
-    penRepository.deleteAll();
-}
-
-@Test
-public void shouldIndexSingleBookEntity(){
-
-    Pen pen = new Pen();
-    pen.setId(&quot;123455&quot;);
-    pen.setName(&quot;LIMY&quot;);
-    Set&lt;String&gt; types = new HashSet&lt;String&gt;();
-    types.add(&quot;E_PRI_PERSON.NAME&quot;);
-    types.add(&quot;E_INV_INVESTMENT.SUBCONAM&quot;);
-    pen.setType(types);
-    //Indexing using sampleArticleRepository
-    penRepository.save(pen);
-    //lets try to search same record in elasticsearch
-    Pen pen2 = penRepository.findOne(pen.getId());
-
-    BoolQueryBuilder query = QueryBuilders.boolQuery();
-        query.must(QueryBuilders.queryString(&quot;E_PRI_PERSON.NAME&quot;).field(&quot;pen.type&quot;))
-        .must(QueryBuilders.queryString(&quot;E_INV_INVESTMENT.SUBCONAM&quot;).field(&quot;pen.type&quot;));
-
-
-
-    Iterable&lt;Pen&gt; res = penRepository.search(query);
-
-    Iterator&lt;Pen&gt; it = res.iterator();
-
-    while (it.hasNext()){
-        System.out.println(it.next().getType());
-    }
-
-}
-</code></pre><p>}<br>```</p>
-]]></content>
+#!/bin/bash
+export XMODIFIERS=&quot;@im=fcitx&quot;
+export QT_IM_MODULE=&quot;fcitx&quot;
+gOpt=
+#gOptExt=-multiply
+gTemplateExt=(&quot;wpt&quot; &quot;dot&quot; &quot;dotx&quot;)
+</code></pre><p>###8. 安装git</p>
+<blockquote>
+<p>sudo apt-get install git</p>
+<p>###9. 安装Java</p>
+<p>###10. 安装字体</p>
+<p>####10.1 将windows字体拷贝到/usr/share/fonts/windows/</p>
+<p>####10.2 修改权限</p>
+<pre><code>sudo chmod 664 /usr/share/fonts/windows/*
+</code></pre><p>####10.3 安装</p>
+<pre><code>cd /usr/share/fonts/windows/
+sudo mkfontscale
+sudo mkfontdir
+sudo fc-cache -fv
+</code></pre><p>###11. 安装haroopad<br>编辑区主题 paraiso-darkdark</p>
+<p>###12. 安装unrar<br>sudo apt-get install unrar</p>
+<p>###13. 安装idea</p>
+<p>###14. 安装mysql客户端navicat</p>
+<p>###15. 安装maven</p>
+<p>###16. 安装vmware</p>
+<p>###17. 安装docker 未完成</p>
+<p>###18. 安装node.js</p>
+<p>###19. 安装gulp</p>
+<p>###20. linux版百度网盘 bcloud</p>
+<p>###21. thunderbird</p>
+<p>####21.1 添加插件<br>Thunderbird Conversations<br>Manually Sort Folders<br>Color Folders<br>Extra Folder Columns<br>LookOut<br>ViewAbout<br>Theme Font &amp; Size Changer  </p>
+</blockquote>
+<p>####21.2 去除签名档之前的分割符<br>mail.identity.default.suppress_signature_separator=true</p>
+<p>###22. 关闭系统错误报告</p>
+<blockquote>
+<p>sudo rm /var/crash/*<br>    sudo gedit /etc/default/apport</p>
+</blockquote>
+<p>修改enabled=1为enabled=0</p>
+<p>###23. dash不搜索第三方应用</p>
+<blockquote>
+<p>wget -q -O - <a href="https://fixUbuntu.com/fixubuntu.sh" target="_blank" rel="external">https://fixUbuntu.com/fixubuntu.sh</a> | bash</p>
+</blockquote>
+<p>###24. chrome</p>
+<pre><code>sudo wget https://repo.fdzh.org/chrome/google-chrome.list -P /etc/apt/sources.list.d/
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install google-chrome-stable
+</code></pre><h3 id="25-plank"><a href="#25-plank" class="headerlink" title="25. plank"></a>25. plank</h3><p>安装</p>
+<pre><code>sudo add-apt-repository ppa:docky-core/stable
+sudo apt-get update
+sudo apt-get install plank
+</code></pre><p>设置开机启动<br>dash中搜索启动应用程序，添加plank路径/usr/bin/plank</p>
+<h3 id="26-关闭utc"><a href="#26-关闭utc" class="headerlink" title="26. 关闭utc"></a>26. 关闭utc</h3><p>/etc/default/rcS</p>
+<pre><code>utc=no
+</code></pre><h3 id="27-uGet"><a href="#27-uGet" class="headerlink" title="27. uGet"></a>27. uGet</h3><h3 id="28-fileZilla"><a href="#28-fileZilla" class="headerlink" title="28. fileZilla"></a>28. fileZilla</h3><h3 id="29-MySQL-Workbench"><a href="#29-MySQL-Workbench" class="headerlink" title="29. MySQL Workbench"></a>29. MySQL Workbench</h3>]]></content>
       
         <categories>
             
-            <category> Spring </category>
+            <category> Linux </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Elastic </tag>
-            
-            <tag> Spring </tag>
+            <tag> Ubuntu </tag>
             
         </tags>
         
@@ -15609,154 +17066,196 @@ public class RedisServiceTest {
     </entry>
     
     <entry>
-      <title><![CDATA[Ubuntu 16.04 软件安装及配置]]></title>
-      <url>/2016/07/15/ubuntu-16.04-software-installation-and-configuration/</url>
-      <content type="html"><![CDATA[<h3 id="0-更新源"><a href="#0-更新源" class="headerlink" title="0. 更新源"></a>0. 更新源</h3><pre><code>sudo cp /etc/apt/sources.list /etc/apt/sources.list_bak
-</code></pre><pre><code>deb http://mirrors.sohu.com/ubuntu/ xenial-updates main restricted
-deb-src http://mirrors.sohu.com/ubuntu/ xenial-updates main restricted
-deb http://mirrors.sohu.com/ubuntu/ xenial universe
-deb-src http://mirrors.sohu.com/ubuntu/ xenial universe
-deb http://mirrors.sohu.com/ubuntu/ xenial-updates universe
-deb-src http://mirrors.sohu.com/ubuntu/ xenial-updates universe
-deb http://mirrors.sohu.com/ubuntu/ xenial multiverse
-deb-src http://mirrors.sohu.com/ubuntu/ xenial multiverse
-deb http://mirrors.sohu.com/ubuntu/ xenial-updates multiverse
-deb-src http://mirrors.sohu.com/ubuntu/ xenial-updates multiverse
-deb http://mirrors.sohu.com/ubuntu/ xenial-backports main restricted universe multiverse
-deb-src http://mirrors.sohu.com/ubuntu/ xenial-backports main restricted universe multiverse
+      <title><![CDATA[spring-data-elasticsearch 示例说明]]></title>
+      <url>/2016/07/15/spring-data-elasticsearch/</url>
+      <content type="html"><![CDATA[<h3 id="POM依赖"><a href="#POM依赖" class="headerlink" title="POM依赖"></a>POM依赖</h3><pre><code>&lt;properties&gt;
+    &lt;java-version&gt;1.7&lt;/java-version&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;spring.version&gt;4.1.2.RELEASE&lt;/spring.version&gt;
+    &lt;elasticsearch.version&gt;1.4.4&lt;/elasticsearch.version&gt;
+    &lt;spring-data-elasticsearch.version&gt;1.3.4.RELEASE&lt;/spring-data-elasticsearch.version&gt;
+&lt;/properties&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.elasticsearch&lt;/groupId&gt;
+        &lt;artifactId&gt;elasticsearch&lt;/artifactId&gt;
+        &lt;version&gt;${elasticsearch.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-data-elasticsearch&lt;/artifactId&gt;
+        &lt;version&gt;${spring-data-elasticsearch.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><h3 id="spring-配置文件"><a href="#spring-配置文件" class="headerlink" title="spring 配置文件"></a>spring 配置文件</h3><ol>
+<li><p>beans.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd&quot;&gt;
+ &lt;context:annotation-config /&gt;
+ &lt;!-- 自动扫描所有注解该路径 --&gt;
+ &lt;!-- &lt;context:component-scan base-package=&quot;com.sf.heros.mq.*&quot; /&gt; --&gt;
+ &lt;context:property-placeholder location=&quot;classpath:/config.properties&quot; /&gt;
 
-deb http://mirror.bjtu.edu.cn/ubuntu/ xenial main multiverse restricted universe
-deb http://mirror.bjtu.edu.cn/ubuntu/ xenial-backports main multiverse restricted universe
-deb http://mirror.bjtu.edu.cn/ubuntu/ xenial-proposed main multiverse restricted universe
-deb http://mirror.bjtu.edu.cn/ubuntu/ xenial-security main multiverse restricted universe
-deb http://mirror.bjtu.edu.cn/ubuntu/ xenial-updates main multiverse restricted universe
-deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial main multiverse restricted universe
-deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial-backports main multiverse restricted universe
-deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial-proposed main multiverse restricted universe
-deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial-security main multiverse restricted universe
-deb-src http://mirror.bjtu.edu.cn/ubuntu/ xenial-updates main multiverse restricted universe
-</code></pre><pre><code>sudo apt-get update
-</code></pre><p>###1. 安装搜狗输入法</p>
-<blockquote>
-<p>sudo apt-get install fcitx libssh2-1</p>
-</blockquote>
-<p>####1.1 下载deb包</p>
-<p>####1.2 安装</p>
-<blockquote>
-<p>sudo dpkg -i sogoupinyin_2.0.0.0072_amd64.deb</p>
-<p>####1.3 设置<br>打开语言支持，键盘输入法系统选择fcitx。<br>    打开fcitx配置，添加搜狗输入法，注销后生效。</p>
-</blockquote>
-<p>###2. 安装Unity Tweak Tool<br>启动器图标单击收起。minimize single window applications on click</p>
-<p>###3. 删除libreoffice</p>
-<blockquote>
-<p>sudo apt-get remove libreoffice-common</p>
-<p>###4. 删除Amazon的链接<br>sudo apt-get remove unity-webapps-common</p>
-<p>###5. 深度清理用不上的应用程序<br>sudo apt-get remove thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku  landscape-client-ui-install</p>
-<p>sudo apt-get remove onboard deja-dup</p>
-</blockquote>
-<p>###6. 安装Terminator</p>
-<p>###7. 安装WPS Office</p>
-<pre><code>sudo dpkg -i wps-office_10.1.0.5444~a20_amd64.deb
-</code></pre><p>wps不能输入中文</p>
-<pre><code>sudo gedit /usr/bin/wps
+ &lt;import resource=&quot;elasticsearch.xml&quot; /&gt;
+&lt;/beans&gt;
+</code></pre></li>
+<li><p>elasticsearch.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:elasticsearch=&quot;http://www.springframework.org/schema/data/elasticsearch&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch-1.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd&quot;&gt;
 
-#!/bin/bash
-export XMODIFIERS=&quot;@im=fcitx&quot;
-export QT_IM_MODULE=&quot;fcitx&quot;
-gOpt=
-#gOptExt=-multiply
-gTemplateExt=(&quot;wpt&quot; &quot;dot&quot; &quot;dotx&quot;)
-</code></pre><p>###8. 安装git</p>
-<blockquote>
-<p>sudo apt-get install git</p>
-<p>###9. 安装Java</p>
-<p>###10. 安装字体</p>
-<p>####10.1 将windows字体拷贝到/usr/share/fonts/windows/</p>
-<p>####10.2 修改权限</p>
-<pre><code>sudo chmod 664 /usr/share/fonts/windows/*
-</code></pre><p>####10.3 安装</p>
-<pre><code>cd /usr/share/fonts/windows/
-sudo mkfontscale
-sudo mkfontdir
-sudo fc-cache -fv
-</code></pre><p>###11. 安装haroopad<br>编辑区主题 paraiso-darkdark</p>
-<p>###12. 安装unrar<br>sudo apt-get install unrar</p>
-<p>###13. 安装idea</p>
-<p>###14. 安装mysql客户端navicat</p>
-<p>###15. 安装maven</p>
-<p>###16. 安装vmware</p>
-<p>###17. 安装docker 未完成</p>
-<p>###18. 安装node.js</p>
-<p>###19. 安装gulp</p>
-<p>###20. linux版百度网盘 bcloud</p>
-<p>###21. thunderbird</p>
-<p>####21.1 添加插件<br>Thunderbird Conversations<br>Manually Sort Folders<br>Color Folders<br>Extra Folder Columns<br>LookOut<br>ViewAbout<br>Theme Font &amp; Size Changer  </p>
-</blockquote>
-<p>####21.2 去除签名档之前的分割符<br>mail.identity.default.suppress_signature_separator=true</p>
-<p>###22. 关闭系统错误报告</p>
-<blockquote>
-<p>sudo rm /var/crash/*<br>    sudo gedit /etc/default/apport</p>
-</blockquote>
-<p>修改enabled=1为enabled=0</p>
-<p>###23. dash不搜索第三方应用</p>
-<blockquote>
-<p>wget -q -O - <a href="https://fixUbuntu.com/fixubuntu.sh" target="_blank" rel="external">https://fixUbuntu.com/fixubuntu.sh</a> | bash</p>
-</blockquote>
-<p>###24. chrome</p>
-<pre><code>sudo wget https://repo.fdzh.org/chrome/google-chrome.list -P /etc/apt/sources.list.d/
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install google-chrome-stable
-</code></pre><h3 id="25-plank"><a href="#25-plank" class="headerlink" title="25. plank"></a>25. plank</h3><p>安装</p>
-<pre><code>sudo add-apt-repository ppa:docky-core/stable
-sudo apt-get update
-sudo apt-get install plank
-</code></pre><p>设置开机启动<br>dash中搜索启动应用程序，添加plank路径/usr/bin/plank</p>
-<h3 id="26-关闭utc"><a href="#26-关闭utc" class="headerlink" title="26. 关闭utc"></a>26. 关闭utc</h3><p>/etc/default/rcS</p>
-<pre><code>utc=no
-</code></pre><h3 id="27-uGet"><a href="#27-uGet" class="headerlink" title="27. uGet"></a>27. uGet</h3><h3 id="28-fileZilla"><a href="#28-fileZilla" class="headerlink" title="28. fileZilla"></a>28. fileZilla</h3><h3 id="29-MySQL-Workbench"><a href="#29-MySQL-Workbench" class="headerlink" title="29. MySQL Workbench"></a>29. MySQL Workbench</h3>]]></content>
+ &lt;elasticsearch:transport-client id=&quot;client&quot; cluster-name=&quot;daas&quot; cluster-nodes=&quot;192.168.11.11:9300&quot;/&gt;
+
+ &lt;bean name=&quot;elasticsearchTemplate&quot; class=&quot;org.springframework.data.elasticsearch.core.ElasticsearchTemplate&quot;&gt;
+     &lt;constructor-arg name=&quot;client&quot; ref=&quot;client&quot;/&gt;
+ &lt;/bean&gt;
+ &lt;bean name=&quot;entQueryService&quot; class=&quot;com.rolex.se.sample.service.EntQueryService&quot;&gt;
+     &lt;property name=&quot;repository&quot; ref=&quot;entQueryRepository&quot;/&gt;
+     &lt;property name=&quot;elasticsearchTemplate&quot; ref=&quot;elasticsearchTemplate&quot;/&gt;
+ &lt;/bean&gt;
+
+ &lt;elasticsearch:repositories base-package=&quot;com.rolex.se.sample.dao&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3></li>
+<li>实体类<br>```java<br>import org.springframework.data.annotation.Id;<br>import org.springframework.data.elasticsearch.annotations.*;</li>
+</ol>
+<p>import java.util.*;</p>
+<p>@Document(indexName = “pen”,type = “pen” , shards = 1, replicas = 0, indexStoreType = “memory”, refreshInterval = “-1”)<br>public class Pen {</p>
+<pre><code>@Id
+private String id;
+private String name;
+private Long price;
+@Field(type = FieldType.String, index = FieldIndex.not_analyzed)
+private Set&lt;String&gt; type = new HashSet&lt;String&gt;();
+
+public Set&lt;String&gt; getType() {
+    return type;
+}
+
+public void setType(Set&lt;String&gt; type) {
+    this.type = type;
+}
+
+public Pen(){}
+
+public Pen(String id, String name) {
+    this.id = id;
+    this.name = name;
+}
+
+public String getId() {
+    return id;
+}
+
+public void setId(String id) {
+    this.id = id;
+}
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public Long getPrice() {
+    return price;
+}
+
+public void setPrice(Long price) {
+    this.price = price;
+}
+</code></pre><p>}</p>
+<pre><code>
+2. 查询类
+```java
+import org.springframework.data.elasticsearch.entities.Pen;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+public interface PenRepository extends ElasticsearchRepository&lt;Pen,String&gt; {
+}
+</code></pre><ol>
+<li>测试类<br>```java<br>import org.elasticsearch.index.query.BoolQueryBuilder;<br>import org.elasticsearch.index.query.QueryBuilders;<br>import org.junit.Before;<br>import org.junit.Test;<br>import org.junit.runner.RunWith;<br>import org.springframework.data.elasticsearch.entities.Pen;<br>import org.springframework.test.context.ContextConfiguration;<br>import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</li>
+</ol>
+<p>import javax.annotation.Resource;<br>import java.util.*;</p>
+<p>@RunWith(SpringJUnit4ClassRunner.class)<br>@ContextConfiguration(“classpath:/springContext-test.xml”)<br>public class PenRepositoryTest {</p>
+<pre><code>@Resource
+private PenRepository penRepository;
+
+@Before
+public void emptyData(){
+    penRepository.deleteAll();
+}
+
+@Test
+public void shouldIndexSingleBookEntity(){
+
+    Pen pen = new Pen();
+    pen.setId(&quot;123455&quot;);
+    pen.setName(&quot;LIMY&quot;);
+    Set&lt;String&gt; types = new HashSet&lt;String&gt;();
+    types.add(&quot;E_PRI_PERSON.NAME&quot;);
+    types.add(&quot;E_INV_INVESTMENT.SUBCONAM&quot;);
+    pen.setType(types);
+    //Indexing using sampleArticleRepository
+    penRepository.save(pen);
+    //lets try to search same record in elasticsearch
+    Pen pen2 = penRepository.findOne(pen.getId());
+
+    BoolQueryBuilder query = QueryBuilders.boolQuery();
+        query.must(QueryBuilders.queryString(&quot;E_PRI_PERSON.NAME&quot;).field(&quot;pen.type&quot;))
+        .must(QueryBuilders.queryString(&quot;E_INV_INVESTMENT.SUBCONAM&quot;).field(&quot;pen.type&quot;));
+
+
+
+    Iterable&lt;Pen&gt; res = penRepository.search(query);
+
+    Iterator&lt;Pen&gt; it = res.iterator();
+
+    while (it.hasNext()){
+        System.out.println(it.next().getType());
+    }
+
+}
+</code></pre><p>}<br>```</p>
+]]></content>
       
         <categories>
             
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Ubuntu </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Elasticsearch 添加 head 插件]]></title>
-      <url>/2016/07/15/docker-elasticsearch-head-plugin/</url>
-      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir dockerfiles/elasticsearch
-touch Dockerfile
-wget -O elasticsearch-head-master.zip -c https://codeload.github.com/mobz/elasticsearch-head/zip/master
-</code></pre><p><strong><em>Dockerfile</em></strong></p>
-<pre><code>FROM elasticsearch
-MAINTAINER rolex
-
-ADD elasticsearch-head-master.zip /elasticsearch-head-master.zip
-
-RUN /usr/share/elasticsearch/bin/plugin install file:/elasticsearch-head-master.zip
-
-RUN rm -f /elasticsearch-head-master.zip
-
-EXPOSE 9200 9300
-
-CMD [/usr/share/elasticsearch/bin/elasticsearch]
-</code></pre><h3 id="2-创建docker镜像"><a href="#2-创建docker镜像" class="headerlink" title="2. 创建docker镜像"></a>2. 创建docker镜像</h3><pre><code>sudo docker build -t elasticsearch-2.3 .
-</code></pre><h3 id="3-启动"><a href="#3-启动" class="headerlink" title="3. 启动"></a>3. 启动</h3><pre><code>sudo docker run elasticsearch-2.3 --publish=[19200:9200,19300:9300]
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
+            <category> Spring </category>
             
         </categories>
         
@@ -15765,7 +17264,7 @@ CMD [/usr/share/elasticsearch/bin/elasticsearch]
             
             <tag> Elastic </tag>
             
-            <tag> Docker </tag>
+            <tag> Spring </tag>
             
         </tags>
         
@@ -15899,9 +17398,53 @@ exec ${CATALINA_HOME}/bin/catalina.sh run
         
         <tags>
             
+            <tag> Docker </tag>
+            
             <tag> Redis </tag>
             
-            <tag> Docker </tag>
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Windows 安装 compass and scss]]></title>
+      <url>/2016/07/15/installing-compass-and-scss-on-windows/</url>
+      <content type="html"><![CDATA[<h3 id="1-安装ruby"><a href="#1-安装ruby" class="headerlink" title="1. 安装ruby"></a>1. 安装ruby</h3><p>compass 是 ruby 的插件，需要先安装 ruby 环境。</p>
+<ol>
+<li>下载ruby</li>
+</ol>
+<p><a href="http://rubyinstaller.org/" target="_blank" rel="external">http://rubyinstaller.org/</a></p>
+<ol>
+<li>添加环境变量<br>安装完成后添加环境变量<pre><code>RUBY_HOME=D:\Ruby23-x64
+path=$path;%RUBY_HOME%\bin
+</code></pre>执行ruby -v 显示版本号则安装成功。</li>
+</ol>
+<h3 id="2-添加证书"><a href="#2-添加证书" class="headerlink" title="2. 添加证书"></a>2. 添加证书</h3><ol>
+<li>下载证书</li>
+</ol>
+<p>从<a href="http://curl.haxx.se/ca/cacert.pem" target="_blank" rel="external">http://curl.haxx.se/ca/cacert.pem</a>下载证书，保存到ruby安装目录。</p>
+<ol>
+<li>添加环境变量<pre><code>SSL_CERT_FILE=D:\Ruby23-x64\cacert.pem
+</code></pre><h3 id="3-修改源"><a href="#3-修改源" class="headerlink" title="3. 修改源"></a>3. 修改源</h3><pre><code>gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+gem sources -l
+</code></pre><h3 id="4-安装compass"><a href="#4-安装compass" class="headerlink" title="4. 安装compass"></a>4. 安装compass</h3><pre><code>gem install compass
+</code></pre>sass -v显示版本号则安装成功。正常情况compass和scss都会安装。</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Compass </tag>
+            
+            <tag> Scss </tag>
             
         </tags>
         
@@ -15982,31 +17525,27 @@ ssh dockerone@localhost -p 10122
     </entry>
     
     <entry>
-      <title><![CDATA[Windows 安装 compass and scss]]></title>
-      <url>/2016/07/15/installing-compass-and-scss-on-windows/</url>
-      <content type="html"><![CDATA[<h3 id="1-安装ruby"><a href="#1-安装ruby" class="headerlink" title="1. 安装ruby"></a>1. 安装ruby</h3><p>compass 是 ruby 的插件，需要先安装 ruby 环境。</p>
-<ol>
-<li>下载ruby</li>
-</ol>
-<p><a href="http://rubyinstaller.org/" target="_blank" rel="external">http://rubyinstaller.org/</a></p>
-<ol>
-<li>添加环境变量<br>安装完成后添加环境变量<pre><code>RUBY_HOME=D:\Ruby23-x64
-path=$path;%RUBY_HOME%\bin
-</code></pre>执行ruby -v 显示版本号则安装成功。</li>
-</ol>
-<h3 id="2-添加证书"><a href="#2-添加证书" class="headerlink" title="2. 添加证书"></a>2. 添加证书</h3><ol>
-<li>下载证书</li>
-</ol>
-<p>从<a href="http://curl.haxx.se/ca/cacert.pem" target="_blank" rel="external">http://curl.haxx.se/ca/cacert.pem</a>下载证书，保存到ruby安装目录。</p>
-<ol>
-<li>添加环境变量<pre><code>SSL_CERT_FILE=D:\Ruby23-x64\cacert.pem
-</code></pre><h3 id="3-修改源"><a href="#3-修改源" class="headerlink" title="3. 修改源"></a>3. 修改源</h3><pre><code>gem sources --remove https://rubygems.org/
-gem sources -a https://ruby.taobao.org/
-gem sources -l
-</code></pre><h3 id="4-安装compass"><a href="#4-安装compass" class="headerlink" title="4. 安装compass"></a>4. 安装compass</h3><pre><code>gem install compass
-</code></pre>sass -v显示版本号则安装成功。正常情况compass和scss都会安装。</li>
-</ol>
-]]></content>
+      <title><![CDATA[Elasticsearch 添加 head 插件]]></title>
+      <url>/2016/07/15/docker-elasticsearch-head-plugin/</url>
+      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir dockerfiles/elasticsearch
+touch Dockerfile
+wget -O elasticsearch-head-master.zip -c https://codeload.github.com/mobz/elasticsearch-head/zip/master
+</code></pre><p><strong><em>Dockerfile</em></strong></p>
+<pre><code>FROM elasticsearch
+MAINTAINER rolex
+
+ADD elasticsearch-head-master.zip /elasticsearch-head-master.zip
+
+RUN /usr/share/elasticsearch/bin/plugin install file:/elasticsearch-head-master.zip
+
+RUN rm -f /elasticsearch-head-master.zip
+
+EXPOSE 9200 9300
+
+CMD [/usr/share/elasticsearch/bin/elasticsearch]
+</code></pre><h3 id="2-创建docker镜像"><a href="#2-创建docker镜像" class="headerlink" title="2. 创建docker镜像"></a>2. 创建docker镜像</h3><pre><code>sudo docker build -t elasticsearch-2.3 .
+</code></pre><h3 id="3-启动"><a href="#3-启动" class="headerlink" title="3. 启动"></a>3. 启动</h3><pre><code>sudo docker run elasticsearch-2.3 --publish=[19200:9200,19300:9300]
+</code></pre>]]></content>
       
         <categories>
             
@@ -16017,9 +17556,50 @@ gem sources -l
         
         <tags>
             
-            <tag> Compass </tag>
+            <tag> Elastic </tag>
             
-            <tag> Scss </tag>
+            <tag> Docker </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Elasticsearch-1.4.1 集群环境搭建]]></title>
+      <url>/2016/07/14/elasticsearch-1.4.1-cluster/</url>
+      <content type="html"><![CDATA[<p>CentOS 6.4，机器 node3（10.20.20.203）,node4（10.20.20.204）</p>
+<h3 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1. 安装jdk"></a>1. 安装jdk</h3><p>已安装跳过。</p>
+<h3 id="2-下载"><a href="#2-下载" class="headerlink" title="2. 下载"></a>2. 下载</h3><p><a href="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz" title="elasticsearch-1.4.1" target="_blank" rel="external">https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz</a></p>
+<h3 id="3-解压"><a href="#3-解压" class="headerlink" title="3. 解压"></a>3. 解压</h3><pre><code>tar -zxf elasticsearch-1.4.1.tar.gz
+</code></pre><h3 id="4-配置"><a href="#4-配置" class="headerlink" title="4. 配置"></a>4. 配置</h3><p>分别修改2台机器配置</p>
+<p>node3</p>
+<pre><code>cluster.name: elasticsearch
+node.name: node3
+network.host: 10.20.20.203  
+discovery.zen.ping.unicast.hosts: [&quot;10.20.20.203&quot;]
+</code></pre><p>node4</p>
+<pre><code>cluster.name: elasticsearch
+node.name: node4
+network.host: 10.20.20.204  
+discovery.zen.ping.unicast.hosts: [&quot;10.20.20.204&quot;]
+</code></pre><h3 id="5-安装插件"><a href="#5-安装插件" class="headerlink" title="5. 安装插件"></a>5. 安装插件</h3><h4 id="5-1-下载"><a href="#5-1-下载" class="headerlink" title="5.1 下载"></a>5.1 下载</h4><pre><code>wget https://github.com/mobz/elasticsearch-head.git
+</code></pre><h4 id="5-2-安装"><a href="#5-2-安装" class="headerlink" title="5.2 安装"></a>5.2 安装</h4><p>将插件elasticsearch-head-master.zip拷贝到plugin,解压缩</p>
+<pre><code>unzip elasticsearch-head-master.zip
+mv elasticsearch-head-master head
+</code></pre><p>2台机器执行相同操作</p>
+<h3 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h3><pre><code>./bin/elasticsearch &amp;
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Elastic </tag>
             
         </tags>
         
@@ -16145,47 +17725,6 @@ hexo d
         <tags>
             
             <tag> Hexo </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Elasticsearch-1.4.1 集群环境搭建]]></title>
-      <url>/2016/07/14/elasticsearch-1.4.1-cluster/</url>
-      <content type="html"><![CDATA[<p>CentOS 6.4，机器 node3（10.20.20.203）,node4（10.20.20.204）</p>
-<h3 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1. 安装jdk"></a>1. 安装jdk</h3><p>已安装跳过。</p>
-<h3 id="2-下载"><a href="#2-下载" class="headerlink" title="2. 下载"></a>2. 下载</h3><p><a href="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz" title="elasticsearch-1.4.1" target="_blank" rel="external">https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz</a></p>
-<h3 id="3-解压"><a href="#3-解压" class="headerlink" title="3. 解压"></a>3. 解压</h3><pre><code>tar -zxf elasticsearch-1.4.1.tar.gz
-</code></pre><h3 id="4-配置"><a href="#4-配置" class="headerlink" title="4. 配置"></a>4. 配置</h3><p>分别修改2台机器配置</p>
-<p>node3</p>
-<pre><code>cluster.name: elasticsearch
-node.name: node3
-network.host: 10.20.20.203  
-discovery.zen.ping.unicast.hosts: [&quot;10.20.20.203&quot;]
-</code></pre><p>node4</p>
-<pre><code>cluster.name: elasticsearch
-node.name: node4
-network.host: 10.20.20.204  
-discovery.zen.ping.unicast.hosts: [&quot;10.20.20.204&quot;]
-</code></pre><h3 id="5-安装插件"><a href="#5-安装插件" class="headerlink" title="5. 安装插件"></a>5. 安装插件</h3><h4 id="5-1-下载"><a href="#5-1-下载" class="headerlink" title="5.1 下载"></a>5.1 下载</h4><pre><code>wget https://github.com/mobz/elasticsearch-head.git
-</code></pre><h4 id="5-2-安装"><a href="#5-2-安装" class="headerlink" title="5.2 安装"></a>5.2 安装</h4><p>将插件elasticsearch-head-master.zip拷贝到plugin,解压缩</p>
-<pre><code>unzip elasticsearch-head-master.zip
-mv elasticsearch-head-master head
-</code></pre><p>2台机器执行相同操作</p>
-<h3 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h3><pre><code>./bin/elasticsearch &amp;
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Elastic </tag>
             
         </tags>
         
@@ -16405,27 +17944,6 @@ spring.redis.pool.max-wait=-1
     </entry>
     
     <entry>
-      <title><![CDATA[Spark Shuffle 操作]]></title>
-      <url>/2016/05/20/spark-shuffle/</url>
-      <content type="html"><![CDATA[<p>Shuffle 是 Spark 中重新分布数据的机制，它会在机器之间复制数据，是一个复杂且开销很大的操作。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Spark </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Spark </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Spark 存储管理]]></title>
       <url>/2016/05/20/spark-store-management/</url>
       <content type="html"><![CDATA[<p>将数据集持久化或缓存到内存里是 Spark 的重要能力之一。在持久化数据集时，在内存中参与计算的数据集被存储在每一个节点上，其他的 action 可以快速的重用这些数据集。缓存是迭代算法和快速交互的关键。</p>
@@ -16445,6 +17963,27 @@ spring.redis.pool.max-wait=-1
 <h3 id="持久化-shuffle"><a href="#持久化-shuffle" class="headerlink" title="持久化 shuffle"></a>持久化 shuffle</h3><p>Spark 会在执行 shuffle 操作时自动持久化一些中间数据。这样可以避免 shuffle 失败时重新计算整个输入。如果确定结果会被重用，建议对数据集进行持久化。</p>
 <h3 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h3><p>通常，函数传递到 Spark 集群节点执行，函数中使用所有变量的独立副本，这些变量被拷贝到每一个节点，集群节点上的变量变更不会影响驱动程序，因为读写共享的变量访问时低效的。但 Spark 提供了两种有限类型的共享变量：广播变量和累加器。</p>
 <h4 id="广播变量"><a href="#广播变量" class="headerlink" title="广播变量"></a>广播变量</h4><p>广播变量允许程序保持一份只读的变量缓存在机器上，而不是把变量拷贝到任务中。Spark 的 action 是分阶段执行的，每个阶段任务需要使用的数据被自动广播。广播数据以序列化的形式缓存并在任务执行前反序列化。但多个阶段的任务需要相同的数据时，广播变量更加有效。当广播变量创建后，会在方法中代替变量值，以保证不会被多次发送。广播变量在发送到节点后不能再被修改。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Spark </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spark </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Spark Shuffle 操作]]></title>
+      <url>/2016/05/20/spark-shuffle/</url>
+      <content type="html"><![CDATA[<p>Shuffle 是 Spark 中重新分布数据的机制，它会在机器之间复制数据，是一个复杂且开销很大的操作。</p>
 ]]></content>
       
         <categories>
@@ -22543,32 +24082,6 @@ public class BitmapBackgroundButtonField extends Field {
     </entry>
     
     <entry>
-      <title><![CDATA[Contact]]></title>
-      <url>/contact/index.html</url>
-      <content type="html"><![CDATA[<h2>Let us help</h2>
-<p>Lorem ipsum sdolor sic amit, bolero carles.</p>
-<!-- BEGIN FORM-->
-<form action="#" role="form">
-  <div class="form-group">
-    <label for="contacts-name">Name</label>
-    <input type="text" class="form-control" id="contacts-name">
-  </div>
-  <div class="form-group">
-    <label for="contacts-email">Email</label>
-    <input type="email" class="form-control" id="contacts-email">
-  </div>
-  <div class="form-group">
-    <label for="contacts-message">Message</label>
-    <textarea class="form-control" rows="5" id="contacts-message"></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Send</button>
-  <button type="button" class="btn btn-default">Cancel</button>
-</form>
-<!-- END FORM-->
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[About Us]]></title>
       <url>/about/index.html</url>
       <content type="html"><![CDATA[<!-- BEGIN SIDEBAR & CONTENT -->
@@ -22672,17 +24185,28 @@ public class BitmapBackgroundButtonField extends Field {
     </entry>
     
     <entry>
-      <title></title>
-      <url>/java/java.html</url>
-      <content type="html"><![CDATA[<div class="container">
-  <ul class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li class="active">Archive</li>
-  </ul>
-<div id="main">
-  
-</div>
-</div>
+      <title><![CDATA[Contact]]></title>
+      <url>/contact/index.html</url>
+      <content type="html"><![CDATA[<h2>Let us help</h2>
+<p>Lorem ipsum sdolor sic amit, bolero carles.</p>
+<!-- BEGIN FORM-->
+<form action="#" role="form">
+  <div class="form-group">
+    <label for="contacts-name">Name</label>
+    <input type="text" class="form-control" id="contacts-name">
+  </div>
+  <div class="form-group">
+    <label for="contacts-email">Email</label>
+    <input type="email" class="form-control" id="contacts-email">
+  </div>
+  <div class="form-group">
+    <label for="contacts-message">Message</label>
+    <textarea class="form-control" rows="5" id="contacts-message"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Send</button>
+  <button type="button" class="btn btn-default">Cancel</button>
+</form>
+<!-- END FORM-->
 ]]></content>
     </entry>
     
@@ -23041,6 +24565,21 @@ public class BitmapBackgroundButtonField extends Field {
   </div>
 </div>
 
+]]></content>
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/java/java.html</url>
+      <content type="html"><![CDATA[<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li class="active">Archive</li>
+  </ul>
+<div id="main">
+  
+</div>
+</div>
 ]]></content>
     </entry>
     

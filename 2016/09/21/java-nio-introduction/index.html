@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="BSYONLINE">
 <meta property="og:description" content="Java BIO 我们已经很熟悉了，它实现起来比较简单，一个线程只能维护一个连接。但是弊端也很明显，即服务器开销大，资源浪费严重。Java NIO 是在JDK 1.4中引入的。Java NIO 弥补了原来的 I/O 的不足，它在标准 Java 代码中提供了高速的、面向块的 I/O。Java I/O 库与 Java NIO 最重要的区别是数据打包和传输的方式的不同，Java I/O 以流的方式处理数">
 <meta property="og:image" content="https://github.com/bsyonline/pic/blob/master/20191203/20191209205325.png?raw=true">
-<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/buffer init_12.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/buffer_write_1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/buffer_flip_1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/buffer_compact.png">
-<meta property="og:updated_time" content="2020-03-02T09:05:06.243Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/16/8J1BrT.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/16/8J1Y5j.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/16/8J14sK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/16/8J1LRI.png">
+<meta property="og:updated_time" content="2020-03-16T07:31:27.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java NIO 详解">
 <meta name="twitter:description" content="Java BIO 我们已经很熟悉了，它实现起来比较简单，一个线程只能维护一个连接。但是弊端也很明显，即服务器开销大，资源浪费严重。Java NIO 是在JDK 1.4中引入的。Java NIO 弥补了原来的 I/O 的不足，它在标准 Java 代码中提供了高速的、面向块的 I/O。Java I/O 库与 Java NIO 最重要的区别是数据打包和传输的方式的不同，Java I/O 以流的方式处理数">
@@ -228,9 +228,9 @@ public static void main(String[] args) throws Exception {
 <li>position<br>position 指示了 Buffer 中下一个可操作的数据的位置。</li>
 <li>mark<br>临时的 position 。</li>
 </ul>
-<p>以上边代码为例。当 new 一个 ByteBuffer 时，首先将 capacity 和 limit 的大小都设置为 8 ，mark 为 -1， position 为 0 ，初始化完成 capacity 的大小就不变了。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/buffer init_12.png" alt=""><br>有了 Buffer 就可以开始写数据了。从 Chanel 读 5 个字节到 Buffer 中，position 变为 5 。</p>
-<p><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/buffer_write_1.png" alt=""><br>现在要从 Buffer 中将数据写到 Chanel 中，需要执行 flip() 方法。执行 flip() 方法后，position 变为 0， limit 变为 5 。</p>
-<p><img src="https://raw.githubusercontent.com/bsyonline/pic/master/buffer_flip_1.png" alt=""><br>如果 Buffer 中写了 3 个字节到 Chanel 中，如果执行 clear() 方法，剩余的 2 个字节将被丢弃，Buffer 可重新读入数据。如果想保留 2 个字节后续处理，可执行 compact() ，Buffer 将拷贝 2 个字节到起始位置，将 position 置为 2 ，limit 置为 8 。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20181014/buffer_compact.png" alt=""></p>
+<p>以上边代码为例。当 new 一个 ByteBuffer 时，首先将 capacity 和 limit 的大小都设置为 8 ，mark 为 -1， position 为 0 ，初始化完成 capacity 的大小就不变了。</p>
+<p><img src="https://s1.ax1x.com/2020/03/16/8J1BrT.png" alt="8J1BrT.png" border="0" style="width:400px"><br>有了 Buffer 就可以开始写数据了。从 Chanel 读 5 个字节到 Buffer 中，position 变为 5 。<br><img src="https://s1.ax1x.com/2020/03/16/8J1Y5j.png" alt="8J1Y5j.png" border="0" style="width:400px"><br>现在要从 Buffer 中将数据写到 Chanel 中，需要执行 flip() 方法。执行 flip() 方法后，position 变为 0， limit 变为 5 。</p>
+<p><img src="https://s1.ax1x.com/2020/03/16/8J14sK.png" alt="8J14sK.png" border="0" style="width:400px"><br>如果 Buffer 中写了 3 个字节到 Chanel 中，如果执行 clear() 方法，剩余的 2 个字节将被丢弃，Buffer 可重新读入数据。如果想保留 2 个字节后续处理，可执行 compact() ，Buffer 将拷贝 2 个字节到起始位置，将 position 置为 2 ，limit 置为 8 。<br><img src="https://s1.ax1x.com/2020/03/16/8J1LRI.png" alt="8J1LRI.png" border="0" style="width:400px"></p>
 <h3 id="大文件处理"><a href="#大文件处理" class="headerlink" title="大文件处理"></a>大文件处理</h3><blockquote>
 <p>关于 NIO MappedByteBuffer 的例子，我在测试的时候并没有得到和网上资料相同的结果，还不知道原因</p>
 </blockquote>
@@ -324,15 +324,11 @@ try (FileChannel channel = FileChannel.open(Paths.get(&quot;src/c.txt&quot;),
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -340,15 +336,7 @@ try (FileChannel channel = FileChannel.open(Paths.get(&quot;src/c.txt&quot;),
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -356,11 +344,23 @@ try (FileChannel channel = FileChannel.open(Paths.get(&quot;src/c.txt&quot;),
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -368,7 +368,7 @@ try (FileChannel channel = FileChannel.open(Paths.get(&quot;src/c.txt&quot;),
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -389,6 +389,10 @@ try (FileChannel channel = FileChannel.open(Paths.get(&quot;src/c.txt&quot;),
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

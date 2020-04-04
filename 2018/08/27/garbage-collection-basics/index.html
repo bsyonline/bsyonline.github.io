@@ -22,7 +22,7 @@
 <meta property="og:description" content="垃圾对象判断垃圾回收第一步就是确定哪些对象需要被回收，方法有 2 种：
 
 引用计数引用计数就是在全局维护一个 Map 保存对象的引用，当引用一个对象的时候，就给对应的 value 加 1 ，当这个引用失效的时候，就将对应的 value 减 1 。当 value 的值为 0 的时候，就说明此刻该对象是垃圾对象，可以被回收掉。引用计数的缺点：1） 无法解决循环引用的问题。2） 引用计数需要实时更新，开">
-<meta property="og:updated_time" content="2020-03-02T08:59:52.021Z">
+<meta property="og:updated_time" content="2020-03-12T08:25:45.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Garbage Collection Basics">
 <meta name="twitter:description" content="垃圾对象判断垃圾回收第一步就是确定哪些对象需要被回收，方法有 2 种：
@@ -194,7 +194,7 @@
 <li><p><a href="../../../../2020/02/23/g1-garbage-collector">G1 收集器</a></p>
 </li>
 </ul>
-<p>G1 是面向服务端的收集器，</p>
+<h4 id="串行，并行和并发"><a href="#串行，并行和并发" class="headerlink" title="串行，并行和并发"></a>串行，并行和并发</h4><p>串行：应用和 GC 是顺序执行的，在 GC 的时候应用需要停止，只有一个线程在 GC 。<br>并行：应用和 GC 是顺序执行的，在 GC 的时候应用需要停止，有多个线程在 GC 。<br>并发：应用和 GC 是同时执行的，可能同时执行，也可能交替执行。</p>
 
       
     </div>
@@ -209,7 +209,7 @@
     <a href="/2018/08/29/eureka-region-and-zone/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
       <div class="article-nav-title" style="margin-bottom: 20px;">
         
-          eureka region and zone
+          Eureka Region and Zone
         
       </div>
     </a>
@@ -238,15 +238,11 @@
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -254,15 +250,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -270,11 +258,23 @@
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -282,7 +282,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -303,6 +303,10 @@
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

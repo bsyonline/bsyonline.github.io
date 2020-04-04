@@ -24,7 +24,7 @@ public void testCache(){
 @Test
 public void testCache(){
     List&amp;lt;User&amp;gt; users = userDao.fi">
-<meta property="og:updated_time" content="2020-02-23T07:51:05.698Z">
+<meta property="og:updated_time" content="2020-03-12T01:29:23.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis Cache">
 <meta name="twitter:description" content="mybatis 有一级缓存和二级缓存，通过 mybatis 官方文档我们知道默认情况下，mybatis 的一级缓存是默认开启的。如果我们在 springboot 中集成 mybatis ，我们在同一方法中使用两次查询，会发现 mybatis 会执行两次查询。
@@ -193,7 +193,7 @@ public void testCache(){
 2020-02-01 11:57:18.053 DEBUG 2680 --- [           main] com.rolex.microlabs.dao.UserDao.findAll  : ==&gt; Parameters: 
 2020-02-01 11:57:18.056 DEBUG 2680 --- [           main] com.rolex.microlabs.dao.UserDao.findAll  : &lt;==      Total: 4
 [User(id=3, name=alice, age=29, gender=Female, skill=Java), User(id=4, name=jim, age=29, gender=Male, skill=CPP), User(id=5, name=alice, age=19, gender=Female, skill=Java), User(id=6, name=jim, age=20, gender=Male, skill=CPP)]
-</code></pre><p>很显然一级缓存失效了。<br>我们来分析一下缓存失效的原因。我们在使用 springboot 集成 mybatis 时，从始至终都没有发现 mybatis 的一个重要的对象 SqlSession 。原因是因为 spring 在集成 mybatis 时，将 SqlSession 进行了封装，而在使用时通过代理对象创建。所以我们没有办法直接操作 SqlSession 。正是因为 SqlSession 完全由 spring 容器管理，所以 spring 在 SqlSessionTemplate.SqlSessionInterceptor.invoke() 方法中每次执行完 invoke() 方法后，都在 finally 中将 SqlSession 关闭了，所以一级缓存就失效了。</p>
+</code></pre><p>很显然一级缓存失效了。<br>我们来分析一下缓存失效的原因。我们在使用 springboot 集成 mybatis 时，从始至终都没有发现 mybatis 的一个重要的对象 SqlSession 。原因是因为 spring 在集成 mybatis 时，将 SqlSession 进行了封装，而在使用时通过代理对象创建。所以我们没有办法直接操作 SqlSession 。<strong>正是因为 SqlSession 完全由 spring 容器管理，所以 spring 在 SqlSessionTemplate.SqlSessionInterceptor.invoke() 方法中每次执行完 invoke() 方法后，都在 finally 中将 SqlSession 关闭了，所以一级缓存就失效了。</strong></p>
 <p>不过我们还可以通过配置使用二级缓存。在 UserMapper.xml 中加入 <cache> 配置，我们会发现第二次查询使用了缓存。</cache></p>
 <pre><code>2020-02-01 12:35:35.413 DEBUG 20624 --- [           main] com.rolex.microlabs.dao.UserDao.findAll  : ==&gt;  Preparing: select id, name, age, gender, skill from t_user 
 2020-02-01 12:35:35.463 DEBUG 20624 --- [           main] com.rolex.microlabs.dao.UserDao.findAll  : ==&gt; Parameters: 
@@ -251,15 +251,11 @@ public void testCache(){
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -267,15 +263,7 @@ public void testCache(){
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -283,11 +271,23 @@ public void testCache(){
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -295,7 +295,7 @@ public void testCache(){
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -316,6 +316,10 @@ public void testCache(){
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

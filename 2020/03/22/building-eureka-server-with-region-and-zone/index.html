@@ -7,23 +7,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Eureka Architecture | BSYONLINE</title>
+  <title>Building Eureka Server with Region and Zone | BSYONLINE</title>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta name="description" content="上图为 Eureka 的架构图，从图中可以看到有两类角色：Eureka Server 和 Eureka Client 。Client 又分为 Application Service 和 Application Client 。Eureka Client 通过 API 向 Eureka Server 注册并保持通信，Application Client 通过 API 获取注册信息，并通过远程调用来">
+  <meta name="description" content="Eureka Region 和 Zone 的架构参考 Eureka Region and Zone 。
+按照 Region 和 Zone 的架构来构建，有一个 Region us-east-1 ，us-east-1 下有 3 个 Zone ：us-east-1c ，us-east-1d ，us-east-1e 。各个 Zone 下有一个 Eureka Server 和 Application Se">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Eureka Architecture">
-<meta property="og:url" content="/2018/08/29/eureka-architecture/index.html">
+<meta property="og:title" content="Building Eureka Server with Region and Zone">
+<meta property="og:url" content="/2020/03/22/building-eureka-server-with-region-and-zone/index.html">
 <meta property="og:site_name" content="BSYONLINE">
-<meta property="og:description" content="上图为 Eureka 的架构图，从图中可以看到有两类角色：Eureka Server 和 Eureka Client 。Client 又分为 Application Service 和 Application Client 。Eureka Client 通过 API 向 Eureka Server 注册并保持通信，Application Client 通过 API 获取注册信息，并通过远程调用来">
-<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20180829/210836060.png">
-<meta property="og:updated_time" content="2020-02-23T07:39:47.092Z">
+<meta property="og:description" content="Eureka Region 和 Zone 的架构参考 Eureka Region and Zone 。
+按照 Region 和 Zone 的架构来构建，有一个 Region us-east-1 ，us-east-1 下有 3 个 Zone ：us-east-1c ，us-east-1d ，us-east-1e 。各个 Zone 下有一个 Eureka Server 和 Application Se">
+<meta property="og:updated_time" content="2020-03-23T04:52:15.169Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Eureka Architecture">
-<meta name="twitter:description" content="上图为 Eureka 的架构图，从图中可以看到有两类角色：Eureka Server 和 Eureka Client 。Client 又分为 Application Service 和 Application Client 。Eureka Client 通过 API 向 Eureka Server 注册并保持通信，Application Client 通过 API 获取注册信息，并通过远程调用来">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20180829/210836060.png">
+<meta name="twitter:title" content="Building Eureka Server with Region and Zone">
+<meta name="twitter:description" content="Eureka Region 和 Zone 的架构参考 Eureka Region and Zone 。
+按照 Region 和 Zone 的架构来构建，有一个 Region us-east-1 ，us-east-1 下有 3 个 Zone ：us-east-1c ，us-east-1d ，us-east-1e 。各个 Zone 下有一个 Eureka Server 和 Application Se">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
   
@@ -125,15 +126,15 @@
     <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
 	<span style='margin-right:10px'>
 	
-        2018/08/29
-        <a class="article-title" href="/2018/08/29/eureka-architecture/">Eureka Architecture</a>
+        2020/03/22
+        <a class="article-title" href="/2020/03/22/building-eureka-server-with-region-and-zone/">Building Eureka Server with Region and Zone</a>
     
 	</span>
 <div>
 
     <div class="row">
 <div class="col-md-9 col-sm-9 blog-posts">
-<article id="post-eureka-architecture" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+<article id="post-building-eureka-server-with-region-and-zone" class="article article-type-post blog-item" itemscope itemprop="blogPost">
   <div class="article-meta">
   </div>
   <div class="article-inner">
@@ -143,16 +144,14 @@
       <ul class="blog-info">
 	<li><i class="fa fa-user"></i> bsyonline</li>
 	<li><i class="fa fa-calendar"></i>
-	  <time datetime="2018-08-29T09:07:02.000Z" itemprop="datePublished">2018/08/29</time>
+	  <time datetime="2020-03-22T11:01:34.000Z" itemprop="datePublished">2020/03/22</time>
 
 	</li>
 	<li class="hidden-xs"><i class="fa fa-comments"></i>
-	  <a href="/2018/08/29/eureka-architecture/#disqus_thread" class="article-comment-link">Comments</a>
+	  <a href="/2020/03/22/building-eureka-server-with-region-and-zone/#disqus_thread" class="article-comment-link">Comments</a>
 	</li>
 	<li class="hidden-xs"><i class="fa fa-tags"></i> 
 	  
-  
-    <a href="/tags/Microservices/" title="Microservices">Microservices</a>,
   
     <a href="/tags/Spring-Cloud/" title="Spring Cloud">Spring Cloud</a>
   
@@ -171,8 +170,178 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20180829/210836060.png" style="width:600px;"></p>
-<p>上图为 Eureka 的架构图，从图中可以看到有两类角色：Eureka Server 和 Eureka Client 。Client 又分为 Application Service 和 Application Client 。Eureka Client 通过 API 向 Eureka Server 注册并保持通信，Application Client 通过 API 获取注册信息，并通过远程调用来访问 Application Service 。 </p>
+        <p>Eureka Region 和 Zone 的架构参考 <a href="../../../../2018/08/29/eureka-region-and-zone/">Eureka Region and Zone</a> 。</p>
+<p>按照 Region 和 Zone 的架构来构建，有一个 Region us-east-1 ，us-east-1 下有 3 个 Zone ：us-east-1c ，us-east-1d ，us-east-1e 。各个 Zone 下有一个 Eureka Server 和 Application Service ，另外在 us-east-1c 下还有一个 Application Client 。Application Client 和 Application Service 都会注册到 Eureka Server 上，Application Client 会调用 Application Service 。当服务正常时，Application Client 会优先调用相同 us-east-1c 下的 Application Service ，当 us-east-1c 下的 Application Service 下线，Application Client 会调用 us-east-1d 和 us-east-1e 中的 Application Service 。<br>配置文件比之前多了 Region 和 Zone 的信息。<br>eureka-server-01</p>
+<pre><code>server:
+  port: 8761
+spring:
+  application:
+    name: eureka-server-01
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就失效
+    metadata-map:
+      zone: us-east-1c #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1c,us-east-1d,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1000 #剔除时间间隔
+</code></pre><p>eureka-server-02</p>
+<pre><code>server:
+  port: 8762
+spring:
+  application:
+    name: eureka-server-02
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就失效
+    metadata-map:
+      zone: us-east-1d #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1d,us-east-1c,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1000 #剔除时间间隔
+</code></pre><p>eureka-server-03</p>
+<pre><code>server:
+  port: 8763
+spring:
+  application:
+    name: eureka-server-03
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就失效
+    metadata-map:
+      zone: us-east-1e #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1e,us-east-1c,us-east-1d #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1000 #剔除时间间隔
+</code></pre><p>application-service-01</p>
+<pre><code>server:
+  port: 10003
+spring:
+  application:
+    name: application-service
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就剔除服务
+    metadata-map:
+      zone: us-east-1c #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1c,us-east-1d,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+</code></pre><p>application-service-02</p>
+<pre><code>server:
+  port: 10004
+spring:
+  application:
+    name: application-service
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就剔除服务
+    metadata-map:
+      zone: us-east-1d #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1d,us-east-1c,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+</code></pre><p>application-service-03</p>
+<pre><code>server:
+  port: 10005
+spring:
+  application:
+    name: application-service
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就剔除服务
+    metadata-map:
+      zone: us-east-1e #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1e,us-east-1c,us-east-1d #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+</code></pre><p>application-client-01</p>
+<pre><code>server:
+  port: 8081
+spring:
+  application:
+    name: application-client
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 1 #心跳间隔
+    lease-expiration-duration-in-seconds: 3 #3秒没收到心跳就剔除服务
+    metadata-map:
+      zone: us-east-1c #服务属于哪个zone
+  client:
+    region: us-east-1
+    availability-zones:
+      us-east-1: us-east-1c,us-east-1d,us-east-1e #将自己的zone写在前边
+    serviceUrl:
+      us-east-1c: http://eureka-server-01:8761/eureka/
+      us-east-1d: http://eureka-server-02:8762/eureka/
+      us-east-1e: http://eureka-server-03:8763/eureka/
+    prefer-same-zone-eureka: true #优先使用相同zone的服务
+</code></pre><p>通过 metadata-map.zone 标识服务属于哪个 Zone ，<code>prefer-same-zone-eureka: true</code> 会优先调用相同 Zone 的服务。availability-zones 的 Zone 列表应优先将自己 Zone 写在前边，因为 Eureka 在查找服务时是按顺序找的。</p>
 
       
     </div>
@@ -184,17 +353,17 @@
 </div>
 <nav id="article-nav">
   
-    <a href="/2018/09/12/java-virtual-machine-tools/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+    <a href="/2020/03/23/gazing-at-ribbon/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
       <div class="article-nav-title" style="margin-bottom: 20px;">
         
-          Java Virtual Machine Tools
+          Gazing at Ribbon
         
       </div>
     </a>
   
   
-    <a href="/2018/08/29/eureka-data-structure/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
-      <div class="article-nav-title">Eureka Data Structure</div>
+    <a href="/2020/03/22/building-eureka-server-with-peer-awareness/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Building Eureka Server with Peer Awareness</div>
     </a>
   
 </nav>
@@ -216,15 +385,11 @@
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -232,15 +397,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -248,11 +405,23 @@
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -260,7 +429,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -281,6 +450,10 @@
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

@@ -14,16 +14,14 @@
 
   <meta name="description" content="程序在 Linux 服务器上运行，我们需要对程序的运行状态和系统健康状况进行监控，那么如何做呢？下面一组命令可以帮助到我们。
 
-top，监控 CPU 。这里我们主要关注两个地方：
-是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，(1m+5m+15m)/3*100% 可以作为衡量系统负载的指标，一般不要超过 60%">
+top，监控 CPU 。这里我们主要关注两个地方：1) 是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，(1m+5m+15m)/3*100% 可以作为衡量系统负载的指标，一般不要超过 60">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Monitoring Linux Performence">
 <meta property="og:url" content="/2020/02/22/monitoring-linux-performence/index.html">
 <meta property="og:site_name" content="BSYONLINE">
 <meta property="og:description" content="程序在 Linux 服务器上运行，我们需要对程序的运行状态和系统健康状况进行监控，那么如何做呢？下面一组命令可以帮助到我们。
 
-top，监控 CPU 。这里我们主要关注两个地方：
-是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，(1m+5m+15m)/3*100% 可以作为衡量系统负载的指标，一般不要超过 60%">
+top，监控 CPU 。这里我们主要关注两个地方：1) 是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，(1m+5m+15m)/3*100% 可以作为衡量系统负载的指标，一般不要超过 60">
 <meta property="og:image" content="https://s2.ax1x.com/2020/02/27/3wTtfg.png">
 <meta property="og:image" content="https://s2.ax1x.com/2020/02/27/3wqi9O.png">
 <meta property="og:image" content="https://s2.ax1x.com/2020/02/27/3wj0oR.png">
@@ -36,13 +34,12 @@ top，监控 CPU 。这里我们主要关注两个地方：
 <meta property="og:image" content="https://s2.ax1x.com/2020/02/27/30knVf.png">
 <meta property="og:image" content="https://s2.ax1x.com/2020/02/27/30Apyn.png">
 <meta property="og:image" content="https://s2.ax1x.com/2020/02/27/30Asfg.png">
-<meta property="og:updated_time" content="2020-03-02T09:09:32.633Z">
+<meta property="og:updated_time" content="2020-03-10T10:17:09.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Monitoring Linux Performence">
 <meta name="twitter:description" content="程序在 Linux 服务器上运行，我们需要对程序的运行状态和系统健康状况进行监控，那么如何做呢？下面一组命令可以帮助到我们。
 
-top，监控 CPU 。这里我们主要关注两个地方：
-是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，(1m+5m+15m)/3*100% 可以作为衡量系统负载的指标，一般不要超过 60%">
+top，监控 CPU 。这里我们主要关注两个地方：1) 是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，(1m+5m+15m)/3*100% 可以作为衡量系统负载的指标，一般不要超过 60">
 <meta name="twitter:image" content="https://s2.ax1x.com/2020/02/27/3wTtfg.png">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
@@ -191,16 +188,8 @@ top，监控 CPU 。这里我们主要关注两个地方：
       
         <p>程序在 Linux 服务器上运行，我们需要对程序的运行状态和系统健康状况进行监控，那么如何做呢？下面一组命令可以帮助到我们。</p>
 <ol>
-<li><strong>top</strong>，监控 CPU 。<br><img src="https://s2.ax1x.com/2020/02/27/3wTtfg.png" alt="3wTtfg.png" border="0" style="width:550px"><br>这里我们主要关注两个地方：<ol>
-<li>是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，<code>(1m+5m+15m)/3*100%</code> 可以作为衡量系统负载的指标，一般不要超过 60% 。</li>
-<li>是 %CPU 。可以可以看出 CPU 占用情况和对应的的进程 id 。</li>
-</ol>
-</li>
-<li><strong>vmstat</strong>，也可以用来监控 CPU 资源。<br><img src="https://s2.ax1x.com/2020/02/27/3wqi9O.png" alt="3wqi9O.png" border="0" style="width:550px"><br>也是关注两块：<ol>
-<li>procs，如果 r 的平均值大于系统 CPU 核数的 2 倍说明负载过高。<br>r 表示进行 CPU 处理的进程数。<br>b 表示进行 I/O 处理的进程数。</li>
-<li>cpu，如果 us + sy 大于 80% 说明 CPU 资源不足。<br>us 表示用户进程消耗 CPU 时间百分比。<br>sy 表示内核进程消耗 CPU 时间百分比。</li>
-</ol>
-</li>
+<li><strong>top</strong>，监控 CPU 。<br><img src="https://s2.ax1x.com/2020/02/27/3wTtfg.png" alt="3wTtfg.png" border="0" style="width:550px"><br>这里我们主要关注两个地方：<br>1) 是右上角的 load average ，load average 有 3 个值，分别表示系统 1m ，5m ，15m 的平均负载值，<code>(1m+5m+15m)/3*100%</code> 可以作为衡量系统负载的指标，一般不要超过 60% 。<br>2) 是 %CPU 。可以看出 CPU 占用情况和对应的的进程 id 。</li>
+<li><strong>vmstat</strong>，也可以用来监控 CPU 资源。<br><img src="https://s2.ax1x.com/2020/02/27/3wqi9O.png" alt="3wqi9O.png" border="0" style="width:550px"><br>也是关注两块：<br>1) procs，如果 r 的平均值大于系统 CPU 核数的 2 倍说明负载过高。<br> r 表示进行 CPU 处理的进程数。<br> b 表示进行 I/O 处理的进程数。<br>2) cpu，如果 us + sy 大于 80% 说明 CPU 资源不足。<br> us 表示用户进程消耗 CPU 时间百分比。<br> sy 表示内核进程消耗 CPU 时间百分比。</li>
 <li><strong>pidstat</strong>，可以监控具体进程的 CPU 资源。<br><img src="https://s2.ax1x.com/2020/02/27/3wj0oR.png" alt="3wj0oR.png" border="0" style="width:500px"><br>也可以监控内存资源。<br><img src="https://s2.ax1x.com/2020/02/27/3wvyAs.png" alt="3wvyAs.png" border="0" style="width:500px"></li>
 <li><strong>free</strong>，可以监控内存。<br><img src="https://s2.ax1x.com/2020/02/27/3wxebQ.png" alt="3wxebQ.png" border="0" style="width:600px"><br>一般 free 小于 20% 说明内存不足。</li>
 <li><strong>df</strong>，可以查看磁盘占用情况。<br><img src="https://s2.ax1x.com/2020/02/27/3wxvR0.png" alt="3wxvR0.png" border="0" style="width:400px"></li>
@@ -271,15 +260,11 @@ top，监控 CPU 。这里我们主要关注两个地方：
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -287,15 +272,7 @@ top，监控 CPU 。这里我们主要关注两个地方：
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -303,11 +280,23 @@ top，监控 CPU 。这里我们主要关注两个地方：
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -315,7 +304,7 @@ top，监控 CPU 。这里我们主要关注两个地方：
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -336,6 +325,10 @@ top，监控 CPU 。这里我们主要关注两个地方：
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

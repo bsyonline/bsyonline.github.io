@@ -23,7 +23,7 @@
 
 服务提供者">
 <meta property="og:image" content="https://vaadin.com/documents/226808/13548263/client-side-load-balancer-flow.png/df1c6235-311e-4715-a232-4ecfca470b95?t=1512740698000">
-<meta property="og:updated_time" content="2020-02-23T07:28:46.822Z">
+<meta property="og:updated_time" content="2020-03-22T08:31:37.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Service Registration and Discovery">
 <meta name="twitter:description" content="服务发现和注册是微服务架构的关键步骤，它是一种使微服务能够在不知道确切位置（通常是URL）的情况下使用其他微服务的机制。在简单的环境中服务可以通过静态配置记录每个服务的地址、端口和 URL 等信息，但是在微服务架构中，由于服务的动态增减和持续集成的因素，静态的配置信息将不再适用，所以就需要能够动态记录各个服务的连接信息，这就是服务注册和发现产生的原因。服务注册和发现通常需要以下几步：
@@ -158,9 +158,9 @@
 	<li class="hidden-xs"><i class="fa fa-tags"></i> 
 	  
   
-    <a href="/tags/Microservices/" title="Microservices">Microservices</a>,
-  
     <a href="/tags/Spring-Cloud/" title="Spring Cloud">Spring Cloud</a>,
+  
+    <a href="/tags/Microservices/" title="Microservices">Microservices</a>,
   
     <a href="/tags/Eureka/" title="Eureka">Eureka</a>
   
@@ -195,8 +195,8 @@
 <li>注册中心维护着所有服务的访问信息，服务之间要通信，首先要访问注册中心，那么注册中心就会成为瓶颈，所以如果采用主从模式在每个客户端维护一份副本，那么服务就不用每次都去访问注册中心了。这样虽然解决了注册中心的瓶颈问题，但是需要主从之间进行同步；</li>
 <li>作为主节点，如果注册服务关闭，那么其他副本也就无法同步，所以主节点还要解决单点问题，比如使用分布式机器来提供服务。</li>
 </ol>
-<p>综上看来，实现一个服务注册和发现的程序还是比较复杂的。不过，有很多优秀的框架已经实现了这些功能，比如 Spring Cloud Eureka。</p>
-<h4 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a><strong>Spring Cloud Eureka</strong></h4><p>Eureka 是 netflix 开源的产品，通过和 Spring Cloud 集成，通过 Java 注解声明式的注册和调用服务变得非常简单，以下以 Greenwich.SR1 为例说明。</p>
+<p>综上看来，实现一个服务注册和发现的程序还是比较复杂的。不过，有很多优秀的框架已经实现了这些功能，比如 Eureka。</p>
+<h4 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a><strong>Eureka</strong></h4><p>Eureka 是 netflix 开源的产品，通过和 Spring Cloud 集成，通过 Java 注解声明式的注册和调用服务变得非常简单，以下以 Greenwich.SR1 为例说明。</p>
 <p>1.加入 maven 配置</p>
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
@@ -211,18 +211,16 @@ public class RegisterCenterApplication {
     }
 }
 </code></pre><p>3.修改配置文件</p>
-<pre><code>spring:
-  application: eureka-server
-server:
+<pre><code>server:
   port: 8761
 eureka:
   instance:
-    hostname: eureka-server
+    hostname: localhost
   client:
-    register-with-eureka: false
-    fetch-registry: false
-  server:
-    wait-time-in-ms-when-sync-empty: 0
+    registerWithEureka: false #不对外提供服务调用
+    fetchRegistry: false #不拉取注册信息
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 </code></pre><p>简单三步即可实现一个注册发现服务。启动服务访问 <a href="http://localhost:8761/" target="_blank" rel="external">http://localhost:8761/</a> 即可看到界面。<br>此时还没有任何服务注册到 Eureka ，我们接下来就来看看如何将服务注册到 Eureka 。</p>
 <p>我们再创建另一个应用 eureka-client 注册到 eureka server 上。<br>1.添加 maven 配置</p>
 <pre><code>&lt;dependency&gt;
@@ -261,10 +259,10 @@ eureka:
 </div>
 <nav id="article-nav">
   
-    <a href="/2018/06/17/proxying-routing-and-filtering-using-zuul/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+    <a href="/2018/06/17/routing-and-filtering-with-zuul/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
       <div class="article-nav-title" style="margin-bottom: 20px;">
         
-          Proxying Routing and Filtering using Zuul
+          Routing and Filtering with Zuul
         
       </div>
     </a>
@@ -293,15 +291,11 @@ eureka:
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -309,15 +303,7 @@ eureka:
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -325,11 +311,23 @@ eureka:
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -337,7 +335,7 @@ eureka:
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -358,6 +356,10 @@ eureka:
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

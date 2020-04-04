@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="BSYONLINE">
 <meta property="og:description" content="幂等设计是架构设计中需要考虑的重要环节。幂等设计可以分两个层面考虑：接口定义和幂等实现方案。
 接口定义请求幂等是说请求一次和请求多次结果一样。其实这个说法有一点不准确，因为如果是看请求结果的话，那么在读请求在数据被修改之后，得到的结果也是不同的。所以准确的说应该是看请求是否有副作用，比如每次请求都会将数据修改成不一样的值。按照这个定义，读请求不会修改数据本身，所以读请求是幂等的。而写请求是会修改数">
-<meta property="og:updated_time" content="2020-03-02T12:15:19.576Z">
+<meta property="og:updated_time" content="2020-03-23T07:02:29.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Design with Idempotency">
 <meta name="twitter:description" content="幂等设计是架构设计中需要考虑的重要环节。幂等设计可以分两个层面考虑：接口定义和幂等实现方案。
@@ -186,8 +186,8 @@
 <ol>
 <li>利用数据库约束<br>由于请求最终都是操作数据库，所以最终都会反映到数据库的 CRUD 操作，所以我们可以利用数据库主键或唯一索引来保证唯一。</li>
 <li>去重表<br>单独维护一张表保存去重字段，比如订单号，在业务操作之前先插入订单号，插入订单号和业务处理在同一个事务中，同时成功提交或者回滚。这种方案是第一种方式的变形，好处是业务无关，多个业务可以共享一张表。</li>
-<li>乐观锁<br>在进行更新和删除操作时比较常用。可以利用 version 字段，如<pre><code>update t1 set age++, version++ where id=1 and version=1
-</code></pre>也可以使用业务字段，如<pre><code>update t1 set age++ where id=1 and age=19
+<li>乐观锁<br>在进行更新和删除操作时比较常用。可以利用 version 字段，如<pre><code>update t1 set age=age+1, version=version+1 where id=1 and version=1
+</code></pre>也可以使用业务字段，如<pre><code>update t1 set age=age+1 where id=1 and age=19
 </code></pre><blockquote>
 <p>在进行更新和删除操作时，最好使用绝对值，不要使用相对值。</p>
 </blockquote>
@@ -216,17 +216,17 @@
 </div>
 <nav id="article-nav">
   
-    <a href="/2019/08/03/destributed-transations/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+    <a href="/2019/08/03/distributed-transations/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
       <div class="article-nav-title" style="margin-bottom: 20px;">
         
-          Destributed Transations
+          Distributed Transations
         
       </div>
     </a>
   
   
-    <a href="/2019/07/28/one-question-one-answer-for-db-index/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
-      <div class="article-nav-title">One Question One Answer for DB Index</div>
+    <a href="/2019/07/28/one-question-one-answer-for-mysql/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">One Question One Answer for MySQL</div>
     </a>
   
 </nav>
@@ -248,15 +248,11 @@
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -264,15 +260,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -280,11 +268,23 @@
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -292,7 +292,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -313,6 +313,10 @@
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

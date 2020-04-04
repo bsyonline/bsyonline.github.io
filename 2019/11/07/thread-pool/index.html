@@ -12,22 +12,22 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta name="description" content="线程创建销毁耗费资源，所以使用线程池来重用。本质上是维护两个队列，一个存放预先创建的线程，一个存放提交给线程的任务，工作线程不断从队列中获取任务来执行。JDK 提供了 ThreadPoolExecutor 来创建线程池。
-public ThreadPoolExecutor(int corePoolSize,
-                              int maximumPool">
+  <meta name="description" content="线程池可以重用线程资源，减少线程创建销毁的资源耗费。JDK 提供了 ThreadPoolExecutor 来创建线程池。
+public ThreadPoolExecutor(int corePoolSize,                  // 线程池初始大小
+                          int maximumPoolSize,               // 线程池">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Thread Pool">
 <meta property="og:url" content="/2019/11/07/thread-pool/index.html">
 <meta property="og:site_name" content="BSYONLINE">
-<meta property="og:description" content="线程创建销毁耗费资源，所以使用线程池来重用。本质上是维护两个队列，一个存放预先创建的线程，一个存放提交给线程的任务，工作线程不断从队列中获取任务来执行。JDK 提供了 ThreadPoolExecutor 来创建线程池。
-public ThreadPoolExecutor(int corePoolSize,
-                              int maximumPool">
-<meta property="og:updated_time" content="2020-03-02T09:18:30.709Z">
+<meta property="og:description" content="线程池可以重用线程资源，减少线程创建销毁的资源耗费。JDK 提供了 ThreadPoolExecutor 来创建线程池。
+public ThreadPoolExecutor(int corePoolSize,                  // 线程池初始大小
+                          int maximumPoolSize,               // 线程池">
+<meta property="og:updated_time" content="2020-03-11T01:51:18.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Thread Pool">
-<meta name="twitter:description" content="线程创建销毁耗费资源，所以使用线程池来重用。本质上是维护两个队列，一个存放预先创建的线程，一个存放提交给线程的任务，工作线程不断从队列中获取任务来执行。JDK 提供了 ThreadPoolExecutor 来创建线程池。
-public ThreadPoolExecutor(int corePoolSize,
-                              int maximumPool">
+<meta name="twitter:description" content="线程池可以重用线程资源，减少线程创建销毁的资源耗费。JDK 提供了 ThreadPoolExecutor 来创建线程池。
+public ThreadPoolExecutor(int corePoolSize,                  // 线程池初始大小
+                          int maximumPoolSize,               // 线程池">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
   
@@ -173,26 +173,22 @@ public ThreadPoolExecutor(int corePoolSize,
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>线程创建销毁耗费资源，所以使用线程池来重用。<br>本质上是维护两个队列，一个存放预先创建的线程，一个存放提交给线程的任务，工作线程不断从队列中获取任务来执行。<br>JDK 提供了 ThreadPoolExecutor 来创建线程池。</p>
-<pre><code>public ThreadPoolExecutor(int corePoolSize,
-                              int maximumPoolSize,
-                              long keepAliveTime,
-                              TimeUnit unit,
-                              BlockingQueue&lt;Runnable&gt; workQueue,
-                              RejectedExecutionHandler handler) {
-</code></pre><p>corePoolSize 是线程池大小</p>
-<p>maximumPoolSize 是线程池最大线程数</p>
-<p>keepAliveTime 是线程存活的时间</p>
-<p>workQueue 任务等待队列</p>
-<p>handler 线程数量超过线程池大小后的处理策略</p>
-<p>我们通过一个例子来说明上述参数和线程池运行的关系。</p>
+        <p>线程池可以重用线程资源，减少线程创建销毁的资源耗费。JDK 提供了 ThreadPoolExecutor 来创建线程池。</p>
+<pre><code>public ThreadPoolExecutor(int corePoolSize,                  // 线程池初始大小
+                          int maximumPoolSize,               // 线程池最大线程数
+                          long keepAliveTime,                // 线程存活的时间
+                          TimeUnit unit,                     // 时间单位
+                          BlockingQueue&lt;Runnable&gt; workQueue, // 任务等待队列
+                          ThreadFactory threadFactory,       // 线程工厂用来创建线程
+                          RejectedExecutionHandler handler   // 线程数量超过线程池大小后的处理策略
+                          ) {}
+</code></pre><h4 id="线程池参数效果"><a href="#线程池参数效果" class="headerlink" title="线程池参数效果"></a>线程池参数效果</h4><p>我们要创建一个核心线程数 5 ，最大线程数 20 ，队列大小是 10 的一个线程池。</p>
 <pre><code>ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 20,
-            5, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(5));
-</code></pre><p>首先我们创建了一个核心线程数 5 ，最大线程数 20 ，队列大小是 10 的一个线程池。</p>
-<p>如果我们提交 10 个任务，那么首先会将前 5 个任务交给 5 个线程执行，同时 5 个线程进入队列等待。这时队列有 5 个线程工作，5 个任务等待。</p>
+            5, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(5), Executors.defaultThreadFactory(), defaultHandler);
+</code></pre><p>如果我们提交 10 个任务，那么首先会将前 5 个任务交给 5 个线程执行，同时 5 个线程进入队列等待。这时队列有 5 个线程工作，5 个任务等待。</p>
 <p>如果我们提交 15 个任务，那么首先会将前 5 个任务交给 5 个线程执行，同时 5 个线程进入队列等待，再新创建 5 个线程来执行 11-15 号任务。这时队列有 10 个线程工作，5 个任务等待。</p>
 <p>如果我们提交 50 个任务，那么首先会将前 5 个任务交给 5 个线程执行，同时 5 个线程进入队列等待，再新创建 15 个线程来执行任务，剩下的 25 个任务会丢弃掉。这时队列有 20 个线程工作，5 个任务等待，等任务执行完，超过线程存活时间，线程会被销毁，剩下 5 个线程。</p>
-<p>除了使用 new ThreadPoolExecutor ，Executors 提供了一些静态方法用来创建线程池，如：</p>
+<h4 id="jdk-提供的线程池"><a href="#jdk-提供的线程池" class="headerlink" title="jdk 提供的线程池"></a>jdk 提供的线程池</h4><p>除了使用 new ThreadPoolExecutor ，Executors 提供了一些静态方法用来创建线程池，如：</p>
 <pre><code>Executor executor = Executors.newSingleThreadExecutor();
 //new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue&lt;Runnable&gt;()));
 </code></pre><pre><code>Executor executor = Executors.newFixedThreadPool(5);
@@ -251,15 +247,11 @@ public ThreadPoolExecutor(int corePoolSize,
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -267,15 +259,7 @@ public ThreadPoolExecutor(int corePoolSize,
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -283,11 +267,23 @@ public ThreadPoolExecutor(int corePoolSize,
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -295,7 +291,7 @@ public ThreadPoolExecutor(int corePoolSize,
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -316,6 +312,10 @@ public ThreadPoolExecutor(int corePoolSize,
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

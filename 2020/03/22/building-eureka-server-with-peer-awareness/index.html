@@ -7,23 +7,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Destributed Transations | BSYONLINE</title>
+  <title>Building Eureka Server with Peer Awareness | BSYONLINE</title>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta name="description" content="我们通常说的事务是指本地事务，即对一个数据库进行的操作，并且这些操作满足事务的 4 个特性。事务的 4 个特性分别是：Aotmicity（原子性），Consistency（一致性），Isolation（隔离性），Durability（持久性）。在一个事务中的所有操作要么同时成功，要么同时失败，这是原子性，一旦执行成功 commit 或是执行失败 rollback 那么这个结果必须是持久的。在事务开">
+  <meta name="description" content="构建一个 Eureka Server Standalone 非常简单，可以参考 Service Registration and Discovery 。Eureka Server 也支持部署多个节点，步骤和单节点类似，只是配置文件略有修改。如果我们有 3 个对等的节点，配置文件是这样的：eureka01
+server:
+  port: 8761
+spring:
+  application:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Destributed Transations">
-<meta property="og:url" content="/2019/08/03/destributed-transations/index.html">
+<meta property="og:title" content="Building Eureka Server with Peer Awareness">
+<meta property="og:url" content="/2020/03/22/building-eureka-server-with-peer-awareness/index.html">
 <meta property="og:site_name" content="BSYONLINE">
-<meta property="og:description" content="我们通常说的事务是指本地事务，即对一个数据库进行的操作，并且这些操作满足事务的 4 个特性。事务的 4 个特性分别是：Aotmicity（原子性），Consistency（一致性），Isolation（隔离性），Durability（持久性）。在一个事务中的所有操作要么同时成功，要么同时失败，这是原子性，一旦执行成功 commit 或是执行失败 rollback 那么这个结果必须是持久的。在事务开">
-<meta property="og:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20190805/2pc.jpg">
-<meta property="og:updated_time" content="2020-03-02T08:56:42.468Z">
+<meta property="og:description" content="构建一个 Eureka Server Standalone 非常简单，可以参考 Service Registration and Discovery 。Eureka Server 也支持部署多个节点，步骤和单节点类似，只是配置文件略有修改。如果我们有 3 个对等的节点，配置文件是这样的：eureka01
+server:
+  port: 8761
+spring:
+  application:">
+<meta property="og:updated_time" content="2020-03-23T04:04:47.628Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Destributed Transations">
-<meta name="twitter:description" content="我们通常说的事务是指本地事务，即对一个数据库进行的操作，并且这些操作满足事务的 4 个特性。事务的 4 个特性分别是：Aotmicity（原子性），Consistency（一致性），Isolation（隔离性），Durability（持久性）。在一个事务中的所有操作要么同时成功，要么同时失败，这是原子性，一旦执行成功 commit 或是执行失败 rollback 那么这个结果必须是持久的。在事务开">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/bsyonline/pic/master/20190805/2pc.jpg">
+<meta name="twitter:title" content="Building Eureka Server with Peer Awareness">
+<meta name="twitter:description" content="构建一个 Eureka Server Standalone 非常简单，可以参考 Service Registration and Discovery 。Eureka Server 也支持部署多个节点，步骤和单节点类似，只是配置文件略有修改。如果我们有 3 个对等的节点，配置文件是这样的：eureka01
+server:
+  port: 8761
+spring:
+  application:">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
   
@@ -125,15 +135,15 @@
     <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
 	<span style='margin-right:10px'>
 	
-        2019/08/03
-        <a class="article-title" href="/2019/08/03/destributed-transations/">Destributed Transations</a>
+        2020/03/22
+        <a class="article-title" href="/2020/03/22/building-eureka-server-with-peer-awareness/">Building Eureka Server with Peer Awareness</a>
     
 	</span>
 <div>
 
     <div class="row">
 <div class="col-md-9 col-sm-9 blog-posts">
-<article id="post-destributed-transations" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+<article id="post-building-eureka-server-with-peer-awareness" class="article article-type-post blog-item" itemscope itemprop="blogPost">
   <div class="article-meta">
   </div>
   <div class="article-inner">
@@ -143,16 +153,16 @@
       <ul class="blog-info">
 	<li><i class="fa fa-user"></i> bsyonline</li>
 	<li><i class="fa fa-calendar"></i>
-	  <time datetime="2019-08-03T14:32:48.000Z" itemprop="datePublished">2019/08/03</time>
+	  <time datetime="2020-03-22T01:22:03.000Z" itemprop="datePublished">2020/03/22</time>
 
 	</li>
 	<li class="hidden-xs"><i class="fa fa-comments"></i>
-	  <a href="/2019/08/03/destributed-transations/#disqus_thread" class="article-comment-link">Comments</a>
+	  <a href="/2020/03/22/building-eureka-server-with-peer-awareness/#disqus_thread" class="article-comment-link">Comments</a>
 	</li>
 	<li class="hidden-xs"><i class="fa fa-tags"></i> 
 	  
   
-    <a href="/tags/Interview/" title="Interview">Interview</a>
+    <a href="/tags/Spring-Cloud/" title="Spring Cloud">Spring Cloud</a>
   
 
 
@@ -160,7 +170,7 @@
         <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
           
   
-    <a href="/categories/Java/" title="Java">Java</a>
+    <a href="/categories/Spring-Cloud/" title="Spring Cloud">Spring Cloud</a>
   
 
         </li>
@@ -169,49 +179,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我们通常说的事务是指本地事务，即对一个数据库进行的操作，并且这些操作满足事务的 4 个特性。事务的 4 个特性分别是：<br>Aotmicity（原子性），Consistency（一致性），Isolation（隔离性），Durability（持久性）。在一个事务中的所有操作要么同时成功，要么同时失败，这是原子性，一旦执行成功 commit 或是执行失败 rollback 那么这个结果必须是持久的。在事务开始和结束之间，存在着中间状态，这些中间状态是对事务之外是隔离的，换句话说，在事务结束之前，对数据进行的任何修改对事务之外都是不可见的，这就是隔离性。在事务结束之后，数据必须是完整并且一致的。</p>
-<p>在传统的架构体系中经常使用本地事务来保证数据一致性。但是随着分布式系统的发展，出现了越来越多的跨多个数据库进行操作的情况。在这种情况下，本地事务就无法保证数据一致性，分布式事务应运而生。分布式事务是针对本地事务来说的，它的目的就是解决在分布式环境下，跨多个数据库操作的数据一致性问题。分布式事务可分为刚性分布式事务和柔性分布式事务。</p>
-<h4 id="刚性分布式事务"><a href="#刚性分布式事务" class="headerlink" title="刚性分布式事务"></a>刚性分布式事务</h4><p>刚性分布式事务是和本地事务一样，都满足 ACID 特性的，是强一致性的。提到刚性事务，最据代表性的就是 XA 模型。XA 模型是 X/Open 提出的一种分布式事务模型。XA 模型有 3 个组成部分：</p>
-<p>​    <strong>AP</strong>（Application Program）：定义事务边界</p>
-<p>​    <strong>RM</strong>（Resource Manager）：管理计算机共享资源</p>
-<p>​    <strong>TM</strong>（Transation Manager）：负责全局事务，分配事务唯一id，监控事务的执行进度，负责事务的提交，回滚，失败恢复</p>
-<p>基于 XA 模型，衍生出多种实现，2PC（two phase commit）就是其标准实现。<br><img src="https://raw.githubusercontent.com/bsyonline/pic/master/20190805/2pc.jpg" style="width:400px"><br>2PC 过程如下：</p>
-<p>​    第一阶段，AP 发起事务 commit ，TM 发起 prepare 投票，当 RM 都同意后，进行第二阶段。</p>
-<p>​    第二阶段，TM 最终执行 commit 。如果 commit 过程出现异常，则根据 recover 进行补偿。</p>
-<p>刚性分布式事务的优点是强一致性，但是缺点也很明显，由于要保证数据一致性，那么 TM 要挨个询问 RM 收集投票结果，如果 RM 数量很多，那么在所有 RM 投票完成之前，RM 的资源都是被锁定的，所以会导致全局的资源锁定，处理的性能及其低下。为了提高可用性，出现了柔性分布式事务。</p>
-<h4 id="柔性分布式事务"><a href="#柔性分布式事务" class="headerlink" title="柔性分布式事务"></a>柔性分布式事务</h4><p>柔性分布式事务和刚性分布式事务不同，其理论基础是 BASE 理论。BASE 是 Basically Available（基本可用），Soft state（软状态）和 Eventually consistent（最终一致性）的缩写，是由 CAP 定理演化而来。</p>
-<p>​    <strong>基本可用</strong>是指在特殊情况下，系统可以在功能和性能上保证基本或部分可用，比如系统响应时间从 10ms 降低到 500ms 或者只保证核心服务可用，非核心服务暂时不可用。</p>
-<p>​    <strong>软状态</strong>是指在多个服务之间数据存在中间状态，多个服务之间暂时地数据不一致不会影响整体可用。</p>
-<p>​    <strong>最终一致性</strong>是指数据经过短暂的不一致，最终能够达到一致状态。</p>
-<p>通常柔性分布式事务有以下几种实现：</p>
-<p><strong>TCC</strong></p>
-<p>TCC 是 2PC 的一种变形，是 <strong>T</strong>ry-<strong>C</strong>onfirm-<strong>C</strong>ancel 的缩写。TCC 的执行过程和 2PC 类似，首先 try 阶段尝试执行业务，完成资源检查，预留资源。第二阶段，不用进行业务检查，直接进行 confirm ，执行成功，事务结束，如果 confirm 失败，则进行重试。如果在某一方的 try 失败了，则进行 cancel 来释放 try 阶段预留的资源。</p>
-<p>我们通过一个简单的例子来感受一下。假设一个下订单-减库存-支付的场景，各业务方需要针对 TCC 进行改造，比如预留库存，在 try 阶段不能真正扣减库存，所以在数据库里需要增加一个预留库存的字段，再比如支付模块也需要增加字段来预存支付金额。如果 try 阶段预留资源都成功了，那么再将预留字段更新到实际扣减库存字段或扣减金额字段，并清空预留资源字段。一般经过 try 阶段的检查， confirm 基本上都能成功。如果 comfirm  不成功，可能是网络抖动，进行重试即可。如果支付模块在 try 阶段预减金额失败了，那么就进行 cancel ，库存模块按照 try 阶段预留的资源进行释放。通过举例，我们可以看出，TCC 很灵活，但是缺点是和业务耦合性高，因为 try-confirm-cancel 3 个阶段都交由业务方来实现。</p>
-<p><strong>Saga</strong></p>
-<p>Saga 是另一种著名分布式事务模型。1987 年论文 sagas 讲述了一种长事务的处理方案，即 saga 模型。Saga 模型的主要思想就是把一个分布式事务拆分成多个本地事务，每个 saga 子事务 <code>T1,T2,...Tn</code> 都有对应的补偿模块 <code>C1,C2,...Cn-1</code> 。当所有子事务都执行成功，那么它的执行顺序是 <code>T1,T2,...Tn</code> 。如果 Tj 执行失败了，那么它的执行顺序是 <code>T1,T2,...Tj,Cj-1,...C2,C1,(0&lt;j&lt;n)</code> 。<br>由于 saga 模型没有 try 阶段，所以当执行失败，需要通过进行恢复。Saga 定义了两种恢复方式：向前恢复和向后恢复。向前恢复就是认为事务一定会执行成功而进行重试。向后恢复就是执行回滚+补偿，实际当中使用较多的是向后恢复。<br>我们还是以下单-减库存-支付这一场景来进行说明。首先我们需要定义两张事务表，事务状态表和事务调用表，这两张表和业务 DB 是独立的。</p>
-<p>事务状态表</p>
-<table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr></table>
-
-<p>事务调用表</p>
-<table class="table table-bordered" style="width: 100px"><tr><td>tx_id</td><td>action_id</td><td>method</td><td>param_type</td><td>param_value</td></tr></table><br>saga 执行过程如下：<br><br>1.AP 发起事务后 TM 生成 txId， 向事务状态表存一条记录，状态是执行中 。<br><br><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1514736000</td></tr></table>
-
-<p>2.AP 按顺序调用下单-减库存-支付操作，每调用一个操作之前向事务调用表插一条记录。</p>
-<table class="table table-bordered" style="width: 100px"><tr><td>tx_id</td><td>action_id</td><td>recover_method</td><td>param_type</td><td>param_value</td></tr><tr><td>1</td><td>1</td><td>/recover_order</td><td>kv</td><td>orderid=12345</td></tr><tr><td>1</td><td>2</td><td>/recover_stock</td><td>kv</td><td>stock=1</td></tr><tr><td>1</td><td>3</td><td>/recover_payment</td><td>kv</td><td>pay=1000</td></tr></table><br>这些信息如何获取到呢，又是怎么写到表里的呢？ 假如我们有个方法 <code>reduceStock()</code> ，我们在调用方法的时候可以利用 AOP 或者动态代理，就可以获取到方法的参数类型和参数值。recoverMethod 的信息可以通过注解写在被调用的方法上，这样通过反射就可以获取到 recoverMethod 的信息了。得到这些信息之后，按位置插到事务调用表中就可以了。<br><br>3.如果下单-减库存-支付都执行成功，TM 将事务状态表中的记录更新成成功，事务结束。<br><br><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1514737000</td></tr></table>
-
-<p>4.如果有一步执行失败，则将事务状态更新成失败，同时立刻通知客户端执行失败。</p>
-<table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr><tr><td>1</td><td>2</td><td>0</td><td>1514737000</td></tr></table>
-
-<p>补偿是异步的，所以不用等补偿执行完成再通知客户端。<br>5.TM 定时扫描事务状态表，如果有失败状态的记录，就按照事务调用表中对应的除最后一步调用记录之外的其他记录调补偿接口进行补偿。</p>
-<table class="table table-bordered" style="width: 100px"><tr><td>tx_id</td><td>action_id</td><td>recover_method</td><td>param_type</td><td>param_value</td></tr><tr><td>1</td><td>1</td><td>/recover_order</td><td>kv</td><td>orderid=12345</td></tr><tr><td>1</td><td>2</td><td>/recover_stock</td><td>kv</td><td>stock=1</td></tr><tr><td>1</td><td>3</td><td>/recover_payment</td><td>kv</td><td>pay=1000</td></tr></table><br>如果表中有 3 条记录，说明前两条是执行成功的，第 3 条执行失败了。那么只需要执行前两步的补偿，第 3 步是不需要补偿的。那么接下来就按照事务调用表中记录的补偿接口的信息进行补偿。<br><br>1. 首先将事务状态置为 3 。<br>2. 第二步调用 <code>/recover_stock?stock=1</code> 补偿库存，然后将 recover_step 改为 2，表示第二步补偿完成。<br>3. 第三步调用 <code>/recover_order?orderid=12345&amp;state=2</code> 补偿订单，成功后将 recover_step 置为 1。<br><br>补偿接口应该设计成幂等的，这样可以保证多次重试也不会产生垃圾数据。<br><br>6.补偿完成后将事务状态表的状态更新成补偿完成。<br><br><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>timestamp</td></tr><tr><td>1</td><td>4</td><td>1514739000</td></tr></table>
-
-<p>如果补偿接口出现问题，怎么办呢，我们需不需要再给补偿接口加一个分布式事务呢？一般情况下，经过测试并且有重试机制，补偿是可以成功。我们完全没有必要再加一个分布式事务来保证补偿，因为我们一旦给补偿加上分布式事务，那我们是不是也要对保证补偿的逻辑再加一个分布式事务来保证一致性呢，这样就无穷无尽了。所以简单的做法就是一旦真的补偿接口出错了，那么记录错误日志，告警，然后人工处理就好了。</p>
-<p><strong>异步消息</strong></p>
-<p>Saga 是一种同步串行的方式，接下来我们介绍异步消息的分布式事务实现。说到异步消息，自然少不了消息中间件。通过 MQ 进行消息传递，就需要有一套机制来保证消息可靠。<br>第一种方式是通过异步消息方式来实现：</p>
-<p>1.先发送一个 prepare 消息给 MQ Server 。<br>2.MQ Server 收到消息返回一个 ack 。<br>3.执行本地事务。<br>4.本地事务成功向 MQ Server 发送一个 commit 消息。本地事务失败则向 MQ Server 发送一个 cancel 消息。<br>5.如果长时间没有收到 prepare 消息的确认，MQ Server 则需要向 Client 申请回查。<br>6.Client 收到回查申请后，调用本地服务的回查接口查看本地事务是否成功，如果成功，发送 commit 消息，如果本地消息失败，则发送 cancel 消息。</p>
-<p>以上就是异步消息的操作步骤，这种方式其实也是 2PC 的变形。这种方式实现起来对 MQ 的要求较高，并且需要业务方提供回查接口，对业务入侵较大。</p>
-<p>另一种方式是通过本地消息表来实现：<br>1.执行本地事务同时将消息先写到本地消息表中，由于执行本地操作和写消息在同一个事务中，所以可以保证同时成功或失败。<br>2.将消息从表中读出来，写到 MQ 。<br>3.MQ 收到消息，返回 ack 。<br>4.收到 ack 后删除本地消息。</p>
-<p>这种方式对业务没有入侵并且实现简单，但是其中有一些细节需要注意。如果从消息表读出消息的服务部署了多个，那么都从消息表去读，就会产生大量的重复消息，所以可以使用分布式锁进行控制，获得锁的服务才能从消息表读，这样就可以避免重复消息。由于消息可能会产生重复，所以在消费端需要处理幂等。</p>
-<p>通过上边的讲解，我们对分布式事务的几种实现方式有了简单的认识。在实际使用中，我们其实应该避免出现分布式事务，尽量让核心步骤先执行，不重要的步骤异步执行。如果实在无法避免，那么可以通过柔性分布式事务来处理，同步场景下使用 Saga ，异步场景下使用本地消息表。</p>
+        <p>构建一个 Eureka Server Standalone 非常简单，可以参考 <a href="../../../../2018/06/16/service-registration-and-discovery/">Service Registration and Discovery</a> 。<br>Eureka Server 也支持部署多个节点，步骤和单节点类似，只是配置文件略有修改。如果我们有 3 个对等的节点，配置文件是这样的：<br>eureka01</p>
+<pre><code>server:
+  port: 8761
+spring:
+  application:
+    name: eureka01
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://eureka01:8761/eureka/,http://eureka02:8762/eureka/,http://eureka03:8763/eureka/
+  server:
+    enable-self-preservation: false
+</code></pre><p>eureka02</p>
+<pre><code>server:
+  port: 8762
+spring:
+  application:
+    name: eureka02
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://eureka01:8761/eureka/,http://eureka02:8762/eureka/,http://eureka03:8763/eureka/
+</code></pre><p>eureka03</p>
+<pre><code>server:
+  port: 8763
+spring:
+  application:
+    name: eureka03
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://eureka01:8761/eureka/,http://eureka02:8762/eureka/,http://eureka03:8763/eureka/
+</code></pre><p>Eureka Server 之间是对等的，所以可以将自己作为 Client 注册到其他的 Eureka Server 上，defaultZone 可以不用区分，启动的时候会过滤掉自己。</p>
 
       
     </div>
@@ -223,17 +232,17 @@
 </div>
 <nav id="article-nav">
   
-    <a href="/2019/08/11/mysql/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+    <a href="/2020/03/22/building-eureka-server-with-region-and-zone/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
       <div class="article-nav-title" style="margin-bottom: 20px;">
         
-          mysql
+          Building Eureka Server with Region and Zone
         
       </div>
     </a>
   
   
-    <a href="/2019/07/31/understanding-design-with-idempotency/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
-      <div class="article-nav-title">Understanding Design with Idempotency</div>
+    <a href="/2020/03/21/mysql-log/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">MySQL Log</div>
     </a>
   
 </nav>
@@ -255,15 +264,11 @@
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -271,15 +276,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -287,11 +284,23 @@
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -299,7 +308,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -320,6 +329,10 @@
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

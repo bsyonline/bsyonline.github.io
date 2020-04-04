@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Routing and Filtering with Zuul | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="在微服务架构中系统为客户端应用程序提供一个独特的入口 —— API 网关是一种非常常见的微服务模式。API 网关实现代理、路由、流量控制，同时为用户提供了统一的界面，而屏蔽了微服务内部的细节。使用 API 网关的优点：
+
+集中处理逻辑，比如鉴权、速率限定、监控等；
+提高了安全性，对外只暴露一个入口；
+提高了扩展性，重构微服务不会影响客户行为。
+
+同时，使用 API 网关也会带来以下缺点：
+
+面临单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Routing and Filtering with Zuul">
+<meta property="og:url" content="/2018/06/17/routing-and-filtering-with-zuul/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="在微服务架构中系统为客户端应用程序提供一个独特的入口 —— API 网关是一种非常常见的微服务模式。API 网关实现代理、路由、流量控制，同时为用户提供了统一的界面，而屏蔽了微服务内部的细节。使用 API 网关的优点：
+
+集中处理逻辑，比如鉴权、速率限定、监控等；
+提高了安全性，对外只暴露一个入口；
+提高了扩展性，重构微服务不会影响客户行为。
+
+同时，使用 API 网关也会带来以下缺点：
+
+面临单">
+<meta property="og:updated_time" content="2020-03-24T01:52:38.530Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Routing and Filtering with Zuul">
+<meta name="twitter:description" content="在微服务架构中系统为客户端应用程序提供一个独特的入口 —— API 网关是一种非常常见的微服务模式。API 网关实现代理、路由、流量控制，同时为用户提供了统一的界面，而屏蔽了微服务内部的细节。使用 API 网关的优点：
+
+集中处理逻辑，比如鉴权、速率限定、监控等；
+提高了安全性，对外只暴露一个入口；
+提高了扩展性，重构微服务不会影响客户行为。
+
+同时，使用 API 网关也会带来以下缺点：
+
+面临单">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2018/06/17
+        <a class="article-title" href="/2018/06/17/routing-and-filtering-with-zuul/">Routing and Filtering with Zuul</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-routing-and-filtering-with-zuul" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2018-06-17T10:24:06.000Z" itemprop="datePublished">2018/06/17</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2018/06/17/routing-and-filtering-with-zuul/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Spring-Cloud/" title="Spring Cloud">Spring Cloud</a>,
+  
+    <a href="/tags/Microservices/" title="Microservices">Microservices</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Spring-Cloud/" title="Spring Cloud">Spring Cloud</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在微服务架构中系统为客户端应用程序提供一个独特的入口 —— API 网关是一种非常常见的微服务模式。API 网关实现代理、路由、流量控制，同时为用户提供了统一的界面，而屏蔽了微服务内部的细节。<br>使用 API 网关的优点：</p>
+<ul>
+<li>集中处理逻辑，比如鉴权、速率限定、监控等；</li>
+<li>提高了安全性，对外只暴露一个入口；</li>
+<li>提高了扩展性，重构微服务不会影响客户行为。</li>
+</ul>
+<p>同时，使用 API 网关也会带来以下缺点：</p>
+<ul>
+<li>面临单点问题；</li>
+<li>增加了额外的路由。</li>
+</ul>
+<h3 id="Spring-Cloud-Zuul"><a href="#Spring-Cloud-Zuul" class="headerlink" title="Spring Cloud Zuul"></a><strong>Spring Cloud Zuul</strong></h3><p>Spring Cloud Zuul 是 Netflix 开源的基于 Java 的 API 网关，通过声明式注解可以方便的实现路由、过滤等功能。</p>
+<h4 id="实现路由"><a href="#实现路由" class="headerlink" title="实现路由"></a>实现路由</h4><p>首先我们对 service1 服务进行一些改造，为它添加一个访问入口。</p>
+<pre><code>@RestController(value = &quot;/api&quot;)
+public class Service1Controller {
+
+    @GetMapping(value = &quot;/hello&quot;)
+    public String hello(String name) {
+        return &quot;hello, &quot; + name;
+    }
+}
+</code></pre><p>访问 <a href="http://localhost:9900/api/hello?name=tom" target="_blank" rel="external">http://localhost:9900/api/hello?name=tom</a> 可以看到返回结果。通常不会直接将服务入口暴露出来，而是在服务前加一层网关来进行代理，比如 nginx，zuul 也可以实现类似功能。</p>
+<p>1.创建一个工程，加入 maven 配置</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-zuul&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>2.在启动类添加注解<code>@EnableZuulProxy</code></p>
+<pre><code>@EnableZuulProxy
+@EnableDiscoveryClient
+@SpringBootApplication
+public class ApiGatewayApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ApiGatewayApplication.class, args);
+    }
+}
+</code></pre><p>3.添加配置文件</p>
+<pre><code>spring:
+  application:
+    name: api-gateway
+server:
+  port: 9000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+zuul:
+  routes:
+    hello: # 访问的 uri
+      url: http://localhost:9900/api/hello
+  prefix: /api
+</code></pre><p>完成以上配置，访问 <a href="http://localhost:9000/api/hello?name=bob" target="_blank" rel="external">http://localhost:9000/api/hello?name=bob</a> 会跳转到 service1 服务。</p>
+<p>zuul 的路由规则可以指定 url 也可以通过 path 来匹配，比如:</p>
+<pre><code>zuul:
+  routes:
+    service1:
+      path: /hello
+      serviceId: service1
+</code></pre><p>这个规则会匹配 service1 服务的 “/hello” 接口。</p>
+<p>还可以支持通配符，比如： </p>
+<pre><code>zuul:
+  routes:
+    service4:
+      path: /hello/*/world
+      serviceId: service1
+</code></pre><p>如果 service1 服务有2个接口分别是 “/hello/{id}/world” 和 “/{id}/world” ，这个规则会将请求路由到 “/{id}/world” 这个接口。”*“ 号表示匹配一级，如果有多级可以用 “**” 。</p>
+<h4 id="实现负载均衡"><a href="#实现负载均衡" class="headerlink" title="实现负载均衡"></a>实现负载均衡</h4><p>在上一个例子中， zuul 已经实现了负载均衡的功能，只不过我们只有一个实例，为了显示直观，我们重新创建一个 service2 并加入一些返回信息。</p>
+<pre><code>@RestController
+public class Service2Controller {
+
+    @Autowired
+    DiscoveryClient discoveryClient;
+
+    @GetMapping(value = &quot;/hello&quot;)
+    public String hello(HttpServletRequest request) {
+        return &quot;host=&quot; + request.getRemoteHost() + &quot;, port=&quot; + request.getServerPort();
+    }
+}
+</code></pre><p>更新 api-gateway 的配置文件：</p>
+<pre><code>zuul:
+  routes:
+    service2:
+      path: /service2/**
+      serviceId: service2
+  prefix: /api
+</code></pre><p>启动服务使用不同端口启动两个 service2 实例，然后访问 <a href="http://localhost:9000/api/service2/hello" target="_blank" rel="external">http://localhost:9000/api/service2/hello</a> ，刷新请求会看到返回信息在来回切换，这实际上就是 zuul 实现了负载均衡，对 service2 的两个实例轮询访问。</p>
+<h4 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h4><p>过滤器是 Spring Cloud Zuul 的核心组件之一，对应请求的生命周期，zuul 定义了 4 种过滤器类型：</p>
+<ul>
+<li>pre 在请求被路由之前调用；</li>
+<li>route 将请求路由到微服务；</li>
+<li>post 在路由到微服务以后执行；</li>
+<li>error 发生错误时执行。</li>
+</ul>
+<p>除了以上 4 种，zuul 还支持自定义过滤器。</p>
+<h5 id="Pre-Filter"><a href="#Pre-Filter" class="headerlink" title="Pre Filter"></a>Pre Filter</h5><p>我们先来看看 pre filter 。我们编写一个简单的 pre filter 来打印访问日志信息。</p>
+<pre><code>@Component
+@Slf4j
+public class PreFilter extends ZuulFilter {
+
+    @Override
+    public String filterType() {
+        return &quot;pre&quot;;
+    }
+
+    @Override
+    public int filterOrder() {
+        return 0;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
+        log.info(String.format(&quot;send %s request to %s&quot;, request.getMethod(), request.getRequestURL().toString()));
+        return null;
+    }
+}
+</code></pre><p>在 api-gateway 项目中加入上面的代码，然后重启，每次发送请求都可以看到打印的日志信息。<br>zuul 内置了很多过滤器，如果要去掉一个过滤器，可以通过配置文件灵活配置。</p>
+<pre><code>zuul:
+  PreFilter:
+    pre:
+      disable: true
+</code></pre><p>这样我们刚才加入的 PreFilter 就不起作用了，可以重启服务试试看。同理，对于其他的过滤器，我们也可以使用 <code>zuul.{filterName}.{filterType}.disable</code> 的方式来进行配置。</p>
+<h5 id="Route-Filter"><a href="#Route-Filter" class="headerlink" title="Route Filter"></a>Route Filter</h5><p>route filter 的作用就是把请求路由到其他服务。我们在本文的开始通过配置，实现了路由功能，现在我们通过自己写一个过滤器来实现路由功能。</p>
+<pre><code>@Component
+@Slf4j
+public class RouteFilter extends ZuulFilter {
+
+    @Override
+    public String filterType() {
+        return &quot;route&quot;;
+    }
+
+    @Override
+    public int filterOrder() {
+        return 10;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() throws ZuulException {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletResponse response = ctx.getResponse();
+        String url = &quot;http://cn.bing.com&quot;;
+        try {
+            log.info(String.format(&quot;redirect to %s&quot;, url));
+            response.sendRedirect(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
+</code></pre><h5 id="Post-Filter"><a href="#Post-Filter" class="headerlink" title="Post Filter"></a>Post Filter</h5><p>Post Filter 用来处理服务对响应后要进行的操作，比如添加 http header 。</p>
+<pre><code>@Component
+@Slf4j
+public class PostFilter extends ZuulFilter {
+
+    @Override
+    public String filterType() {
+        return &quot;post&quot;;
+    }
+
+    @Override
+    public int filterOrder() {
+        return 0;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() throws ZuulException {
+        log.info(&quot;post&quot;);
+        RequestContext ctx = RequestContext.getCurrentContext();
+        List&lt;Pair&lt;String, String&gt;&gt; headers = ctx.getZuulResponseHeaders();
+        headers.add(1, new Pair&lt;String, String&gt;(&quot;X-RateLimit-Remaining&quot;, &quot;30&quot;));
+        return null;
+    }
+}
+</code></pre><h5 id="Error-Filter"><a href="#Error-Filter" class="headerlink" title="Error Filter"></a>Error Filter</h5><p>在过滤器中出现的任何错误都会进入 error filter 处理，所以在 error filter 中统一处理异常比在每一处代码都使用 try-catch 要简单很多。</p>
+<pre><code>@Component
+@Slf4j
+public class ErrorFilter extends ZuulFilter {
+
+    @Override
+    public String filterType() {
+        return &quot;error&quot;;
+    }
+
+    @Override
+    public int filterOrder() {
+        return 0;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() throws ZuulException {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        Throwable throwable = ctx.getThrowable();
+        log.info(String.format(&quot;take exception %s&quot;, throwable.getCause().getMessage()));
+        return null;
+    }
+}
+</code></pre><p>这样在出错时就可以得到一个 <code>/error</code> 的映射，比如可以对映射进行简单的处理：</p>
+<pre><code>@RestController
+public class ErrorHandlerController implements ErrorController {
+    @Override
+    public String getErrorPath() {
+        return &quot;/error&quot;;
+    }
+
+    @RequestMapping(&quot;/error&quot;)
+    public String error() {
+        return &quot;{\&quot;code\&quot;: 500, \&quot;msg\&quot;:\&quot;internal server error\&quot;}&quot;;
+    }
+}
+</code></pre><p>这样错误就不会直接暴露给用户了。</p>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2018/06/20/services-communication-using-feign/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Services Communication using Feign
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/16/service-registration-and-discovery/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Service Registration and Discovery</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (99)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Docker/">Docker (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Netty/">Netty (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Boot/">Spring Boot (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spark/">Spark (14)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring/">Spring (5)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/"><i class='fa fa-tags'></i>Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrent/"><i class='fa fa-tags'></i>Concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/"><i class='fa fa-tags'></i>Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drools/"><i class='fa fa-tags'></i>Drools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GC/"><i class='fa fa-tags'></i>GC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interview/"><i class='fa fa-tags'></i>Interview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mock/"><i class='fa fa-tags'></i>Mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/"><i class='fa fa-tags'></i>MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/"><i class='fa fa-tags'></i>MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/"><i class='fa fa-tags'></i>Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reactive/"><i class='fa fa-tags'></i>Reactive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/"><i class='fa fa-tags'></i>Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2020 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

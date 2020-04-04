@@ -12,16 +12,16 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta name="description" content="JVM ArchitectureJava Virtual Machine ToolsDefault JVM OptionsJVM OptionsGarbage Collection BasicsGarbage Collection StepsCMS Garbage CollectorG1 Garbage CollectorGC Details">
+  <meta name="description" content="JVM ArchitectureJava Virtual Machine ToolsDefault JVM OptionsJVM OptionsGarbage Collection BasicsGarbage Collection StepsCMS Garbage CollectorG1 Garbage CollectorGC DetailsJIT at a GlanceEscape Analys">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Learning about Java Virtual Machine (JVM)">
 <meta property="og:url" content="/2099/08/13/learning-about-java-virtual-machine/index.html">
 <meta property="og:site_name" content="BSYONLINE">
-<meta property="og:description" content="JVM ArchitectureJava Virtual Machine ToolsDefault JVM OptionsJVM OptionsGarbage Collection BasicsGarbage Collection StepsCMS Garbage CollectorG1 Garbage CollectorGC Details">
-<meta property="og:updated_time" content="2020-03-02T09:25:08.866Z">
+<meta property="og:description" content="JVM ArchitectureJava Virtual Machine ToolsDefault JVM OptionsJVM OptionsGarbage Collection BasicsGarbage Collection StepsCMS Garbage CollectorG1 Garbage CollectorGC DetailsJIT at a GlanceEscape Analys">
+<meta property="og:updated_time" content="2020-03-27T02:21:53.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning about Java Virtual Machine (JVM)">
-<meta name="twitter:description" content="JVM ArchitectureJava Virtual Machine ToolsDefault JVM OptionsJVM OptionsGarbage Collection BasicsGarbage Collection StepsCMS Garbage CollectorG1 Garbage CollectorGC Details">
+<meta name="twitter:description" content="JVM ArchitectureJava Virtual Machine ToolsDefault JVM OptionsJVM OptionsGarbage Collection BasicsGarbage Collection StepsCMS Garbage CollectorG1 Garbage CollectorGC DetailsJIT at a GlanceEscape Analys">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
   
@@ -166,7 +166,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="../../../..//2018/08/13/jvm-architecture/">JVM Architecture</a><br><a href="../../../..//2018/09/12/java-virtual-machine-tools/">Java Virtual Machine Tools</a><br><a href="../../../..//2020/02/21/default-jvm-options/">Default JVM Options</a><br><a href="../../../..//2020/02/21/jvm-options/">JVM Options</a><br><a href="../../../..//2018/08/27/garbage-collection-basics/">Garbage Collection Basics</a><br><a href="../../../..//2020/02/23/garbage-collection-steps/">Garbage Collection Steps</a><br><a href="../../../..//2020/02/23/cms-garbage-collector/">CMS Garbage Collector</a><br><a href="../../../..//2020/02/23/g1-garbage-collector/">G1 Garbage Collector</a><br><a href="../../../..//2020/02/21/gc-details/">GC Details</a></p>
+        <p><a href="../../../..//2018/08/13/jvm-architecture/">JVM Architecture</a><br><a href="../../../..//2018/09/12/java-virtual-machine-tools/">Java Virtual Machine Tools</a><br><a href="../../../..//2020/02/21/default-jvm-options/">Default JVM Options</a><br><a href="../../../..//2020/02/21/jvm-options/">JVM Options</a><br><a href="../../../..//2018/08/27/garbage-collection-basics/">Garbage Collection Basics</a><br><a href="../../../..//2020/02/23/garbage-collection-steps/">Garbage Collection Steps</a><br><a href="../../../..//2020/02/23/cms-garbage-collector/">CMS Garbage Collector</a><br><a href="../../../..//2020/02/23/g1-garbage-collector/">G1 Garbage Collector</a><br><a href="../../../..//2020/02/21/gc-details/">GC Details</a><br><a href="../../../..//2020/03/26/jit-at-a-glance/">JIT at a Glance</a><br><a href="../../../../2020/03/27/escape-analysis/">Escape Analysis</a></p>
 
       
     </div>
@@ -202,15 +202,11 @@
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -218,15 +214,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -234,11 +222,23 @@
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -246,7 +246,7 @@
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -267,6 +267,10 @@
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>

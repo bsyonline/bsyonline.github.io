@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>One Question One Answer for Redis | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="Q: Redis 有哪些数据类型，及应用场景。A: 数据类型有 8 种：
+
+string，简单的 KV 缓存。
+list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 lrange list 0 9。可以用来实现队列，如 lpush 和 rpop
+set，应用场景需要没有重复的元素。
+zset，无重复且有序。
+hash，可以用来存储简单对象。
+bit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="One Question One Answer for Redis">
+<meta property="og:url" content="/2020/03/17/one-question-one-answer-for-redis/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="Q: Redis 有哪些数据类型，及应用场景。A: 数据类型有 8 种：
+
+string，简单的 KV 缓存。
+list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 lrange list 0 9。可以用来实现队列，如 lpush 和 rpop
+set，应用场景需要没有重复的元素。
+zset，无重复且有序。
+hash，可以用来存储简单对象。
+bit">
+<meta property="og:updated_time" content="2020-03-29T13:25:37.664Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="One Question One Answer for Redis">
+<meta name="twitter:description" content="Q: Redis 有哪些数据类型，及应用场景。A: 数据类型有 8 种：
+
+string，简单的 KV 缓存。
+list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 lrange list 0 9。可以用来实现队列，如 lpush 和 rpop
+set，应用场景需要没有重复的元素。
+zset，无重复且有序。
+hash，可以用来存储简单对象。
+bit">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2020/03/17
+        <a class="article-title" href="/2020/03/17/one-question-one-answer-for-redis/">One Question One Answer for Redis</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-one-question-one-answer-for-redis" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2020-03-17T00:59:23.000Z" itemprop="datePublished">2020/03/17</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2020/03/17/one-question-one-answer-for-redis/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Interview/" title="Interview">Interview</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Java/" title="Java">Java</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Q: Redis 有哪些数据类型，及应用场景。<br>A: 数据类型有 8 种：</p>
+<ol>
+<li>string，简单的 KV 缓存。</li>
+<li>list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 <code>lrange list 0 9</code>。可以用来实现队列，如 lpush 和 rpop</li>
+<li>set，应用场景需要没有重复的元素。</li>
+<li>zset，无重复且有序。</li>
+<li>hash，可以用来存储简单对象。</li>
+<li>bitmap，可以用来实现 bloomfilter 。</li>
+<li>hyperloglog，可以用来进行大数据量统计，比如 UV 。但是不精确。</li>
+<li>geo，可以用来进行地理信息计算。</li>
+</ol>
+<p>还有一些功能也列一下：</p>
+<ol>
+<li>pub/sub，可以用来实现消息队列。</li>
+<li>lua，利用它的原子性。</li>
+<li>Pipeline，一次提交多条命令，一次返回多个结果，减少交互次数。</li>
+<li>transaction，使用 multi ，exec ， discard 和 watch 实现。弱事务，可以保证全部执行，单不能同时成功，失败了不会回滚。</li>
+</ol>
+<p>Q: Redis 底层数据结构有哪些？<br>A: 可变字节数组 (simple dynamic string, SDS) ，链表 (list) ，双哈希表 (dict) ，跳跃表 (zskiplist) ，intset ，ziplist ，quicklist ，zipmap 。</p>
+<p>Q: Redis 为什么快？<br>A:  </p>
+<ol>
+<li>单进程单线程模型，没有上下文切换。</li>
+<li>使用多路复用无阻塞 I/O 模型。</li>
+<li>内存计算。</li>
+<li>数据结构简单，查找和操作的时间复杂度都是 O(1) 。</li>
+</ol>
+<p>Q: Redis 是怎么样持久化的？<br>A: Redis 有两种持久化方式：</p>
+<ol>
+<li>RDB，全量镜像方式，通过 fork 和 copy on write 方式实现，备份时间长，恢复速度快，可以分成多个文件存储，时间间隔长。</li>
+<li>AOF，增量日志方式，对每条命令都生成日志，以 append-on 方式写文件，写入速度快，数据量大，频率高。</li>
+</ol>
+<p>Q: Redis 的高可用是怎么做的？<br>A: 通过哨兵模式，只少 3 个节点，如果 master 挂了，slave 会被提升为 master 。哨兵模式只能保证高可用，不能保证数据不丢。</p>
+<p>Q: Redis 主从之间是如何进行数据同步的？<br>A: 如果新加一个 salve 节点到集群，master 会生成一个 RDB 的镜像快照，将 RDB 发给 slave ，salve 将 RDB 保存到本地，然后加载到内存。如果在数据同步期间有增量数据，等 salve 通过 RDB 恢复了再把增量的部分发给 salve 。如果网络断了，会自动重连，网络恢复之后会重发。</p>
+<p>Q: 哨兵模式 master 挂了如何进行选主？<br>A: 先看优先级，优先级相同，看复制偏移量，及数据完整性，偏移量相同，取 id 最小的。</p>
+<p>Q: Redis key 的过期的 key 是怎么删除的？<br>A: 如果 redis 中的 key 过期了，就会返回 nil 。但是这个 key 并没有被立刻删除。Redis 的失效的 key 的删除策略有 2 种：</p>
+<ol>
+<li>被动删除(passive)：当再次访问这个 key 时发现它已经过期，则删除。</li>
+<li>主动删除(active)：有些 key 失效之后可能再也不会被访问，所以无法被动删除，只能主动删除。Redis 会从过期的集合中随机挑一些 key 删除，如果失效 key 大于 25% ，主动删除会一直进行。如果还删不掉，就只能等 LRU 了。</li>
+</ol>
+<p>Q: 内存淘汰策略是怎样的？<br>A: noeviction，allkeys-LRU，volatile-LRU，allkeys-Random，volatile-Random，volatile-ttl 。</p>
+<p>Q:<br>A:<br>Q:<br>A:<br>Q:<br>A:<br>Q:<br>A: </p>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2020/03/19/mvcc/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          MVCC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/14/proxy-pattern/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">Proxy Pattern</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (99)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Docker/">Docker (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Netty/">Netty (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Boot/">Spring Boot (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spark/">Spark (14)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring/">Spring (5)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/"><i class='fa fa-tags'></i>Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrent/"><i class='fa fa-tags'></i>Concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/"><i class='fa fa-tags'></i>Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drools/"><i class='fa fa-tags'></i>Drools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GC/"><i class='fa fa-tags'></i>GC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interview/"><i class='fa fa-tags'></i>Interview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mock/"><i class='fa fa-tags'></i>Mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/"><i class='fa fa-tags'></i>MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/"><i class='fa fa-tags'></i>MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/"><i class='fa fa-tags'></i>Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reactive/"><i class='fa fa-tags'></i>Reactive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/"><i class='fa fa-tags'></i>Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2020 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

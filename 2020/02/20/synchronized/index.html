@@ -22,10 +22,7 @@ synchronized void method(){
 synchronized (this) {
 
 }
-synchronized 具有以下特点：
-
-非公平锁
-可重入：是指在如果一个线程获得了锁进入了 synchronized 方法，那么该方法内部调用的其他方">
+不论是同步方法还是同步代码块，在 JVM 中都是通过管程 (Monitor) 来支持的。同步方法是隐式的，通过 ACC_SYNCHRONIZED 访问标识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="synchronized">
 <meta property="og:url" content="/2020/02/20/synchronized/index.html">
@@ -40,11 +37,8 @@ synchronized void method(){
 synchronized (this) {
 
 }
-synchronized 具有以下特点：
-
-非公平锁
-可重入：是指在如果一个线程获得了锁进入了 synchronized 方法，那么该方法内部调用的其他方">
-<meta property="og:updated_time" content="2020-03-02T09:26:47.348Z">
+不论是同步方法还是同步代码块，在 JVM 中都是通过管程 (Monitor) 来支持的。同步方法是隐式的，通过 ACC_SYNCHRONIZED 访问标识">
+<meta property="og:updated_time" content="2020-03-28T06:57:24.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="synchronized">
 <meta name="twitter:description" content="synchronized 是 java 关键字，是最常见多线程同步方式，可以作用于方法和代码块。
@@ -57,10 +51,7 @@ synchronized void method(){
 synchronized (this) {
 
 }
-synchronized 具有以下特点：
-
-非公平锁
-可重入：是指在如果一个线程获得了锁进入了 synchronized 方法，那么该方法内部调用的其他方">
+不论是同步方法还是同步代码块，在 JVM 中都是通过管程 (Monitor) 来支持的。同步方法是隐式的，通过 ACC_SYNCHRONIZED 访问标识">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
   
@@ -216,7 +207,7 @@ synchronized void method(){
 synchronized (this) {
 
 }
-</code></pre><p>synchronized 具有以下特点：</p>
+</code></pre><p>不论是同步方法还是同步代码块，在 JVM 中都是通过管程 (Monitor) 来支持的。同步方法是隐式的，通过 ACC_SYNCHRONIZED 访问标识来声明。同步代码则是在 javac 编译器在字节码中添加 monitorenter 和 monitorexit 指令来实现的。无论正常退出还是异常结束， monitorenter 都必须有 monitorexit 与之对应。<br>synchronized 具有以下特点：</p>
 <ol>
 <li><strong>非公平锁</strong></li>
 <li><strong>可重入</strong>：是指在如果一个线程获得了锁进入了 synchronized 方法，那么该方法内部调用的其他方法可以直接获得该对象的锁。</li>
@@ -271,15 +262,11 @@ synchronized (this) {
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Java/">Java (97)</a>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (28)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Concurrent/">Concurrent (9)</a>
+	  <a href="/categories/Java/">Java (99)</a>
 	</li>
       
 	<li>
@@ -287,15 +274,7 @@ synchronized (this) {
 	</li>
       
 	<li>
-	  <a href="/categories/JVM/">JVM (11)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Linux/">Linux (46)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Architecture/">Architecture (4)</a>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
 	</li>
       
 	<li>
@@ -303,11 +282,23 @@ synchronized (this) {
 	</li>
       
 	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (21)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
 	</li>
       
 	<li>
@@ -315,7 +306,7 @@ synchronized (this) {
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (2)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
 	</li>
       
 	<li>
@@ -336,6 +327,10 @@ synchronized (this) {
       
 	<li>
 	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
 	</li>
       
 	<li>
