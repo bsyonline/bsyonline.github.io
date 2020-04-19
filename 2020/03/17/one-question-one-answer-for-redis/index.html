@@ -32,7 +32,7 @@ set，应用场景需要没有重复的元素。
 zset，无重复且有序。
 hash，可以用来存储简单对象。
 bit">
-<meta property="og:updated_time" content="2020-03-29T13:25:37.664Z">
+<meta property="og:updated_time" content="2020-04-06T15:31:27.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="One Question One Answer for Redis">
 <meta name="twitter:description" content="Q: Redis 有哪些数据类型，及应用场景。A: 数据类型有 8 种：
@@ -220,7 +220,7 @@ bit">
 <li>AOF，增量日志方式，对每条命令都生成日志，以 append-on 方式写文件，写入速度快，数据量大，频率高。</li>
 </ol>
 <p>Q: Redis 的高可用是怎么做的？<br>A: 通过哨兵模式，只少 3 个节点，如果 master 挂了，slave 会被提升为 master 。哨兵模式只能保证高可用，不能保证数据不丢。</p>
-<p>Q: Redis 主从之间是如何进行数据同步的？<br>A: 如果新加一个 salve 节点到集群，master 会生成一个 RDB 的镜像快照，将 RDB 发给 slave ，salve 将 RDB 保存到本地，然后加载到内存。如果在数据同步期间有增量数据，等 salve 通过 RDB 恢复了再把增量的部分发给 salve 。如果网络断了，会自动重连，网络恢复之后会重发。</p>
+<p>Q: Redis 主从之间是如何进行数据同步的？<br>A: 如果新加一个 slave 节点到集群，master 会生成一个 RDB 的镜像快照，将 RDB 发给 slave ，slave 将 RDB 保存到本地，然后加载到内存。如果在数据同步期间有增量数据，等 slave 通过 RDB 恢复了再把增量的部分发给 slave 。如果网络断了，会自动重连，网络恢复之后会重发。</p>
 <p>Q: 哨兵模式 master 挂了如何进行选主？<br>A: 先看优先级，优先级相同，看复制偏移量，及数据完整性，偏移量相同，取 id 最小的。</p>
 <p>Q: Redis key 的过期的 key 是怎么删除的？<br>A: 如果 redis 中的 key 过期了，就会返回 nil 。但是这个 key 并没有被立刻删除。Redis 的失效的 key 的删除策略有 2 种：</p>
 <ol>
@@ -228,7 +228,7 @@ bit">
 <li>主动删除(active)：有些 key 失效之后可能再也不会被访问，所以无法被动删除，只能主动删除。Redis 会从过期的集合中随机挑一些 key 删除，如果失效 key 大于 25% ，主动删除会一直进行。如果还删不掉，就只能等 LRU 了。</li>
 </ol>
 <p>Q: 内存淘汰策略是怎样的？<br>A: noeviction，allkeys-LRU，volatile-LRU，allkeys-Random，volatile-Random，volatile-ttl 。</p>
-<p>Q:<br>A:<br>Q:<br>A:<br>Q:<br>A:<br>Q:<br>A: </p>
+<p>Q: 主从模式，哨兵模式，集群模式的区别。<br>A: 主从是备份关系，如果主挂了，从可以接替主继续工作，但是切换需要人工。哨兵是在主挂了之后由程序自动将从提成主，保证高可用，哨兵最少 3 台。集群是将数据自动分配到 hash slot 中，多台机器同时工作，提高并发，集群最少 6 台，3 主 3 从。</p>
 
       
     </div>
@@ -288,11 +288,11 @@ bit">
 	</li>
       
 	<li>
-	  <a href="/categories/Guitar/">Guitar (7)</a>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Architecture/">Architecture (5)</a>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
 	</li>
       
 	<li>
@@ -300,11 +300,11 @@ bit">
 	</li>
       
 	<li>
-	  <a href="/categories/Wiki/">Wiki (7)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (27)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
@@ -316,7 +316,7 @@ bit">
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (4)</a>
 	</li>
       
 	<li>
@@ -329,6 +329,10 @@ bit">
       
 	<li>
 	  <a href="/categories/Netty/">Netty (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Cloud/Microservices/">Microservices (1)</a>
 	</li>
       
 	<li>

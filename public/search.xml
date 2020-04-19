@@ -57,7 +57,7 @@
     <entry>
       <title><![CDATA[Microservices Learning Path]]></title>
       <url>/2099/06/16/microservices-learning-path/</url>
-      <content type="html"><![CDATA[<h4 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/eureka-data-structure/">Eureka Data Structure</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/communication-between-eureka-server-and-client/">Communication Between Eureka Server And Client</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/synchronization-between-eureka-server-nodes/">Synchronization Between Eureka Server Nodes</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/eureka-server-self-preservation-mode/">Eureka Server Self Preservation Mode</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/eureka-region-and-zone/">Eureka Region and Zone</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/16/service-registration-and-discovery/">Service Registration and Discovery</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/22/building-eureka-server-with-peer-awareness/">Building Eureka Server with Peer Awareness</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/22/building-eureka-server-with-region-and-zone/">Building Eureka Server with Region and Zone</a> <font color="blue">(Practice)</font></p>
+      <content type="html"><![CDATA[<h3 id="Spirng-Cloud-Netflix"><a href="#Spirng-Cloud-Netflix" class="headerlink" title="Spirng Cloud Netflix"></a>Spirng Cloud Netflix</h3><h4 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/eureka-data-structure/">Eureka Data Structure</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/communication-between-eureka-server-and-client/">Communication Between Eureka Server And Client</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/synchronization-between-eureka-server-nodes/">Synchronization Between Eureka Server Nodes</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/eureka-server-self-preservation-mode/">Eureka Server Self Preservation Mode</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/08/29/eureka-region-and-zone/">Eureka Region and Zone</a> <font color="red">(Fundamental)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/16/service-registration-and-discovery/">Service Registration and Discovery</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/22/building-eureka-server-with-peer-awareness/">Building Eureka Server with Peer Awareness</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/22/building-eureka-server-with-region-and-zone/">Building Eureka Server with Region and Zone</a> <font color="blue">(Practice)</font></p>
 <h4 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/17/routing-and-filtering-with-zuul/">Routing and Filtering with Zuul</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/24/gazing-at-zuul/">Gazing at Zuul</a> <font color="red">(Fundamental)</font></p>
 <h4 id="Ribbon"><a href="#Ribbon" class="headerlink" title="Ribbon"></a>Ribbon</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/30/client-side-loadbalancing-with-spring-cloud-ribbon/">Client Side Loadbalancing with Spring Cloud Ribbon</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/23/gazing-at-ribbon/">Gazing at Ribbon</a> <font color="red">(Fundamental)</font></p>
 <h4 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/20/services-communication-using-feign/">Services Communication using Feign</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/03/24/gazing-at-feign/">Gazing at Feign</a> <font color="red">(Fundamental)</font></p>
@@ -66,6 +66,7 @@
 <h4 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/26/configuration-management-with-spring-cloud-config/">Configuration Management with Spring Cloud Config</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/27/dynamic-configuration-management-with-spring-cloud-bus/">Dynamic Configuration Management with Spring Cloud Bus</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/07/01/monitoring-and-integrating-hystrix-using-hystrix-dashboard-and-turbine/">Monitoring and Integrating Hystrix using Hystrix Dashboard and Turbine</a> <font color="blue">(Practice)</font></p>
 <h4 id="gRPC"><a href="#gRPC" class="headerlink" title="gRPC"></a>gRPC</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/05/18/about-rpc/">About RPC</a> <font color="red">(Fundamental)</font></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/09/getting-started-with-grpc/">Getting Started with gRPC</a> <font color="blue">(Practice)</font><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2018/06/09/spring-cloud-with-grpc/">Spring Cloud with gRPC</a> <font color="blue">(Practice)</font></p>
+<h3 id="Spring-Cloud-Alibaba"><a href="#Spring-Cloud-Alibaba" class="headerlink" title="Spring Cloud Alibaba"></a>Spring Cloud Alibaba</h3><h4 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../../../../2020/04/19/introducing-nacos/">Introducing Nacos</a> <font color="blue">(Practice)</font></p>
 ]]></content>
       
         <categories>
@@ -149,6 +150,171 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Introducing Nacos]]></title>
+      <url>/2020/04/19/introducing-nacos/</url>
+      <content type="html"><![CDATA[<p>Nacos 是一个用于构建微服务的基础设施，提供服务发现、服务配置、元数据和流量管理功能。</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>目前推荐版本是 1.1.4 ，可以去 github 下载。直接下载二进制包速度太慢，可以使用源代码编译。</p>
+<pre><code>git clone https://github.com/alibaba/nacos.git
+cd nacos/
+mvn -Prelease-nacos -Dmaven.test.skip=true clean install -U
+</code></pre><p>编译完成，在 <code>distribution/target/</code> 中有编译好的二进制包，解压之后就可以使用命令启动。启动有单机和集群两种方式。</p>
+<pre><code>sh startup.sh -m standalone
+</code></pre><p>不带参数为集群方式。</p>
+<p>单机模式不需要什么配置，直接启动就可以。集群方式需要先修改 <code>conf/cluster.conf</code> 。</p>
+<pre><code>192.168.100.101:8848
+192.168.100.102:8848
+192.168.100.103:8848
+</code></pre><p>集群至少需要 3 个节点。</p>
+<p>启动之后访问 <a href="http://localhost:8848/nacos/index.html" target="_blank" rel="external">http://localhost:8848/nacos/index.html</a> 可以看到界面，默认用户名密码为：nacos/nacos 。</p>
+<h4 id="添加获取配置"><a href="#添加获取配置" class="headerlink" title="添加获取配置"></a>添加获取配置</h4><p>Nacos 通过 Namespace 、Group 、DataId 三元组来确定配置，Namespace 对应环境如 dev 、test 、prod ，Group 可以对应项目或工程，DataId 对应配置文件。Nacos 有多种方式，界面、OpenAPI 、SDK 。界面点点就好了，下面来说说另外两种方式。</p>
+<h5 id="OpenAPI-方式"><a href="#OpenAPI-方式" class="headerlink" title="OpenAPI 方式"></a>OpenAPI 方式</h5><p>发布</p>
+<pre><code>curl -XPOST &quot;http://localhost:8848/nacos/v1/cs/configs&quot; \
+-H &quot;Content-Type: application/x-www-form-urlencoded; charset=utf-8&quot; \
+--data-urlencode &quot;dataId=application.properties&quot; \
+--data-urlencode &quot;group=spring-cloud-alibaba-nacos&quot; \
+--data-urlencode &quot;tenant=e400be7d-039f-460a-bbb9-d2a2752fcb9e&quot; \
+--data-urlencode &quot;content=application.name=nacos&quot;
+</code></pre><blockquote>
+<p>这里有一点需要注意，tenant 为 Namespace ，不能写名字，需要写 ID 。</p>
+</blockquote>
+<p>获取</p>
+<pre><code>curl -XGET &quot;http://localhost:8848/nacos/v1/cs/configs?dataId=application.properties&amp;group=spring-cloud-alibaba-nacos&amp;tenant=e400be7d-039f-460a-bbb9-d2a2752fcb9e&quot;
+</code></pre><p>监听</p>
+<pre><code>curl -XPOST &quot;http://localhost:8848/nacos/v1/cs/configs/listener&quot; -H &quot;Long-Pulling-Timeout: 30000&quot; -d &quot;Listening-Configs=application.properties^2spring-cloud-alibaba-nacos^6db060a43bdf54674e916e7b3acca7fa^2e400be7d-039f-460a-bbb9-d2a2752fcb9e^1&quot;
+</code></pre><h5 id="SDK"><a href="#SDK" class="headerlink" title="SDK"></a>SDK</h5><pre><code>public class NacosSDK {
+    public static void main(String[] args) throws NacosException, InterruptedException {
+        String serverAddr = &quot;localhost:8848&quot;;
+        String dataId = &quot;application.properties&quot;;
+        String group = &quot;spring-cloud-alibaba-nacos&quot;;
+        String tenant = &quot;e400be7d-039f-460a-bbb9-d2a2752fcb9e&quot;;
+        Properties properties = new Properties();
+        properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
+        properties.put(PropertyKeyConst.NAMESPACE, tenant);
+        ConfigService configService = NacosFactory.createConfigService(properties);
+        String content = configService.getConfig(dataId, group, 5000);
+        System.out.println(&quot;配置为：&quot; + content);
+        configService.addListener(dataId, group, new Listener() {
+            @Override
+            public void receiveConfigInfo(String configInfo) {
+                System.out.println(&quot;监听器-配置更新了：&quot; + configInfo);
+            }
+
+            @Override
+            public Executor getExecutor() {
+                return null;
+            }
+        });
+
+        boolean isPublishOk = configService.publishConfig(dataId, group, &quot;application.name=nacos&quot;);
+        System.out.println(&quot;发布了配置：&quot; + isPublishOk);
+
+        Thread.sleep(3000);
+        content = configService.getConfig(dataId, group, 5000);
+        System.out.println(&quot;配置为：&quot; + content);
+
+        Thread.sleep(3000);
+        boolean isPublishOk1 = configService.publishConfig(dataId, group, &quot;application.name=nacos1&quot;);
+        System.out.println(&quot;更新了配置：&quot; + isPublishOk1);
+
+        Thread.sleep(3000);
+        content = configService.getConfig(dataId, group, 5000);
+        System.out.println(&quot;更新后配置为：&quot; + content);
+
+        Thread.sleep(3000);
+        boolean isRemoveOk = configService.removeConfig(dataId, group);
+        System.out.println(&quot;删除了配置：&quot; + isRemoveOk);
+
+        Thread.sleep(3000);
+        content = configService.getConfig(dataId, group, 5000);
+        System.out.println(&quot;删除后配置为：&quot; + content);
+        Thread.sleep(300000);
+    }
+}
+</code></pre><h4 id="使用-MySQL-数据源"><a href="#使用-MySQL-数据源" class="headerlink" title="使用 MySQL 数据源"></a>使用 MySQL 数据源</h4><p>Nacos 默认使用嵌入式数据库存储配置信息，数据源支持换成 MySQL 。<br>首先使用 conf/nacos-mysql.sql 创建数据库。第二步将数据库配置加入 conf/application.properties 中。</p>
+<pre><code>spring.datasource.platform=mysql
+
+db.num=1
+db.url.0=jdbc:mysql://localhost:3306/nacos_config?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true
+db.user=root
+db.password=123456
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Spring Cloud </category>
+            
+            <category> Microservices </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spring Cloud </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[The Basic Principles of Design]]></title>
+      <url>/2020/04/05/the-basic-principles-of-design/</url>
+      <content type="html"><![CDATA[<h4 id="1-单一职责原则-Single-Resposibility-Principle-SRP"><a href="#1-单一职责原则-Single-Resposibility-Principle-SRP" class="headerlink" title="1. 单一职责原则 (Single Resposibility Principle, SRP)"></a><strong>1. 单一职责原则 (Single Resposibility Principle, SRP)</strong></h4><p>通常我们设计一个类，比如 UserInfo ，会像这样。<br><img src="https://s1.ax1x.com/2020/04/05/G0vs61.png" alt="20200405002557" border="0" style="width:250px;"><br>这样做非常简单，相信大多数人也都是这样做的，但是这并不符合单一职责原则。<strong>单一职责原则是说有且只有一种原因会引起变更。</strong>在 UserInfo 中，<code>void setUserId(Integer userId);</code> ，<code>void setUserName(String userName);</code> ，<code>void setPassword(String password);</code> 是用户的属性，<code>void changePassword(String password);</code> 是用户的行为，所以它不符合单一职责原则。我们对它进行修改以符合单一职责原则。<br><img src="https://s1.ax1x.com/2020/04/05/G0vrlR.png" alt="20200405002919" border="0" style="width:350px;"><br>现在用户属性在 IUserBO 中，用户的行为在 IUserBiz 中，这样就符合单一职责原则了。<br>单一职责原则</p>
+<ul>
+<li>优点：每个类的复杂度降低，定义清晰明确，易于维护和扩展。</li>
+<li>缺点：类之间的耦合增高，数量增多，增加了设计的复杂度。</li>
+</ul>
+<p>在实际中，单一原则有时很难使用，主要是因为职责是不可度量也不是一成不变的。但是我们还是应该尽可能应用它，不管是接口，类，还是方法。设计尽量要让使用的人清楚类或方法是干什么的，而不要让人猜他是怎么用的。</p>
+<h4 id="2-里氏替换原则-Liskov-Substitution-Principle-LSP"><a href="#2-里氏替换原则-Liskov-Substitution-Principle-LSP" class="headerlink" title="2. 里氏替换原则 (Liskov Substitution Principle, LSP)"></a><strong>2. 里氏替换原则 (Liskov Substitution Principle, LSP)</strong></h4><p>通俗的讲，<strong>所有使用父类的地方都可以换成子类，且不会出现错误，反之则不行，这就是里氏替换原则</strong>。<br><img src="https://s1.ax1x.com/2020/04/05/GrYNQS.png" alt="GrYNQS.png" border="0" style="width:350px;"></p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        Person alice = new Person();
+        Dog dog = new Dog();
+        alice.set(dog);
+        alice.play();
+    }
+}
+</code></pre><p><code>void set(Animal animal)</code> 可以换成子类，满足里氏替换原则。<br>里氏替换原则的优点：增强程序的健壮性和可扩展性。</p>
+<h4 id="3-依赖倒置原则-Dependence-Inversion-Principle-DIP"><a href="#3-依赖倒置原则-Dependence-Inversion-Principle-DIP" class="headerlink" title="3. 依赖倒置原则 (Dependence Inversion Principle, DIP)"></a><strong>3. 依赖倒置原则 (Dependence Inversion Principle, DIP)</strong></h4><p><strong>依赖倒置原则的意思是上层不依赖下层，抽象不依赖细节，而细节应该依赖抽象，通俗的说就是面向接口编程。</strong><br><img src="https://s1.ax1x.com/2020/04/05/GrdhPs.png" alt="GrdhPs.png" border="0" style="width:350px;"><br>Benz 是细节，ICar 是抽象，如果把 Benz 换成 BMW 不应该影响 ICar 。</p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        IDriver tom = new Driver();
+        tom.drive(new Benz());
+    }
+}
+</code></pre><p>Client 调用 Benz ，所以 Client 是上层，Benz 是下层，将 Benz 换成 BMW ，Client 其他细节不需要改变。<br>依赖倒置原则的优点：减少因需求变化导致的变更，程序易于扩展和维护。</p>
+<h4 id="4-接口隔离原则-Interface-Segregation-Principle-ISP"><a href="#4-接口隔离原则-Interface-Segregation-Principle-ISP" class="headerlink" title="4. 接口隔离原则 (Interface Segregation Principle, ISP)"></a><strong>4. 接口隔离原则 (Interface Segregation Principle, ISP)</strong></h4><p>接口隔离原则是说接口应该细化，接口中的方法也应尽可能少。接口隔离原则和单一职责有点类似，也有些冲突，需要灵活应用。接口隔离原则目的是提高内聚，增加灵活性。</p>
+<h4 id="5-迪米特法则-Law-of-Demeter-LoD"><a href="#5-迪米特法则-Law-of-Demeter-LoD" class="headerlink" title="5. 迪米特法则 (Law of Demeter, LoD)"></a><strong>5. 迪米特法则 (Law of Demeter, LoD)</strong></h4><p><strong>迪米特法则也叫最少知识原则，简单来说就是一个类对需要调用的类知道的越少越好。</strong>比如我们设计一个软件安装引导程序，我们可以这样设计。<br><img src="https://s1.ax1x.com/2020/04/06/GyKGxH.png" alt="20200406170228" border="0" style="width:200px;"><br>这样设计，Wizard 暴露了太多的方法给 SoftwareInstaller ，耦合性太高，按照迪米特法则进行优化。<br><img src="https://s1.ax1x.com/2020/04/06/GyKYMd.png" alt="20200406170346" border="0" style="width:200px;"><br>修改完后，Wizard 只暴露了一个方法给 SoftwareInstaller ，Wizard 中的 private 方法的修改不会影响到 SoftwareInstaller 。</p>
+<h4 id="6-开闭原则-Open-Closed-Principle-OCP"><a href="#6-开闭原则-Open-Closed-Principle-OCP" class="headerlink" title="6. 开闭原则 (Open Closed Principle, OCP)"></a><strong>6. 开闭原则 (Open Closed Principle, OCP)</strong></h4><p><strong>开闭原则是说对扩展开放，对修改关闭。简单来说，我们的程序应该通过扩展功能来实现新的功能，而不应该通过修改已有的代码来实现新的功能。</strong>假设我们已经开发好了商品模块，现在需要进行促销，我们应该怎么做呢？有 3 种方法。</p>
+<ol>
+<li>在接口种增加打折方法。不建议，接口不应该经常发生变化，如果接口变了，所有的实现都需要改变。</li>
+<li>将实现类中的价格改成折扣价格。容易造成业务上的混乱，分不清是折扣还是原价。</li>
+<li>通过新增折扣商品的方式实现功能。<br><img src="https://s1.ax1x.com/2020/04/06/GymBiF.png" alt="GymBiF.png" border="0" style="width:400px;"></li>
+</ol>
+<p>开闭原则的优点：</p>
+<ol>
+<li>易于进行单元测试。</li>
+<li>提高了复用性。</li>
+<li>提高了可靠性。</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Design Pattern </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Interview </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Understanding MySQL Explain]]></title>
       <url>/2020/04/01/understanding-mysql-explain/</url>
       <content type="html"><![CDATA[<p>Explain 会展示 MySQL 优化器关于语句执行计划的信息，也就是说会解释 MySQL 将如何处理语句。<br>我们先来试一下。</p>
@@ -159,36 +325,68 @@
 |  1 | SIMPLE      | t_user | NULL       | ref  | i_name        | i_name | 202     | const |    1 |   100.00 | NULL  |
 +----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------+
 </code></pre><p>Explain 结果显示了 12 列（黑体是我们需要重点关注的列）。</p>
+<p><table style="font-size:12px;color:#333333;border-width: 1px;border-color: #666666;border-collapse: collapse;"><tr><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">列</th><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">说明</th></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">id</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">序号</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;"><strong>select_type</strong></td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">select 的类型</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">table</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">表名</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">partitions</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">匹配的分区</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;"><strong>type</strong></td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">查找的类型</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">possible_keys</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">可能选择的索引</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">key</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">实际选择的索引</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">key_len</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">实际使用的索引的长度</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;"><strong>ref</strong></td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">与索引比较的列</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">rows</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">读取的行数</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">filtered</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">按条件过滤后的行数占比</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;"><strong>Extra</strong></td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">附加信息</td></tr></table><br></p>
+<h5 id="select-type"><a href="#select-type" class="headerlink" title="select_type"></a><strong>select_type</strong></h5><p>select_type 有以下一些值：</p>
 <ol>
-<li>id：序号。</li>
-<li><strong>select_type</strong>：select 的类型。</li>
-<li>table：这行记录属于哪个表。</li>
-<li>partitions：匹配的分区。</li>
-<li><strong>type</strong>：查找的类型。</li>
-<li>possible_keys：可能选择的索引。</li>
-<li>key：实际选择的索引。</li>
-<li>key_len：选择的索引的长度。</li>
-<li><strong>ref</strong>：与索引比较的列。</li>
-<li>rows：读取的行数。</li>
-<li>filtered：按条件过滤的行数占比。</li>
-<li><strong>Extra</strong>：附加信息。 </li>
-</ol>
-<h5 id="select-type"><a href="#select-type" class="headerlink" title="select_type"></a>select_type</h5><p>select_type 有以下一些值：</p>
-<ol>
-<li>SIMPLE：简单SELECT（不使用 UNION 或子查询）。</li>
-<li>PRIMARY：最外层 SELECT 。</li>
-<li>UNION：UNION 中第二个及以后的 SELECT 语句。</li>
-<li>DEPENDENT UNION：UNION 中的第二个及以后的 SELECT 语句，依赖外层查询。</li>
+<li>SIMPLE：简单 SELECT（不使用 UNION 或子查询）。<pre><code>mysql&gt; explain select * from t_user;
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | t_user | NULL       | ALL  | NULL          | NULL | NULL    | NULL |  100 |   100.00 | NULL  |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------+
+</code></pre></li>
+<li>PRIMARY：最外层 SELECT 。<pre><code>mysql&gt; explain select t1.* from t_user t1 where t1.id =(select id from t_user t2 where t2.name=&#39;user1&#39;);
++----+-------------+-------+------------+-------+---------------+---------+---------+-------+------+----------+-------------+
+| id | select_type | table | partitions | type  | possible_keys | key     | key_len | ref   | rows | filtered | Extra       |
++----+-------------+-------+------------+-------+---------------+---------+---------+-------+------+----------+-------------+
+|  1 | PRIMARY     | t1    | NULL       | const | PRIMARY       | PRIMARY | 4       | const |    1 |   100.00 | NULL        |
+|  2 | SUBQUERY    | t2    | NULL       | ref   | i_name        | i_name  | 202     | const |    1 |   100.00 | Using index |
++----+-------------+-------+------------+-------+---------------+---------+---------+-------+------+----------+-------------+
+</code></pre></li>
+<li>UNION：UNION 中第二个及以后的 SELECT 语句。<pre><code>mysql&gt; explain select * from t_user t1 where t1.id=1 union select * from t_user t2 where t2.id=2;
++----+--------------+------------+------------+-------+---------------+---------+---------+-------+------+----------+-----------------+
+| id | select_type  | table      | partitions | type  | possible_keys | key     | key_len | ref   | rows | filtered | Extra           |
++----+--------------+------------+------------+-------+---------------+---------+---------+-------+------+----------+-----------------+
+|  1 | PRIMARY      | t1         | NULL       | const | PRIMARY       | PRIMARY | 4       | const |    1 |   100.00 | NULL            |
+|  2 | UNION        | t2         | NULL       | const | PRIMARY       | PRIMARY | 4       | const |    1 |   100.00 | NULL            |
+| NULL | UNION RESULT | &lt;union1,2&gt; | NULL       | ALL   | NULL          | NULL    | NULL    | NULL  | NULL |     NULL | Using temporary |
++----+--------------+------------+------------+-------+---------------+---------+---------+-------+------+----------+-----------------+
+</code></pre>union 的结果 UNION RESULT 放在临时表 <union1,2> 中，所以 id 为 NULL 。union 要对结果去重，所以需要临时表，union all 不需要去重，所以不需要临时表。<pre><code>mysql&gt; explain select * from t_user t1 where t1.id=1 union all select * from t_user t2 where t2.id=2;
++----+-------------+-------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
+| id | select_type | table | partitions | type  | possible_keys | key     | key_len | ref   | rows | filtered | Extra |
++----+-------------+-------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
+|  1 | PRIMARY     | t1    | NULL       | const | PRIMARY       | PRIMARY | 4       | const |    1 |   100.00 | NULL  |
+|  2 | UNION       | t2    | NULL       | const | PRIMARY       | PRIMARY | 4       | const |    1 |   100.00 | NULL  |
++----+-------------+-------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
+</code></pre></union1,2></li>
+<li>DEPENDENT UNION：UNION 中的第二个及以后的 SELECT 语句，依赖外层查询。<pre><code>mysql&gt; explain select t1.* from t_user t1 where t1.id in (select id from t_user t2 union select id from t_user t3);
++----+--------------------+------------+------------+--------+---------------+---------+---------+------+------+----------+-----------------+
+| id | select_type        | table      | partitions | type   | possible_keys | key     | key_len | ref  | rows | filtered | Extra           |
++----+--------------------+------------+------------+--------+---------------+---------+---------+------+------+----------+-----------------+
+|  1 | PRIMARY            | t1         | NULL       | ALL    | NULL          | NULL    | NULL    | NULL |  100 |   100.00 | Using where     |
+|  2 | DEPENDENT SUBQUERY | t2         | NULL       | eq_ref | PRIMARY       | PRIMARY | 4       | func |    1 |   100.00 | Using index     |
+|  3 | DEPENDENT UNION    | t3         | NULL       | eq_ref | PRIMARY       | PRIMARY | 4       | func |    1 |   100.00 | Using index     |
+| NULL | UNION RESULT       | &lt;union2,3&gt; | NULL       | ALL    | NULL          | NULL    | NULL    | NULL | NULL |     NULL | Using temporary |
++----+--------------------+------------+------------+--------+---------------+---------+---------+------+------+----------+-----------------+
+</code></pre></li>
 <li>UNION RESULT：UNION 的结果。</li>
 <li>SUBQUERY：子查询中第一个 SELECT 语句。</li>
 <li>DEPENDENT SUBQUERY：子查询中第一个 SELECT 语句，依赖外部查询。</li>
-<li>DERIVED：derived 表</li>
+<li>DERIVED：derived 表<pre><code>mysql&gt; explain select * from (select id from t_user group by id) A;
++----+-------------+------------+------------+-------+------------------------+---------+---------+------+------+----------+-------------+
+| id | select_type | table      | partitions | type  | possible_keys          | key     | key_len | ref  | rows | filtered | Extra       |
++----+-------------+------------+------------+-------+------------------------+---------+---------+------+------+----------+-------------+
+|  1 | PRIMARY     | &lt;derived2&gt; | NULL       | ALL   | NULL                   | NULL    | NULL    | NULL |  100 |   100.00 | NULL        |
+|  2 | DERIVED     | t_user     | NULL       | index | PRIMARY,i_name,i_skill | PRIMARY | 4       | NULL |  100 |   100.00 | Using index |
++----+-------------+------------+------------+-------+------------------------+---------+---------+------+------+----------+-------------+
+</code></pre></li>
 <li>MATERIALIZED：</li>
 <li>UNCACHEABLE SUBQUERY：子查询结果无法缓存，必须针对外部查询的每一行重新进行评估。</li>
 <li>UNCACHEABLE UNION：UNION 中的第二个及以后的 SELETE 语句，并且这个 UNION 属于 UNCACHEABLE SUBQUERY 。</li>
 </ol>
-<h5 id="type"><a href="#type" class="headerlink" title="type"></a>type</h5><ol>
-<li>system：该表只有一行记录。</li>
+<h5 id="table"><a href="#table" class="headerlink" title="table"></a><strong>table</strong></h5><p>table 对应的是表名，比如 t1 ，或者是临时表的名字。将查询的结果保存到临时表叫做物化。如果是物化的方式，则显示为 <code>&lt;derivedN&gt;</code> ，表示需要依赖 id 为 N 的查询。当使用 union 时显示 <code>&lt;union1,2&gt;</code> 。 </p>
+<h5 id="type"><a href="#type" class="headerlink" title="type"></a><strong>type</strong></h5><ol>
+<li>system：该表只有一行记录。system 是 const 的特例。</li>
 <li>const：全表最多只有一行匹配。<pre><code>mysql&gt; explain select * from t_user where id=1;
 +----+-------------+--------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
 | id | select_type | table  | partitions | type  | possible_keys | key     | key_len | ref   | rows | filtered | Extra |
@@ -196,8 +394,22 @@
 |  1 | SIMPLE      | t_user | NULL       | const | PRIMARY       | PRIMARY | 4       | const |    1 |   100.00 | NULL  |
 +----+-------------+--------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
 </code></pre></li>
-<li>eq_ref：A 表中的每一行，B 表中只有一行匹配。（存疑）</li>
-<li>ref：</li>
+<li>eq_ref：A 连接 B ，B 的连接字段是主键或唯一索引。<pre><code>mysql&gt; explain select * from t_dept join t_employee on t_dept.dept_id=t_employee.id;
++----+-------------+------------+------------+--------+---------------+---------+---------+---------------------+------+----------+-------+
+| id | select_type | table      | partitions | type   | possible_keys | key     | key_len | ref                 | rows | filtered | Extra |
++----+-------------+------------+------------+--------+---------------+---------+---------+---------------------+------+----------+-------+
+|  1 | SIMPLE      | t_dept     | NULL       | ALL    | PRIMARY       | NULL    | NULL    | NULL                |    1 |   100.00 | NULL  |
+|  1 | SIMPLE      | t_employee | NULL       | eq_ref | PRIMARY       | PRIMARY | 4       | test.t_dept.dept_id |    1 |   100.00 | NULL  |
++----+-------------+------------+------------+--------+---------------+---------+---------+---------------------+------+----------+-------+
+</code></pre></li>
+<li>ref：A 连接 B ，B 的连接字段是普通索引。<pre><code>mysql&gt; explain select * from t_dept join t_employee on t_dept.dept_id=t_employee.dept_id;
++----+-------------+------------+------------+------+---------------+-----------+---------+---------------------+------+----------+-------+
+| id | select_type | table      | partitions | type | possible_keys | key       | key_len | ref                 | rows | filtered | Extra |
++----+-------------+------------+------------+------+---------------+-----------+---------+---------------------+------+----------+-------+
+|  1 | SIMPLE      | t_dept     | NULL       | ALL  | PRIMARY       | NULL      | NULL    | NULL                |    1 |   100.00 | NULL  |
+|  1 | SIMPLE      | t_employee | NULL       | ref  | i_dept_id     | i_dept_id | 5       | test.t_dept.dept_id |    1 |   100.00 | NULL  |
++----+-------------+------------+------------+------+---------------+-----------+---------+---------------------+------+----------+-------+
+</code></pre></li>
 <li>fulltext：使用 fulltext 索引进行连接。</li>
 <li>ref_or_null：类似 ref ，但是还会搜索包含 NULL 的行。<pre><code>mysql&gt; explain select * from t_user where skill=&#39;aaa&#39; or skill is null;
 +----+-------------+--------+------------+-------------+---------------+---------+---------+-------+------+----------+-----------------------+
@@ -215,16 +427,66 @@
 </code></pre></li>
 <li>unique_subquery：</li>
 <li>index_subquery：</li>
-<li>range：</li>
-<li>index：</li>
-<li>ALL</li>
+<li>range：<pre><code>mysql&gt; explain select * from t_user where id&gt;10;
++----+-------------+--------+------------+-------+---------------+---------+---------+------+------+----------+-------------+
+| id | select_type | table  | partitions | type  | possible_keys | key     | key_len | ref  | rows | filtered | Extra       |
++----+-------------+--------+------------+-------+---------------+---------+---------+------+------+----------+-------------+
+|  1 | SIMPLE      | t_user | NULL       | range | PRIMARY       | PRIMARY | 4       | NULL |   90 |   100.00 | Using where |
++----+-------------+--------+------------+-------+---------------+---------+---------+------+------+----------+-------------+
+</code></pre></li>
+<li>index：全表扫描，查询字段全都有索引。<pre><code>mysql&gt; explain select name from t_user;
++----+-------------+--------+------------+-------+---------------+--------+---------+------+------+----------+-------------+
+| id | select_type | table  | partitions | type  | possible_keys | key    | key_len | ref  | rows | filtered | Extra       |
++----+-------------+--------+------------+-------+---------------+--------+---------+------+------+----------+-------------+
+|  1 | SIMPLE      | t_user | NULL       | index | NULL          | i_name | 202     | NULL |  100 |   100.00 | Using index |
++----+-------------+--------+------------+-------+---------------+--------+---------+------+------+----------+-------------+
+</code></pre></li>
+<li>ALL：全表扫描，查询的字段不全都有索引。<pre><code>mysql&gt; explain select * from t_user;
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | t_user | NULL       | ALL  | NULL          | NULL | NULL    | NULL |  100 |   100.00 | NULL  |
++----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------+
+</code></pre></li>
 </ol>
+<h5 id="possible-keys"><a href="#possible-keys" class="headerlink" title="possible_keys"></a><strong>possible_keys</strong></h5><p>如果查询没有使用索引，则为 NULL ，可以在 where 中添加一些条件来使用索引。</p>
+<h5 id="key-len"><a href="#key-len" class="headerlink" title="key_len"></a><strong>key_len</strong></h5><p>key_len 是实际使用的 key 的长度，tinyint 是 1 字节 ，smallint 是 2 字节，int 是 4 字节，bigint 是 8 字节，timestamp 是 3 字节，datetime 是 8 字节 ，char(n) 是 n 字节，varchar(n) 是 x*n + 2 字节，x 根据字符集而定。</p>
+<h5 id="rows"><a href="#rows" class="headerlink" title="rows"></a><strong>rows</strong></h5><p>rows 是查询计划预估的记录数，不是真正的结果行数。如果没有走索引，是全表扫描的行数，如果走索引，是预估的索引扫描行数。</p>
+<h5 id="filtered"><a href="#filtered" class="headerlink" title="filtered"></a><strong>filtered</strong></h5><p>filtered 主要用于表连接。</p>
+<pre><code>mysql&gt; explain select * from t_employee,t_dept where t_employee.dept_id=t_dept.dept_id;
++----+-------------+------------+------------+------+---------------+-----------+---------+---------------------+------+----------+-------+
+| id | select_type | table      | partitions | type | possible_keys | key       | key_len | ref                 | rows | filtered | Extra |
++----+-------------+------------+------------+------+---------------+-----------+---------+---------------------+------+----------+-------+
+|  1 | SIMPLE      | t_dept     | NULL       | ALL  | PRIMARY       | NULL      | NULL    | NULL                |    1 |   100.00 | NULL  |
+|  1 | SIMPLE      | t_employee | NULL       | ref  | i_dept_id     | i_dept_id | 5       | test.t_dept.dept_id |    1 |   100.00 | NULL  |
++----+-------------+------------+------------+------+---------------+-----------+---------+---------------------+------+----------+-------+
+</code></pre><p>在使用表连接时，如果是 A left join B ，则 A 是驱动表，B 是被驱动表。如果是 A right join B ，则 B 是驱动表，A 是被驱动表。如果是 <code>select * from A,B</code>  ，则小表是驱动表，大表是被驱动表。上边的例子，t_dept 是驱动表，t_employee 是被驱动表，t_employee 的连接行数 = 1 行 (t_dept rows * t_dept filtered=1 * 100% = 1) 。</p>
 <h5 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h5><ol>
-<li></li>
-<li>const row not found</li>
-<li>Deleting all rows</li>
-<li>Distinct</li>
-<li>FirstMatch</li>
+<li>NULL：查询的列没有被索引覆盖，必须通过回表进行查询。<pre><code>mysql&gt; explain select * from t_user where name=&#39;tom&#39;;
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------+
+| id | select_type | table  | partitions | type | possible_keys | key    | key_len | ref   | rows | filtered | Extra |
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------+
+|  1 | SIMPLE      | t_user | NULL       | ref  | i_name        | i_name | 202     | const |    1 |   100.00 | NULL  |
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------+
+</code></pre></li>
+<li>Using index：只使用索引查询列的信息，这种情况一般都是使用了索引覆盖。<pre><code>mysql&gt; explain select name from t_user where name=&#39;tom&#39;;
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------------+
+| id | select_type | table  | partitions | type | possible_keys | key    | key_len | ref   | rows | filtered | Extra       |
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------------+
+|  1 | SIMPLE      | t_user | NULL       | ref  | i_name        | i_name | 202     | const |    1 |   100.00 | Using index |
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------------+
+</code></pre></li>
+<li>Using where：where 条件是索引之一。<pre><code>mysql&gt; explain select name from t_user where name=&#39;tom&#39; and age=10;
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------------+
+| id | select_type | table  | partitions | type | possible_keys | key    | key_len | ref   | rows | filtered | Extra       |
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------------+
+|  1 | SIMPLE      | t_user | NULL       | ref  | i_name        | i_name | 202     | const |    1 |    10.00 | Using where |
++----+-------------+--------+------------+------+---------------+--------+---------+-------+------+----------+-------------+
+</code></pre></li>
+<li>Using index condition：使用了索引下推优化。</li>
+<li>Using temporary：查询使用了临时表，临时表创建和维护成本很高，所以一般需要考虑优化。</li>
+<li>Using filesort：filesort 耗时，一般需要考虑优化成索引排序。</li>
+<li>Using join buffer：连接条件没有使用索引，需要优化。</li>
 </ol>
 ]]></content>
       
@@ -1063,7 +1325,7 @@ eureka:
 <li>AOF，增量日志方式，对每条命令都生成日志，以 append-on 方式写文件，写入速度快，数据量大，频率高。</li>
 </ol>
 <p>Q: Redis 的高可用是怎么做的？<br>A: 通过哨兵模式，只少 3 个节点，如果 master 挂了，slave 会被提升为 master 。哨兵模式只能保证高可用，不能保证数据不丢。</p>
-<p>Q: Redis 主从之间是如何进行数据同步的？<br>A: 如果新加一个 salve 节点到集群，master 会生成一个 RDB 的镜像快照，将 RDB 发给 slave ，salve 将 RDB 保存到本地，然后加载到内存。如果在数据同步期间有增量数据，等 salve 通过 RDB 恢复了再把增量的部分发给 salve 。如果网络断了，会自动重连，网络恢复之后会重发。</p>
+<p>Q: Redis 主从之间是如何进行数据同步的？<br>A: 如果新加一个 slave 节点到集群，master 会生成一个 RDB 的镜像快照，将 RDB 发给 slave ，slave 将 RDB 保存到本地，然后加载到内存。如果在数据同步期间有增量数据，等 slave 通过 RDB 恢复了再把增量的部分发给 slave 。如果网络断了，会自动重连，网络恢复之后会重发。</p>
 <p>Q: 哨兵模式 master 挂了如何进行选主？<br>A: 先看优先级，优先级相同，看复制偏移量，及数据完整性，偏移量相同，取 id 最小的。</p>
 <p>Q: Redis key 的过期的 key 是怎么删除的？<br>A: 如果 redis 中的 key 过期了，就会返回 nil 。但是这个 key 并没有被立刻删除。Redis 的失效的 key 的删除策略有 2 种：</p>
 <ol>
@@ -1071,7 +1333,7 @@ eureka:
 <li>主动删除(active)：有些 key 失效之后可能再也不会被访问，所以无法被动删除，只能主动删除。Redis 会从过期的集合中随机挑一些 key 删除，如果失效 key 大于 25% ，主动删除会一直进行。如果还删不掉，就只能等 LRU 了。</li>
 </ol>
 <p>Q: 内存淘汰策略是怎样的？<br>A: noeviction，allkeys-LRU，volatile-LRU，allkeys-Random，volatile-Random，volatile-ttl 。</p>
-<p>Q:<br>A:<br>Q:<br>A:<br>Q:<br>A:<br>Q:<br>A: </p>
+<p>Q: 主从模式，哨兵模式，集群模式的区别。<br>A: 主从是备份关系，如果主挂了，从可以接替主继续工作，但是切换需要人工。哨兵是在主挂了之后由程序自动将从提成主，保证高可用，哨兵最少 3 台。集群是将数据自动分配到 hash slot 中，多台机器同时工作，提高并发，集群最少 6 台，3 主 3 从。</p>
 ]]></content>
       
         <categories>
@@ -4373,11 +4635,12 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
     </entry>
     
     <entry>
-      <title><![CDATA[spring bean life cycle]]></title>
+      <title><![CDATA[Spring Bean Life Cycle]]></title>
       <url>/2019/11/07/spring-bean-life-cycle/</url>
       <content type="html"><![CDATA[<p><img src="https://s1.ax1x.com/2020/04/04/GwMsOK.png" alt="GwMsOK.png" border="0" style="width:500px;"></p>
-<p>Spring bean 的生命周期有 4 个阶段：</p>
+<p>Spring bean 的生命周期有 5 个阶段：</p>
 <ol>
+<li>Prepare 阶段</li>
 <li>Instantation 阶段</li>
 <li>PopulateBean 阶段</li>
 <li>Initailization 阶段</li>
@@ -4402,12 +4665,12 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
     </entry>
     
     <entry>
-      <title><![CDATA[spring boot life cycle]]></title>
+      <title><![CDATA[Spring Boot Life Cycle]]></title>
       <url>/2019/11/07/spring-boot-life-cycle/</url>
       <content type="html"><![CDATA[<p>spring boot 启动流程</p>
 <ol>
 <li>实例化 SpringApplication<br> 1.1 扫描 ApplicationContextInitializer 的配置并实例化（通过 SpringFactoriesLoader 加载 spring.factories 中的配置）<br> 1.2 扫描 ApplicationListener 的配置并实例化（通过 SpringFactoriesLoader 加载 spring.factories 中的配置）</li>
-<li>执行 SpringApplication.run() 方法<br> 2.1 创建并启动 stopwatch<br> 2.2 扫描 SpringApplicationRunListener 并将实例化后的 EventPublishingRunListener 加入到 RunListener 集合<br> 2.3 遍历 RunListener 集合，启动 runListener ，创建一个 SpringBootStartingEvent 加入到事件广播<br> 2.4 包装命令行的参数<br> 2.5 配置环境变量<br> &ensp;&ensp;&ensp;&ensp;2.5.1 根据 applicationType 获取环境变量<br> &ensp;&ensp;&ensp;&ensp;2.5.2 配置自定义环境变量，比如命令行的参数<br> 2.6 打印 banner<br> 2.7 根据 applicationType 实例化 ConfigurableApplicationContext 类<br> 2.8 扫描 SpringBootExceptionReporter 的配置并实例化，将 failureAnalyzer 加入到 exceptionReporter 集合<br> 2.9 准备 context<br> &ensp;&ensp;&ensp;&ensp;2.9.1 set 环境变量<br> &ensp;&ensp;&ensp;&ensp;2.9.2 做一些后置处理<br> &ensp;&ensp;&ensp;&ensp;2.9.3 遍历 Initializer 集合执行每个 initializer 的 initialize() 方法<br> &ensp;&ensp;&ensp;&ensp;2.9.4 创建一个 ApplicationContextInitializedEvent 加入到事件广播<br> &ensp;&ensp;&ensp;&ensp;2.9.5 创建 beanDefinitionLoader<br> &ensp;&ensp;&ensp;&ensp;2.9.6 ApplicationListener 和 Context 互相 set，然后创建一个 ApplicationPreparedEvent 加入到事件广播<br> 2.10 refreshContext<br> &ensp;&ensp;&ensp;&ensp;2.10.1 调用 super.refresh()<br> &ensp;&ensp;&ensp;&ensp;2.10.1.1 prepareRefresh<br> &ensp;&ensp;&ensp;&ensp;2.10.1.2 prepareBeanFactory<br> &ensp;&ensp;&ensp;&ensp;2.10.1.3 postProcessBeanFactory<br> &ensp;&ensp;&ensp;&ensp;2.10.1.4 invokeBeanFactoryPostProcessors<br> &ensp;&ensp;&ensp;&ensp;2.10.1.5 registerBeanPostProcessors<br> &ensp;&ensp;&ensp;&ensp;2.10.1.6 initApplicationEventMulticaster<br> &ensp;&ensp;&ensp;&ensp;2.10.1.7 onRefresh 创建 webserver<br> &ensp;&ensp;&ensp;&ensp;2.10.1.8 registerListeners<br> &ensp;&ensp;&ensp;&ensp;2.10.1.9 finishBeanFactoryInitialization<br> &ensp;&ensp;&ensp;&ensp;2.10.1.10 finishRefresh<br> &ensp;&ensp;&ensp;&ensp;2.10.1.10.1 启动 webserver<br> &ensp;&ensp;&ensp;&ensp;2.10.1.10.2 创建一个 ServletWebServerInitializedEvent 加入到事件广播<br> &ensp;&ensp;&ensp;&ensp;2.10.2 registerShutdownHook<br> 2.11 afterRefresh 什么都没有做<br> 2.12 创建一个 ApplicationStartedEvent 加入到事件广播<br> 2.13 创建一个 ApplicationReadyEvent 加入到事件广播  </li>
+<li>执行 SpringApplication.run() 方法<br> 2.1 创建并启动 stopwatch<br> 2.2 扫描 SpringApplicationRunListener 并将实例化后的 EventPublishingRunListener 加入到 RunListener 集合<br> 2.3 遍历 RunListener 集合，启动 runListener ，创建一个 <strong>SpringBootStartingEvent</strong> 加入到事件广播<br> 2.4 包装命令行的参数<br> 2.5 配置环境变量<br> &ensp;&ensp;&ensp;&ensp;2.5.1 根据 applicationType 获取环境变量<br> &ensp;&ensp;&ensp;&ensp;2.5.2 配置自定义环境变量，比如命令行的参数<br> 2.6 打印 banner<br> 2.7 根据 applicationType 实例化 ConfigurableApplicationContext 类<br> 2.8 扫描 SpringBootExceptionReporter 的配置并实例化，将 failureAnalyzer 加入到 exceptionReporter 集合<br> 2.9 准备 context<br> &ensp;&ensp;&ensp;&ensp;2.9.1 set 环境变量<br> &ensp;&ensp;&ensp;&ensp;2.9.2 做一些后置处理<br> &ensp;&ensp;&ensp;&ensp;2.9.3 遍历 Initializer 集合执行每个 initializer 的 initialize() 方法<br> &ensp;&ensp;&ensp;&ensp;2.9.4 创建一个 <strong>ApplicationContextInitializedEvent</strong> 加入到事件广播<br> &ensp;&ensp;&ensp;&ensp;2.9.5 创建 beanDefinitionLoader<br> &ensp;&ensp;&ensp;&ensp;2.9.6 ApplicationListener 和 Context 互相 set，然后创建一个 <strong>ApplicationPreparedEvent</strong> 加入到事件广播<br> 2.10 refreshContext<br> &ensp;&ensp;&ensp;&ensp;2.10.1 调用 super.refresh()<br> &ensp;&ensp;&ensp;&ensp;2.10.1.1 prepareRefresh<br> &ensp;&ensp;&ensp;&ensp;2.10.1.2 prepareBeanFactory<br> &ensp;&ensp;&ensp;&ensp;2.10.1.3 postProcessBeanFactory<br> &ensp;&ensp;&ensp;&ensp;2.10.1.4 invokeBeanFactoryPostProcessors<br> &ensp;&ensp;&ensp;&ensp;2.10.1.5 registerBeanPostProcessors<br> &ensp;&ensp;&ensp;&ensp;2.10.1.6 initApplicationEventMulticaster<br> &ensp;&ensp;&ensp;&ensp;2.10.1.7 onRefresh 创建 webserver<br> &ensp;&ensp;&ensp;&ensp;2.10.1.8 registerListeners<br> &ensp;&ensp;&ensp;&ensp;2.10.1.9 finishBeanFactoryInitialization<br> &ensp;&ensp;&ensp;&ensp;2.10.1.10 finishRefresh<br> &ensp;&ensp;&ensp;&ensp;2.10.1.10.1 启动 webserver<br> &ensp;&ensp;&ensp;&ensp;2.10.1.10.2 创建一个 <strong>ServletWebServerInitializedEvent</strong> 加入到事件广播<br> &ensp;&ensp;&ensp;&ensp;2.10.2 registerShutdownHook<br> 2.11 afterRefresh 什么都没有做<br> 2.12 创建一个 <strong>ApplicationStartedEvent</strong> 加入到事件广播<br> 2.13 创建一个 <strong>ApplicationReadyEvent</strong> 加入到事件广播  </li>
 </ol>
 ]]></content>
       
@@ -4886,10 +5149,10 @@ check point
       <url>/2019/07/28/one-question-one-answer-for-mysql/</url>
       <content type="html"><![CDATA[<p>Q: 什么是索引</p>
 <p>A: 索引是关系数据库中的一种存储数据结构，针对数据库表的一列或多列进行排序，从而快速定位，加速检索。</p>
-<p>Q: MySQL有哪些索引</p>
-<p>A: 主键索引， 唯一索引，哈希索引，fulltext索引。</p>
-<p>Q: B+Tree索引和Hash索引的区别</p>
-<p>A: B+Tree索引可以用于列相等的比较，范围查找，Like前半部分的比较，BTree的任何最左前缀都可以用来查找。Hash索引仅能用于相等的比较，不能用于范围查找，但是速度更快。</p>
+<p>Q: MySQL 有哪些索引</p>
+<p>A: 主键索引， 唯一索引，哈希索引，fulltext 索引。</p>
+<p>Q: B+Tree 索引和Hash 索引的区别</p>
+<p>A: B+Tree 索引可以用于列相等的比较，范围查找，Like 前半部分的比较，B+Tree 的任何最左前缀都可以用来查找。Hash 索引仅能用于相等的比较，不能用于范围查找，但是速度更快。</p>
 <p>Q: 加了索引为什么没有生效</p>
 <p>A: 索引是否生效，可以通过执行计划进行查看。</p>
 <p>在一些情况下即使加了索引，也是不会生效的，比如：</p>
@@ -4899,17 +5162,16 @@ check point
 <li>数据类型不同的列，没有进行转换的情况下。</li>
 </ol>
 <p>最终是否使用索引，是由查询优化器决定的，会根据检索条件，全表扫描的代价，各种执行方案对比等最终选择一个优化器觉得成本最低的方案执行。</p>
-<p>如果索引没有生效，可以使用 <code>FORCE INDEX</code> 强制使用索引，但是会增加运维的成本。</p>
-<p>Q: B+Tree数据结构都可以存储哪些内容</p>
-<p>A: BTree节点可以存放key和数据，B+Tree的内节点只能存放key，数据只能存放在叶子节点。</p>
-<p>Q: 为什么使用B+Tree二不使用二叉树或是红黑树</p>
-<p>A: 和计算机处理数据的原理有关系。计算机会在两个地方存储数据，一个是内存，一个是磁盘。当我们使用的数据没有在内存中时，计算机就会报一个缺页异常，这时候内存和磁盘之间就会进行数据交换。计算机会在磁盘上找到数据存储的位置。由于磁盘在读取数据成本很高，为了提高性能，通常计算机会以这个位置为开始位置，向后预读页的整数倍大小数据，将这些数据加载到内存。如果使用二叉树或是红黑树，树的高度会很大，逻辑上很近的数值可能在物理上很远，预读的优势无法体现。BTree相对来说，出度很大，树的高度相对较小，逻辑相邻的数据物理上也相距很近，可以充分发挥预读的优势。B+Tree相对于BTree来说中间节点只存储key，占用空间更小，所以在相同大小的页中包含的节点就更多，在一次I/O预读的数据就更多。</p>
+<p>Q: B+Tree 数据结构都可以存储哪些内容</p>
+<p>A: BTree 节点可以存放 key 和数据，B+Tree 的内节点只能存放 key ，数据只能存放在叶子节点。</p>
+<p>Q: 为什么使用 B+Tree 而不使用二叉树或是红黑树</p>
+<p>A: 和计算机处理数据的原理有关系。计算机会在两个地方存储数据，一个是内存，一个是磁盘。当我们使用的数据没有在内存中时，计算机就会报一个缺页异常，这时候内存和磁盘之间就会进行数据交换。计算机会在磁盘上找到数据存储的位置。由于磁盘在读取数据成本很高，为了提高性能，通常计算机会以这个位置为开始位置，向后预读页的整数倍大小数据，将这些数据加载到内存。如果使用二叉树或是红黑树，树的高度会很大，逻辑上很近的数值可能在物理上很远，预读的优势无法体现。BTree 相对来说，出度很大，树的高度相对较小，逻辑相邻的数据物理上也相距很近，可以充分发挥预读的优势。B+Tree 相对于 BTree 来说中间节点只存储 key ，占用空间更小，所以在相同大小的页中包含的节点就更多，一次 I/O 预读的数据就更多。</p>
 <p>Q: 什么是聚集索引和非聚集索引，他们有什么区别</p>
-<p>A: 在InnoDB存储引擎中，B+Tree的叶子节点保存了完整的数据这种方式叫做聚集索引。MyISAM存储引擎中B+Tree在叶子节点存储的是数据的地址信息，这种方式叫做非聚集索引。如果一个表有多个列使用非聚集索引，那么主键索引和非主键索引结构上是一致的。如果使用聚集索引，那么主键索引的叶子节点存储了完整的数据信息，非主键索引的叶子节点存储的是列信息和主键的信息。</p>
+<p>A: 在 InnoDB 存储引擎中，B+Tree 的叶子节点保存了完整的数据这种方式叫做聚集索引。MyISAM 存储引擎中 B+Tree 在叶子节点存储的是数据的地址信息，这种方式叫做非聚集索引（二级索引）。如果一个表有多个列使用非聚集索引，那么主键索引和非主键索引结构上是一致的。如果使用聚集索引，那么主键索引的叶子节点存储了完整的数据信息，非主键索引的叶子节点存储的是列信息和主键的信息。</p>
 <p>Q: 什么是回表</p>
 <p>A: 在使用非主键索引查询时，通过索引查到主键，然后在通过主键进行一次查询，这个过程叫做回表。使用非主键索引进行查询时，可以使用索引覆盖（covering index）来避免回表。</p>
 <p>Q: 什么是索引下推</p>
-<p>A:</p>
+<p>A: 不使用索引下推时，查询结果拿到 server 层，回表之后再根据 where 条件进行过滤。使用索引下推，在 innoDB 层就对查询结果进行过滤，过滤之后的结果返回到 server 层进行回表。使用索引下推优化可以减少回表的数量。</p>
 <p>Q: InnoDB 和 MyISAM 的区别。</p>
 <p>A: <table style="font-size:12px;color:#333333;border-width: 1px;border-color: #666666;border-collapse: collapse;"><tr><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;"></th><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">InnoDB</th><th style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;">MyISAM</th></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持事务</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">不支持</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">锁</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">行级锁</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">表级锁</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持MVCC</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">不支持</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持外键</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">不支持</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持全文索引</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">不支持</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">支持</td></tr><tr><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">索引</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">聚簇索引</td><td style="border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;">非聚簇索引</td></tr></table></p>
 <p>Q: 什么情况下应该或不应该使用索引。</p>
@@ -4936,18 +5198,18 @@ check point
 <p>Q: delete、drop、truncate 区别？</p>
 <p>A: 删除表用 drop ，删除表中的全部数据用 truncate ，删除表的部分数据用 delete 。drop 和 truncate 是 DDL ，不能回滚，delete 是 DML ，可以回滚。</p>
 <p>Q: MySQL 有哪些锁？</p>
-<p>A: MySQL 锁分为 lock 和 latch 。lock 针对的是事务，用来锁定数据库中的对象，latch 针对的是线程，用来保证并发的正确性。latch 是一种轻量级锁，又分为互斥锁 (mutex) 和 读写锁 (rw-lock) 。lock 又分为 表锁，页锁，行锁。行锁里又分 record lock (行锁，锁定一行)，gap lock (间隙锁，锁定范围行) ，next-key lock (临键锁，record lock + gap lock) 。<br>按模式分成共享锁和独占锁。<br>按使用机制分：乐观锁和悲观锁。</p>
+<p>A: MySQL 锁分为 lock 和 latch 。lock 针对的是事务，用来锁定数据库中的对象，latch 针对的是线程，用来保证并发的正确性。latch 是一种轻量级锁，又分为互斥锁 (mutex) 和 读写锁 (rw-lock) 。lock 又分为 表锁，页锁，行锁。行锁里又分 record lock (行锁，锁定一行)，gap lock (间隙锁，锁定范围行) ，next-key lock (临键锁，record lock + gap lock) 。<br>按模式分成共享锁和独占锁。<br>按使用机制分成乐观锁和悲观锁。</p>
 <p>Q: 什么是 ACID？</p>
 <p>A: 事务要么同时成功要么同时失败，这是原子性 atomic 。成功了 commit 失败了 rollback ，不管 commit 还是 rollback ，一旦执行，结果就是不可变的，这是持久性 Durability 。在事务开始和结束之间，存在中间状态，这些中间状态对事务之外是不可见的，这是隔离性 isolation 。事务前后数据必须是完整一致的，不能存在中间状态，这是一致性 consistency 。</p>
 <p>Q: 什么是 B+ 树？</p>
-<p>A: B+ 树是一种出度很大，高度很小，已排序的 n 叉树，在 MySQL 中，</p>
+<p>A: B+ 树是一种出度很大，高度很小，已排序的 n 叉树。</p>
 <p>Q: AUTO_INCREMENT 的原理？</p>
 <p>A: 传统的方式，MySQL 会维护一个计数器来记录当前最大的 id 值，当新增一条记录时，先获取 AUTO-INC 锁直到语句结束。AUTO-INC 是一个表级锁，性能不好，所以有了改进方式。如果能确定插入行数，则使用轻量级的互斥锁，如果是批量插入，还是使用 AUTO-INC 锁。</p>
 <p>Q: 组合索引和几个单个的索引有什么区别？</p>
 <p>A: 组合索引在进行多个条件查询时可以根据最左前缀规则进行索引，单个索引在多个查询条件时，索引可能只会使用一个索引（实际还要看查询计划）。</p>
 <p>Q: 临时表有什么用，什么时候删除？</p>
 <p>A: 临时表用于保存临时数据，连接断开时会删除临时表。</p>
-<p>Q: 数据库的3个范式时什么？</p>
+<p>Q: 数据库的3个范式是什么？</p>
 <p>A: 第一范式：关系中的每个属性都不可再分。第二范式：要有主键。第三范式：消除冗余。</p>
 <p>Q: MySQL 主从复制是怎么做的？</p>
 <p>A: 当有从库连接到主库时，主库会创建一个线程将 Bin Log 发送到从库。从库创建线程接收 Bin Log 并回放 sql 。</p>
@@ -16856,6 +17118,129 @@ sudo apt-get install plank
     </entry>
     
     <entry>
+      <title><![CDATA[IDEA + Maven + Jetty 热部署]]></title>
+      <url>/2016/07/15/jetty-hot-deployment/</url>
+      <content type="html"><![CDATA[<p>####1. 集成</p>
+<p>pom.xml</p>
+<pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
+            &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;8.1.15.v20140411&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;connectors&gt;
+                    &lt;!-- 修改端口 --&gt;
+                    &lt;connector implementation=&quot;org.eclipse.jetty.server.nio.SelectChannelConnector&quot;&gt;
+                        &lt;port&gt;8080&lt;/port&gt;
+                    &lt;/connector&gt;
+                &lt;/connectors&gt;
+                &lt;stopKey&gt;exit&lt;/stopKey&gt;
+                &lt;stopPort&gt;9090&lt;/stopPort&gt;
+                &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;
+                &lt;webAppConfig&gt;
+                    &lt;!-- 热部署 --&gt;
+                    &lt;defaultsDescriptor&gt;src/main/resources/webdefault.xml&lt;/defaultsDescriptor&gt;
+                    &lt;contextPath&gt;/redis-doc&lt;/contextPath&gt;
+                &lt;/webAppConfig&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Meven </tag>
+            
+            <tag> Jetty </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Ubuntu14.04 + ssh 镜像]]></title>
+      <url>/2016/07/15/docker-ubuntu14.04-with-ssh/</url>
+      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir ubuntu
+cd ubuntu
+touch Dockerfile run.sh sources.list authorized_keys
+</code></pre><p><strong><em>Dockerfile</em></strong></p>
+<pre><code>FROM ubuntu:14.04
+
+MAINTAINER rolex
+
+RUN rm /etc/apt/sources.list
+
+ADD sources.list /etc/apt/sources.list
+
+RUN apt-get update
+
+
+
+RUN sudo apt-get install -y openssh-server
+RUN mkdir -p /var/run/sshd
+RUN mkdir -p /root/.ssh
+
+RUN sed -ri &#39;s/session required pam_loginuid.so/#session required pam_loginuid.so/g&#39; /etc/pam.d/sshd
+
+ADD authorized_keys /root/.ssh/authorized_keys
+ADD run.sh /run.sh
+RUN chmod 755 /run.sh
+
+RUN groupadd dockerone
+RUN useradd -g dockerone dockerone
+RUN echo &quot;dockerone:dockerone&quot; | chpasswd
+
+RUN echo &quot;root:dockerone&quot; | chpasswd
+
+EXPOSE 22
+
+CMD [&quot;/run.sh&quot;]
+</code></pre><p><strong><em>run.sh</em></strong></p>
+<pre><code>#!/bin/bash
+
+/usr/sbin/sshd -D
+</code></pre><p><strong><em>sources.list</em></strong></p>
+<pre><code>deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse
+</code></pre><p><strong><em>authorized_keys</em></strong></p>
+<pre><code>ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub &gt; authorized_keys
+</code></pre><h3 id="2-创建镜像"><a href="#2-创建镜像" class="headerlink" title="2. 创建镜像"></a>2. 创建镜像</h3><pre><code>sudo docker build -t ubuntu_14.04 .
+</code></pre><h3 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h3><pre><code>sudo docker run -d -p 10122:22 ubuntu_14.04
+
+ssh dockerone@localhost -p 10122
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Docker </tag>
+            
+            <tag> Ubuntu </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[spring-data-redis示例说明]]></title>
       <url>/2016/07/15/spring-data-redis/</url>
       <content type="html"><![CDATA[<p>###1. POM</p>
@@ -17060,6 +17445,177 @@ public class RedisServiceTest {
             <tag> Redis </tag>
             
             <tag> Spring </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[使用 docker + redis 学习 redis-cli]]></title>
+      <url>/2016/07/15/docker-build-redis/</url>
+      <content type="html"><![CDATA[<p>有时我们不想在自己机器上安装redis环境又想快速开始redis-cli实践，如果安装了docker环境，那么redis的环境将非常容易搭建。</p>
+<h3 id="1-下载redis的docker镜像"><a href="#1-下载redis的docker镜像" class="headerlink" title="1. 下载redis的docker镜像"></a>1. 下载redis的docker镜像</h3><pre><code class="shell">sudo docker pull redis
+</code></pre>
+<h3 id="2-启动redis-server"><a href="#2-启动redis-server" class="headerlink" title="2. 启动redis server"></a>2. 启动redis server</h3><pre><code class="shell">sudo docker run -d --name redisone redis redis-server
+</code></pre>
+<h3 id="3-启动redis-cli"><a href="#3-启动redis-cli" class="headerlink" title="3. 启动redis cli"></a>3. 启动redis cli</h3><pre><code class="shell">sudo docker run -it --link redisone redis redic-cli -h redisone -p 6379
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Docker </tag>
+            
+            <tag> Redis </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Windows 安装 compass and scss]]></title>
+      <url>/2016/07/15/installing-compass-and-scss-on-windows/</url>
+      <content type="html"><![CDATA[<h3 id="1-安装ruby"><a href="#1-安装ruby" class="headerlink" title="1. 安装ruby"></a>1. 安装ruby</h3><p>compass 是 ruby 的插件，需要先安装 ruby 环境。</p>
+<ol>
+<li>下载ruby</li>
+</ol>
+<p><a href="http://rubyinstaller.org/" target="_blank" rel="external">http://rubyinstaller.org/</a></p>
+<ol>
+<li>添加环境变量<br>安装完成后添加环境变量<pre><code>RUBY_HOME=D:\Ruby23-x64
+path=$path;%RUBY_HOME%\bin
+</code></pre>执行ruby -v 显示版本号则安装成功。</li>
+</ol>
+<h3 id="2-添加证书"><a href="#2-添加证书" class="headerlink" title="2. 添加证书"></a>2. 添加证书</h3><ol>
+<li>下载证书</li>
+</ol>
+<p>从<a href="http://curl.haxx.se/ca/cacert.pem" target="_blank" rel="external">http://curl.haxx.se/ca/cacert.pem</a>下载证书，保存到ruby安装目录。</p>
+<ol>
+<li>添加环境变量<pre><code>SSL_CERT_FILE=D:\Ruby23-x64\cacert.pem
+</code></pre><h3 id="3-修改源"><a href="#3-修改源" class="headerlink" title="3. 修改源"></a>3. 修改源</h3><pre><code>gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+gem sources -l
+</code></pre><h3 id="4-安装compass"><a href="#4-安装compass" class="headerlink" title="4. 安装compass"></a>4. 安装compass</h3><pre><code>gem install compass
+</code></pre>sass -v显示版本号则安装成功。正常情况compass和scss都会安装。</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Compass </tag>
+            
+            <tag> Scss </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Elasticsearch 添加 head 插件]]></title>
+      <url>/2016/07/15/docker-elasticsearch-head-plugin/</url>
+      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir dockerfiles/elasticsearch
+touch Dockerfile
+wget -O elasticsearch-head-master.zip -c https://codeload.github.com/mobz/elasticsearch-head/zip/master
+</code></pre><p><strong><em>Dockerfile</em></strong></p>
+<pre><code>FROM elasticsearch
+MAINTAINER rolex
+
+ADD elasticsearch-head-master.zip /elasticsearch-head-master.zip
+
+RUN /usr/share/elasticsearch/bin/plugin install file:/elasticsearch-head-master.zip
+
+RUN rm -f /elasticsearch-head-master.zip
+
+EXPOSE 9200 9300
+
+CMD [/usr/share/elasticsearch/bin/elasticsearch]
+</code></pre><h3 id="2-创建docker镜像"><a href="#2-创建docker镜像" class="headerlink" title="2. 创建docker镜像"></a>2. 创建docker镜像</h3><pre><code>sudo docker build -t elasticsearch-2.3 .
+</code></pre><h3 id="3-启动"><a href="#3-启动" class="headerlink" title="3. 启动"></a>3. 启动</h3><pre><code>sudo docker run elasticsearch-2.3 --publish=[19200:9200,19300:9300]
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Elastic </tag>
+            
+            <tag> Docker </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[创建 tomcat 镜像]]></title>
+      <url>/2016/07/15/docker-tomcat-image/</url>
+      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><p>1.1 创建制作 docker 镜像的工作目录和文件</p>
+<pre><code>mkdir dorckerfiles
+cd dockerfiles
+touch Dockerfile run.sh
+</code></pre><p><strong><em>Dockerfile</em></strong></p>
+<pre><code>FROM ubuntu_14.04
+
+MAINTAINER rolex
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN echo &quot;Asia/Beijing&quot; &gt; /etc/timezone &amp;&amp; dpkg-reconfigure -f noninteractive tzdata
+
+RUN apt-get install -yq --no-install-recommends wget pwgen ca-certificates &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+ENV CATALINA_HOME /tomcat
+ENV JAVA_HOME /jdk
+
+ADD apache-tomcat-8.0.35 /tomcat
+ADD jdk1.8.0_74 /jdk
+
+#ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
+ADD run.sh /run.sh
+
+RUN chmod +x /*.sh
+RUN chmod +x /tomcat/bin/*.sh
+
+EXPOSE 8080
+
+CMD [&quot;/run.sh&quot;]
+</code></pre><p><strong><em>run.sh</em></strong></p>
+<pre><code>#!/bin/bash
+
+/user/sbin/sshd -D &amp;
+exec ${CATALINA_HOME}/bin/catalina.sh run
+</code></pre><p>1.2 下载 tomcat 和 jdk</p>
+<h3 id="2-制作镜像"><a href="#2-制作镜像" class="headerlink" title="2. 制作镜像"></a>2. 制作镜像</h3><pre><code>sudo docker build -t tomcat8_on_ubuntu .
+</code></pre><h3 id="3-运行镜像"><a href="#3-运行镜像" class="headerlink" title="3. 运行镜像"></a>3. 运行镜像</h3><pre><code>sudo docker run -p 32700:8080 tomcat8_on_ubuntu
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Docker </tag>
             
         </tags>
         
@@ -17271,341 +17827,6 @@ public void shouldIndexSingleBookEntity(){
     </entry>
     
     <entry>
-      <title><![CDATA[IDEA + Maven + Jetty 热部署]]></title>
-      <url>/2016/07/15/jetty-hot-deployment/</url>
-      <content type="html"><![CDATA[<p>####1. 集成</p>
-<p>pom.xml</p>
-<pre><code>&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
-            &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
-            &lt;version&gt;8.1.15.v20140411&lt;/version&gt;
-            &lt;configuration&gt;
-                &lt;connectors&gt;
-                    &lt;!-- 修改端口 --&gt;
-                    &lt;connector implementation=&quot;org.eclipse.jetty.server.nio.SelectChannelConnector&quot;&gt;
-                        &lt;port&gt;8080&lt;/port&gt;
-                    &lt;/connector&gt;
-                &lt;/connectors&gt;
-                &lt;stopKey&gt;exit&lt;/stopKey&gt;
-                &lt;stopPort&gt;9090&lt;/stopPort&gt;
-                &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;
-                &lt;webAppConfig&gt;
-                    &lt;!-- 热部署 --&gt;
-                    &lt;defaultsDescriptor&gt;src/main/resources/webdefault.xml&lt;/defaultsDescriptor&gt;
-                    &lt;contextPath&gt;/redis-doc&lt;/contextPath&gt;
-                &lt;/webAppConfig&gt;
-            &lt;/configuration&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Meven </tag>
-            
-            <tag> Jetty </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[创建 tomcat 镜像]]></title>
-      <url>/2016/07/15/docker-tomcat-image/</url>
-      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><p>1.1 创建制作 docker 镜像的工作目录和文件</p>
-<pre><code>mkdir dorckerfiles
-cd dockerfiles
-touch Dockerfile run.sh
-</code></pre><p><strong><em>Dockerfile</em></strong></p>
-<pre><code>FROM ubuntu_14.04
-
-MAINTAINER rolex
-
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN echo &quot;Asia/Beijing&quot; &gt; /etc/timezone &amp;&amp; dpkg-reconfigure -f noninteractive tzdata
-
-RUN apt-get install -yq --no-install-recommends wget pwgen ca-certificates &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*
-
-ENV CATALINA_HOME /tomcat
-ENV JAVA_HOME /jdk
-
-ADD apache-tomcat-8.0.35 /tomcat
-ADD jdk1.8.0_74 /jdk
-
-#ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
-ADD run.sh /run.sh
-
-RUN chmod +x /*.sh
-RUN chmod +x /tomcat/bin/*.sh
-
-EXPOSE 8080
-
-CMD [&quot;/run.sh&quot;]
-</code></pre><p><strong><em>run.sh</em></strong></p>
-<pre><code>#!/bin/bash
-
-/user/sbin/sshd -D &amp;
-exec ${CATALINA_HOME}/bin/catalina.sh run
-</code></pre><p>1.2 下载 tomcat 和 jdk</p>
-<h3 id="2-制作镜像"><a href="#2-制作镜像" class="headerlink" title="2. 制作镜像"></a>2. 制作镜像</h3><pre><code>sudo docker build -t tomcat8_on_ubuntu .
-</code></pre><h3 id="3-运行镜像"><a href="#3-运行镜像" class="headerlink" title="3. 运行镜像"></a>3. 运行镜像</h3><pre><code>sudo docker run -p 32700:8080 tomcat8_on_ubuntu
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Docker </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[使用 docker + redis 学习 redis-cli]]></title>
-      <url>/2016/07/15/docker-build-redis/</url>
-      <content type="html"><![CDATA[<p>有时我们不想在自己机器上安装redis环境又想快速开始redis-cli实践，如果安装了docker环境，那么redis的环境将非常容易搭建。</p>
-<h3 id="1-下载redis的docker镜像"><a href="#1-下载redis的docker镜像" class="headerlink" title="1. 下载redis的docker镜像"></a>1. 下载redis的docker镜像</h3><pre><code class="shell">sudo docker pull redis
-</code></pre>
-<h3 id="2-启动redis-server"><a href="#2-启动redis-server" class="headerlink" title="2. 启动redis server"></a>2. 启动redis server</h3><pre><code class="shell">sudo docker run -d --name redisone redis redis-server
-</code></pre>
-<h3 id="3-启动redis-cli"><a href="#3-启动redis-cli" class="headerlink" title="3. 启动redis cli"></a>3. 启动redis cli</h3><pre><code class="shell">sudo docker run -it --link redisone redis redic-cli -h redisone -p 6379
-</code></pre>
-]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Docker </tag>
-            
-            <tag> Redis </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Windows 安装 compass and scss]]></title>
-      <url>/2016/07/15/installing-compass-and-scss-on-windows/</url>
-      <content type="html"><![CDATA[<h3 id="1-安装ruby"><a href="#1-安装ruby" class="headerlink" title="1. 安装ruby"></a>1. 安装ruby</h3><p>compass 是 ruby 的插件，需要先安装 ruby 环境。</p>
-<ol>
-<li>下载ruby</li>
-</ol>
-<p><a href="http://rubyinstaller.org/" target="_blank" rel="external">http://rubyinstaller.org/</a></p>
-<ol>
-<li>添加环境变量<br>安装完成后添加环境变量<pre><code>RUBY_HOME=D:\Ruby23-x64
-path=$path;%RUBY_HOME%\bin
-</code></pre>执行ruby -v 显示版本号则安装成功。</li>
-</ol>
-<h3 id="2-添加证书"><a href="#2-添加证书" class="headerlink" title="2. 添加证书"></a>2. 添加证书</h3><ol>
-<li>下载证书</li>
-</ol>
-<p>从<a href="http://curl.haxx.se/ca/cacert.pem" target="_blank" rel="external">http://curl.haxx.se/ca/cacert.pem</a>下载证书，保存到ruby安装目录。</p>
-<ol>
-<li>添加环境变量<pre><code>SSL_CERT_FILE=D:\Ruby23-x64\cacert.pem
-</code></pre><h3 id="3-修改源"><a href="#3-修改源" class="headerlink" title="3. 修改源"></a>3. 修改源</h3><pre><code>gem sources --remove https://rubygems.org/
-gem sources -a https://ruby.taobao.org/
-gem sources -l
-</code></pre><h3 id="4-安装compass"><a href="#4-安装compass" class="headerlink" title="4. 安装compass"></a>4. 安装compass</h3><pre><code>gem install compass
-</code></pre>sass -v显示版本号则安装成功。正常情况compass和scss都会安装。</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Compass </tag>
-            
-            <tag> Scss </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Ubuntu14.04 + ssh 镜像]]></title>
-      <url>/2016/07/15/docker-ubuntu14.04-with-ssh/</url>
-      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir ubuntu
-cd ubuntu
-touch Dockerfile run.sh sources.list authorized_keys
-</code></pre><p><strong><em>Dockerfile</em></strong></p>
-<pre><code>FROM ubuntu:14.04
-
-MAINTAINER rolex
-
-RUN rm /etc/apt/sources.list
-
-ADD sources.list /etc/apt/sources.list
-
-RUN apt-get update
-
-
-
-RUN sudo apt-get install -y openssh-server
-RUN mkdir -p /var/run/sshd
-RUN mkdir -p /root/.ssh
-
-RUN sed -ri &#39;s/session required pam_loginuid.so/#session required pam_loginuid.so/g&#39; /etc/pam.d/sshd
-
-ADD authorized_keys /root/.ssh/authorized_keys
-ADD run.sh /run.sh
-RUN chmod 755 /run.sh
-
-RUN groupadd dockerone
-RUN useradd -g dockerone dockerone
-RUN echo &quot;dockerone:dockerone&quot; | chpasswd
-
-RUN echo &quot;root:dockerone&quot; | chpasswd
-
-EXPOSE 22
-
-CMD [&quot;/run.sh&quot;]
-</code></pre><p><strong><em>run.sh</em></strong></p>
-<pre><code>#!/bin/bash
-
-/usr/sbin/sshd -D
-</code></pre><p><strong><em>sources.list</em></strong></p>
-<pre><code>deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse
-</code></pre><p><strong><em>authorized_keys</em></strong></p>
-<pre><code>ssh-keygen -t rsa
-cat ~/.ssh/id_rsa.pub &gt; authorized_keys
-</code></pre><h3 id="2-创建镜像"><a href="#2-创建镜像" class="headerlink" title="2. 创建镜像"></a>2. 创建镜像</h3><pre><code>sudo docker build -t ubuntu_14.04 .
-</code></pre><h3 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h3><pre><code>sudo docker run -d -p 10122:22 ubuntu_14.04
-
-ssh dockerone@localhost -p 10122
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Docker </tag>
-            
-            <tag> Ubuntu </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Elasticsearch 添加 head 插件]]></title>
-      <url>/2016/07/15/docker-elasticsearch-head-plugin/</url>
-      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir dockerfiles/elasticsearch
-touch Dockerfile
-wget -O elasticsearch-head-master.zip -c https://codeload.github.com/mobz/elasticsearch-head/zip/master
-</code></pre><p><strong><em>Dockerfile</em></strong></p>
-<pre><code>FROM elasticsearch
-MAINTAINER rolex
-
-ADD elasticsearch-head-master.zip /elasticsearch-head-master.zip
-
-RUN /usr/share/elasticsearch/bin/plugin install file:/elasticsearch-head-master.zip
-
-RUN rm -f /elasticsearch-head-master.zip
-
-EXPOSE 9200 9300
-
-CMD [/usr/share/elasticsearch/bin/elasticsearch]
-</code></pre><h3 id="2-创建docker镜像"><a href="#2-创建docker镜像" class="headerlink" title="2. 创建docker镜像"></a>2. 创建docker镜像</h3><pre><code>sudo docker build -t elasticsearch-2.3 .
-</code></pre><h3 id="3-启动"><a href="#3-启动" class="headerlink" title="3. 启动"></a>3. 启动</h3><pre><code>sudo docker run elasticsearch-2.3 --publish=[19200:9200,19300:9300]
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Elastic </tag>
-            
-            <tag> Docker </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Elasticsearch-1.4.1 集群环境搭建]]></title>
-      <url>/2016/07/14/elasticsearch-1.4.1-cluster/</url>
-      <content type="html"><![CDATA[<p>CentOS 6.4，机器 node3（10.20.20.203）,node4（10.20.20.204）</p>
-<h3 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1. 安装jdk"></a>1. 安装jdk</h3><p>已安装跳过。</p>
-<h3 id="2-下载"><a href="#2-下载" class="headerlink" title="2. 下载"></a>2. 下载</h3><p><a href="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz" title="elasticsearch-1.4.1" target="_blank" rel="external">https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz</a></p>
-<h3 id="3-解压"><a href="#3-解压" class="headerlink" title="3. 解压"></a>3. 解压</h3><pre><code>tar -zxf elasticsearch-1.4.1.tar.gz
-</code></pre><h3 id="4-配置"><a href="#4-配置" class="headerlink" title="4. 配置"></a>4. 配置</h3><p>分别修改2台机器配置</p>
-<p>node3</p>
-<pre><code>cluster.name: elasticsearch
-node.name: node3
-network.host: 10.20.20.203  
-discovery.zen.ping.unicast.hosts: [&quot;10.20.20.203&quot;]
-</code></pre><p>node4</p>
-<pre><code>cluster.name: elasticsearch
-node.name: node4
-network.host: 10.20.20.204  
-discovery.zen.ping.unicast.hosts: [&quot;10.20.20.204&quot;]
-</code></pre><h3 id="5-安装插件"><a href="#5-安装插件" class="headerlink" title="5. 安装插件"></a>5. 安装插件</h3><h4 id="5-1-下载"><a href="#5-1-下载" class="headerlink" title="5.1 下载"></a>5.1 下载</h4><pre><code>wget https://github.com/mobz/elasticsearch-head.git
-</code></pre><h4 id="5-2-安装"><a href="#5-2-安装" class="headerlink" title="5.2 安装"></a>5.2 安装</h4><p>将插件elasticsearch-head-master.zip拷贝到plugin,解压缩</p>
-<pre><code>unzip elasticsearch-head-master.zip
-mv elasticsearch-head-master head
-</code></pre><p>2台机器执行相同操作</p>
-<h3 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h3><pre><code>./bin/elasticsearch &amp;
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Elastic </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Elasticsearch-2.2.0 安装]]></title>
       <url>/2016/07/14/elasticsearch-2.1.1-installation/</url>
       <content type="html"><![CDATA[<h3 id="1-下载"><a href="#1-下载" class="headerlink" title="1. 下载"></a>1. 下载</h3><p><a href="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.0/elasticsearch-2.2.0.tar.gz" title="elasticsearch-2.2.0" target="_blank" rel="external">https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.0/elasticsearch-2.2.0.tar.gz</a></p>
@@ -17725,6 +17946,47 @@ hexo d
         <tags>
             
             <tag> Hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Elasticsearch-1.4.1 集群环境搭建]]></title>
+      <url>/2016/07/14/elasticsearch-1.4.1-cluster/</url>
+      <content type="html"><![CDATA[<p>CentOS 6.4，机器 node3（10.20.20.203）,node4（10.20.20.204）</p>
+<h3 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1. 安装jdk"></a>1. 安装jdk</h3><p>已安装跳过。</p>
+<h3 id="2-下载"><a href="#2-下载" class="headerlink" title="2. 下载"></a>2. 下载</h3><p><a href="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz" title="elasticsearch-1.4.1" target="_blank" rel="external">https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz</a></p>
+<h3 id="3-解压"><a href="#3-解压" class="headerlink" title="3. 解压"></a>3. 解压</h3><pre><code>tar -zxf elasticsearch-1.4.1.tar.gz
+</code></pre><h3 id="4-配置"><a href="#4-配置" class="headerlink" title="4. 配置"></a>4. 配置</h3><p>分别修改2台机器配置</p>
+<p>node3</p>
+<pre><code>cluster.name: elasticsearch
+node.name: node3
+network.host: 10.20.20.203  
+discovery.zen.ping.unicast.hosts: [&quot;10.20.20.203&quot;]
+</code></pre><p>node4</p>
+<pre><code>cluster.name: elasticsearch
+node.name: node4
+network.host: 10.20.20.204  
+discovery.zen.ping.unicast.hosts: [&quot;10.20.20.204&quot;]
+</code></pre><h3 id="5-安装插件"><a href="#5-安装插件" class="headerlink" title="5. 安装插件"></a>5. 安装插件</h3><h4 id="5-1-下载"><a href="#5-1-下载" class="headerlink" title="5.1 下载"></a>5.1 下载</h4><pre><code>wget https://github.com/mobz/elasticsearch-head.git
+</code></pre><h4 id="5-2-安装"><a href="#5-2-安装" class="headerlink" title="5.2 安装"></a>5.2 安装</h4><p>将插件elasticsearch-head-master.zip拷贝到plugin,解压缩</p>
+<pre><code>unzip elasticsearch-head-master.zip
+mv elasticsearch-head-master head
+</code></pre><p>2台机器执行相同操作</p>
+<h3 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h3><pre><code>./bin/elasticsearch &amp;
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Elastic </tag>
             
         </tags>
         
@@ -17944,6 +18206,27 @@ spring.redis.pool.max-wait=-1
     </entry>
     
     <entry>
+      <title><![CDATA[Spark Shuffle 操作]]></title>
+      <url>/2016/05/20/spark-shuffle/</url>
+      <content type="html"><![CDATA[<p>Shuffle 是 Spark 中重新分布数据的机制，它会在机器之间复制数据，是一个复杂且开销很大的操作。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Spark </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spark </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Spark 存储管理]]></title>
       <url>/2016/05/20/spark-store-management/</url>
       <content type="html"><![CDATA[<p>将数据集持久化或缓存到内存里是 Spark 的重要能力之一。在持久化数据集时，在内存中参与计算的数据集被存储在每一个节点上，其他的 action 可以快速的重用这些数据集。缓存是迭代算法和快速交互的关键。</p>
@@ -17963,27 +18246,6 @@ spring.redis.pool.max-wait=-1
 <h3 id="持久化-shuffle"><a href="#持久化-shuffle" class="headerlink" title="持久化 shuffle"></a>持久化 shuffle</h3><p>Spark 会在执行 shuffle 操作时自动持久化一些中间数据。这样可以避免 shuffle 失败时重新计算整个输入。如果确定结果会被重用，建议对数据集进行持久化。</p>
 <h3 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h3><p>通常，函数传递到 Spark 集群节点执行，函数中使用所有变量的独立副本，这些变量被拷贝到每一个节点，集群节点上的变量变更不会影响驱动程序，因为读写共享的变量访问时低效的。但 Spark 提供了两种有限类型的共享变量：广播变量和累加器。</p>
 <h4 id="广播变量"><a href="#广播变量" class="headerlink" title="广播变量"></a>广播变量</h4><p>广播变量允许程序保持一份只读的变量缓存在机器上，而不是把变量拷贝到任务中。Spark 的 action 是分阶段执行的，每个阶段任务需要使用的数据被自动广播。广播数据以序列化的形式缓存并在任务执行前反序列化。但多个阶段的任务需要相同的数据时，广播变量更加有效。当广播变量创建后，会在方法中代替变量值，以保证不会被多次发送。广播变量在发送到节点后不能再被修改。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Spark </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Spark </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Spark Shuffle 操作]]></title>
-      <url>/2016/05/20/spark-shuffle/</url>
-      <content type="html"><![CDATA[<p>Shuffle 是 Spark 中重新分布数据的机制，它会在机器之间复制数据，是一个复杂且开销很大的操作。</p>
 ]]></content>
       
         <categories>
@@ -24569,21 +24831,6 @@ public class BitmapBackgroundButtonField extends Field {
     </entry>
     
     <entry>
-      <title></title>
-      <url>/java/java.html</url>
-      <content type="html"><![CDATA[<div class="container">
-  <ul class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li class="active">Archive</li>
-  </ul>
-<div id="main">
-  
-</div>
-</div>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[Login]]></title>
       <url>/login/index.html</url>
       <content type="html"><![CDATA[<!-- BEGIN SIDEBAR & CONTENT -->
@@ -24647,6 +24894,21 @@ public class BitmapBackgroundButtonField extends Field {
   <!-- END CONTENT -->
 </div>
 <!-- END SIDEBAR & CONTENT -->
+]]></content>
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/java/java.html</url>
+      <content type="html"><![CDATA[<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li class="active">Archive</li>
+  </ul>
+<div id="main">
+  
+</div>
+</div>
 ]]></content>
     </entry>
     

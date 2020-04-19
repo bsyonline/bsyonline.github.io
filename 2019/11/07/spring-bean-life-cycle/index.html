@@ -7,43 +7,46 @@
 <head>
   <meta charset="utf-8">
   
-  <title>spring bean life cycle | BSYONLINE</title>
+  <title>Spring Bean Life Cycle | BSYONLINE</title>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta name="description" content="Spring bean 的生命周期有 4 个阶段：
+  <meta name="description" content="Spring bean 的生命周期有 5 个阶段：
 
+Prepare 阶段
 Instantation 阶段
 PopulateBean 阶段
 Initailization 阶段
 Destory 阶段
 
-Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之后会执行 postProcessAfterInstantiation 和 postProc">
+Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之后会执行 postProcessAfterInstantiation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring bean life cycle">
+<meta property="og:title" content="Spring Bean Life Cycle">
 <meta property="og:url" content="/2019/11/07/spring-bean-life-cycle/index.html">
 <meta property="og:site_name" content="BSYONLINE">
-<meta property="og:description" content="Spring bean 的生命周期有 4 个阶段：
+<meta property="og:description" content="Spring bean 的生命周期有 5 个阶段：
 
+Prepare 阶段
 Instantation 阶段
 PopulateBean 阶段
 Initailization 阶段
 Destory 阶段
 
-Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之后会执行 postProcessAfterInstantiation 和 postProc">
+Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之后会执行 postProcessAfterInstantiation">
 <meta property="og:image" content="https://s1.ax1x.com/2020/04/04/GwMsOK.png">
-<meta property="og:updated_time" content="2020-04-04T06:31:01.625Z">
+<meta property="og:updated_time" content="2020-04-06T16:24:44.589Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring bean life cycle">
-<meta name="twitter:description" content="Spring bean 的生命周期有 4 个阶段：
+<meta name="twitter:title" content="Spring Bean Life Cycle">
+<meta name="twitter:description" content="Spring bean 的生命周期有 5 个阶段：
 
+Prepare 阶段
 Instantation 阶段
 PopulateBean 阶段
 Initailization 阶段
 Destory 阶段
 
-Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之后会执行 postProcessAfterInstantiation 和 postProc">
+Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之后会执行 postProcessAfterInstantiation">
 <meta name="twitter:image" content="https://s1.ax1x.com/2020/04/04/GwMsOK.png">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
@@ -147,7 +150,7 @@ Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之�
 	<span style='margin-right:10px'>
 	
         2019/11/07
-        <a class="article-title" href="/2019/11/07/spring-bean-life-cycle/">spring bean life cycle</a>
+        <a class="article-title" href="/2019/11/07/spring-bean-life-cycle/">Spring Bean Life Cycle</a>
     
 	</span>
 <div>
@@ -191,8 +194,9 @@ Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之�
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="https://s1.ax1x.com/2020/04/04/GwMsOK.png" alt="GwMsOK.png" border="0" style="width:500px;"></p>
-<p>Spring bean 的生命周期有 4 个阶段：</p>
+<p>Spring bean 的生命周期有 5 个阶段：</p>
 <ol>
+<li>Prepare 阶段</li>
 <li>Instantation 阶段</li>
 <li>PopulateBean 阶段</li>
 <li>Initailization 阶段</li>
@@ -220,7 +224,7 @@ Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之�
   
   
     <a href="/2019/11/07/spring-boot-life-cycle/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
-      <div class="article-nav-title">spring boot life cycle</div>
+      <div class="article-nav-title">Spring Boot Life Cycle</div>
     </a>
   
 </nav>
@@ -258,11 +262,11 @@ Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之�
 	</li>
       
 	<li>
-	  <a href="/categories/Guitar/">Guitar (7)</a>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Architecture/">Architecture (5)</a>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
 	</li>
       
 	<li>
@@ -270,11 +274,11 @@ Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之�
 	</li>
       
 	<li>
-	  <a href="/categories/Wiki/">Wiki (7)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (27)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (26)</a>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
@@ -286,7 +290,7 @@ Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之�
 	</li>
       
 	<li>
-	  <a href="/categories/Design-Pattern/">Design Pattern (3)</a>
+	  <a href="/categories/Design-Pattern/">Design Pattern (4)</a>
 	</li>
       
 	<li>
@@ -299,6 +303,10 @@ Instantation 之前会执行 postProcessBeforeInstantiation 。Instantation 之�
       
 	<li>
 	  <a href="/categories/Netty/">Netty (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Cloud/Microservices/">Microservices (1)</a>
 	</li>
       
 	<li>
