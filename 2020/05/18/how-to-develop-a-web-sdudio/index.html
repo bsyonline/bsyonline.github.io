@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>how to develop a web code sdudio | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="这是一个系列，记录了我们在接到这个需求之后进行的一些调研和尝试，以及最后我们是如何做的。好了，我们下面是一个路线图。
+
+什么是 Cloud IDE
+Cloud IDE 都具有哪些功能
+如何动态编译源代码文本
+如何动态执行源代码文本
+Java如何执行命令行
+如何进行远程debug
+前后端如何交互
+服务端执行日志如何返回客户端
+前端代码编辑器
+如何将工程发布成镜像
+如何初始化workspace
+如何做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="how to develop a web code sdudio">
+<meta property="og:url" content="/2020/05/18/how-to-develop-a-web-sdudio/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="这是一个系列，记录了我们在接到这个需求之后进行的一些调研和尝试，以及最后我们是如何做的。好了，我们下面是一个路线图。
+
+什么是 Cloud IDE
+Cloud IDE 都具有哪些功能
+如何动态编译源代码文本
+如何动态执行源代码文本
+Java如何执行命令行
+如何进行远程debug
+前后端如何交互
+服务端执行日志如何返回客户端
+前端代码编辑器
+如何将工程发布成镜像
+如何初始化workspace
+如何做">
+<meta property="og:updated_time" content="2020-09-01T14:45:27.879Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="how to develop a web code sdudio">
+<meta name="twitter:description" content="这是一个系列，记录了我们在接到这个需求之后进行的一些调研和尝试，以及最后我们是如何做的。好了，我们下面是一个路线图。
+
+什么是 Cloud IDE
+Cloud IDE 都具有哪些功能
+如何动态编译源代码文本
+如何动态执行源代码文本
+Java如何执行命令行
+如何进行远程debug
+前后端如何交互
+服务端执行日志如何返回客户端
+前端代码编辑器
+如何将工程发布成镜像
+如何初始化workspace
+如何做">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2020/05/18
+        <a class="article-title" href="/2020/05/18/how-to-develop-a-web-sdudio/">how to develop a web code sdudio</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-how-to-develop-a-web-sdudio" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2020-05-18T15:39:45.000Z" itemprop="datePublished">2020/05/18</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2020/05/18/how-to-develop-a-web-sdudio/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/java/" title="java">java</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Java/" title="Java">Java</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一个系列，记录了我们在接到这个需求之后进行的一些调研和尝试，以及最后我们是如何做的。好了，我们下面是一个路线图。</p>
+<ol>
+<li>什么是 Cloud IDE</li>
+<li>Cloud IDE 都具有哪些功能</li>
+<li>如何动态编译源代码文本</li>
+<li>如何动态执行源代码文本</li>
+<li>Java如何执行命令行</li>
+<li>如何进行远程debug</li>
+<li>前后端如何交互</li>
+<li>服务端执行日志如何返回客户端</li>
+<li>前端代码编辑器</li>
+<li>如何将工程发布成镜像</li>
+<li>如何初始化workspace</li>
+<li>如何做资源隔离</li>
+</ol>
+<p>首先了解一下什么是 web ide 。</p>
+<p>目前市面上都有哪些类似的产品，都具有什么功能。</p>
+<p>基于 git 和 maven 构建，能够在浏览器中编辑和运行代码，并且支持远程调试。</p>
+<p>大概的需求清楚了，接下来就考虑如何实现。</p>
+<p>最初首先想到的是，既然是基于浏览器的，那么肯定是 B/S 架构没跑了。那么可以分成两块，前端和后端。前端渲染页面，由于前端太菜，所以一笔带过，主要说说后端。本地的 ide 我们都熟悉，我们假设把本地 ide 的界面想象成浏览器，那么我们在界面上做的操作，都可以对应到一个向 server 的请求，server 接到请求，进行处理，然后将结果返回给前端进行渲染，这样一来一回，好像整个流程就串起来了。于是就有了第一版设计。<br>前端有一个 text 用来写代码，然后将整个代码作为一个字符串提交给 server ，接下来就需要 server 对前端传过来的程序字符串进行处理了。以 Java 程序为例，首先需要编译，然后才能执行。那如何编译呢？学过 Java 的都知道有个命令叫 javac 。那问题来了，javac 是在命令行执行，如果我们要用 javac 来编译，就需要让 server 能够执行 shell 。所以问题又变成了 java 如何执行 shell 。于是请出了今天的第一位选手 Runtime 。</p>
+<h4 id="Runtime"><a href="#Runtime" class="headerlink" title="Runtime"></a>Runtime</h4><p>每个 Java 都会对应一个 Runtime 类的实例，用来使 Java 和环境能够进行交互。比如使用 Runtime 获取 CPU 核数和内存大小：</p>
+<pre><code>int availableProcessors = Runtime.getRuntime().availableProcessors();
+long freeMemory = Runtime.getRuntime().freeMemory();
+System.out.println(availableProcessors);
+System.out.println(freeMemory / 1024 / 1024);
+</code></pre><p>Runtime 还可以用来在独立的进程中执行命令，比如这样：</p>
+<pre><code>Process process = Runtime.getRuntime().exec(new String[]{&quot;powershell&quot;, &quot;java -version&quot;});
+InputStream inputStream = process.getErrorStream();
+BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+String line = null;
+while((line = br.readLine()) !=null){
+    System.out.println(line);
+}
+br.close();
+</code></pre><p>既然是执行命令，那么就会有正常输出和错误输出，Runtime 需要我们自己处理来处理 process.getErrorStream() 和 process.getInputStream() 。这里需要注意，因为 Runtime 是 fork 子进程来执行，流是父子进程公用的，所以很容易造成阻塞。正确的做法就是创建单独的线程来处理流。</p>
+<pre><code>Process proc = Runtime.getRuntime().exec(cmd);
+// any error message
+StreamBeat errorGobbler = new StreamBeat(ctx, proc.getErrorStream(), &quot;ERROR&quot;);
+// any output
+StreamBeat outputGobbler = new StreamBeat(ctx, proc.getInputStream(), &quot;OUTPUT&quot;);
+// kick them off
+new Thread(errorGobbler).start();
+new Thread(outputGobbler).start();
+// wait for finished
+int exitVal = proc.waitFor();
+</code></pre><p>从 JDK1.5 以后，创建进程有一种更好的方式 ProcessBuilder ，它还提供了重定向错误输出，这样我们就不用创建线程来处理流了。</p>
+<pre><code>ProcessBuilder processBuilder = new ProcessBuilder();
+processBuilder.redirectErrorStream(true);
+processBuilder.command(&quot;powershell&quot;, cmd);
+Process process = processBuilder.start();
+InputStream inputStream = process.getInputStream();
+BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+String line = null;
+while ((line = br.readLine()) != null) {
+    System.out.println(line);
+}
+br.close();
+</code></pre><p>不管是 Runtime 还是 ProcessBuilder ，都可以解决我们执行命令的问题。 于是我们顺着这个思路就想既然有 javac 、java -jar 这样的命令，那调试应该也有命令吧，于是我们惊喜的发现在角落里有一个不起眼的家伙 jdb 。</p>
+<h4 id="JDB"><a href="#JDB" class="headerlink" title="JDB"></a>JDB</h4><p>在说 jdb 之前，我们先来看几个概念。<br>JDPA(Java Platform Debugger Architecture) 是一个多层的调试架构，它包括 3 层：JVM TI(Java VM Tool Interface) 、JDWP(Java Debug Wire Protocol) 和 JDI(Java Debug Interface) 。程序开发可以在任何一层切入到调试当中，但是由于 JDI 是最贴近用户的一层，所以在 JDI 进行编程操作最为简单。我们之前说的 jdb 就可以理解为 JDI 的一种实现。jdb 是一组调试的命令，它会进入一个会话来进行交互。<br>首先启动 agent 。</p>
+<pre><code>java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 test.Test
+</code></pre><p>我们把被调试的程序、调试程序的后端服务以及运行程序的 VM 统称为 debuggee ，把来看看 jdb 命令怎么用。</p>
+<p>命令有了，无非就再麻烦一下 Runtime 老兄嘛。燃鹅，在查看了 jdb 的用法之后，三下五除二请出了 Runtime 。纳尼？竟然卡住了。卡住的原因不是没有处理流，二十因为 jdb 会开启会话，启动 jdb 之后进入到交互模式，Process 拿不到 stream ，程序就卡入住，卡住了自然就没有响应给客户端，也就没办法再进行后续的操作了。所以直接使用 jdb 是不行的，但是 jdb 也是按照 JDI 实现的，那么我们也可以按照 JDI 来进行开发。</p>
+
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2020/07/09/managing-documents-with-elasticsearch-index-life-management/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Managing Documents with Elasticsearch Index Life Management
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/02/logstash-quickstart/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">logstash quickstart</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (100)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (27)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Docker/">Docker (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Design-Pattern/">Design Pattern (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Cloud/Microservices/">Microservices (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Netty/">Netty (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MQ/">MQ (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Boot/">Spring Boot (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spark/">Spark (14)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring/">Spring (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Microservices/">Microservices (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/"><i class='fa fa-tags'></i>Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrent/"><i class='fa fa-tags'></i>Concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/"><i class='fa fa-tags'></i>Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drools/"><i class='fa fa-tags'></i>Drools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/"><i class='fa fa-tags'></i>ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GC/"><i class='fa fa-tags'></i>GC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interview/"><i class='fa fa-tags'></i>Interview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/"><i class='fa fa-tags'></i>Kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mock/"><i class='fa fa-tags'></i>Mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/"><i class='fa fa-tags'></i>MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/"><i class='fa fa-tags'></i>MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/"><i class='fa fa-tags'></i>Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/"><i class='fa fa-tags'></i>RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reactive/"><i class='fa fa-tags'></i>Reactive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/"><i class='fa fa-tags'></i>Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/"><i class='fa fa-tags'></i>java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2020 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

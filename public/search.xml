@@ -150,6 +150,789 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Mysql High Availabity]]></title>
+      <url>/2020/09/05/mysql-high-availabity/</url>
+      <content type="html"><![CDATA[<p>高可用架构分成以下几部分：UI 层，API 层，监控服务层，管理数据库，生产数据库集群。</p>
+<p>管理数据库存储数据库集群信息，vip 映射信息，日志信息。数据库集群对外有一个 vip，通过 LVS 进行负载，LVS 主备防止单点故障。</p>
+<p><img src="https://s1.ax1x.com/2020/09/05/wVLx9f.png" alt="20200905215639" border="0"></p>
+<p>流程如下：</p>
+<ol>
+<li>鉴权。</li>
+<li>一个线程从管理数据库读取集群信息到队列中。</li>
+<li>一个线程从队列中消费。拿到一组主从节点信息，先对主库进行 read 操作（select test 表），如果读成功，继续测试写。如果读失败，可能是网络抖动，不能断定主库挂了，此时就向从库节点发一条命令，从从库读主库，如果读成功，说明主库没挂，如果读失败，则说明主库挂了，此时再将这组集群的信息发送到故障队列。</li>
+<li>测试写，对主库进行写操作（insert into test 表）。如果主库可写，则这组集群状态正常，继续下一组检查。如果写主库失败，也可能是网络抖动，此时就向主库发起一组写操作（每 5 秒写一次，持续 30 秒），如果超过半数成功，则认为状态正常，如果超过半数失败，则认为主库故障，加入到故障队列中。</li>
+<li>加入到故障队列后，通知相关人员。从故障队列中取出一组主从信息。查询每个从库的 GTID ，GTID 大的作为新的主库，如果 GTID 相同，则随机选一台。</li>
+<li>把从库指向主库信息换成新的，将 vip 切换到新的主库，更新原来的主从信息（管理数据库的元数据）。</li>
+<li>如果成功，此次故障切换完成，通知相关人员。如果主从切换失败，记录失败日志，告警人工介入。</li>
+</ol>
+<p><img src="https://s1.ax1x.com/2020/09/05/wVLz38.png" alt="20200905215732" border="0"></p>
+<p>此方案的问题：</p>
+<ol>
+<li>在健康检查的过程中，如果主库挂了，会有 30 秒的时间不可写，读不影响。</li>
+<li>管理数据库是单点，需要定期监控。但没必要对管理数据库进行自动主从切换。原因一是管理数据库压力不大，故障概率小，二是，管理数据库挂了，影响健康检查，但是不影响业务数据库使用，用自动主从切换增加了复杂度。</li>
+<li>为什么检查主库读，要从从库读，而检查主库写，是循环写？第一次读失败了，也可以多读几次，按半数来统计。</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> uncategory </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> untag </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Guide to Java Agent]]></title>
+      <url>/2020/08/25/guide-to-java-agent/</url>
+      <content type="html"><![CDATA[<pre><code>public class MyAgent {
+    public static void premain(String args, Instrumentation instrumentation) {
+        System.out.println(&quot;premain start&quot;);
+        System.out.println(args);
+    }
+
+    public static void premain(String args) {
+        System.out.println(&quot;premain start&quot;);
+        System.out.println(args);
+    }
+}
+</code></pre><p>/METE-INF/MANIFEST.MF</p>
+<pre><code>Manifest-Version: 1.0
+Premain-Class: com.rolex.microlabs.agent.MyAgent
+</code></pre><p>使用 maven 打包，防止 maven 生成的 MANIFEST.MF 覆盖我们自己的。</p>
+<pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.8.1&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;source&gt;1.8&lt;/source&gt;
+                &lt;target&gt;1.8&lt;/target&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.2.0&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;archive&gt;
+                    &lt;manifest&gt;
+                        &lt;addClasspath&gt;true&lt;/addClasspath&gt;
+                    &lt;/manifest&gt;
+                    &lt;manifestEntries&gt;
+                        &lt;Premain-Class&gt;
+                            com.rolex.microlabs.agent.MyAgent
+                        &lt;/Premain-Class&gt;
+                    &lt;/manifestEntries&gt;
+                &lt;/archive&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre><pre><code>java -javaagent:D:\MyAgent-1.0.jar=helloworld test.Test
+</code></pre>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Managing Documents with Elasticsearch Index Life Management]]></title>
+      <url>/2020/07/09/managing-documents-with-elasticsearch-index-life-management/</url>
+      <content type="html"><![CDATA[<p>上一篇讲了使用 ELK Stack 来搭建日志收集系统，这一篇来讲讲使用 Elasticsearch 来管理日志。日志存储在 Elasticsearch 是随着时间逐步增加的，有些日志会长期保存，而有些日志只需要保存一段时间后就删除，Elasticsearch 为 index 定义了生命周期，包括 4 个阶段：hot 、warm、cold 和 delete 。针对不同的阶段也定义了不同的策略，下面我们就来看一下如何使用策略来管理日志。</p>
+<p>假设我们的日志规则是每 10000 条日志一个索引，日志最多保存 3 个月，那么我们可以创建一个策略。</p>
+<pre><code>curl -XPUT &quot;http://localhost:9200/_ilm/policy/my_policy&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;policy&quot;: {
+    &quot;phases&quot;: {
+      &quot;hot&quot;: {
+        &quot;actions&quot;: {
+          &quot;rollover&quot;: {
+            &quot;max_docs&quot;: 10000
+          }
+        }
+      },
+      &quot;delete&quot;: {
+        &quot;min_age&quot;: &quot;90d&quot;,
+        &quot;actions&quot;: {
+          &quot;delete&quot;: {}
+        }
+      }
+    }
+  }
+}&#39;
+</code></pre><p>我们定义了一个滚动策略 rollover ，每 10000 条就会生成一个新的索引，并且 90 天后进入 delete 阶段，即被删除。</p>
+<p>接下来需要将日志索引加上这个策略。日志我们都是通过 template 生成的，所以在 template 上加上策略。</p>
+<pre><code>curl -XPUT &quot;http://localhost:9200/_template/my_template&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;index_patterns&quot;: [&quot;log-*&quot;], 
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 1,
+    &quot;number_of_replicas&quot;: 0,
+    &quot;index.lifecycle.name&quot;: &quot;my_policy&quot;, 
+    &quot;index.lifecycle.rollover_alias&quot;: &quot;log-alias&quot;
+  }
+}&#39;
+</code></pre><p>最后在初始化的时候创建第一个索引，并将索引设为可写。</p>
+<pre><code>curl -XPUT &quot;http://localhost:9200/log-000001&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;aliases&quot;: {
+    &quot;log-alias&quot;: {
+       &quot;is_write_index&quot;: true
+    }
+  }
+}&#39;
+</code></pre><p>以后往 log-alias 中写入新的日志是，就会使用我们设置的策略了。</p>
+<blockquote>
+<p>详细的操作设置见 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.8/index-lifecycle-management.html" target="_blank" rel="external">https://www.elastic.co/guide/en/elasticsearch/reference/6.8/index-lifecycle-management.html</a> 。</p>
+<p>这里附一些常用的操作：</p>
+<p>查看策略</p>
+<pre><code>curl -XGET &quot;http://localhost:9200/_ilm/policy?pretty&quot;
+</code></pre><p>查看索引的信息</p>
+<pre><code>curl -XGET &quot;http://localhost:9200/test-*/_ilm/explain?pretty&quot;
+</code></pre><p>查看状态</p>
+<pre><code>curl -XGET &quot;http://localhost:9200/_ilm/status?pretty&quot;
+</code></pre><p>修改 ES 的 策略生效时间</p>
+<pre><code>curl -XPUT &quot;http://localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;transient&quot;: {
+    &quot;indices.lifecycle.poll_interval&quot;: &quot;3s&quot; 
+  }
+}&#39;
+</code></pre></blockquote>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[how to develop a web code sdudio]]></title>
+      <url>/2020/05/18/how-to-develop-a-web-sdudio/</url>
+      <content type="html"><![CDATA[<p>这是一个系列，记录了我们在接到这个需求之后进行的一些调研和尝试，以及最后我们是如何做的。好了，我们下面是一个路线图。</p>
+<ol>
+<li>什么是 Cloud IDE</li>
+<li>Cloud IDE 都具有哪些功能</li>
+<li>如何动态编译源代码文本</li>
+<li>如何动态执行源代码文本</li>
+<li>Java如何执行命令行</li>
+<li>如何进行远程debug</li>
+<li>前后端如何交互</li>
+<li>服务端执行日志如何返回客户端</li>
+<li>前端代码编辑器</li>
+<li>如何将工程发布成镜像</li>
+<li>如何初始化workspace</li>
+<li>如何做资源隔离</li>
+</ol>
+<p>首先了解一下什么是 web ide 。</p>
+<p>目前市面上都有哪些类似的产品，都具有什么功能。</p>
+<p>基于 git 和 maven 构建，能够在浏览器中编辑和运行代码，并且支持远程调试。</p>
+<p>大概的需求清楚了，接下来就考虑如何实现。</p>
+<p>最初首先想到的是，既然是基于浏览器的，那么肯定是 B/S 架构没跑了。那么可以分成两块，前端和后端。前端渲染页面，由于前端太菜，所以一笔带过，主要说说后端。本地的 ide 我们都熟悉，我们假设把本地 ide 的界面想象成浏览器，那么我们在界面上做的操作，都可以对应到一个向 server 的请求，server 接到请求，进行处理，然后将结果返回给前端进行渲染，这样一来一回，好像整个流程就串起来了。于是就有了第一版设计。<br>前端有一个 text 用来写代码，然后将整个代码作为一个字符串提交给 server ，接下来就需要 server 对前端传过来的程序字符串进行处理了。以 Java 程序为例，首先需要编译，然后才能执行。那如何编译呢？学过 Java 的都知道有个命令叫 javac 。那问题来了，javac 是在命令行执行，如果我们要用 javac 来编译，就需要让 server 能够执行 shell 。所以问题又变成了 java 如何执行 shell 。于是请出了今天的第一位选手 Runtime 。</p>
+<h4 id="Runtime"><a href="#Runtime" class="headerlink" title="Runtime"></a>Runtime</h4><p>每个 Java 都会对应一个 Runtime 类的实例，用来使 Java 和环境能够进行交互。比如使用 Runtime 获取 CPU 核数和内存大小：</p>
+<pre><code>int availableProcessors = Runtime.getRuntime().availableProcessors();
+long freeMemory = Runtime.getRuntime().freeMemory();
+System.out.println(availableProcessors);
+System.out.println(freeMemory / 1024 / 1024);
+</code></pre><p>Runtime 还可以用来在独立的进程中执行命令，比如这样：</p>
+<pre><code>Process process = Runtime.getRuntime().exec(new String[]{&quot;powershell&quot;, &quot;java -version&quot;});
+InputStream inputStream = process.getErrorStream();
+BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+String line = null;
+while((line = br.readLine()) !=null){
+    System.out.println(line);
+}
+br.close();
+</code></pre><p>既然是执行命令，那么就会有正常输出和错误输出，Runtime 需要我们自己处理来处理 process.getErrorStream() 和 process.getInputStream() 。这里需要注意，因为 Runtime 是 fork 子进程来执行，流是父子进程公用的，所以很容易造成阻塞。正确的做法就是创建单独的线程来处理流。</p>
+<pre><code>Process proc = Runtime.getRuntime().exec(cmd);
+// any error message
+StreamBeat errorGobbler = new StreamBeat(ctx, proc.getErrorStream(), &quot;ERROR&quot;);
+// any output
+StreamBeat outputGobbler = new StreamBeat(ctx, proc.getInputStream(), &quot;OUTPUT&quot;);
+// kick them off
+new Thread(errorGobbler).start();
+new Thread(outputGobbler).start();
+// wait for finished
+int exitVal = proc.waitFor();
+</code></pre><p>从 JDK1.5 以后，创建进程有一种更好的方式 ProcessBuilder ，它还提供了重定向错误输出，这样我们就不用创建线程来处理流了。</p>
+<pre><code>ProcessBuilder processBuilder = new ProcessBuilder();
+processBuilder.redirectErrorStream(true);
+processBuilder.command(&quot;powershell&quot;, cmd);
+Process process = processBuilder.start();
+InputStream inputStream = process.getInputStream();
+BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+String line = null;
+while ((line = br.readLine()) != null) {
+    System.out.println(line);
+}
+br.close();
+</code></pre><p>不管是 Runtime 还是 ProcessBuilder ，都可以解决我们执行命令的问题。 于是我们顺着这个思路就想既然有 javac 、java -jar 这样的命令，那调试应该也有命令吧，于是我们惊喜的发现在角落里有一个不起眼的家伙 jdb 。</p>
+<h4 id="JDB"><a href="#JDB" class="headerlink" title="JDB"></a>JDB</h4><p>在说 jdb 之前，我们先来看几个概念。<br>JDPA(Java Platform Debugger Architecture) 是一个多层的调试架构，它包括 3 层：JVM TI(Java VM Tool Interface) 、JDWP(Java Debug Wire Protocol) 和 JDI(Java Debug Interface) 。程序开发可以在任何一层切入到调试当中，但是由于 JDI 是最贴近用户的一层，所以在 JDI 进行编程操作最为简单。我们之前说的 jdb 就可以理解为 JDI 的一种实现。jdb 是一组调试的命令，它会进入一个会话来进行交互。<br>首先启动 agent 。</p>
+<pre><code>java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 test.Test
+</code></pre><p>我们把被调试的程序、调试程序的后端服务以及运行程序的 VM 统称为 debuggee ，把来看看 jdb 命令怎么用。</p>
+<p>命令有了，无非就再麻烦一下 Runtime 老兄嘛。燃鹅，在查看了 jdb 的用法之后，三下五除二请出了 Runtime 。纳尼？竟然卡住了。卡住的原因不是没有处理流，二十因为 jdb 会开启会话，启动 jdb 之后进入到交互模式，Process 拿不到 stream ，程序就卡入住，卡住了自然就没有响应给客户端，也就没办法再进行后续的操作了。所以直接使用 jdb 是不行的，但是 jdb 也是按照 JDI 实现的，那么我们也可以按照 JDI 来进行开发。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[logstash quickstart]]></title>
+      <url>/2020/05/02/logstash-quickstart/</url>
+      <content type="html"></content>
+      
+        <categories>
+            
+            <category> uncategory </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> untag </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[elasticsearch quickstart]]></title>
+      <url>/2020/05/02/elasticsearch-quickstart/</url>
+      <content type="html"></content>
+      
+        <categories>
+            
+            <category> uncategory </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> untag </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Kafka Quickstart]]></title>
+      <url>/2020/05/02/kafka-quickstart/</url>
+      <content type="html"><![CDATA[<p>Kafka 快速开始：</p>
+<ol>
+<li>下载<pre><code>wget https://www.apache.org/dyn/closer.cgi?path=/kafka/2.4.1/kafka_2.11-2.4.1.tgz
+tar -xzf kafka_2.11-2.4.1.tgz
+</code></pre></li>
+<li>配置<br>修改 config/server.properties 。<pre><code>broker.id=0
+port=9092
+host.name=192.168.0.206
+advertised.host.name=192.168.0.206
+num.network.threads=3
+num.io.threads=8
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+log.dirs=/opt/kafka-logs                # Kafka 日志路径，重要
+num.partitions=1
+num.recovery.threads.per.data.dir=1
+offsets.topic.replication.factor=1
+transaction.state.log.replication.factor=1
+transaction.state.log.min.isr=1
+log.retention.hours=168
+log.segment.bytes=1073741824
+log.retention.check.interval.ms=300000
+zookeeper.connect=192.168.0.206:2181
+zookeeper.connection.timeout.ms=6000
+group.initial.rebalance.delay.ms=0
+</code></pre>Kafka 启动需要用到 Zookeeper ，需要提前搭好。</li>
+<li>启动<pre><code>./bin/kafka-server-start.sh ./config/server.properties
+</code></pre></li>
+<li>创建 topic<pre><code>./bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test --replication-factor 1 --partitions 1
+</code></pre>创建成功之后可以查看。<pre><code>./bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+</code></pre></li>
+<li>发送消息<pre><code>./bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test
+</code></pre></li>
+<li>消费消息<pre><code>./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+</code></pre></li>
+<li>查看消费进度<pre><code>./kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe
+</code></pre></li>
+<li>删除 topic<pre><code>./kafka-topics.sh --zookeeper localhost:2181 --delete --topic test
+</code></pre></li>
+</ol>
+<p>单个节点就搭建完成了，现在把它扩展成集群。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> MQ </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Kafka </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Building Log Collection System]]></title>
+      <url>/2020/05/02/building-log-collection-system/</url>
+      <content type="html"><![CDATA[<p>日志收集方式有很多，本文主要介绍利用 Kafka 和 ELK 来进行日志收集。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvOEse.png" alt="20200502190811" border="0" style="width:600px"><br>设计思路很简单：</p>
+<ol>
+<li>首先通过日志框架，将日志分级并存储到文件。</li>
+<li>通过 Filebeat 将文件内容放到 Kafka 中。</li>
+<li>Logstash 对 Kafka 中的日志进行消费，过滤出需要的日志，写到 Elasticsearch 中。</li>
+<li>最后用 Kibana 进行展示。</li>
+</ol>
+<p>使用的环境是 Centos7 + logback + Kafka_2.11-2.4.1 + ELK Stack 6.8.8 。这里简单介绍一下 ELK Stack 。ELK Stack 就是 ELK + Beats 。ELK 是三个开源项目的首字母缩写，这三个项目分别是：Elasticsearch 、Logstash 和 Kibana 。Elasticsearch 是一个搜索和分析引擎。Logstash  是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch  中使用图形和图表对数据进行可视化。Beats 是轻量型的单一功能数据采集器，Filebeat 是 Beats 中的一个用于文件的采集器。</p>
+<h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><p>第一步首先要选择一个日志框架，日志框架有很多，根据自己习惯选就好了。这里用的是 Logback ，它是 SLF4J 的直接实现，SpringBoot 默认使用的也是它。接下来就是要将日志分级，把全量 Log 和 Error Log 分别存储，以 logback-spring.xml 为例。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;
+    &lt;contextName&gt;logback&lt;/contextName&gt;
+    &lt;property name=&quot;app.name&quot; value=&quot;log-collection&quot;/&gt;
+    &lt;property name=&quot;log.path&quot; value=&quot;./logs/${app.name}&quot;/&gt;
+    &lt;!--输出到控制台--&gt;
+    &lt;appender name=&quot;console&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+        &lt;layout&gt;
+            &lt;Pattern&gt;[%X{host}] [%X{ip}] [%X{appName}] %d{yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS} %level ${PID:- } %thread %logger - %msg ##&#39;%ex&#39;%n&lt;/Pattern&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+
+    &lt;!--输出到文件--&gt;
+    &lt;appender name=&quot;infoFile&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;file&gt;${log.path}/app.log&lt;/file&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy&quot;&gt;
+            &lt;!-- 按天轮转 --&gt;
+            &lt;fileNamePattern&gt;${log.path}/app-%d{yyyy-MM-dd}-%i.zip&lt;/fileNamePattern&gt;
+            &lt;!-- 单个文件最大 500M --&gt;
+            &lt;maxFileSize&gt;500MB&lt;/maxFileSize&gt;
+            &lt;!-- 保存 30 天的历史记录，最大大小为 30GB --&gt;
+            &lt;maxHistory&gt;30&lt;/maxHistory&gt;
+            &lt;totalSizeCap&gt;3GB&lt;/totalSizeCap&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;layout&gt;
+            &lt;Pattern&gt;[%X{host}] [%X{ip}] [%X{appName}] %d{yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS} %level ${PID:- } %thread %logger - %msg ##&#39;%ex&#39;%n&lt;/Pattern&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+    &lt;appender name=&quot;errorFile&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;file&gt;${log.path}/error.log&lt;/file&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy&quot;&gt;
+            &lt;!-- 按天轮转 --&gt;
+            &lt;fileNamePattern&gt;${log.path}/error-%d{yyyy-MM-dd}-%i.zip&lt;/fileNamePattern&gt;
+            &lt;!-- 单个文件最大 500M --&gt;
+            &lt;maxFileSize&gt;500MB&lt;/maxFileSize&gt;
+            &lt;!-- 保存 30 天的历史记录，最大大小为 30GB --&gt;
+            &lt;maxHistory&gt;30&lt;/maxHistory&gt;
+            &lt;totalSizeCap&gt;3GB&lt;/totalSizeCap&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;
+            &lt;level&gt;ERROR&lt;/level&gt;
+            &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;
+            &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;
+        &lt;/filter&gt;
+        &lt;layout&gt;
+            &lt;Pattern&gt;[%X{host}] [%X{ip}] [%X{appName}] %d{yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS} %level ${PID:- } %thread %logger - %msg ##&#39;%ex&#39;%n&lt;/Pattern&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+
+    &lt;root level=&quot;info&quot;&gt;
+        &lt;appender-ref ref=&quot;console&quot;/&gt;
+        &lt;appender-ref ref=&quot;infoFile&quot;/&gt;
+        &lt;appender-ref ref=&quot;errorFile&quot;/&gt;
+    &lt;/root&gt;
+
+&lt;/configuration&gt;
+</code></pre><p>这里需要特殊说明的是 Layout.Pattern 。一行日志通过空格分隔，前 3 个是自定义 MDC 属性，第 4 部分是 UTC Timestamp ，第 5 部分是日志级别，第 6 部分是进程号，第 7 部分是线程名字，第 8 部分是类的名字，第 9 部分是日志信息，最后一部分是异常信息。由于异常堆栈是多行，所以通过 ”‘“ 包起来便于后续处理。<br>Logback 更多内容参考 <a href="http://www.logback.cn/" target="_blank" rel="external">http://www.logback.cn/</a> 。</p>
+<h4 id="Filebeat"><a href="#Filebeat" class="headerlink" title="Filebeat"></a>Filebeat</h4><p>Filebeat 用来对文件内容进行收集，将其和应用程序部署在同一台机器。下载解压之后修改配置文件 filebeat.yml 。</p>
+<pre><code>filebeat.inputs:
+
+- type: log
+  enabled: true
+  paths:
+    - /logs/log-collection/app.log     # 指定日志文件
+  document_type: &quot;app-log&quot;
+  multiline:
+    pattern: &#39;^\[&#39;                    # 以 ”[“ 开头，不是 [ 开头则合并到上一行，最大2000行
+    negate: true
+    match: after
+    max_lines: 2000
+    timeout: 2s
+  fields:
+    logbiz: log-collection            # 应用名称
+    log_topic: app-log-collection    # Kafka 的 Topic
+    evn: dev                        # 环境
+
+- type: log
+  enabled: true
+  paths:
+    - /logs/log-collection/error.log
+  document_type: &quot;error-log&quot;
+  multiline:
+    pattern: &#39;^\[&#39;
+    negate: true
+    match: after
+    max_lines: 2000
+    timeout: 2s
+  fields:
+    logbiz: log-collection
+    log_topic: error-log-collection
+    evn: dev
+
+output.kafka:                        # 输出到 Kafka
+  enabled: true
+  hosts: [&quot;192.168.0.106:9092&quot;]        # Kafka Broker 地址
+  topic: &#39;%{[fields.log_topic]}&#39;    # Kafka Topic ，动态获取上边配置的 Topic
+  partition.hash:
+    reachable_only: true
+  compression: gzip
+  max_message_bytes: 1000000
+  required_acks: 1
+logging.to_files: true
+</code></pre><p>启动，带 -e 可以看到日志。</p>
+<pre><code>./filebeat -e
+</code></pre><h4 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h4><p>Kafka 安装配置参考 <a href="../../../../2020/05/02/kafka-quickstart/">Kafka Quickstart</a> 。</p>
+<p>创建 Filebeat 要用到的 Topic 。</p>
+<pre><code>bin/kafka-topics.sh --zookeeper 192.168.0.206:2181 --create --topic app-log-collection --partitions 1 --replication-factor 1
+bin/kafka-topics.sh --zookeeper 192.168.0.206:2181 --create --topic error-log-collection --partitions 1 --replication-factor 1
+</code></pre><p>启动 Filebeat 之后，如果配置正常，在 Kafka 的 logs 目录可以看到对应 topic 的日志。</p>
+<h4 id="Logstash"><a href="#Logstash" class="headerlink" title="Logstash"></a>Logstash</h4><p>Lostash 作用是消费 Kafka 中的日志。下载解压之后修改配置文件 config/logstash.conf 。</p>
+<pre><code># 输入，可以有多个
+input {
+  # Kafka 的配置
+  kafka {
+    topics_pattern =&gt; &quot;app-log-.*&quot;                 # Kafka 的 Topic 模式
+    bootstrap_servers =&gt; &quot;192.168.0.206:9092&quot;    # Kafka broker 地址
+    codec =&gt; json
+    consumer_threads =&gt; 4
+    decorate_events =&gt; true
+    group_id =&gt; &quot;app-log-group&quot;
+  }
+  kafka {
+    topics_pattern =&gt; &quot;error-log-.*&quot;
+    bootstrap_servers =&gt; &quot;192.168.0.206:9092&quot;
+    codec =&gt; json
+    consumer_threads =&gt; 4
+    decorate_events =&gt; true
+    group_id =&gt; &quot;error-log-group&quot;
+  }
+}
+
+filter {
+  ruby {
+    # 将本地时间赋给变量 index_time ，在 ES 中按天创建索引会用到
+    # Logstash 使用的 UTC 时间，所以会比东八区晚 8 小时，这里进行时区转换
+    code =&gt; &quot;event.set(&#39;index_time&#39;, event.timestamp.time.localtime.strftime(&#39;%Y.%m.%d&#39;))&quot;
+  }
+
+  if &quot;app-log&quot; in [fields][log_topic] {     # Filebeat 中的变量
+    grok {
+      # 针对日志格式进行解析，变量名字无所谓，位置需要对应
+      match =&gt; [&quot;message&quot;, &quot;\[%{DATA:host}\] \[%{DATA:ip}\] \[%{DATA:appName}\] %{NOTSPACE:currentDateTime} %{NOTSPACE:level} %{NOTSPACE:pid} %{NOTSPACE:thread} %{NOTSPACE:class} - %{DATA:msgInfo} ##(\&#39;\&#39;|%{QUOTEDSTRING:throwable})&quot;]
+    }
+    # 还是时区的问题，ELK 缺省使用的是 UTC ，所以在这把时区加上，在 ES 和 Kibana 里就都按指定时区了
+    mutate {
+      gsub =&gt; [&quot;currentDateTime&quot;, &quot;[+]&quot;, &quot;T&quot;]
+    } 
+    mutate{
+      replace =&gt; [&quot;currentDateTime&quot;,&quot;%{currentDateTime}+08:00&quot;]
+    }
+  }
+
+  if &quot;error-log&quot; in [fields][log_topic] {
+    grok {
+      match =&gt; [&quot;message&quot;, &quot;\[%{DATA:host}\] \[%{DATA:ip}\] \[%{DATA:appName}\] %{NOTSPACE:currentDateTime} %{NOTSPACE:level} %{NOTSPACE:pid} %{NOTSPACE:thread} %{NOTSPACE:class} - %{DATA:msgInfo} ##(\&#39;\&#39;|%{QUOTEDSTRING:throwable})&quot;]
+    }
+    mutate {
+      gsub =&gt; [&quot;currentDateTime&quot;, &quot;[+]&quot;, &quot;T&quot;]
+    } 
+    mutate{
+      replace =&gt; [&quot;currentDateTime&quot;,&quot;%{currentDateTime}+08:00&quot;]
+    }
+  }
+}
+
+# 输出
+output {
+  # 输出到控制台
+  stdout { 
+    codec =&gt; rubydebug
+  }
+}
+
+output {
+  # 输出到 ES
+  if &quot;app-log&quot; in [fields][log_topic] {
+    elasticsearch {
+      hosts =&gt; [&quot;192.168.0.201:9200&quot;]                        # ES 地址
+      index =&gt; &quot;app-log-%{[fields][logbiz]}-%{index_time}&quot;    # ES 索引的名字，按天生成索引
+      sniffing =&gt; true                                        # 嗅探模式
+      template_overwrite =&gt; true                                  
+    }
+  }
+
+  if &quot;error-log&quot; in [fields][log_topic] {
+    elasticsearch {
+      hosts =&gt; [&quot;192.168.0.201:9200&quot;]
+      index =&gt; &quot;error-log-%{[fields][logbiz]}-%{index_time}&quot;
+      sniffing =&gt; true
+      template_overwrite =&gt; true      
+    }
+  }
+}
+</code></pre><p>配置完成后启动</p>
+<pre><code>./bin/logstash -f ./config/logstash.conf
+</code></pre><p>更多 Logstash 内容参考 <a href="http://doc.yonyoucloud.com/doc/logstash-best-practice-cn/index.html" target="_blank" rel="external">Logstash 最佳实践</a> 。</p>
+<h4 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h4><p>Elasticsearch 集群搭建参考 <a href="../../../../2020/05/02/elasticsearch-quickstart/">Elasticsearch Quickstart</a> 。</p>
+<h4 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h4><p>下载解压之后在 config/kibana.yml 中配置 ES 的地址就可以运行了。</p>
+<pre><code>./bin/kibana
+</code></pre><p>启动之后访问 <a href="http://locahost:5601" target="_blank" rel="external">http://locahost:5601</a> 。<br>先去 Management &gt; Kibana &gt; Advanced Settings 里修改时区为东八区，然后创建 Index Patterns 。<br><img src="https://s1.ax1x.com/2020/05/02/JvOVqH.png" alt="20200502183933" border="0"><br>在 Discover 中就可以看到日志了。</p>
+<h4 id="错误告警"><a href="#错误告警" class="headerlink" title="错误告警"></a>错误告警</h4><p>通过 Elasticsearch Watcher 可以进行错误告警。Watcher 就是一个定时任务，通过 Watcher API 可以创建 Watcher ，比如创建一个 Watcher 每 10s 扫描一次 error-log 索引。</p>
+<pre><code>PUT _xpack/watcher/watch/applog_error_watcher
+{
+  # 触发器
+  &quot;trigger&quot;:{
+    &quot;schedule&quot;:{
+      &quot;interval&quot;:&quot;10s&quot;
+    }
+  },
+  &quot;input&quot;:{
+    &quot;search&quot;:{
+      &quot;request&quot;:{
+        &quot;indices&quot;:[
+          &quot;error-log-*&quot;
+        ],
+        &quot;body&quot;:{
+          &quot;size&quot;:0,
+          &quot;query&quot;:{
+            &quot;bool&quot;:{
+              &quot;must&quot;:{
+                &quot;term&quot;:{
+                  &quot;level.keyword&quot;:&quot;ERROR&quot;
+                }
+              },
+              &quot;filter&quot;:{
+                &quot;range&quot;:{
+                  &quot;currentDateTime&quot;:{
+                    &quot;gt&quot;:&quot;now-30s&quot;,
+                    &quot;lt&quot;:&quot;now&quot;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  # 条件：查询命中条数大于0触发
+  &quot;condition&quot;:{
+      &quot;compare&quot;:{
+          &quot;ctx.payload.hits.total&quot;:{
+              &quot;gt&quot;:0
+          }
+      }
+  },
+  # 查询数据
+  &quot;transform&quot;:{
+    &quot;search&quot;:{
+      &quot;request&quot;:{
+        &quot;indices&quot;:[
+          &quot;error-log-*&quot;
+        ],
+        &quot;body&quot;:{
+          &quot;size&quot;:10,
+          &quot;query&quot;:{
+            &quot;bool&quot;:{
+              &quot;must&quot;:{
+                &quot;term&quot;:{
+                  &quot;level.keyword&quot;:&quot;ERROR&quot;
+                }
+              },
+              &quot;filter&quot;:{
+                &quot;range&quot;:{
+                  &quot;currentDateTime&quot;:{
+                    &quot;gt&quot;:&quot;now-30s&quot;,
+                    &quot;lt&quot;:&quot;now&quot;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  # 处理动作，这里是注册了一个webhook，然后进行回调
+  &quot;actions&quot;:{
+    &quot;test_error&quot;:{
+      &quot;throttle_period&quot;:&quot;1m&quot;,
+      &quot;webhook&quot;:{
+        &quot;method&quot;:&quot;POST&quot;,
+        &quot;url&quot;:&quot;http://192.168.0.106:8080/watch&quot;,
+        &quot;body&quot;:&quot;watcher test&quot;
+      }
+    }
+  }
+}
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Microservices </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> ELK </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[rabbitmq cluster]]></title>
+      <url>/2020/04/27/rabbitmq-cluster/</url>
+      <content type="html"></content>
+      
+        <categories>
+            
+            <category> uncategory </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> untag </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[RabbitMQ Management GUI]]></title>
+      <url>/2020/04/27/rabbitmq-management-gui/</url>
+      <content type="html"><![CDATA[<p>RabbitMQ 提供了一个管理图形界面，通过 <a href="http://localhost:15672/" target="_blank" rel="external">http://localhost:15672/</a> 可以访问，默认用户名密码是 guest/guest 。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> MQ </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> RabbitMQ </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[RabbitMQ Exchange Types]]></title>
+      <url>/2020/04/25/rabbitmq-exchange-types/</url>
+      <content type="html"><![CDATA[<p>RabbitMQ 中有 4 种不同的 Exchange ，分别是 Direct 、Topic 、Fanout 和 Headers 。</p>
+<h4 id="Direct"><a href="#Direct" class="headerlink" title="Direct"></a>Direct</h4><p>RabbitMQ 默认的 Exchange Type 。使用此方式 Exchange 会比较 RoutingKey 和 BindingKey ，两个相等才会将消息路由到 Queue ，如果没有和 RoutingKey 相等的 BindingKey ，消息就会被丢弃。</p>
+<p><img src="https://s1.ax1x.com/2020/04/25/JyHBWt.png" alt="JyHBWt.png" border="0" style="width:700px"></p>
+<p>有两个 Queue 绑定到 Exchange ，分别是 hello.queue 和 hello2.queue 。Producer 向 Exchange 发送消息，RoutingKey 作为参数存放在消息的 header 。Exchange 会将消息路由到 hello.queue 的队列中，因为 RoutingKey 和 BindingKey 完全相等。</p>
+<h4 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h4><p>使用此方式 Exchange 会通过模式匹配的方式进行路由，RoutingKey 可以使用 “.” 、“#” 、“<em>” ，例如 order.create.</em> ，order.# ，”*“ 匹配 0 或 1 个，”#“ 匹配 0 或 n 个。Consumer 可以订阅任何感兴趣的 Topic ，Exchange 会将消息路由到所有符合模式的队列中。</p>
+<p><img src="https://s1.ax1x.com/2020/04/25/Jyv2jI.png" alt="Jyv2jI.png" border="0" style="width:700px"></p>
+<p>Consumer1 订阅了 order.# ，Consumer2 订阅了 order.del.# ，Consumer3 订阅了 order.create.<em> 。Producer 向 Exchange 发送了一条消息，RoutingKey 为 order.create.test ，order.create.</em> 、order.# 都可以匹配 order.create.test ，因此 Consumer1 和 Consumer3 都会收到消息， order.del.# 无法匹配，则 Consumer2 不会收到消息。</p>
+<h4 id="Fonout"><a href="#Fonout" class="headerlink" title="Fonout"></a>Fonout</h4><p>使用此方式 Exchange 会消息复制多份，并路由到所有与 Exchange 绑定的队列，此时将不再关心 RoutingKey 。这种模式通常在需要对相同的消息采取不同的处理时使用。</p>
+<p><img src="https://s1.ax1x.com/2020/04/25/J6SzUf.png" alt="J6SzUf.png" border="0" style="width:700px"></p>
+<h4 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h4><p>使用此方式 Exchange 在绑定 Queue 时会增加一个特殊参数 x-match ，x-match 有两个值，分别是 any 和 all ，默认是 all 。Exchange 在路由匹配时，通过消息的 Header 进行匹配，而不是 RoutingKey 。<br><img src="https://s1.ax1x.com/2020/04/25/J6kuPx.png" alt="J6kuPx.png" border="0" style="width:700px"><br>Consumer1 订阅了 type:order format:xml ，Consumer2 订阅了 type:pay format:binary ，Consumer3 订阅了 type:pay format:json 。Producer1 发送的消息 headers 为 type:order format:json ，Exchange 没有与其匹配的 Queue ，所以消息会被丢弃。Producer2 发送的消息 headers 为 type:pay format:text x-match:any ，Exchange 会将消息路由给 Queue2 和 Queue3 。Producer3 发送的消息 headers 为 type:pay format:json ，Exchange 会将消息路由到 Queue3 。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> MQ </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> RabbitMQ </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[RabbitMQ-Concepts-and-Glossary]]></title>
+      <url>/2020/04/25/rabbitmq-concepts-and-glossary/</url>
+      <content type="html"><![CDATA[<h4 id="概念和术语"><a href="#概念和术语" class="headerlink" title="概念和术语"></a>概念和术语</h4><p>在学习 RabbitMQ 之前，先了解一下 RabbitMQ 的术语和基本概念。</p>
+<ol>
+<li>AMQP<br>高级消息队列协议 (Advanced Message Queuing Protocol, AMQP) 是一个应用层协议的开放标准。RabbitMQ 实现了 AMQP 协议。</li>
+<li>Publisher<br>向 MQ 发送消息的程序。</li>
+<li>Message<br>Publisher 通过 MQ 传递给 Consumer 的数据。</li>
+<li>Consumer<br>从 MQ 接收消息的程序。</li>
+<li>Connection<br>应用程序和 RabbitMQ Broker 之间建立的 TCP 连接。</li>
+<li>Queue<br>存放消息的队列。</li>
+<li>Confirm<br>Publisher 向 RabbitMQ 发送 Message ，RabbitMQ 收到 Message 之后给 Publisher 的回执，用来标识 RabbitMQ 收到 Message 。</li>
+<li>Message acknowledgment<br>消息回执，简称 ack 。Message 被 Consumer 消费之后，Consumer 向 MQ Server 发送一个 ack ，MQ Server 收到 ack 后会将 Message 删除。如果没有收到 ack 并且 Consumer 和 MQ Server  断开连接，MQ Server 会将 Message 发送给其他的 Consumer 处理。</li>
+<li>Message durability<br>消息持久化，用来保证 MQ Server 在异常宕机时消息不丢失。</li>
+<li>Prefetch count</li>
+<li>Exchange<br>在 RabbitMQ 中，Publisher 不会直接将消息发送到 Queue ，而是将消息发送到 Exchange ，再由 Exchange 将消息路由给 Queue 。</li>
+<li>RoutingKey<br>发送消息时携带的 key 。</li>
+<li>Binding<br>绑定就是将 Exchange 和 Queue 进行关联。 </li>
+<li>BindingKey<br>BindingKey 是在 Exchange 和 Queue 绑定时指定的。BindingKey 并不是实际存在，而是为了和 RoutingKey 进行区分，实际和 RoutingKey 是一个东西。Exchange 在路由消息时，会将 RoutingKey 和 BindingKey 进行比较，如果相等或匹配，Exchange 就会将消息路由到对应的 Queue 。</li>
+<li>Exchange Types<br>路由规则，有 4 种：fanuot 、direct 、topic 和 headers 。</li>
+</ol>
+<h4 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h4><p>了解了基本概念，再来看看 MQ 的执行过程。<br><img src="https://s1.ax1x.com/2020/04/25/JyRABt.png" alt="JyRABt.png" border="0" style="width:700px"></p>
+<ol>
+<li>RabbitMQ 已经运行，并且 Exchange 和 Queue 已经绑定。</li>
+<li>Producer 连接到 RabbitMQ ，并发送一条消息，这个消息上带着一个 RoutingKey 。</li>
+<li>RabbitMQ 接收到消息，并给 Producer 发送了 Confirm 消息。</li>
+<li>Exchange 根据 RoutingKey 将消息路由到 Queue 。</li>
+<li>Consumer 从 RabbitMQ 接收一条消息，处理完成后向 RabbitMQ 发送一条 Ack 。</li>
+<li>RabbitMQ 收到 Ack 后删除消息，整个流程结束。</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> MQ </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> RabbitMQ </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Introducing Nacos]]></title>
       <url>/2020/04/19/introducing-nacos/</url>
       <content type="html"><![CDATA[<p>Nacos 是一个用于构建微服务的基础设施，提供服务发现、服务配置、元数据和流量管理功能。</p>
@@ -237,7 +1020,49 @@ db.num=1
 db.url.0=jdbc:mysql://localhost:3306/nacos_config?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true
 db.user=root
 db.password=123456
-</code></pre>]]></content>
+</code></pre><h4 id="管理多环境配置文件"><a href="#管理多环境配置文件" class="headerlink" title="管理多环境配置文件"></a>管理多环境配置文件</h4><p>通常会有 3 个环境 dev 、test 、prod ，三个环境的配置文件在 nacos 中进行管理。在项目中只存放 nacos config 相关的配置。通过 profiles 来区分不同环境的配置。</p>
+<pre><code># dev 配置
+spring:
+  profiles: dev
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    namespace: af40020e-9c75-4174-be5b-796622544bae
+
+---
+#test 配置
+spring:
+  profiles: test
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    namespace: 33d746ec-529e-472c-a6d1-302ee741e6cf
+
+---
+# prod 配置
+spring:
+  profiles: prod
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    namespace: d8038098-05b5-4a9a-9d55-a274eecf1e3a
+---
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: &#39;*&#39;
+  endpoint:
+    health:
+      show-details: always
+
+spring:
+  application:
+    name: spring-boot-nacos-example
+</code></pre><p>启动时通过 <code>java -jar xxx.jar --spring.profiles.active=dev</code> 来指定运行环境。</p>
+]]></content>
       
         <categories>
             
@@ -1242,9 +2067,11 @@ eureka:
     <entry>
       <title><![CDATA[MVCC]]></title>
       <url>/2020/03/19/mvcc/</url>
-      <content type="html"><![CDATA[<p>数据库有 4 种隔离级别，MySQL 默认为 Repeatable Read 。如果有两个事务并发操作 t1 表，效果如下： </p>
-<p><img src="https://s1.ax1x.com/2020/03/20/8cPaex.png" alt="8cPaex.png" border="0" style="width:350px"><br>Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之前是相同的，等 Client2 提交之后才能看到 Client1 插入的记录。<br>如果将 MySQL 的隔离级别改成 Read Commited ，效果又会有不同。<br><img src="https://s1.ax1x.com/2020/03/20/8c9xbV.png" alt="8c9xbV.png" border="0" style="width:600px"><br>这就是不可重复读的现象。</p>
-<p>透过现象看本质，当数据库的隔离级别为 RC 时，会出现不可重复读，通过修改隔离级别为 RR ，可以避免不可重复读。在 MySQL 中，RC 和 RR 隔离级别是通过 MVCC 实现的。MVCC (Multi-Version Concurrency Control) 是 InnoDB 使用的一种并发控制协议，只作用于 RC RR 两个级别。</p>
+      <content type="html"><![CDATA[<p>数据库有 4 种隔离级别，RU 、RC 、RR 和 Serializable ，MySQL 默认为 Repeatable Read 。t1 表有两条记录，如果有两个事务并发操作 t1 表如下： </p>
+<p><img src="http://bsyonline.gitee.io/pic/20200502/20200929221226.png" alt="20200929221405" border="0" style="width:500px"></p>
+<p>Client1 开启事务，将记录 2 的 name 修改为 C 。Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之前是相同的，等 Client2 提交之后才能看到 Client1 修改的内容。<br>如果将 MySQL 的隔离级别改成 Read Commited ，效果又会有不同。<br><img src="http://bsyonline.gitee.io/pic/20200502/20200929221405.png" alt="20200929221405" border="0" style="width:500px"></p>
+<p>这就是不可重复读的现象。</p>
+<p>为什么当数据库的隔离级别为 RC 时，会出现不可重复读，通过修改隔离级别为 RR ，可以避免不可重复读呢？答案是因为在 MySQL 中，RC 和 RR 隔离级别是通过 MVCC 实现的。MVCC (Multi-Version Concurrency Control) 是 InnoDB 使用的一种并发控制协议，作用于 RC RR 两个级别。</p>
 <h4 id="MVCC-的作用"><a href="#MVCC-的作用" class="headerlink" title="MVCC 的作用"></a>MVCC 的作用</h4><p>你一定想问，MVCC 有什么用呢？我们知道如果要实现并发，第一个想到的就是加锁。如果加锁，那么当 Client1 开启了事务，Client2 就无法获得锁，就会阻塞，这样性能就会很差。MVCC 并不会加锁，而是允许 Client2 在 Client1 事务期间依旧是可读的，这样就提高了读写的并发度。</p>
 <h4 id="MVCC-是如何实现的"><a href="#MVCC-是如何实现的" class="headerlink" title="MVCC 是如何实现的"></a>MVCC 是如何实现的</h4><p>对于 t1 表，我们看到的是这样的：</p>
 <pre><code>mysql&gt; desc t1;
@@ -1260,16 +2087,19 @@ eureka:
 <ol>
 <li>DB_TRX_ID：表示插入或更新的的最后一个事务 id 。</li>
 <li>DB_ROLL_PTR：回滚指针，指向 Undo Log 的记录。</li>
-<li>DB_ROW_ID：id 行，单调递增。</li>
+<li>DB_ROW_ID：行 id ，单调递增。</li>
 </ol>
 <p>每次开启事务，都会生成对应的 Undo Log 。在事务中做的任何修改都会在 Undo Log 中保存下来，类似链表。然后在 select 的时候会生成对应查询视图 ReadView 。<strong>ReadView 由当前未提交的事务 id 列表和最大事务 id 组成</strong>。用 select 的结果的 DB_TRX_ID 和 ReadView 比较来判断事务的状态，从而确定返回的结果集。比较规则如下：</p>
 <ol>
 <li>当 DB_TRX_ID 小于 ReadView 的最小 ID ，则说明事务已经提交，则数据是可见的。</li>
 <li>当 DB_TRX_ID 大于等于 ReadView 的最小 ID 小于等于 ReadView 的最大 ID 时，<br> 2.1) 如果 DB_TRX_ID 等于当前的 DB_TRX_ID ，说明是自己的事务，则数据可见。<br> 2.2) 如果 DB_TRX_ID 在 ReadView 的未完成事务列表中，说明事务未提交，则数据不可见。如果不在，则说明事务已提交，数据可见。</li>
 </ol>
-<p><strong>在 RR 隔离级别下，ReadView 会延用事务第一次生成的 ReadView ，而 RC 隔离级别下，每次查询会生成新的 ReadView </strong>。<br>有了上边的概念，我们来分析一下前边的例子，假设 t1 表中有一条记录 id=1 name=’A’ ，是由 DB_TRX_ID=100 的事务插入的。</p>
-<h5 id="在-RR-级别下"><a href="#在-RR-级别下" class="headerlink" title="在 RR 级别下"></a>在 RR 级别下</h5><p>&ensp;&ensp;1)  Client1 开启了事务，假设它的 DB_TRX_ID=200 ，插入 id=2 的记录，MySQL 会将 id=1 这条记录拷贝到 Undo Log 中，然后将 DB_ROLL_PTR 指向 Undo Log 中的这条记录，这样就形成一个版本链。<br>&ensp;&ensp;2)  当 Client1 查询时，会生成查询视图 ReadView([200],200) ，从版本链的最后一条记录，即 id=2 的记录开始比较。DB_TRX_ID=200 等于当前的 DB_TRX_ID ，所以数据是可见的。DB_TRX_ID=100 小于 ReadView 中最小的事务 id ，说明它是已经提交的事务，所以数据也是可见的。所以最终 Client1 查询会返回 2 条记录。<br>&ensp;&ensp;3)  当 Client2 开启事务 DB_TRX_ID=300 ，执行查询时，也会生成对应的查询视图 ReadView([200],300) 。然后从版本链的最后一条记录开始比较，DB_TRX_ID=200 大于等于 ReadView 的最小 ID 且不等于当前 DB_TRX_ID ，说明事务未提交，所以数据不可见。DB_TRX_ID=100 小于 ReadView 中最小的事务 ID ，说明它是已经提交的事务，所以数据是可见的。所以最终 Client2 查询只会返回 1 条记录。<br>&ensp;&ensp;4)  当 Client1 提交事务之后，Client2 再次查询，由于隔离级别是 RR ，会延用第一次的 ReadView([200],300)，所以虽然 DB_TRX_ID=200 已经提交了，但是按照 ReadView 比较还是大于等于最小的事务 ID 所以依旧不可见，最终只返回 1 条记录。</p>
-<h5 id="在-RC-级别下"><a href="#在-RC-级别下" class="headerlink" title="在 RC 级别下"></a>在 RC 级别下</h5><p>与此类似，我们再来看看 RC 级别。<br>&ensp;&ensp;1)  Client1 和上边是相同的。<br>&ensp;&ensp;2)  当 Client2 开启事务 DB_TRX_ID=300 ，执行查询时，会生成对应的查询视图 ReadView([200],300) 。然后从版本链的最后一条记录开始比较，DB_TRX_ID=200 大于等于 ReadView 的最小 ID 且不等于当前 DB_TRX_ID ，说明事务未提交，所以数据不可见。DB_TRX_ID=100 小于 ReadView([200],300) 中最小的事务 ID，说明它是已经提交的事务，所以数据也是可见的。所以最终 Client2 查询只会返回 1 条记录。<br>&ensp;&ensp;3)  当 Client1 提交事务之后，由于隔离级别是 RC ，会重新生成一个新的 ReadView([300],300)，DB_TRX_ID=200 和 DB_TRX_ID=100 对于 ReadView([300],300) 来说都是小于最小的事务 ID ，所以数据是可见的，因此最终会返回 2 条记录。</p>
+<p><strong>在 RR 隔离级别下，ReadView 会延用事务第一次生成的 ReadView ，而 RC 隔离级别下，每次查询会生成新的 ReadView </strong>。<br>有了上边的概念，我们来分析一下前边的例子，假设 t1 表中有 2 条记录，是由 DB_TRX_ID=100 的事务插入的，事务已经提交。</p>
+<p><img src="http://bsyonline.gitee.io/pic/20200502/20200929230446.png" alt="20200929230446" border="0" style="width:500px"></p>
+<h5 id="首先看-RR-级别："><a href="#首先看-RR-级别：" class="headerlink" title="首先看 RR 级别："></a>首先看 RR 级别：</h5><p>&ensp;&ensp;1)  Client1 开启了事务，假设它的 DB_TRX_ID=200 。Client1 修改了 id=12 的 name 为 C ，MySQL 会将 id=12 这条记录拷贝到 Undo Log 中，然后将 DB_ROLL_PTR 指向 Undo Log 中的这条记录，然后将 name 修改成 C ，这样就形成一个版本链。</p>
+<p><img src="http://bsyonline.gitee.io/pic/20200502/20200929230614.png" alt="20200929230446" border="0" style="width:700px"></p>
+<p>&ensp;&ensp;2)  当 Client1 查询时，会生成查询视图 ReadView([200],200) 。id=11 这条记录的 DB_TRX_ID=100 ，小于最小的未提交 DB_TRX_ID ，所以 id=11 这条记录是可见的。id=12 这条记录的 DB_TRX_ID=200 ，等于最大的未提交 DB_TRX_ID 说明是自己的事务，所以也是可见的。所以查到的结果就是 A 和 C 。<br>&ensp;&ensp;3)  当 Client2 开启了事务，假设它的 DB_TRX_ID=300 ，生成对应的查询视图 ReadView([200],300) 。Client2 执行查询时，id=11 这条记录的 DB_TRX_ID=100 ，小于最小的未提交 DB_TRX_ID ，所以 id=11 这条记录是可见的。id=12 这条记录的 DB_TRX_ID=200 ，在未提交列表中，所以需要去 Undo Log 中找历史版本 DB_TRX_ID=100 ，最终查到的结果是 A 和 B 。<br>&ensp;&ensp;4)  当 Client1 提交后，Client2 再次查询，ReadView 还是 ([200],300) ，所以查到的结果还是 A 和 B 。</p>
+<h5 id="与此类似，我们再来看看-RC-级别："><a href="#与此类似，我们再来看看-RC-级别：" class="headerlink" title="与此类似，我们再来看看 RC 级别："></a>与此类似，我们再来看看 RC 级别：</h5><p>&ensp;&ensp;1) 、 2） 、3）和上边是相同的。<br>&ensp;&ensp;4)  当 Client1 提交后，Client2 再次查询，此时 ReadView 是新生成的 ([300],300) ，DB_TRX_ID=200 已经提交，所以 C 是可见的，最终查到的结果是 A 和 C 。</p>
 <blockquote>
 <p>MVCC 只作用于 RC 和 RR ，那 RU 和 Serializable 是如何实现的？<br>RU 每次都读最新记录。<br>Serializable 通过互斥锁。</p>
 </blockquote>
@@ -1295,14 +2125,91 @@ eureka:
       <url>/2020/03/17/one-question-one-answer-for-redis/</url>
       <content type="html"><![CDATA[<p>Q: Redis 有哪些数据类型，及应用场景。<br>A: 数据类型有 8 种：</p>
 <ol>
-<li>string，简单的 KV 缓存。</li>
-<li>list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 <code>lrange list 0 9</code>。可以用来实现队列，如 lpush 和 rpop</li>
-<li>set，应用场景需要没有重复的元素。</li>
-<li>zset，无重复且有序。</li>
-<li>hash，可以用来存储简单对象。</li>
-<li>bitmap，可以用来实现 bloomfilter 。</li>
-<li>hyperloglog，可以用来进行大数据量统计，比如 UV 。但是不精确。</li>
-<li>geo，可以用来进行地理信息计算。</li>
+<li><p>string，简单的 KV 缓存，比如单值缓存，再比如文章的阅读量。</p>
+<pre><code>127.0.0.1:6379&gt; incr article:view:19 
+127.0.0.1:6379&gt; incr article:view:19 
+127.0.0.1:6379&gt; incr article:view:19
+127.0.0.1:6379&gt; get article:view:19 
+&quot;3&quot;
+</code></pre></li>
+<li><p>list，list 使用场景很多，可以存储列表类型的数据，比如消息列表。</p>
+<pre><code>127.0.0.1:6379&gt; lpush 12:msg 101
+127.0.0.1:6379&gt; lpush 12:msg 104
+127.0.0.1:6379&gt; lrange 12:msg 0 5
+1) &quot;104&quot;
+2) &quot;101&quot;
+</code></pre><p>再比如查询历史。</p>
+<pre><code>127.0.0.1:6379&gt; lpush history &quot;select * from user where id=1&quot;
+127.0.0.1:6379&gt; lpush history &quot;select * from dept where dept_name=&#39;sales&#39;&quot;
+127.0.0.1:6379&gt; lrange history 0 5
+1) &quot;select * from dept where dept_name=&#39;sales&#39;&quot;
+2) &quot;select * from user where id=1&quot;
+</code></pre><p>可以用来分页。</p>
+<pre><code>127.0.0.1:6379&gt; lrange list 0 9
+</code></pre><p>可以用来实现队列： lpush + rpop 。实现栈：lpush + lpop 。</p>
+</li>
+<li><p>set，应用场景需要没有重复的元素，比如将歌曲从歌曲库加到我喜欢的歌曲列表。</p>
+<pre><code>127.0.0.1:6379&gt; smove songs my_favourite &quot;yestoday once more&quot;
+(integer) 1
+</code></pre><p>再比如抽奖</p>
+<pre><code>127.0.0.1:6379&gt; srandmember lottery_draw 1    #不移除
+or
+127.0.0.1:6379&gt; spop lottery_draw 1           #移除
+</code></pre><p>再比如点赞</p>
+<pre><code>127.0.0.1:6379&gt; sadd like:123 19         #点赞
+127.0.0.1:6379&gt; srem like:123 19         #取消点赞
+127.0.0.1:6379&gt; sismember like:123 19    #是否点过赞
+127.0.0.1:6379&gt; smembers like:123        #点赞用户列表
+127.0.0.1:6379&gt; scard like:123           #点赞数
+</code></pre><p>再比如关注</p>
+<pre><code>127.0.0.1:6379&gt; sadd tom:follow 101 102 199 
+127.0.0.1:6379&gt; sadd alice:follow 102 103 199 
+127.0.0.1:6379&gt; sinter tom:follow alice:follow       #tom和alice共同关注
+1) &quot;102&quot;
+2) &quot;199&quot;
+127.0.0.1:6379&gt; sdiff alice:follow tom:follow        #alice还关注了哪些人
+1) &quot;103&quot;
+</code></pre></li>
+<li><p>zset，无重复且有序。比如排行榜。</p>
+<pre><code>127.0.0.1:6379&gt; zincrby music:month:1:week:1 1 &quot;yestoday once more&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:1 1 &quot;yestoday once more&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:1 1 &quot;hotel california&quot;
+127.0.0.1:6379&gt; zrevrange music:month:1:week:1 0 9 withscores     #周排行
+1) &quot;yestoday once more&quot;
+2) &quot;2&quot;
+3) &quot;hotel california&quot;
+4) &quot;1&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:2 1 &quot;yestoday once more&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:3 1 &quot;hotel california&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:4 1 &quot;hotel california&quot;
+127.0.0.1:6379&gt; zunionstore music:month:1 4 music:month:1:week:1 music:month:1:week:2 music:month:1:week:3 music:month:1:week:4 
+127.0.0.1:6379&gt; zrevrange music:month:1 0 9 withscores    #月排行
+1) &quot;yestoday once more&quot;
+2) &quot;8&quot;
+3) &quot;hotel california&quot;
+4) &quot;5&quot;
+</code></pre></li>
+<li><p>hash，可以用来存储简单对象。比如数据库表 user 是这样的：<br>| id   | name  | age  |<br>| —- | —– | —- |<br>| 1    | Tom   | 20   |<br>| 2    | Alice | 19   |<br>用 redis hash 可以这样表示：</p>
+<pre><code class="shell">127.0.0.1:6379&gt; hmset user 1:name Tome 1:age 20
+127.0.0.1:6379&gt; hmset user 2:name Alice 2:age 19
+127.0.0.1:6379&gt; hmget user 1:name 1:age
+1) &quot;Tome&quot;
+2) &quot;20&quot;
+</code></pre>
+<p>如果表记录很多，可以进行分段，防止 big value 导致执行缓慢。<br>再比如购物车，</p>
+<pre><code># 用户 id 为 12 商品 id 为 1099
+127.0.0.1:6379&gt; hset cart:12 1099 1         #添加商品
+127.0.0.1:6379&gt; hincrby cart:12 1099 1      #增加数量
+127.0.0.1:6379&gt; hlen cart:12                #购物车中商品种类数量
+127.0.0.1:6379&gt; hdel cart:12 1099           #删除商品
+127.0.0.1:6379&gt; hgetall cart:12             #购物车中全部商品
+</code></pre></li>
+<li><p>bitmap，可以用来实现 bloomfilter 。</p>
+</li>
+<li><p>hyperloglog，可以用来进行大数据量统计，比如 UV 。但是不精确。</p>
+</li>
+<li><p>geo，可以用来进行地理信息计算。</p>
+</li>
 </ol>
 <p>还有一些功能也列一下：</p>
 <ol>
@@ -4861,10 +5768,14 @@ if (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)
 </blockquote>
 <p>停机时间可以从一个方面反应出系统的可用性，但是在高峰期停机 6 分钟和在低峰期停机 6 分钟造成的影响是不一样的，所以我们又提出通过估算停机时的请求量/一年的总请求量的比值来进行评估。不管使用何种评估方式，我们都可以对我们系统的高可用性有一个大致的了解。如果想要提高系统的可用性，那么就需要在系统的架构设计中进行改进。</p>
 <h4 id="如何实现高可用"><a href="#如何实现高可用" class="headerlink" title="如何实现高可用"></a>如何实现高可用</h4><h5 id="1-服务冗余"><a href="#1-服务冗余" class="headerlink" title="1.服务冗余"></a>1.服务冗余</h5><p>5 个 9 的服务可用性是非常具有挑战的，因为我们的系统是软件，这些软件会有 bug ，而软件又是运行在计算机硬件上的，硬件也会出现故障，所以单一系统出现问题是无法避免的。为了解决单点问题，就必须将我们的服务冗余，进行集群，从而保证集群中任何节点出现故障都不影响系统整体的可用性。</p>
-<h5 id="2-负载均衡"><a href="#2-负载均衡" class="headerlink" title="2.负载均衡"></a>2.负载均衡</h5><p>服务冗余固然可以消除单点故障的影响，但是仅仅冗余部署是不够的，必须要有一套监控机制来保证。服务部署多份，那么如何将请求分配到不同的节点，保证不会出现某个节点接受请求过大而另一些节点请求过少，或者当一个节点故障之后不会再有请求被分配到故障节点，这就需要使用负载均衡技术。当一个节点的请求处理失败，负载均衡会将请求路游到另外的节点上进行重试，为了保证系统不会因为多次请求导致数据不一致，我们还需要保证幂等性。</p>
-<h5 id="3-动态扩容缩容"><a href="#3-动态扩容缩容" class="headerlink" title="3.动态扩容缩容"></a>3.动态扩容缩容</h5><p>当请求不断增多，集群压力过大，如果有富裕的硬件资源，我们需要增加服务节点，当请求减少，我们需要减少服务节点，回收多余的硬件资源。为了能够动态的扩容和缩容，服务必须是无状态的，否则每个节点都是不一样的，那么处理起来就会非常困难。</p>
-<h5 id="4-限流，降级，熔断"><a href="#4-限流，降级，熔断" class="headerlink" title="4.限流，降级，熔断"></a>4.限流，降级，熔断</h5><p>有时在很短的时间内我们的系统资源无法支撑海量的请求，为了保证系统可用，我们需要对系统进行限流，降级或熔断处理。限流就是当请求数量超过系统的处理能力时，丢弃一部分请求以保证一部分请求能够正常处理。降级就是当系统资源不足时，将一部分边缘服务使用默认处理或是停掉，以保证核心服务资源可用。熔断是当一个服务请求处理缓慢时，使用服务的默认行为，防止因为单个服务缓慢导致整个系统雪崩。</p>
-<h5 id="5-异地容灾"><a href="#5-异地容灾" class="headerlink" title="5.异地容灾"></a>5.异地容灾</h5><p>不管是应用还是数据，异地部署都是有效的手段。比如，同城不同机房，异地多个机房等。</p>
+<h5 id="2-负载均衡"><a href="#2-负载均衡" class="headerlink" title="2.负载均衡"></a>2.负载均衡</h5><p>服务冗余固然可以消除单点故障的影响，但是仅仅冗余部署是不够的，必须要有一套监控机制来保证。服务部署多份，那么如何将请求分配到不同的节点，保证不会出现某个节点接受请求过大而另一些节点请求过少，或者当一个节点故障之后不会再有请求被分配到故障节点，这就需要使用负载均衡技术。</p>
+<h5 id="3-幂等"><a href="#3-幂等" class="headerlink" title="3.幂等"></a>3.幂等</h5><p>当一个节点的请求处理失败，负载均衡会将请求路游到另外的节点上进行重试，为了保证系统不会因为多次请求导致数据不一致，我们还需要保证幂等性。</p>
+<h5 id="4-无状态及动态扩容缩容"><a href="#4-无状态及动态扩容缩容" class="headerlink" title="4.无状态及动态扩容缩容"></a>4.无状态及动态扩容缩容</h5><p>当请求不断增多，集群压力过大，如果有富裕的硬件资源，我们需要增加服务节点，当请求减少，我们需要减少服务节点，回收多余的硬件资源。为了能够动态的扩容和缩容，服务必须是无状态的，否则每个节点都是不一样的，那么处理起来就会非常困难。</p>
+<h5 id="5-限流、降级、熔断"><a href="#5-限流、降级、熔断" class="headerlink" title="5.限流、降级、熔断"></a>5.限流、降级、熔断</h5><p>有时在很短的时间内我们的系统资源无法支撑海量的请求，为了保证系统可用，我们需要对系统进行限流，降级或熔断处理。<strong>限流</strong>就是当请求数量超过系统的处理能力时，丢弃一部分请求以保证一部分请求能够正常处理。<strong>降级</strong>就是当系统资源不足时，将一部分边缘服务使用默认处理或是停掉，以保证核心服务资源可用。<strong>熔断</strong>是当一个服务请求处理缓慢时，使用服务的默认行为，防止因为单个服务缓慢导致整个系统雪崩。</p>
+<h5 id="6-服务拆分"><a href="#6-服务拆分" class="headerlink" title="6.服务拆分"></a>6.服务拆分</h5><p>将服务拆分，按照服务等级施行不同策略的保障措施。</p>
+<h5 id="7-服务监控"><a href="#7-服务监控" class="headerlink" title="7.服务监控"></a>7.服务监控</h5><p>从平均响应延时或异常条数来进行实时监控，需要有对日志实时采集和分析的能力。</p>
+<h5 id="8-热部署或热切换"><a href="#8-热部署或热切换" class="headerlink" title="8.热部署或热切换"></a>8.热部署或热切换</h5><p>在不停机的情况下进行服务更新或状态修改，比如使用配置中心。</p>
+<h5 id="9-异地容灾"><a href="#9-异地容灾" class="headerlink" title="9.异地容灾"></a>9.异地容灾</h5><p>不管是应用还是数据，异地部署都是有效的手段。比如，同城不同机房，异地多个机房等。</p>
 ]]></content>
       
         <categories>
@@ -5031,42 +5942,44 @@ check point
       <url>/2019/08/03/distributed-transations/</url>
       <content type="html"><![CDATA[<p>我们通常说的事务是指本地事务，即对一个数据库进行的操作，并且这些操作满足事务的 4 个特性。事务的 4 个特性分别是：<br>Aotmicity（原子性），Consistency（一致性），Isolation（隔离性），Durability（持久性）。在一个事务中的所有操作要么同时成功，要么同时失败，这是原子性，一旦执行成功 commit 或是执行失败 rollback 那么这个结果必须是持久的。在事务开始和结束之间，存在着中间状态，这些中间状态是对事务之外是隔离的，换句话说，在事务结束之前，对数据进行的任何修改对事务之外都是不可见的，这就是隔离性。在事务结束之后，数据必须是完整并且一致的。</p>
 <p>在传统的架构体系中经常使用本地事务来保证数据一致性。但是随着分布式系统的发展，出现了越来越多的跨多个数据库进行操作的情况。在这种情况下，本地事务就无法保证数据一致性，分布式事务应运而生。分布式事务是针对本地事务来说的，它的目的就是解决在分布式环境下，跨多个数据库操作的数据一致性问题。分布式事务可分为刚性分布式事务和柔性分布式事务。</p>
-<h4 id="刚性分布式事务"><a href="#刚性分布式事务" class="headerlink" title="刚性分布式事务"></a>刚性分布式事务</h4><p>刚性分布式事务是和本地事务一样，都满足 ACID 特性的，是强一致性的。提到刚性事务，最据代表性的就是 XA 模型。XA 模型是 X/Open 提出的一种分布式事务模型。XA 模型有 3 个组成部分：</p>
-<p>​    <strong>AP</strong>（Application Program）：定义事务边界</p>
-<p>​    <strong>RM</strong>（Resource Manager）：管理计算机共享资源</p>
+<h4 id="刚性分布式事务"><a href="#刚性分布式事务" class="headerlink" title="刚性分布式事务"></a>刚性分布式事务</h4><p>刚性分布式事务是和本地事务一样，都满足 ACID 特性的，是强一致性的。提到刚性事务，最据代表性的就是X/Open 提出的一种分布式事务模型，DTP (<strong>D</strong>istributed <strong>T</strong>ransaction <strong>P</strong>rocessing Reference Model) 模型。</p>
+<p><img src="http://www.ibm.com/developerworks/websphere/library/techarticles/0407_woolf/images/DTPModel.gif" alt="http://www.ibm.com/developerworks/websphere/library/techarticles/0407_woolf/images/DTPModel.gif"></p>
+<p>DTP 模型有 3 个组成部分：</p>
+<p>​    <strong>AP</strong>（Application Program）：即应用程序，定义事务边界</p>
+<p>​    <strong>RM</strong>（Resource Manager）：即 RDBMS ，管理计算机共享资源</p>
 <p>​    <strong>TM</strong>（Transation Manager）：负责全局事务，分配事务唯一id，监控事务的执行进度，负责事务的提交，回滚，失败恢复</p>
-<p>基于 XA 模型，衍生出多种实现，2PC（two phase commit）就是其标准实现。<br><img src="https://s2.ax1x.com/2020/03/11/8AVSxA.png" alt="8AVSxA.png" border="0" style="width:400px"><br>2PC 过程如下：</p>
+<p>TM 和 AP、TM 和 RM 之间通信遵守 XA 规范 (XA Specification) ，AP 和 RM 之间通过 Native API 通信。</p>
+<h4 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h4><p>2PC（two phase commit）是基于 DTP 模型的一种实现。<br><img src="https://s2.ax1x.com/2020/03/11/8AVSxA.png" alt="8AVSxA.png" border="0" style="width:400px"><br>2PC 过程如下：</p>
 <p>​    第一阶段，AP 发起事务 commit ，TM 发起 prepare 投票，当 RM 都同意后，进行第二阶段。</p>
 <p>​    第二阶段，TM 最终执行 commit 。如果 commit 过程出现异常，则根据 recover 进行补偿。</p>
-<p>刚性分布式事务的优点是强一致性，但是缺点也很明显，由于要保证数据一致性，那么 TM 要挨个询问 RM 收集投票结果，如果 RM 数量很多，那么在所有 RM 投票完成之前，RM 的资源都是被锁定的，所以会导致全局的资源锁定，处理的性能及其低下。为了提高可用性，出现了柔性分布式事务。</p>
-<h4 id="柔性分布式事务"><a href="#柔性分布式事务" class="headerlink" title="柔性分布式事务"></a>柔性分布式事务</h4><p>柔性分布式事务和刚性分布式事务不同，其理论基础是 BASE 理论。BASE 是 Basically Available（基本可用），Soft state（软状态）和 Eventually consistent（最终一致性）的缩写，是由 CAP 定理演化而来。</p>
+<p>刚性分布式事务的优点是强一致性，但是缺点也很明显，由于要保证数据一致性，那么 TM 要挨个询问 RM 收集投票结果，如果 RM 数量很多，那么在所有 RM 投票完成之前，RM 的资源都是被锁定的，所以会导致全局的资源锁定，处理的性能及其低下。</p>
+<h4 id="柔性分布式事务"><a href="#柔性分布式事务" class="headerlink" title="柔性分布式事务"></a>柔性分布式事务</h4><p>为了提高可用性，出现了柔性分布式事务。柔性分布式事务和刚性分布式事务不同，其理论基础是 BASE 理论。BASE 是 <strong>B</strong>asically <strong>A</strong>vailable（基本可用），<strong>S</strong>oft state（软状态）和 <strong>E</strong>ventually consistent（最终一致性）的缩写，是由 CAP 定理演化而来。</p>
 <p>​    <strong>基本可用</strong>是指在特殊情况下，系统可以在功能和性能上保证基本或部分可用，比如系统响应时间从 10ms 降低到 500ms 或者只保证核心服务可用，非核心服务暂时不可用。</p>
 <p>​    <strong>软状态</strong>是指在多个服务之间数据存在中间状态，多个服务之间暂时地数据不一致不会影响整体可用。</p>
 <p>​    <strong>最终一致性</strong>是指数据经过短暂的不一致，最终能够达到一致状态。</p>
 <p>通常柔性分布式事务有以下几种实现：</p>
-<p><strong>TCC</strong></p>
-<p>TCC 是 2PC 的一种变形，是 <strong>T</strong>ry-<strong>C</strong>onfirm-<strong>C</strong>ancel 的缩写。TCC 的执行过程和 2PC 类似，首先 try 阶段尝试执行业务，完成资源检查，预留资源。第二阶段，不用进行业务检查，直接进行 confirm ，执行成功，事务结束，如果 confirm 失败，则进行重试。如果在某一方的 try 失败了，则进行 cancel 来释放 try 阶段预留的资源。</p>
+<h5 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a><strong>TCC</strong></h5><p>TCC 是 2PC 的一种变形，是 <strong>T</strong>ry-<strong>C</strong>onfirm-<strong>C</strong>ancel 的缩写。TCC 的执行过程和 2PC 类似，首先 try 阶段尝试执行业务，完成资源检查，预留资源。第二阶段，不用进行业务检查，直接进行 confirm ，执行成功，事务结束，如果 confirm 失败，则进行重试。如果在某一方的 try 失败了，则进行 cancel 来释放 try 阶段预留的资源。</p>
 <p>我们通过一个简单的例子来感受一下。假设一个下订单-减库存-支付的场景，各业务方需要针对 TCC 进行改造，比如预留库存，在 try 阶段不能真正扣减库存，所以在数据库里需要增加一个预留库存的字段，再比如支付模块也需要增加字段来预存支付金额。如果 try 阶段预留资源都成功了，那么再将预留字段更新到实际扣减库存字段或扣减金额字段，并清空预留资源字段。一般经过 try 阶段的检查， confirm 基本上都能成功。如果 comfirm  不成功，可能是网络抖动，进行重试即可。如果支付模块在 try 阶段预减金额失败了，那么就进行 cancel ，库存模块按照 try 阶段预留的资源进行释放。通过举例，我们可以看出，TCC 很灵活，但是缺点是和业务耦合性高，因为 try-confirm-cancel 3 个阶段都交由业务方来实现。</p>
-<p><strong>Saga</strong></p>
-<p>Saga 是另一种著名分布式事务模型。1987 年论文 sagas 讲述了一种长事务的处理方案，即 saga 模型。Saga 模型的主要思想就是把一个分布式事务拆分成多个本地事务，每个 saga 子事务 <code>T1,T2,...Tn</code> 都有对应的补偿模块 <code>C1,C2,...Cn-1</code> 。当所有子事务都执行成功，那么它的执行顺序是 <code>T1,T2,...Tn</code> 。如果 Tj 执行失败了，那么它的执行顺序是 <code>T1,T2,...Tj,Cj-1,...C2,C1,(0&lt;j&lt;n)</code> 。<br>由于 saga 模型没有 try 阶段，所以当执行失败，需要通过补偿模块进行恢复。Saga 定义了两种恢复方式：向前恢复和向后恢复。向前恢复就是认为事务一定会执行成功而进行重试。向后恢复就是执行回滚+补偿，实际当中使用较多的是向后恢复。<br>我们还是以下单-减库存-支付这一场景来进行说明。首先我们需要定义两张事务表，事务状态表和事务调用表，这两张表和业务 DB 是独立的。</p>
+<h5 id="Saga"><a href="#Saga" class="headerlink" title="Saga"></a><strong>Saga</strong></h5><p>Saga 是另一种著名分布式事务模型。1987 年论文 sagas 讲述了一种长事务的处理方案，即 saga 模型。Saga 模型的主要思想就是把一个分布式事务拆分成多个本地事务，每个 saga 子事务 <code>T1,T2,...Tn</code> 都有对应的补偿模块 <code>C1,C2,...Cn-1</code> 。当所有子事务都执行成功，那么它的执行顺序是 <code>T1,T2,...Tn</code> 。如果 Tj 执行失败了，那么它的执行顺序是 <code>T1,T2,...Tj,Cj-1,...C2,C1,(0&lt;j&lt;n)</code> 。<br>由于 saga 模型没有 try 阶段，所以当执行失败，需要通过补偿模块进行恢复。Saga 定义了两种恢复方式：向前恢复和向后恢复。向前恢复就是认为事务一定会执行成功而进行重试。向后恢复就是执行回滚+补偿，实际当中使用较多的是向后恢复。<br>我们还是以下单-减库存-支付这一场景来进行说明。首先我们需要定义两张事务表，事务状态表和事务调用表，这两张表和业务 DB 是独立的。</p>
 <p>事务状态表</p>
-<table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr></table>
-
-<p>事务调用表</p>
-<table class="table table-bordered" style="width: 100px"><tr><td>tx_id</td><td>action_id</td><td>method</td><td>param_type</td><td>param_value</td></tr></table><br>saga 执行过程如下：<br><br>1.AP 发起事务后 TM 生成 txId， 向事务状态表存一条记录，状态是执行中 。<br><br><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1514736000</td></tr></table>
-
-<p>2.AP 按顺序调用下单-减库存-支付操作，每调用一个操作之前向事务调用表插一条记录。</p>
-<table class="table table-bordered" style="width: 100px"><tr><td>tx_id</td><td>action_id</td><td>recover_method</td><td>param_type</td><td>param_value</td></tr><tr><td>1</td><td>1</td><td>/recover_order</td><td>kv</td><td>orderid=12345</td></tr><tr><td>1</td><td>2</td><td>/recover_stock</td><td>kv</td><td>stock=1</td></tr><tr><td>1</td><td>3</td><td>/recover_payment</td><td>kv</td><td>pay=1000</td></tr></table><br>这些信息如何获取到呢，又是怎么写到表里的呢？ 假如我们有个方法 <code>reduceStock()</code> ，我们在调用方法的时候可以利用 AOP 或者动态代理，就可以获取到方法的参数类型和参数值。recoverMethod 的信息可以通过注解写在被调用的方法上，这样通过反射就可以获取到 recoverMethod 的信息了。得到这些信息之后，按位置插到事务调用表中就可以了。<br><br>3.如果下单-减库存-支付都执行成功，TM 将事务状态表中的记录更新成成功，事务结束。<br><br><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1514737000</td></tr></table>
-
-<p>4.如果有一步执行失败，则将事务状态更新成失败，同时立刻通知客户端执行失败。</p>
-<table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr><tr><td>1</td><td>2</td><td>0</td><td>1514737000</td></tr></table>
-
-<p>补偿是异步的，所以不用等补偿执行完成再通知客户端。<br>5.TM 定时扫描事务状态表，如果有失败状态的记录，就按照事务调用表中对应的除最后一步调用记录之外的其他记录调补偿接口进行补偿。</p>
-<table class="table table-bordered" style="width: 100px"><tr><td>tx_id</td><td>action_id</td><td>recover_method</td><td>param_type</td><td>param_value</td></tr><tr><td>1</td><td>1</td><td>/recover_order</td><td>kv</td><td>orderid=12345</td></tr><tr><td>1</td><td>2</td><td>/recover_stock</td><td>kv</td><td>stock=1</td></tr><tr><td>1</td><td>3</td><td>/recover_payment</td><td>kv</td><td>pay=1000</td></tr></table><br>如果表中有 3 条记录，说明前两条是执行成功的，第 3 条执行失败了。那么只需要执行前两步的补偿，第 3 步是不需要补偿的。那么接下来就按照事务调用表中记录的补偿接口的信息进行补偿。<br><br>1. 首先将事务状态置为 3 。<br>2. 第二步调用 <code>/recover_stock?stock=1</code> 补偿库存，然后将 recover_step 改为 2，表示第二步补偿完成。<br>3. 第三步调用 <code>/recover_order?orderid=12345&amp;state=2</code> 补偿订单，成功后将 recover_step 置为 1。<br><br>补偿接口应该设计成幂等的，这样可以保证多次重试也不会产生垃圾数据。<br><br>6.补偿完成后将事务状态表的状态更新成补偿完成。<br><br><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>timestamp</td></tr><tr><td>1</td><td>4</td><td>1514739000</td></tr></table>
-
-<p>如果补偿接口出现问题，怎么办呢，我们需不需要再给补偿接口加一个分布式事务呢？一般情况下，经过测试并且有重试机制，补偿是可以成功。我们完全没有必要再加一个分布式事务来保证补偿，因为我们一旦给补偿加上分布式事务，那我们是不是也要对保证补偿的逻辑再加一个分布式事务来保证一致性呢，这样就无穷无尽了。所以简单的做法就是一旦真的补偿接口出错了，那么记录错误日志，告警，然后人工处理就好了。</p>
-<p><strong>异步消息</strong></p>
-<p>Saga 是一种同步串行的方式，接下来我们介绍异步消息的分布式事务实现。说到异步消息，自然少不了消息中间件。通过 MQ 进行消息传递，就需要有一套机制来保证消息可靠。<br>第一种方式是通过异步消息方式来实现：</p>
+<p><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr></table><br>事务调用表</p>
+<p><table class="table table-bordered" style="width: 100px"><tr><td>tx_id</td><td>action_id</td><td>method</td><td>param_type</td><td>param_value</td></tr></table><br>saga 执行过程如下：</p>
+<p>1.AP 发起事务后 TM 生成 txId， 向事务状态表存一条记录，状态是执行中 。</p>
+<p><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1514736000</td></tr></table><br>2.AP 按顺序调用下单-减库存-支付操作，每调用一个操作之前向事务调用表插一条记录。</p>
+<p><table class="table table-bordered" style="width: 100px"><tr><td>tx_id</td><td>action_id</td><td>recover_method</td><td>param_type</td><td>param_value</td></tr><tr><td>1</td><td>1</td><td>/recover_order</td><td>kv</td><td>orderid=12345</td></tr><tr><td>1</td><td>2</td><td>/recover_stock</td><td>kv</td><td>stock=1</td></tr><tr><td>1</td><td>3</td><td>/recover_payment</td><td>kv</td><td>pay=1000</td></tr></table><br>这些信息如何获取到呢，又是怎么写到表里的呢？ 假如我们有个方法 <code>reduceStock()</code> ，我们在调用方法的时候可以利用 AOP 或者动态代理，就可以获取到方法的参数类型和参数值。recoverMethod 的信息可以通过注解写在被调用的方法上，这样通过反射就可以获取到 recoverMethod 的信息了。得到这些信息之后，按位置插到事务调用表中就可以了。</p>
+<p>3.如果下单-减库存-支付都执行成功，TM 将事务状态表中的记录更新成成功，事务结束。</p>
+<p><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1514737000</td></tr></table><br>4.如果有一步执行失败，则将事务状态更新成失败，同时立刻通知客户端执行失败。</p>
+<p><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>recover_step</td><td>timestamp</td></tr><tr><td>1</td><td>2</td><td>0</td><td>1514737000</td></tr></table><br>补偿是异步的，所以不用等补偿执行完成再通知客户端。<br>5.TM 定时扫描事务状态表，如果有失败状态的记录，就按照事务调用表中对应的除最后一步调用记录之外的其他记录调补偿接口进行补偿。</p>
+<p><table class="table table-bordered" style="width: 100px"><tr><td>tx_id</td><td>action_id</td><td>recover_method</td><td>param_type</td><td>param_value</td></tr><tr><td>1</td><td>1</td><td>/recover_order</td><td>kv</td><td>orderid=12345</td></tr><tr><td>1</td><td>2</td><td>/recover_stock</td><td>kv</td><td>stock=1</td></tr><tr><td>1</td><td>3</td><td>/recover_payment</td><td>kv</td><td>pay=1000</td></tr></table><br>如果表中有 3 条记录，说明前两条是执行成功的，第 3 条执行失败了。那么只需要执行前两步的补偿，第 3 步是不需要补偿的。那么接下来就按照事务调用表中记录的补偿接口的信息进行补偿。</p>
+<ol>
+<li>首先将事务状态置为 3 。</li>
+<li>第二步调用 <code>/recover_stock?stock=1</code> 补偿库存，然后将 recover_step 改为 2，表示第二步补偿完成。</li>
+<li>第三步调用 <code>/recover_order?orderid=12345&amp;state=2</code> 补偿订单，成功后将 recover_step 置为 1。</li>
+</ol>
+<p>补偿接口应该设计成幂等的，这样可以保证多次重试也不会产生垃圾数据。</p>
+<p>6.补偿完成后将事务状态表的状态更新成补偿完成。</p>
+<p><table class="table table-bordered" style="width: 60px"><tr><td>tx_id</td><td>state</td><td>timestamp</td></tr><tr><td>1</td><td>4</td><td>1514739000</td></tr></table><br>如果补偿接口出现问题，怎么办呢，我们需不需要再给补偿接口加一个分布式事务呢？一般情况下，经过测试并且有重试机制，补偿是可以成功。我们完全没有必要再加一个分布式事务来保证补偿，因为我们一旦给补偿加上分布式事务，那我们是不是也要对保证补偿的逻辑再加一个分布式事务来保证一致性呢，这样就无穷无尽了。所以简单的做法就是一旦真的补偿接口出错了，那么记录错误日志，告警，然后人工处理就好了。</p>
+<h5 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a><strong>异步消息</strong></h5><p>Saga 是一种同步串行的方式，接下来我们介绍异步消息的分布式事务实现。说到异步消息，自然少不了消息中间件。通过 MQ 进行消息传递，就需要有一套机制来保证消息可靠。<br>第一种方式是通过异步消息方式来实现：</p>
 <p>1.先发送一个 prepare 消息给 MQ Server 。<br>2.MQ Server 收到消息返回一个 ack 。<br>3.执行本地事务。<br>4.本地事务成功向 MQ Server 发送一个 commit 消息。本地事务失败则向 MQ Server 发送一个 cancel 消息。<br>5.如果长时间没有收到 prepare 消息的确认，MQ Server 则需要向 Client 申请回查。<br>6.Client 收到回查申请后，调用本地服务的回查接口查看本地事务是否成功，如果成功，发送 commit 消息，如果本地消息失败，则发送 cancel 消息。</p>
 <p>以上就是异步消息的操作步骤，这种方式其实也是 2PC 的变形。这种方式实现起来对 MQ 的要求较高，并且需要业务方提供回查接口，对业务入侵较大。</p>
 <p>另一种方式是通过本地消息表来实现：<br>1.执行本地事务同时将消息先写到本地消息表中，由于执行本地操作和写消息在同一个事务中，所以可以保证同时成功或失败。<br>2.将消息从表中读出来，写到 MQ 。<br>3.MQ 收到消息，返回 confirm 。<br>4.收到 confirm 后删除本地消息。</p>
@@ -17118,55 +18031,6 @@ sudo apt-get install plank
     </entry>
     
     <entry>
-      <title><![CDATA[IDEA + Maven + Jetty 热部署]]></title>
-      <url>/2016/07/15/jetty-hot-deployment/</url>
-      <content type="html"><![CDATA[<p>####1. 集成</p>
-<p>pom.xml</p>
-<pre><code>&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
-            &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
-            &lt;version&gt;8.1.15.v20140411&lt;/version&gt;
-            &lt;configuration&gt;
-                &lt;connectors&gt;
-                    &lt;!-- 修改端口 --&gt;
-                    &lt;connector implementation=&quot;org.eclipse.jetty.server.nio.SelectChannelConnector&quot;&gt;
-                        &lt;port&gt;8080&lt;/port&gt;
-                    &lt;/connector&gt;
-                &lt;/connectors&gt;
-                &lt;stopKey&gt;exit&lt;/stopKey&gt;
-                &lt;stopPort&gt;9090&lt;/stopPort&gt;
-                &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;
-                &lt;webAppConfig&gt;
-                    &lt;!-- 热部署 --&gt;
-                    &lt;defaultsDescriptor&gt;src/main/resources/webdefault.xml&lt;/defaultsDescriptor&gt;
-                    &lt;contextPath&gt;/redis-doc&lt;/contextPath&gt;
-                &lt;/webAppConfig&gt;
-            &lt;/configuration&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Meven </tag>
-            
-            <tag> Jetty </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Ubuntu14.04 + ssh 镜像]]></title>
       <url>/2016/07/15/docker-ubuntu14.04-with-ssh/</url>
       <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><pre><code>mkdir ubuntu
@@ -17235,6 +18099,260 @@ ssh dockerone@localhost -p 10122
             <tag> Docker </tag>
             
             <tag> Ubuntu </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[spring-data-elasticsearch 示例说明]]></title>
+      <url>/2016/07/15/spring-data-elasticsearch/</url>
+      <content type="html"><![CDATA[<h3 id="POM依赖"><a href="#POM依赖" class="headerlink" title="POM依赖"></a>POM依赖</h3><pre><code>&lt;properties&gt;
+    &lt;java-version&gt;1.7&lt;/java-version&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;spring.version&gt;4.1.2.RELEASE&lt;/spring.version&gt;
+    &lt;elasticsearch.version&gt;1.4.4&lt;/elasticsearch.version&gt;
+    &lt;spring-data-elasticsearch.version&gt;1.3.4.RELEASE&lt;/spring-data-elasticsearch.version&gt;
+&lt;/properties&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.elasticsearch&lt;/groupId&gt;
+        &lt;artifactId&gt;elasticsearch&lt;/artifactId&gt;
+        &lt;version&gt;${elasticsearch.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-data-elasticsearch&lt;/artifactId&gt;
+        &lt;version&gt;${spring-data-elasticsearch.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><h3 id="spring-配置文件"><a href="#spring-配置文件" class="headerlink" title="spring 配置文件"></a>spring 配置文件</h3><ol>
+<li><p>beans.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd&quot;&gt;
+ &lt;context:annotation-config /&gt;
+ &lt;!-- 自动扫描所有注解该路径 --&gt;
+ &lt;!-- &lt;context:component-scan base-package=&quot;com.sf.heros.mq.*&quot; /&gt; --&gt;
+ &lt;context:property-placeholder location=&quot;classpath:/config.properties&quot; /&gt;
+
+ &lt;import resource=&quot;elasticsearch.xml&quot; /&gt;
+&lt;/beans&gt;
+</code></pre></li>
+<li><p>elasticsearch.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:elasticsearch=&quot;http://www.springframework.org/schema/data/elasticsearch&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch-1.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd&quot;&gt;
+
+ &lt;elasticsearch:transport-client id=&quot;client&quot; cluster-name=&quot;daas&quot; cluster-nodes=&quot;192.168.11.11:9300&quot;/&gt;
+
+ &lt;bean name=&quot;elasticsearchTemplate&quot; class=&quot;org.springframework.data.elasticsearch.core.ElasticsearchTemplate&quot;&gt;
+     &lt;constructor-arg name=&quot;client&quot; ref=&quot;client&quot;/&gt;
+ &lt;/bean&gt;
+ &lt;bean name=&quot;entQueryService&quot; class=&quot;com.rolex.se.sample.service.EntQueryService&quot;&gt;
+     &lt;property name=&quot;repository&quot; ref=&quot;entQueryRepository&quot;/&gt;
+     &lt;property name=&quot;elasticsearchTemplate&quot; ref=&quot;elasticsearchTemplate&quot;/&gt;
+ &lt;/bean&gt;
+
+ &lt;elasticsearch:repositories base-package=&quot;com.rolex.se.sample.dao&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3></li>
+<li>实体类<br>```java<br>import org.springframework.data.annotation.Id;<br>import org.springframework.data.elasticsearch.annotations.*;</li>
+</ol>
+<p>import java.util.*;</p>
+<p>@Document(indexName = “pen”,type = “pen” , shards = 1, replicas = 0, indexStoreType = “memory”, refreshInterval = “-1”)<br>public class Pen {</p>
+<pre><code>@Id
+private String id;
+private String name;
+private Long price;
+@Field(type = FieldType.String, index = FieldIndex.not_analyzed)
+private Set&lt;String&gt; type = new HashSet&lt;String&gt;();
+
+public Set&lt;String&gt; getType() {
+    return type;
+}
+
+public void setType(Set&lt;String&gt; type) {
+    this.type = type;
+}
+
+public Pen(){}
+
+public Pen(String id, String name) {
+    this.id = id;
+    this.name = name;
+}
+
+public String getId() {
+    return id;
+}
+
+public void setId(String id) {
+    this.id = id;
+}
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public Long getPrice() {
+    return price;
+}
+
+public void setPrice(Long price) {
+    this.price = price;
+}
+</code></pre><p>}</p>
+<pre><code>
+2. 查询类
+```java
+import org.springframework.data.elasticsearch.entities.Pen;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+public interface PenRepository extends ElasticsearchRepository&lt;Pen,String&gt; {
+}
+</code></pre><ol>
+<li>测试类<br>```java<br>import org.elasticsearch.index.query.BoolQueryBuilder;<br>import org.elasticsearch.index.query.QueryBuilders;<br>import org.junit.Before;<br>import org.junit.Test;<br>import org.junit.runner.RunWith;<br>import org.springframework.data.elasticsearch.entities.Pen;<br>import org.springframework.test.context.ContextConfiguration;<br>import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</li>
+</ol>
+<p>import javax.annotation.Resource;<br>import java.util.*;</p>
+<p>@RunWith(SpringJUnit4ClassRunner.class)<br>@ContextConfiguration(“classpath:/springContext-test.xml”)<br>public class PenRepositoryTest {</p>
+<pre><code>@Resource
+private PenRepository penRepository;
+
+@Before
+public void emptyData(){
+    penRepository.deleteAll();
+}
+
+@Test
+public void shouldIndexSingleBookEntity(){
+
+    Pen pen = new Pen();
+    pen.setId(&quot;123455&quot;);
+    pen.setName(&quot;LIMY&quot;);
+    Set&lt;String&gt; types = new HashSet&lt;String&gt;();
+    types.add(&quot;E_PRI_PERSON.NAME&quot;);
+    types.add(&quot;E_INV_INVESTMENT.SUBCONAM&quot;);
+    pen.setType(types);
+    //Indexing using sampleArticleRepository
+    penRepository.save(pen);
+    //lets try to search same record in elasticsearch
+    Pen pen2 = penRepository.findOne(pen.getId());
+
+    BoolQueryBuilder query = QueryBuilders.boolQuery();
+        query.must(QueryBuilders.queryString(&quot;E_PRI_PERSON.NAME&quot;).field(&quot;pen.type&quot;))
+        .must(QueryBuilders.queryString(&quot;E_INV_INVESTMENT.SUBCONAM&quot;).field(&quot;pen.type&quot;));
+
+
+
+    Iterable&lt;Pen&gt; res = penRepository.search(query);
+
+    Iterator&lt;Pen&gt; it = res.iterator();
+
+    while (it.hasNext()){
+        System.out.println(it.next().getType());
+    }
+
+}
+</code></pre><p>}<br>```</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Spring </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Elastic </tag>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[IDEA + Maven + Jetty 热部署]]></title>
+      <url>/2016/07/15/jetty-hot-deployment/</url>
+      <content type="html"><![CDATA[<p>####1. 集成</p>
+<p>pom.xml</p>
+<pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
+            &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;8.1.15.v20140411&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;connectors&gt;
+                    &lt;!-- 修改端口 --&gt;
+                    &lt;connector implementation=&quot;org.eclipse.jetty.server.nio.SelectChannelConnector&quot;&gt;
+                        &lt;port&gt;8080&lt;/port&gt;
+                    &lt;/connector&gt;
+                &lt;/connectors&gt;
+                &lt;stopKey&gt;exit&lt;/stopKey&gt;
+                &lt;stopPort&gt;9090&lt;/stopPort&gt;
+                &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;
+                &lt;webAppConfig&gt;
+                    &lt;!-- 热部署 --&gt;
+                    &lt;defaultsDescriptor&gt;src/main/resources/webdefault.xml&lt;/defaultsDescriptor&gt;
+                    &lt;contextPath&gt;/redis-doc&lt;/contextPath&gt;
+                &lt;/webAppConfig&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Meven </tag>
+            
+            <tag> Jetty </tag>
             
         </tags>
         
@@ -17451,16 +18569,47 @@ public class RedisServiceTest {
     </entry>
     
     <entry>
-      <title><![CDATA[使用 docker + redis 学习 redis-cli]]></title>
-      <url>/2016/07/15/docker-build-redis/</url>
-      <content type="html"><![CDATA[<p>有时我们不想在自己机器上安装redis环境又想快速开始redis-cli实践，如果安装了docker环境，那么redis的环境将非常容易搭建。</p>
-<h3 id="1-下载redis的docker镜像"><a href="#1-下载redis的docker镜像" class="headerlink" title="1. 下载redis的docker镜像"></a>1. 下载redis的docker镜像</h3><pre><code class="shell">sudo docker pull redis
-</code></pre>
-<h3 id="2-启动redis-server"><a href="#2-启动redis-server" class="headerlink" title="2. 启动redis server"></a>2. 启动redis server</h3><pre><code class="shell">sudo docker run -d --name redisone redis redis-server
-</code></pre>
-<h3 id="3-启动redis-cli"><a href="#3-启动redis-cli" class="headerlink" title="3. 启动redis cli"></a>3. 启动redis cli</h3><pre><code class="shell">sudo docker run -it --link redisone redis redic-cli -h redisone -p 6379
-</code></pre>
-]]></content>
+      <title><![CDATA[创建 tomcat 镜像]]></title>
+      <url>/2016/07/15/docker-tomcat-image/</url>
+      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><p>1.1 创建制作 docker 镜像的工作目录和文件</p>
+<pre><code>mkdir dorckerfiles
+cd dockerfiles
+touch Dockerfile run.sh
+</code></pre><p><strong><em>Dockerfile</em></strong></p>
+<pre><code>FROM ubuntu_14.04
+
+MAINTAINER rolex
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN echo &quot;Asia/Beijing&quot; &gt; /etc/timezone &amp;&amp; dpkg-reconfigure -f noninteractive tzdata
+
+RUN apt-get install -yq --no-install-recommends wget pwgen ca-certificates &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+ENV CATALINA_HOME /tomcat
+ENV JAVA_HOME /jdk
+
+ADD apache-tomcat-8.0.35 /tomcat
+ADD jdk1.8.0_74 /jdk
+
+#ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
+ADD run.sh /run.sh
+
+RUN chmod +x /*.sh
+RUN chmod +x /tomcat/bin/*.sh
+
+EXPOSE 8080
+
+CMD [&quot;/run.sh&quot;]
+</code></pre><p><strong><em>run.sh</em></strong></p>
+<pre><code>#!/bin/bash
+
+/user/sbin/sshd -D &amp;
+exec ${CATALINA_HOME}/bin/catalina.sh run
+</code></pre><p>1.2 下载 tomcat 和 jdk</p>
+<h3 id="2-制作镜像"><a href="#2-制作镜像" class="headerlink" title="2. 制作镜像"></a>2. 制作镜像</h3><pre><code>sudo docker build -t tomcat8_on_ubuntu .
+</code></pre><h3 id="3-运行镜像"><a href="#3-运行镜像" class="headerlink" title="3. 运行镜像"></a>3. 运行镜像</h3><pre><code>sudo docker run -p 32700:8080 tomcat8_on_ubuntu
+</code></pre>]]></content>
       
         <categories>
             
@@ -17472,8 +18621,6 @@ public class RedisServiceTest {
         <tags>
             
             <tag> Docker </tag>
-            
-            <tag> Redis </tag>
             
         </tags>
         
@@ -17564,47 +18711,16 @@ CMD [/usr/share/elasticsearch/bin/elasticsearch]
     </entry>
     
     <entry>
-      <title><![CDATA[创建 tomcat 镜像]]></title>
-      <url>/2016/07/15/docker-tomcat-image/</url>
-      <content type="html"><![CDATA[<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><p>1.1 创建制作 docker 镜像的工作目录和文件</p>
-<pre><code>mkdir dorckerfiles
-cd dockerfiles
-touch Dockerfile run.sh
-</code></pre><p><strong><em>Dockerfile</em></strong></p>
-<pre><code>FROM ubuntu_14.04
-
-MAINTAINER rolex
-
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN echo &quot;Asia/Beijing&quot; &gt; /etc/timezone &amp;&amp; dpkg-reconfigure -f noninteractive tzdata
-
-RUN apt-get install -yq --no-install-recommends wget pwgen ca-certificates &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*
-
-ENV CATALINA_HOME /tomcat
-ENV JAVA_HOME /jdk
-
-ADD apache-tomcat-8.0.35 /tomcat
-ADD jdk1.8.0_74 /jdk
-
-#ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
-ADD run.sh /run.sh
-
-RUN chmod +x /*.sh
-RUN chmod +x /tomcat/bin/*.sh
-
-EXPOSE 8080
-
-CMD [&quot;/run.sh&quot;]
-</code></pre><p><strong><em>run.sh</em></strong></p>
-<pre><code>#!/bin/bash
-
-/user/sbin/sshd -D &amp;
-exec ${CATALINA_HOME}/bin/catalina.sh run
-</code></pre><p>1.2 下载 tomcat 和 jdk</p>
-<h3 id="2-制作镜像"><a href="#2-制作镜像" class="headerlink" title="2. 制作镜像"></a>2. 制作镜像</h3><pre><code>sudo docker build -t tomcat8_on_ubuntu .
-</code></pre><h3 id="3-运行镜像"><a href="#3-运行镜像" class="headerlink" title="3. 运行镜像"></a>3. 运行镜像</h3><pre><code>sudo docker run -p 32700:8080 tomcat8_on_ubuntu
-</code></pre>]]></content>
+      <title><![CDATA[使用 docker + redis 学习 redis-cli]]></title>
+      <url>/2016/07/15/docker-build-redis/</url>
+      <content type="html"><![CDATA[<p>有时我们不想在自己机器上安装redis环境又想快速开始redis-cli实践，如果安装了docker环境，那么redis的环境将非常容易搭建。</p>
+<h3 id="1-下载redis的docker镜像"><a href="#1-下载redis的docker镜像" class="headerlink" title="1. 下载redis的docker镜像"></a>1. 下载redis的docker镜像</h3><pre><code class="shell">sudo docker pull redis
+</code></pre>
+<h3 id="2-启动redis-server"><a href="#2-启动redis-server" class="headerlink" title="2. 启动redis server"></a>2. 启动redis server</h3><pre><code class="shell">sudo docker run -d --name redisone redis redis-server
+</code></pre>
+<h3 id="3-启动redis-cli"><a href="#3-启动redis-cli" class="headerlink" title="3. 启动redis cli"></a>3. 启动redis cli</h3><pre><code class="shell">sudo docker run -it --link redisone redis redic-cli -h redisone -p 6379
+</code></pre>
+]]></content>
       
         <categories>
             
@@ -17617,210 +18733,7 @@ exec ${CATALINA_HOME}/bin/catalina.sh run
             
             <tag> Docker </tag>
             
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[spring-data-elasticsearch 示例说明]]></title>
-      <url>/2016/07/15/spring-data-elasticsearch/</url>
-      <content type="html"><![CDATA[<h3 id="POM依赖"><a href="#POM依赖" class="headerlink" title="POM依赖"></a>POM依赖</h3><pre><code>&lt;properties&gt;
-    &lt;java-version&gt;1.7&lt;/java-version&gt;
-    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-    &lt;spring.version&gt;4.1.2.RELEASE&lt;/spring.version&gt;
-    &lt;elasticsearch.version&gt;1.4.4&lt;/elasticsearch.version&gt;
-    &lt;spring-data-elasticsearch.version&gt;1.3.4.RELEASE&lt;/spring-data-elasticsearch.version&gt;
-&lt;/properties&gt;
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
-        &lt;version&gt;${spring.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.elasticsearch&lt;/groupId&gt;
-        &lt;artifactId&gt;elasticsearch&lt;/artifactId&gt;
-        &lt;version&gt;${elasticsearch.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-data-elasticsearch&lt;/artifactId&gt;
-        &lt;version&gt;${spring-data-elasticsearch.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</code></pre><h3 id="spring-配置文件"><a href="#spring-配置文件" class="headerlink" title="spring 配置文件"></a>spring 配置文件</h3><ol>
-<li><p>beans.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd&quot;&gt;
- &lt;context:annotation-config /&gt;
- &lt;!-- 自动扫描所有注解该路径 --&gt;
- &lt;!-- &lt;context:component-scan base-package=&quot;com.sf.heros.mq.*&quot; /&gt; --&gt;
- &lt;context:property-placeholder location=&quot;classpath:/config.properties&quot; /&gt;
-
- &lt;import resource=&quot;elasticsearch.xml&quot; /&gt;
-&lt;/beans&gt;
-</code></pre></li>
-<li><p>elasticsearch.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xmlns:elasticsearch=&quot;http://www.springframework.org/schema/data/elasticsearch&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch-1.0.xsd
-     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd&quot;&gt;
-
- &lt;elasticsearch:transport-client id=&quot;client&quot; cluster-name=&quot;daas&quot; cluster-nodes=&quot;192.168.11.11:9300&quot;/&gt;
-
- &lt;bean name=&quot;elasticsearchTemplate&quot; class=&quot;org.springframework.data.elasticsearch.core.ElasticsearchTemplate&quot;&gt;
-     &lt;constructor-arg name=&quot;client&quot; ref=&quot;client&quot;/&gt;
- &lt;/bean&gt;
- &lt;bean name=&quot;entQueryService&quot; class=&quot;com.rolex.se.sample.service.EntQueryService&quot;&gt;
-     &lt;property name=&quot;repository&quot; ref=&quot;entQueryRepository&quot;/&gt;
-     &lt;property name=&quot;elasticsearchTemplate&quot; ref=&quot;elasticsearchTemplate&quot;/&gt;
- &lt;/bean&gt;
-
- &lt;elasticsearch:repositories base-package=&quot;com.rolex.se.sample.dao&quot;/&gt;
-&lt;/beans&gt;
-</code></pre><h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3></li>
-<li>实体类<br>```java<br>import org.springframework.data.annotation.Id;<br>import org.springframework.data.elasticsearch.annotations.*;</li>
-</ol>
-<p>import java.util.*;</p>
-<p>@Document(indexName = “pen”,type = “pen” , shards = 1, replicas = 0, indexStoreType = “memory”, refreshInterval = “-1”)<br>public class Pen {</p>
-<pre><code>@Id
-private String id;
-private String name;
-private Long price;
-@Field(type = FieldType.String, index = FieldIndex.not_analyzed)
-private Set&lt;String&gt; type = new HashSet&lt;String&gt;();
-
-public Set&lt;String&gt; getType() {
-    return type;
-}
-
-public void setType(Set&lt;String&gt; type) {
-    this.type = type;
-}
-
-public Pen(){}
-
-public Pen(String id, String name) {
-    this.id = id;
-    this.name = name;
-}
-
-public String getId() {
-    return id;
-}
-
-public void setId(String id) {
-    this.id = id;
-}
-
-public String getName() {
-    return name;
-}
-
-public void setName(String name) {
-    this.name = name;
-}
-
-public Long getPrice() {
-    return price;
-}
-
-public void setPrice(Long price) {
-    this.price = price;
-}
-</code></pre><p>}</p>
-<pre><code>
-2. 查询类
-```java
-import org.springframework.data.elasticsearch.entities.Pen;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
-
-public interface PenRepository extends ElasticsearchRepository&lt;Pen,String&gt; {
-}
-</code></pre><ol>
-<li>测试类<br>```java<br>import org.elasticsearch.index.query.BoolQueryBuilder;<br>import org.elasticsearch.index.query.QueryBuilders;<br>import org.junit.Before;<br>import org.junit.Test;<br>import org.junit.runner.RunWith;<br>import org.springframework.data.elasticsearch.entities.Pen;<br>import org.springframework.test.context.ContextConfiguration;<br>import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</li>
-</ol>
-<p>import javax.annotation.Resource;<br>import java.util.*;</p>
-<p>@RunWith(SpringJUnit4ClassRunner.class)<br>@ContextConfiguration(“classpath:/springContext-test.xml”)<br>public class PenRepositoryTest {</p>
-<pre><code>@Resource
-private PenRepository penRepository;
-
-@Before
-public void emptyData(){
-    penRepository.deleteAll();
-}
-
-@Test
-public void shouldIndexSingleBookEntity(){
-
-    Pen pen = new Pen();
-    pen.setId(&quot;123455&quot;);
-    pen.setName(&quot;LIMY&quot;);
-    Set&lt;String&gt; types = new HashSet&lt;String&gt;();
-    types.add(&quot;E_PRI_PERSON.NAME&quot;);
-    types.add(&quot;E_INV_INVESTMENT.SUBCONAM&quot;);
-    pen.setType(types);
-    //Indexing using sampleArticleRepository
-    penRepository.save(pen);
-    //lets try to search same record in elasticsearch
-    Pen pen2 = penRepository.findOne(pen.getId());
-
-    BoolQueryBuilder query = QueryBuilders.boolQuery();
-        query.must(QueryBuilders.queryString(&quot;E_PRI_PERSON.NAME&quot;).field(&quot;pen.type&quot;))
-        .must(QueryBuilders.queryString(&quot;E_INV_INVESTMENT.SUBCONAM&quot;).field(&quot;pen.type&quot;));
-
-
-
-    Iterable&lt;Pen&gt; res = penRepository.search(query);
-
-    Iterator&lt;Pen&gt; it = res.iterator();
-
-    while (it.hasNext()){
-        System.out.println(it.next().getType());
-    }
-
-}
-</code></pre><p>}<br>```</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Spring </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Elastic </tag>
-            
-            <tag> Spring </tag>
+            <tag> Redis </tag>
             
         </tags>
         
@@ -17848,6 +18761,47 @@ discovery.zen.ping.unicast.hosts: [&quot;192.168.200.163&quot;,&quot;192.168.200
 </blockquote>
 <p>浏览器中使用 <code>http://192.168.200.163:9200/_plugin/head/</code> 可看到界面</p>
 ]]></content>
+      
+        <categories>
+            
+            <category> Java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Elastic </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Elasticsearch-1.4.1 集群环境搭建]]></title>
+      <url>/2016/07/14/elasticsearch-1.4.1-cluster/</url>
+      <content type="html"><![CDATA[<p>CentOS 6.4，机器 node3（10.20.20.203）,node4（10.20.20.204）</p>
+<h3 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1. 安装jdk"></a>1. 安装jdk</h3><p>已安装跳过。</p>
+<h3 id="2-下载"><a href="#2-下载" class="headerlink" title="2. 下载"></a>2. 下载</h3><p><a href="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz" title="elasticsearch-1.4.1" target="_blank" rel="external">https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz</a></p>
+<h3 id="3-解压"><a href="#3-解压" class="headerlink" title="3. 解压"></a>3. 解压</h3><pre><code>tar -zxf elasticsearch-1.4.1.tar.gz
+</code></pre><h3 id="4-配置"><a href="#4-配置" class="headerlink" title="4. 配置"></a>4. 配置</h3><p>分别修改2台机器配置</p>
+<p>node3</p>
+<pre><code>cluster.name: elasticsearch
+node.name: node3
+network.host: 10.20.20.203  
+discovery.zen.ping.unicast.hosts: [&quot;10.20.20.203&quot;]
+</code></pre><p>node4</p>
+<pre><code>cluster.name: elasticsearch
+node.name: node4
+network.host: 10.20.20.204  
+discovery.zen.ping.unicast.hosts: [&quot;10.20.20.204&quot;]
+</code></pre><h3 id="5-安装插件"><a href="#5-安装插件" class="headerlink" title="5. 安装插件"></a>5. 安装插件</h3><h4 id="5-1-下载"><a href="#5-1-下载" class="headerlink" title="5.1 下载"></a>5.1 下载</h4><pre><code>wget https://github.com/mobz/elasticsearch-head.git
+</code></pre><h4 id="5-2-安装"><a href="#5-2-安装" class="headerlink" title="5.2 安装"></a>5.2 安装</h4><p>将插件elasticsearch-head-master.zip拷贝到plugin,解压缩</p>
+<pre><code>unzip elasticsearch-head-master.zip
+mv elasticsearch-head-master head
+</code></pre><p>2台机器执行相同操作</p>
+<h3 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h3><pre><code>./bin/elasticsearch &amp;
+</code></pre>]]></content>
       
         <categories>
             
@@ -17946,47 +18900,6 @@ hexo d
         <tags>
             
             <tag> Hexo </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Elasticsearch-1.4.1 集群环境搭建]]></title>
-      <url>/2016/07/14/elasticsearch-1.4.1-cluster/</url>
-      <content type="html"><![CDATA[<p>CentOS 6.4，机器 node3（10.20.20.203）,node4（10.20.20.204）</p>
-<h3 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1. 安装jdk"></a>1. 安装jdk</h3><p>已安装跳过。</p>
-<h3 id="2-下载"><a href="#2-下载" class="headerlink" title="2. 下载"></a>2. 下载</h3><p><a href="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz" title="elasticsearch-1.4.1" target="_blank" rel="external">https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz</a></p>
-<h3 id="3-解压"><a href="#3-解压" class="headerlink" title="3. 解压"></a>3. 解压</h3><pre><code>tar -zxf elasticsearch-1.4.1.tar.gz
-</code></pre><h3 id="4-配置"><a href="#4-配置" class="headerlink" title="4. 配置"></a>4. 配置</h3><p>分别修改2台机器配置</p>
-<p>node3</p>
-<pre><code>cluster.name: elasticsearch
-node.name: node3
-network.host: 10.20.20.203  
-discovery.zen.ping.unicast.hosts: [&quot;10.20.20.203&quot;]
-</code></pre><p>node4</p>
-<pre><code>cluster.name: elasticsearch
-node.name: node4
-network.host: 10.20.20.204  
-discovery.zen.ping.unicast.hosts: [&quot;10.20.20.204&quot;]
-</code></pre><h3 id="5-安装插件"><a href="#5-安装插件" class="headerlink" title="5. 安装插件"></a>5. 安装插件</h3><h4 id="5-1-下载"><a href="#5-1-下载" class="headerlink" title="5.1 下载"></a>5.1 下载</h4><pre><code>wget https://github.com/mobz/elasticsearch-head.git
-</code></pre><h4 id="5-2-安装"><a href="#5-2-安装" class="headerlink" title="5.2 安装"></a>5.2 安装</h4><p>将插件elasticsearch-head-master.zip拷贝到plugin,解压缩</p>
-<pre><code>unzip elasticsearch-head-master.zip
-mv elasticsearch-head-master head
-</code></pre><p>2台机器执行相同操作</p>
-<h3 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h3><pre><code>./bin/elasticsearch &amp;
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Java </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Elastic </tag>
             
         </tags>
         
@@ -18206,27 +19119,6 @@ spring.redis.pool.max-wait=-1
     </entry>
     
     <entry>
-      <title><![CDATA[Spark Shuffle 操作]]></title>
-      <url>/2016/05/20/spark-shuffle/</url>
-      <content type="html"><![CDATA[<p>Shuffle 是 Spark 中重新分布数据的机制，它会在机器之间复制数据，是一个复杂且开销很大的操作。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Spark </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Spark </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Spark 存储管理]]></title>
       <url>/2016/05/20/spark-store-management/</url>
       <content type="html"><![CDATA[<p>将数据集持久化或缓存到内存里是 Spark 的重要能力之一。在持久化数据集时，在内存中参与计算的数据集被存储在每一个节点上，其他的 action 可以快速的重用这些数据集。缓存是迭代算法和快速交互的关键。</p>
@@ -18246,6 +19138,27 @@ spring.redis.pool.max-wait=-1
 <h3 id="持久化-shuffle"><a href="#持久化-shuffle" class="headerlink" title="持久化 shuffle"></a>持久化 shuffle</h3><p>Spark 会在执行 shuffle 操作时自动持久化一些中间数据。这样可以避免 shuffle 失败时重新计算整个输入。如果确定结果会被重用，建议对数据集进行持久化。</p>
 <h3 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h3><p>通常，函数传递到 Spark 集群节点执行，函数中使用所有变量的独立副本，这些变量被拷贝到每一个节点，集群节点上的变量变更不会影响驱动程序，因为读写共享的变量访问时低效的。但 Spark 提供了两种有限类型的共享变量：广播变量和累加器。</p>
 <h4 id="广播变量"><a href="#广播变量" class="headerlink" title="广播变量"></a>广播变量</h4><p>广播变量允许程序保持一份只读的变量缓存在机器上，而不是把变量拷贝到任务中。Spark 的 action 是分阶段执行的，每个阶段任务需要使用的数据被自动广播。广播数据以序列化的形式缓存并在任务执行前反序列化。但多个阶段的任务需要相同的数据时，广播变量更加有效。当广播变量创建后，会在方法中代替变量值，以保证不会被多次发送。广播变量在发送到节点后不能再被修改。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Spark </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Spark </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Spark Shuffle 操作]]></title>
+      <url>/2016/05/20/spark-shuffle/</url>
+      <content type="html"><![CDATA[<p>Shuffle 是 Spark 中重新分布数据的机制，它会在机器之间复制数据，是一个复杂且开销很大的操作。</p>
 ]]></content>
       
         <categories>
@@ -24344,135 +25257,6 @@ public class BitmapBackgroundButtonField extends Field {
     </entry>
     
     <entry>
-      <title><![CDATA[About Us]]></title>
-      <url>/about/index.html</url>
-      <content type="html"><![CDATA[<!-- BEGIN SIDEBAR & CONTENT -->
-<div class="row margin-bottom-40">
-  <!-- BEGIN CONTENT -->
-  <div class="col-md-12 col-sm-12">
-    <div class="content-page">
-      <div class="row margin-bottom-30">
-	<!-- BEGIN INFO BLOCK -->               
-	<div class="col-md-7">
-	  <h2 class="no-top-space">title</h2>
-	  <p>comment</p> 
-	  <p>skill</p> 
-	  <!-- BEGIN LISTS -->
-	  <div class="row front-lists-v1">
-	    <div class="col-md-6">
-	      <ul class="list-unstyled margin-bottom-20">
-		<li><i class="fa fa-check"></i> Java</li>
-		<li><i class="fa fa-check"></i> Scala </li>
-		<li><i class="fa fa-check"></i> Spark</li>
-	      </ul>
-	    </div>
-	    <div class="col-md-6">
-	      <ul class="list-unstyled">
-		<li><i class="fa fa-check"></i> Guiar</li>
-	      </ul>
-	    </div>
-	  </div>
-	  <!-- END LISTS -->
-	</div>
-	<!-- END INFO BLOCK -->   
-
-	<!-- BEGIN CAROUSEL -->            
-	<div class="col-md-5 front-carousel">
-	  <div id="myCarousel" class="carousel slide">
-	    <!-- Carousel items -->
-	    <div class="carousel-inner">
-	      <div class="item active">
-                <img src="../metronic/assets/pages/img/index-sliders/slide1.jpg">
-		<div class="carousel-caption">
-		  <p>Excepturi sint occaecati cupiditate non provident</p>
-		</div>
-	      </div>
-	      <div class="item">
-                <img src="../metronic/assets/pages/img/index-sliders/slide2.jpg">
-		<div class="carousel-caption">
-		  <p>Ducimus qui blanditiis praesentium voluptatum</p>
-		</div>
-	      </div>
-	      <div class="item">
-                <img src="../metronic/assets/pages/img/index-sliders/slide3.jpg">
-		<div class="carousel-caption">
-		  <p>Ut non libero consectetur adipiscing elit magna</p>
-		</div>
-	      </div>
-	    </div>
-	    <!-- Carousel nav -->
-	    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-	      <i class="fa fa-angle-left"></i>
-	    </a>
-	    <a class="carousel-control right" href="#myCarousel" data-slide="next">
-	      <i class="fa fa-angle-right"></i>
-	    </a>
-	  </div>                
-	</div>
-	<!-- END CAROUSEL -->
-      </div>
-
-      <div class="row margin-bottom-40">
-	<!-- BEGIN TESTIMONIALS -->
-	<div class="col-md-7 testimonials-v1">
-	  <div id="myCarousel1" class="carousel slide">
-	    <!-- Carousel items -->
-	    <div class="carousel-inner">
-	      <div class="active item">
-		<blockquote><p>Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met consectetur adipisicing sit amet do eiusmod dolore.</p></blockquote>
-		<div class="carousel-info">
-		  <img src="../metronic/assets/pages/img/people/img1-small.jpg">
-		  <div class="pull-left">
-		    <span class="testimonials-name">Lina Mars</span>
-		    <span class="testimonials-post">Commercial Director</span>
-		  </div>
-		</div>
-	      </div>
-	    </div>
-	    <!-- Carousel nav -->
-	    <a class="left-btn" href="#myCarousel1" data-slide="prev"></a>
-	    <a class="right-btn" href="#myCarousel1" data-slide="next"></a>
-	  </div>
-	</div>
-	<!-- END TESTIMONIALS --> 
-
-      </div>
-
-    </div>
-  </div>
-  <!-- END CONTENT -->
-</div>
-<!-- END SIDEBAR & CONTENT -->
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Contact]]></title>
-      <url>/contact/index.html</url>
-      <content type="html"><![CDATA[<h2>Let us help</h2>
-<p>Lorem ipsum sdolor sic amit, bolero carles.</p>
-<!-- BEGIN FORM-->
-<form action="#" role="form">
-  <div class="form-group">
-    <label for="contacts-name">Name</label>
-    <input type="text" class="form-control" id="contacts-name">
-  </div>
-  <div class="form-group">
-    <label for="contacts-email">Email</label>
-    <input type="email" class="form-control" id="contacts-email">
-  </div>
-  <div class="form-group">
-    <label for="contacts-message">Message</label>
-    <textarea class="form-control" rows="5" id="contacts-message"></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Send</button>
-  <button type="button" class="btn btn-default">Cancel</button>
-</form>
-<!-- END FORM-->
-]]></content>
-    </entry>
-    
-    <entry>
       <title></title>
       <url>/index.html</url>
       <content type="html"><![CDATA[<div class="container-fluid flush-with-header">
@@ -24827,6 +25611,135 @@ public class BitmapBackgroundButtonField extends Field {
   </div>
 </div>
 
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[About Us]]></title>
+      <url>/about/index.html</url>
+      <content type="html"><![CDATA[<!-- BEGIN SIDEBAR & CONTENT -->
+<div class="row margin-bottom-40">
+  <!-- BEGIN CONTENT -->
+  <div class="col-md-12 col-sm-12">
+    <div class="content-page">
+      <div class="row margin-bottom-30">
+	<!-- BEGIN INFO BLOCK -->               
+	<div class="col-md-7">
+	  <h2 class="no-top-space">title</h2>
+	  <p>comment</p> 
+	  <p>skill</p> 
+	  <!-- BEGIN LISTS -->
+	  <div class="row front-lists-v1">
+	    <div class="col-md-6">
+	      <ul class="list-unstyled margin-bottom-20">
+		<li><i class="fa fa-check"></i> Java</li>
+		<li><i class="fa fa-check"></i> Scala </li>
+		<li><i class="fa fa-check"></i> Spark</li>
+	      </ul>
+	    </div>
+	    <div class="col-md-6">
+	      <ul class="list-unstyled">
+		<li><i class="fa fa-check"></i> Guiar</li>
+	      </ul>
+	    </div>
+	  </div>
+	  <!-- END LISTS -->
+	</div>
+	<!-- END INFO BLOCK -->   
+
+	<!-- BEGIN CAROUSEL -->            
+	<div class="col-md-5 front-carousel">
+	  <div id="myCarousel" class="carousel slide">
+	    <!-- Carousel items -->
+	    <div class="carousel-inner">
+	      <div class="item active">
+                <img src="../metronic/assets/pages/img/index-sliders/slide1.jpg">
+		<div class="carousel-caption">
+		  <p>Excepturi sint occaecati cupiditate non provident</p>
+		</div>
+	      </div>
+	      <div class="item">
+                <img src="../metronic/assets/pages/img/index-sliders/slide2.jpg">
+		<div class="carousel-caption">
+		  <p>Ducimus qui blanditiis praesentium voluptatum</p>
+		</div>
+	      </div>
+	      <div class="item">
+                <img src="../metronic/assets/pages/img/index-sliders/slide3.jpg">
+		<div class="carousel-caption">
+		  <p>Ut non libero consectetur adipiscing elit magna</p>
+		</div>
+	      </div>
+	    </div>
+	    <!-- Carousel nav -->
+	    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+	      <i class="fa fa-angle-left"></i>
+	    </a>
+	    <a class="carousel-control right" href="#myCarousel" data-slide="next">
+	      <i class="fa fa-angle-right"></i>
+	    </a>
+	  </div>                
+	</div>
+	<!-- END CAROUSEL -->
+      </div>
+
+      <div class="row margin-bottom-40">
+	<!-- BEGIN TESTIMONIALS -->
+	<div class="col-md-7 testimonials-v1">
+	  <div id="myCarousel1" class="carousel slide">
+	    <!-- Carousel items -->
+	    <div class="carousel-inner">
+	      <div class="active item">
+		<blockquote><p>Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met consectetur adipisicing sit amet do eiusmod dolore.</p></blockquote>
+		<div class="carousel-info">
+		  <img src="../metronic/assets/pages/img/people/img1-small.jpg">
+		  <div class="pull-left">
+		    <span class="testimonials-name">Lina Mars</span>
+		    <span class="testimonials-post">Commercial Director</span>
+		  </div>
+		</div>
+	      </div>
+	    </div>
+	    <!-- Carousel nav -->
+	    <a class="left-btn" href="#myCarousel1" data-slide="prev"></a>
+	    <a class="right-btn" href="#myCarousel1" data-slide="next"></a>
+	  </div>
+	</div>
+	<!-- END TESTIMONIALS --> 
+
+      </div>
+
+    </div>
+  </div>
+  <!-- END CONTENT -->
+</div>
+<!-- END SIDEBAR & CONTENT -->
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Contact]]></title>
+      <url>/contact/index.html</url>
+      <content type="html"><![CDATA[<h2>Let us help</h2>
+<p>Lorem ipsum sdolor sic amit, bolero carles.</p>
+<!-- BEGIN FORM-->
+<form action="#" role="form">
+  <div class="form-group">
+    <label for="contacts-name">Name</label>
+    <input type="text" class="form-control" id="contacts-name">
+  </div>
+  <div class="form-group">
+    <label for="contacts-email">Email</label>
+    <input type="email" class="form-control" id="contacts-email">
+  </div>
+  <div class="form-group">
+    <label for="contacts-message">Message</label>
+    <textarea class="form-control" rows="5" id="contacts-message"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Send</button>
+  <button type="button" class="btn btn-default">Cancel</button>
+</form>
+<!-- END FORM-->
 ]]></content>
     </entry>
     

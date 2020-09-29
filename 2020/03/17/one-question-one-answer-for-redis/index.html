@@ -14,35 +14,32 @@
 
   <meta name="description" content="Q: Redis 有哪些数据类型，及应用场景。A: 数据类型有 8 种：
 
-string，简单的 KV 缓存。
-list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 lrange list 0 9。可以用来实现队列，如 lpush 和 rpop
-set，应用场景需要没有重复的元素。
-zset，无重复且有序。
-hash，可以用来存储简单对象。
-bit">
+string，简单的 KV 缓存，比如单值缓存，再比如文章的阅读量。
+127.0.0.1:6379&amp;gt; incr article:view:19 
+127.0.0.1:6379&amp;gt; incr article:view:19 
+127.0.0.1:6379&amp;gt; incr article:view:19
+127.0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="One Question One Answer for Redis">
 <meta property="og:url" content="/2020/03/17/one-question-one-answer-for-redis/index.html">
 <meta property="og:site_name" content="BSYONLINE">
 <meta property="og:description" content="Q: Redis 有哪些数据类型，及应用场景。A: 数据类型有 8 种：
 
-string，简单的 KV 缓存。
-list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 lrange list 0 9。可以用来实现队列，如 lpush 和 rpop
-set，应用场景需要没有重复的元素。
-zset，无重复且有序。
-hash，可以用来存储简单对象。
-bit">
-<meta property="og:updated_time" content="2020-04-06T15:31:27.037Z">
+string，简单的 KV 缓存，比如单值缓存，再比如文章的阅读量。
+127.0.0.1:6379&amp;gt; incr article:view:19 
+127.0.0.1:6379&amp;gt; incr article:view:19 
+127.0.0.1:6379&amp;gt; incr article:view:19
+127.0">
+<meta property="og:updated_time" content="2020-05-05T15:17:00.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="One Question One Answer for Redis">
 <meta name="twitter:description" content="Q: Redis 有哪些数据类型，及应用场景。A: 数据类型有 8 种：
 
-string，简单的 KV 缓存。
-list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 lrange list 0 9。可以用来实现队列，如 lpush 和 rpop
-set，应用场景需要没有重复的元素。
-zset，无重复且有序。
-hash，可以用来存储简单对象。
-bit">
+string，简单的 KV 缓存，比如单值缓存，再比如文章的阅读量。
+127.0.0.1:6379&amp;gt; incr article:view:19 
+127.0.0.1:6379&amp;gt; incr article:view:19 
+127.0.0.1:6379&amp;gt; incr article:view:19
+127.0">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
   
@@ -190,14 +187,91 @@ bit">
       
         <p>Q: Redis 有哪些数据类型，及应用场景。<br>A: 数据类型有 8 种：</p>
 <ol>
-<li>string，简单的 KV 缓存。</li>
-<li>list，list 使用场景很多，可以存储列表类型的数据，比如好友列表，查询历史等。可以用来分页，比如 <code>lrange list 0 9</code>。可以用来实现队列，如 lpush 和 rpop</li>
-<li>set，应用场景需要没有重复的元素。</li>
-<li>zset，无重复且有序。</li>
-<li>hash，可以用来存储简单对象。</li>
-<li>bitmap，可以用来实现 bloomfilter 。</li>
-<li>hyperloglog，可以用来进行大数据量统计，比如 UV 。但是不精确。</li>
-<li>geo，可以用来进行地理信息计算。</li>
+<li><p>string，简单的 KV 缓存，比如单值缓存，再比如文章的阅读量。</p>
+<pre><code>127.0.0.1:6379&gt; incr article:view:19 
+127.0.0.1:6379&gt; incr article:view:19 
+127.0.0.1:6379&gt; incr article:view:19
+127.0.0.1:6379&gt; get article:view:19 
+&quot;3&quot;
+</code></pre></li>
+<li><p>list，list 使用场景很多，可以存储列表类型的数据，比如消息列表。</p>
+<pre><code>127.0.0.1:6379&gt; lpush 12:msg 101
+127.0.0.1:6379&gt; lpush 12:msg 104
+127.0.0.1:6379&gt; lrange 12:msg 0 5
+1) &quot;104&quot;
+2) &quot;101&quot;
+</code></pre><p>再比如查询历史。</p>
+<pre><code>127.0.0.1:6379&gt; lpush history &quot;select * from user where id=1&quot;
+127.0.0.1:6379&gt; lpush history &quot;select * from dept where dept_name=&#39;sales&#39;&quot;
+127.0.0.1:6379&gt; lrange history 0 5
+1) &quot;select * from dept where dept_name=&#39;sales&#39;&quot;
+2) &quot;select * from user where id=1&quot;
+</code></pre><p>可以用来分页。</p>
+<pre><code>127.0.0.1:6379&gt; lrange list 0 9
+</code></pre><p>可以用来实现队列： lpush + rpop 。实现栈：lpush + lpop 。</p>
+</li>
+<li><p>set，应用场景需要没有重复的元素，比如将歌曲从歌曲库加到我喜欢的歌曲列表。</p>
+<pre><code>127.0.0.1:6379&gt; smove songs my_favourite &quot;yestoday once more&quot;
+(integer) 1
+</code></pre><p>再比如抽奖</p>
+<pre><code>127.0.0.1:6379&gt; srandmember lottery_draw 1    #不移除
+or
+127.0.0.1:6379&gt; spop lottery_draw 1           #移除
+</code></pre><p>再比如点赞</p>
+<pre><code>127.0.0.1:6379&gt; sadd like:123 19         #点赞
+127.0.0.1:6379&gt; srem like:123 19         #取消点赞
+127.0.0.1:6379&gt; sismember like:123 19    #是否点过赞
+127.0.0.1:6379&gt; smembers like:123        #点赞用户列表
+127.0.0.1:6379&gt; scard like:123           #点赞数
+</code></pre><p>再比如关注</p>
+<pre><code>127.0.0.1:6379&gt; sadd tom:follow 101 102 199 
+127.0.0.1:6379&gt; sadd alice:follow 102 103 199 
+127.0.0.1:6379&gt; sinter tom:follow alice:follow       #tom和alice共同关注
+1) &quot;102&quot;
+2) &quot;199&quot;
+127.0.0.1:6379&gt; sdiff alice:follow tom:follow        #alice还关注了哪些人
+1) &quot;103&quot;
+</code></pre></li>
+<li><p>zset，无重复且有序。比如排行榜。</p>
+<pre><code>127.0.0.1:6379&gt; zincrby music:month:1:week:1 1 &quot;yestoday once more&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:1 1 &quot;yestoday once more&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:1 1 &quot;hotel california&quot;
+127.0.0.1:6379&gt; zrevrange music:month:1:week:1 0 9 withscores     #周排行
+1) &quot;yestoday once more&quot;
+2) &quot;2&quot;
+3) &quot;hotel california&quot;
+4) &quot;1&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:2 1 &quot;yestoday once more&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:3 1 &quot;hotel california&quot;
+127.0.0.1:6379&gt; zincrby music:month:1:week:4 1 &quot;hotel california&quot;
+127.0.0.1:6379&gt; zunionstore music:month:1 4 music:month:1:week:1 music:month:1:week:2 music:month:1:week:3 music:month:1:week:4 
+127.0.0.1:6379&gt; zrevrange music:month:1 0 9 withscores    #月排行
+1) &quot;yestoday once more&quot;
+2) &quot;8&quot;
+3) &quot;hotel california&quot;
+4) &quot;5&quot;
+</code></pre></li>
+<li><p>hash，可以用来存储简单对象。比如数据库表 user 是这样的：<br>| id   | name  | age  |<br>| —- | —– | —- |<br>| 1    | Tom   | 20   |<br>| 2    | Alice | 19   |<br>用 redis hash 可以这样表示：</p>
+<pre><code class="shell">127.0.0.1:6379&gt; hmset user 1:name Tome 1:age 20
+127.0.0.1:6379&gt; hmset user 2:name Alice 2:age 19
+127.0.0.1:6379&gt; hmget user 1:name 1:age
+1) &quot;Tome&quot;
+2) &quot;20&quot;
+</code></pre>
+<p>如果表记录很多，可以进行分段，防止 big value 导致执行缓慢。<br>再比如购物车，</p>
+<pre><code># 用户 id 为 12 商品 id 为 1099
+127.0.0.1:6379&gt; hset cart:12 1099 1         #添加商品
+127.0.0.1:6379&gt; hincrby cart:12 1099 1      #增加数量
+127.0.0.1:6379&gt; hlen cart:12                #购物车中商品种类数量
+127.0.0.1:6379&gt; hdel cart:12 1099           #删除商品
+127.0.0.1:6379&gt; hgetall cart:12             #购物车中全部商品
+</code></pre></li>
+<li><p>bitmap，可以用来实现 bloomfilter 。</p>
+</li>
+<li><p>hyperloglog，可以用来进行大数据量统计，比如 UV 。但是不精确。</p>
+</li>
+<li><p>geo，可以用来进行地理信息计算。</p>
+</li>
 </ol>
 <p>还有一些功能也列一下：</p>
 <ol>
@@ -276,7 +350,7 @@ bit">
 	</li>
       
 	<li>
-	  <a href="/categories/Java/">Java (99)</a>
+	  <a href="/categories/Java/">Java (100)</a>
 	</li>
       
 	<li>
@@ -288,11 +362,11 @@ bit">
 	</li>
       
 	<li>
-	  <a href="/categories/Architecture/">Architecture (5)</a>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Guitar/">Guitar (7)</a>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
 	</li>
       
 	<li>
@@ -300,11 +374,11 @@ bit">
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (27)</a>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Wiki/">Wiki (7)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (27)</a>
 	</li>
       
 	<li>
@@ -313,6 +387,10 @@ bit">
       
 	<li>
 	  <a href="/categories/Docker/">Docker (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (4)</a>
 	</li>
       
 	<li>
@@ -328,11 +406,15 @@ bit">
 	</li>
       
 	<li>
+	  <a href="/categories/Spring-Cloud/Microservices/">Microservices (1)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Netty/">Netty (11)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/Microservices/">Microservices (1)</a>
+	  <a href="/categories/MQ/">MQ (4)</a>
 	</li>
       
 	<li>
@@ -359,6 +441,10 @@ bit">
 	  <a href="/categories/Spring/">Spring (5)</a>
 	</li>
       
+	<li>
+	  <a href="/categories/Microservices/">Microservices (1)</a>
+	</li>
+      
     </ul>
   </div>
 </div>
@@ -373,7 +459,7 @@ bit">
   <div class="widget-wrap">
     <div class="widget">
       
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/"><i class='fa fa-tags'></i>Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrent/"><i class='fa fa-tags'></i>Concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/"><i class='fa fa-tags'></i>Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drools/"><i class='fa fa-tags'></i>Drools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GC/"><i class='fa fa-tags'></i>GC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interview/"><i class='fa fa-tags'></i>Interview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mock/"><i class='fa fa-tags'></i>Mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/"><i class='fa fa-tags'></i>MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/"><i class='fa fa-tags'></i>MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/"><i class='fa fa-tags'></i>Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reactive/"><i class='fa fa-tags'></i>Reactive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/"><i class='fa fa-tags'></i>Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/"><i class='fa fa-tags'></i>Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrent/"><i class='fa fa-tags'></i>Concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/"><i class='fa fa-tags'></i>Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drools/"><i class='fa fa-tags'></i>Drools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/"><i class='fa fa-tags'></i>ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GC/"><i class='fa fa-tags'></i>GC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interview/"><i class='fa fa-tags'></i>Interview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/"><i class='fa fa-tags'></i>Kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mock/"><i class='fa fa-tags'></i>Mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/"><i class='fa fa-tags'></i>MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/"><i class='fa fa-tags'></i>MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/"><i class='fa fa-tags'></i>Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/"><i class='fa fa-tags'></i>RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reactive/"><i class='fa fa-tags'></i>Reactive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/"><i class='fa fa-tags'></i>Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/"><i class='fa fa-tags'></i>java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
     </div>
   </div>
 

@@ -12,23 +12,28 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta name="description" content="数据库有 4 种隔离级别，MySQL 默认为 Repeatable Read 。如果有两个事务并发操作 t1 表，效果如下： 
-Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之前是相同的，等 Client2 提交之后才能看到 Client1 插入的记录。如果将">
+  <meta name="description" content="数据库有 4 种隔离级别，RU 、RC 、RR 和 Serializable ，MySQL 默认为 Repeatable Read 。t1 表有两条记录，如果有两个事务并发操作 t1 表如下： 
+
+Client1 开启事务，将记录 2 的 name 修改为 C 。Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MVCC">
 <meta property="og:url" content="/2020/03/19/mvcc/index.html">
 <meta property="og:site_name" content="BSYONLINE">
-<meta property="og:description" content="数据库有 4 种隔离级别，MySQL 默认为 Repeatable Read 。如果有两个事务并发操作 t1 表，效果如下： 
-Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之前是相同的，等 Client2 提交之后才能看到 Client1 插入的记录。如果将">
-<meta property="og:image" content="https://s1.ax1x.com/2020/03/20/8cPaex.png">
-<meta property="og:image" content="https://s1.ax1x.com/2020/03/20/8c9xbV.png">
+<meta property="og:description" content="数据库有 4 种隔离级别，RU 、RC 、RR 和 Serializable ，MySQL 默认为 Repeatable Read 。t1 表有两条记录，如果有两个事务并发操作 t1 表如下： 
+
+Client1 开启事务，将记录 2 的 name 修改为 C 。Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之">
+<meta property="og:image" content="http://bsyonline.gitee.io/pic/20200502/20200929221226.png">
+<meta property="og:image" content="http://bsyonline.gitee.io/pic/20200502/20200929221405.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/03/20/86OpNR.png">
-<meta property="og:updated_time" content="2020-03-20T09:44:08.513Z">
+<meta property="og:image" content="http://bsyonline.gitee.io/pic/20200502/20200929230446.png">
+<meta property="og:image" content="http://bsyonline.gitee.io/pic/20200502/20200929230614.png">
+<meta property="og:updated_time" content="2020-09-29T15:22:21.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVCC">
-<meta name="twitter:description" content="数据库有 4 种隔离级别，MySQL 默认为 Repeatable Read 。如果有两个事务并发操作 t1 表，效果如下： 
-Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之前是相同的，等 Client2 提交之后才能看到 Client1 插入的记录。如果将">
-<meta name="twitter:image" content="https://s1.ax1x.com/2020/03/20/8cPaex.png">
+<meta name="twitter:description" content="数据库有 4 种隔离级别，RU 、RC 、RR 和 Serializable ，MySQL 默认为 Repeatable Read 。t1 表有两条记录，如果有两个事务并发操作 t1 表如下： 
+
+Client1 开启事务，将记录 2 的 name 修改为 C 。Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之">
+<meta name="twitter:image" content="http://bsyonline.gitee.io/pic/20200502/20200929221226.png">
   
     <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
   
@@ -174,9 +179,11 @@ Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>数据库有 4 种隔离级别，MySQL 默认为 Repeatable Read 。如果有两个事务并发操作 t1 表，效果如下： </p>
-<p><img src="https://s1.ax1x.com/2020/03/20/8cPaex.png" alt="8cPaex.png" border="0" style="width:350px"><br>Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之前是相同的，等 Client2 提交之后才能看到 Client1 插入的记录。<br>如果将 MySQL 的隔离级别改成 Read Commited ，效果又会有不同。<br><img src="https://s1.ax1x.com/2020/03/20/8c9xbV.png" alt="8c9xbV.png" border="0" style="width:600px"><br>这就是不可重复读的现象。</p>
-<p>透过现象看本质，当数据库的隔离级别为 RC 时，会出现不可重复读，通过修改隔离级别为 RR ，可以避免不可重复读。在 MySQL 中，RC 和 RR 隔离级别是通过 MVCC 实现的。MVCC (Multi-Version Concurrency Control) 是 InnoDB 使用的一种并发控制协议，只作用于 RC RR 两个级别。</p>
+        <p>数据库有 4 种隔离级别，RU 、RC 、RR 和 Serializable ，MySQL 默认为 Repeatable Read 。t1 表有两条记录，如果有两个事务并发操作 t1 表如下： </p>
+<p><img src="http://bsyonline.gitee.io/pic/20200502/20200929221226.png" alt="20200929221405" border="0" style="width:500px"></p>
+<p>Client1 开启事务，将记录 2 的 name 修改为 C 。Client2 也开启事务，查询 t1 。不管 Client1 的事务是否提交，Client2 查询的结果和 Client1 开启事务之前是相同的，等 Client2 提交之后才能看到 Client1 修改的内容。<br>如果将 MySQL 的隔离级别改成 Read Commited ，效果又会有不同。<br><img src="http://bsyonline.gitee.io/pic/20200502/20200929221405.png" alt="20200929221405" border="0" style="width:500px"></p>
+<p>这就是不可重复读的现象。</p>
+<p>为什么当数据库的隔离级别为 RC 时，会出现不可重复读，通过修改隔离级别为 RR ，可以避免不可重复读呢？答案是因为在 MySQL 中，RC 和 RR 隔离级别是通过 MVCC 实现的。MVCC (Multi-Version Concurrency Control) 是 InnoDB 使用的一种并发控制协议，作用于 RC RR 两个级别。</p>
 <h4 id="MVCC-的作用"><a href="#MVCC-的作用" class="headerlink" title="MVCC 的作用"></a>MVCC 的作用</h4><p>你一定想问，MVCC 有什么用呢？我们知道如果要实现并发，第一个想到的就是加锁。如果加锁，那么当 Client1 开启了事务，Client2 就无法获得锁，就会阻塞，这样性能就会很差。MVCC 并不会加锁，而是允许 Client2 在 Client1 事务期间依旧是可读的，这样就提高了读写的并发度。</p>
 <h4 id="MVCC-是如何实现的"><a href="#MVCC-是如何实现的" class="headerlink" title="MVCC 是如何实现的"></a>MVCC 是如何实现的</h4><p>对于 t1 表，我们看到的是这样的：</p>
 <pre><code>mysql&gt; desc t1;
@@ -192,16 +199,19 @@ Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，
 <ol>
 <li>DB_TRX_ID：表示插入或更新的的最后一个事务 id 。</li>
 <li>DB_ROLL_PTR：回滚指针，指向 Undo Log 的记录。</li>
-<li>DB_ROW_ID：id 行，单调递增。</li>
+<li>DB_ROW_ID：行 id ，单调递增。</li>
 </ol>
 <p>每次开启事务，都会生成对应的 Undo Log 。在事务中做的任何修改都会在 Undo Log 中保存下来，类似链表。然后在 select 的时候会生成对应查询视图 ReadView 。<strong>ReadView 由当前未提交的事务 id 列表和最大事务 id 组成</strong>。用 select 的结果的 DB_TRX_ID 和 ReadView 比较来判断事务的状态，从而确定返回的结果集。比较规则如下：</p>
 <ol>
 <li>当 DB_TRX_ID 小于 ReadView 的最小 ID ，则说明事务已经提交，则数据是可见的。</li>
 <li>当 DB_TRX_ID 大于等于 ReadView 的最小 ID 小于等于 ReadView 的最大 ID 时，<br> 2.1) 如果 DB_TRX_ID 等于当前的 DB_TRX_ID ，说明是自己的事务，则数据可见。<br> 2.2) 如果 DB_TRX_ID 在 ReadView 的未完成事务列表中，说明事务未提交，则数据不可见。如果不在，则说明事务已提交，数据可见。</li>
 </ol>
-<p><strong>在 RR 隔离级别下，ReadView 会延用事务第一次生成的 ReadView ，而 RC 隔离级别下，每次查询会生成新的 ReadView </strong>。<br>有了上边的概念，我们来分析一下前边的例子，假设 t1 表中有一条记录 id=1 name=’A’ ，是由 DB_TRX_ID=100 的事务插入的。</p>
-<h5 id="在-RR-级别下"><a href="#在-RR-级别下" class="headerlink" title="在 RR 级别下"></a>在 RR 级别下</h5><p>&ensp;&ensp;1)  Client1 开启了事务，假设它的 DB_TRX_ID=200 ，插入 id=2 的记录，MySQL 会将 id=1 这条记录拷贝到 Undo Log 中，然后将 DB_ROLL_PTR 指向 Undo Log 中的这条记录，这样就形成一个版本链。<br>&ensp;&ensp;2)  当 Client1 查询时，会生成查询视图 ReadView([200],200) ，从版本链的最后一条记录，即 id=2 的记录开始比较。DB_TRX_ID=200 等于当前的 DB_TRX_ID ，所以数据是可见的。DB_TRX_ID=100 小于 ReadView 中最小的事务 id ，说明它是已经提交的事务，所以数据也是可见的。所以最终 Client1 查询会返回 2 条记录。<br>&ensp;&ensp;3)  当 Client2 开启事务 DB_TRX_ID=300 ，执行查询时，也会生成对应的查询视图 ReadView([200],300) 。然后从版本链的最后一条记录开始比较，DB_TRX_ID=200 大于等于 ReadView 的最小 ID 且不等于当前 DB_TRX_ID ，说明事务未提交，所以数据不可见。DB_TRX_ID=100 小于 ReadView 中最小的事务 ID ，说明它是已经提交的事务，所以数据是可见的。所以最终 Client2 查询只会返回 1 条记录。<br>&ensp;&ensp;4)  当 Client1 提交事务之后，Client2 再次查询，由于隔离级别是 RR ，会延用第一次的 ReadView([200],300)，所以虽然 DB_TRX_ID=200 已经提交了，但是按照 ReadView 比较还是大于等于最小的事务 ID 所以依旧不可见，最终只返回 1 条记录。</p>
-<h5 id="在-RC-级别下"><a href="#在-RC-级别下" class="headerlink" title="在 RC 级别下"></a>在 RC 级别下</h5><p>与此类似，我们再来看看 RC 级别。<br>&ensp;&ensp;1)  Client1 和上边是相同的。<br>&ensp;&ensp;2)  当 Client2 开启事务 DB_TRX_ID=300 ，执行查询时，会生成对应的查询视图 ReadView([200],300) 。然后从版本链的最后一条记录开始比较，DB_TRX_ID=200 大于等于 ReadView 的最小 ID 且不等于当前 DB_TRX_ID ，说明事务未提交，所以数据不可见。DB_TRX_ID=100 小于 ReadView([200],300) 中最小的事务 ID，说明它是已经提交的事务，所以数据也是可见的。所以最终 Client2 查询只会返回 1 条记录。<br>&ensp;&ensp;3)  当 Client1 提交事务之后，由于隔离级别是 RC ，会重新生成一个新的 ReadView([300],300)，DB_TRX_ID=200 和 DB_TRX_ID=100 对于 ReadView([300],300) 来说都是小于最小的事务 ID ，所以数据是可见的，因此最终会返回 2 条记录。</p>
+<p><strong>在 RR 隔离级别下，ReadView 会延用事务第一次生成的 ReadView ，而 RC 隔离级别下，每次查询会生成新的 ReadView </strong>。<br>有了上边的概念，我们来分析一下前边的例子，假设 t1 表中有 2 条记录，是由 DB_TRX_ID=100 的事务插入的，事务已经提交。</p>
+<p><img src="http://bsyonline.gitee.io/pic/20200502/20200929230446.png" alt="20200929230446" border="0" style="width:500px"></p>
+<h5 id="首先看-RR-级别："><a href="#首先看-RR-级别：" class="headerlink" title="首先看 RR 级别："></a>首先看 RR 级别：</h5><p>&ensp;&ensp;1)  Client1 开启了事务，假设它的 DB_TRX_ID=200 。Client1 修改了 id=12 的 name 为 C ，MySQL 会将 id=12 这条记录拷贝到 Undo Log 中，然后将 DB_ROLL_PTR 指向 Undo Log 中的这条记录，然后将 name 修改成 C ，这样就形成一个版本链。</p>
+<p><img src="http://bsyonline.gitee.io/pic/20200502/20200929230614.png" alt="20200929230446" border="0" style="width:700px"></p>
+<p>&ensp;&ensp;2)  当 Client1 查询时，会生成查询视图 ReadView([200],200) 。id=11 这条记录的 DB_TRX_ID=100 ，小于最小的未提交 DB_TRX_ID ，所以 id=11 这条记录是可见的。id=12 这条记录的 DB_TRX_ID=200 ，等于最大的未提交 DB_TRX_ID 说明是自己的事务，所以也是可见的。所以查到的结果就是 A 和 C 。<br>&ensp;&ensp;3)  当 Client2 开启了事务，假设它的 DB_TRX_ID=300 ，生成对应的查询视图 ReadView([200],300) 。Client2 执行查询时，id=11 这条记录的 DB_TRX_ID=100 ，小于最小的未提交 DB_TRX_ID ，所以 id=11 这条记录是可见的。id=12 这条记录的 DB_TRX_ID=200 ，在未提交列表中，所以需要去 Undo Log 中找历史版本 DB_TRX_ID=100 ，最终查到的结果是 A 和 B 。<br>&ensp;&ensp;4)  当 Client1 提交后，Client2 再次查询，ReadView 还是 ([200],300) ，所以查到的结果还是 A 和 B 。</p>
+<h5 id="与此类似，我们再来看看-RC-级别："><a href="#与此类似，我们再来看看-RC-级别：" class="headerlink" title="与此类似，我们再来看看 RC 级别："></a>与此类似，我们再来看看 RC 级别：</h5><p>&ensp;&ensp;1) 、 2） 、3）和上边是相同的。<br>&ensp;&ensp;4)  当 Client1 提交后，Client2 再次查询，此时 ReadView 是新生成的 ([300],300) ，DB_TRX_ID=200 已经提交，所以 C 是可见的，最终查到的结果是 A 和 C 。</p>
 <blockquote>
 <p>MVCC 只作用于 RC 和 RR ，那 RU 和 Serializable 是如何实现的？<br>RU 每次都读最新记录。<br>Serializable 通过互斥锁。</p>
 </blockquote>
@@ -252,7 +262,7 @@ Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，
 	</li>
       
 	<li>
-	  <a href="/categories/Java/">Java (99)</a>
+	  <a href="/categories/Java/">Java (100)</a>
 	</li>
       
 	<li>
@@ -264,11 +274,11 @@ Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，
 	</li>
       
 	<li>
-	  <a href="/categories/Architecture/">Architecture (5)</a>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Guitar/">Guitar (7)</a>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
 	</li>
       
 	<li>
@@ -276,11 +286,11 @@ Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/">Spring Cloud (27)</a>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Wiki/">Wiki (7)</a>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (27)</a>
 	</li>
       
 	<li>
@@ -289,6 +299,10 @@ Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，
       
 	<li>
 	  <a href="/categories/Docker/">Docker (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (4)</a>
 	</li>
       
 	<li>
@@ -304,11 +318,15 @@ Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，
 	</li>
       
 	<li>
+	  <a href="/categories/Spring-Cloud/Microservices/">Microservices (1)</a>
+	</li>
+      
+	<li>
 	  <a href="/categories/Netty/">Netty (11)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/Spring-Cloud/Microservices/">Microservices (1)</a>
+	  <a href="/categories/MQ/">MQ (4)</a>
 	</li>
       
 	<li>
@@ -335,6 +353,10 @@ Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，
 	  <a href="/categories/Spring/">Spring (5)</a>
 	</li>
       
+	<li>
+	  <a href="/categories/Microservices/">Microservices (1)</a>
+	</li>
+      
     </ul>
   </div>
 </div>
@@ -349,7 +371,7 @@ Client1 开启事务，往 t1 中插入一条记录，Client2 也开启事务，
   <div class="widget-wrap">
     <div class="widget">
       
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/"><i class='fa fa-tags'></i>Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrent/"><i class='fa fa-tags'></i>Concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/"><i class='fa fa-tags'></i>Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drools/"><i class='fa fa-tags'></i>Drools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GC/"><i class='fa fa-tags'></i>GC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interview/"><i class='fa fa-tags'></i>Interview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mock/"><i class='fa fa-tags'></i>Mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/"><i class='fa fa-tags'></i>MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/"><i class='fa fa-tags'></i>MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/"><i class='fa fa-tags'></i>Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reactive/"><i class='fa fa-tags'></i>Reactive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/"><i class='fa fa-tags'></i>Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/"><i class='fa fa-tags'></i>Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrent/"><i class='fa fa-tags'></i>Concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/"><i class='fa fa-tags'></i>Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drools/"><i class='fa fa-tags'></i>Drools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/"><i class='fa fa-tags'></i>ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GC/"><i class='fa fa-tags'></i>GC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interview/"><i class='fa fa-tags'></i>Interview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/"><i class='fa fa-tags'></i>Kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mock/"><i class='fa fa-tags'></i>Mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/"><i class='fa fa-tags'></i>MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/"><i class='fa fa-tags'></i>MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/"><i class='fa fa-tags'></i>Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/"><i class='fa fa-tags'></i>RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reactive/"><i class='fa fa-tags'></i>Reactive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/"><i class='fa fa-tags'></i>Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/"><i class='fa fa-tags'></i>java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
     </div>
   </div>
 

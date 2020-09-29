@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Building Log Collection System | BSYONLINE</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="日志收集方式有很多，本文主要介绍利用 Kafka 和 ELK 来进行日志收集。
+设计思路很简单：
+
+首先通过日志框架，将日志分级并存储到文件。
+通过 Filebeat 将文件内容放到 Kafka 中。
+Logstash 对 Kafka 中的日志进行消费，过滤出需要的日志，写到 Elasticsearch 中。
+最后用 Kibana 进行展示。
+
+使用的环境是 Centos7 + logback +">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building Log Collection System">
+<meta property="og:url" content="/2020/05/02/building-log-collection-system/index.html">
+<meta property="og:site_name" content="BSYONLINE">
+<meta property="og:description" content="日志收集方式有很多，本文主要介绍利用 Kafka 和 ELK 来进行日志收集。
+设计思路很简单：
+
+首先通过日志框架，将日志分级并存储到文件。
+通过 Filebeat 将文件内容放到 Kafka 中。
+Logstash 对 Kafka 中的日志进行消费，过滤出需要的日志，写到 Elasticsearch 中。
+最后用 Kibana 进行展示。
+
+使用的环境是 Centos7 + logback +">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvOEse.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/02/JvOVqH.png">
+<meta property="og:updated_time" content="2020-05-02T13:40:58.182Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Building Log Collection System">
+<meta name="twitter:description" content="日志收集方式有很多，本文主要介绍利用 Kafka 和 ELK 来进行日志收集。
+设计思路很简单：
+
+首先通过日志框架，将日志分级并存储到文件。
+通过 Filebeat 将文件内容放到 Kafka 中。
+Logstash 对 Kafka 中的日志进行消费，过滤出需要的日志，写到 Elasticsearch 中。
+最后用 Kibana 进行展示。
+
+使用的环境是 Centos7 + logback +">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/05/02/JvOEse.png">
+  
+    <link rel="alternative" href="/atom.xml" title="BSYONLINE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  <link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+  <link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+  <link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+  <link rel="stylesheet" href="/metronic/assets/corporate/css/themes/gray.css">
+  <link rel="stylesheet" href="/css/theme-styles.css">
+  <!-- Theme styles END -->
+</head>
+
+<body class="corporate page-header-fixed">
+  <!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">BSYONLINE</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/dru.jpg" alt="bsyonline" style="height: 40px;margin-top: -20px;">
+    <div style="width: 100px;font-size: 16px;float: right;margin-left: 10px;">翡翠梦境</div>
+    </a>
+
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Archives</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box" >
+	    <div class='inner-search-box'>
+	    <form action="#"  id="search-form">
+	      <div class="input-group">
+		<input id="local-search-input"  type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit" onclick="resetSearch()">清空</button>
+		</span>
+	      </div>
+	    </form>
+	    <div id="local-search-result" style='max-height:450px;overflow:auto;'></div> <!-- 搜索结果区 -->
+	    <p class='no-result' style='display:none'>No results found </p>
+	    </div>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <section id="main">
+    <div style="padding-left: 30px;margin:5px 0;font-size: 15px">
+	<span style='margin-right:10px'>
+	
+        2020/05/02
+        <a class="article-title" href="/2020/05/02/building-log-collection-system/">Building Log Collection System</a>
+    
+	</span>
+<div>
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-building-log-collection-system" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> bsyonline</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2020-05-02T09:06:57.000Z" itemprop="datePublished">2020/05/02</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="/2020/05/02/building-log-collection-system/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/ELK/" title="ELK">ELK</a>
+  
+
+
+	</li>
+        <li class="hidden-xs"><i class="fa fa-folder-open"></i> 
+          
+  
+    <a href="/categories/Microservices/" title="Microservices">Microservices</a>
+  
+
+        </li>
+      </ul>
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>日志收集方式有很多，本文主要介绍利用 Kafka 和 ELK 来进行日志收集。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvOEse.png" alt="20200502190811" border="0" style="width:600px"><br>设计思路很简单：</p>
+<ol>
+<li>首先通过日志框架，将日志分级并存储到文件。</li>
+<li>通过 Filebeat 将文件内容放到 Kafka 中。</li>
+<li>Logstash 对 Kafka 中的日志进行消费，过滤出需要的日志，写到 Elasticsearch 中。</li>
+<li>最后用 Kibana 进行展示。</li>
+</ol>
+<p>使用的环境是 Centos7 + logback + Kafka_2.11-2.4.1 + ELK Stack 6.8.8 。这里简单介绍一下 ELK Stack 。ELK Stack 就是 ELK + Beats 。ELK 是三个开源项目的首字母缩写，这三个项目分别是：Elasticsearch 、Logstash 和 Kibana 。Elasticsearch 是一个搜索和分析引擎。Logstash  是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch  中使用图形和图表对数据进行可视化。Beats 是轻量型的单一功能数据采集器，Filebeat 是 Beats 中的一个用于文件的采集器。</p>
+<h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><p>第一步首先要选择一个日志框架，日志框架有很多，根据自己习惯选就好了。这里用的是 Logback ，它是 SLF4J 的直接实现，SpringBoot 默认使用的也是它。接下来就是要将日志分级，把全量 Log 和 Error Log 分别存储，以 logback-spring.xml 为例。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;configuration scan=&quot;true&quot; scanPeriod=&quot;60 seconds&quot; debug=&quot;false&quot;&gt;
+    &lt;contextName&gt;logback&lt;/contextName&gt;
+    &lt;property name=&quot;app.name&quot; value=&quot;log-collection&quot;/&gt;
+    &lt;property name=&quot;log.path&quot; value=&quot;./logs/${app.name}&quot;/&gt;
+    &lt;!--输出到控制台--&gt;
+    &lt;appender name=&quot;console&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+        &lt;layout&gt;
+            &lt;Pattern&gt;[%X{host}] [%X{ip}] [%X{appName}] %d{yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS} %level ${PID:- } %thread %logger - %msg ##&#39;%ex&#39;%n&lt;/Pattern&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+
+    &lt;!--输出到文件--&gt;
+    &lt;appender name=&quot;infoFile&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;file&gt;${log.path}/app.log&lt;/file&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy&quot;&gt;
+            &lt;!-- 按天轮转 --&gt;
+            &lt;fileNamePattern&gt;${log.path}/app-%d{yyyy-MM-dd}-%i.zip&lt;/fileNamePattern&gt;
+            &lt;!-- 单个文件最大 500M --&gt;
+            &lt;maxFileSize&gt;500MB&lt;/maxFileSize&gt;
+            &lt;!-- 保存 30 天的历史记录，最大大小为 30GB --&gt;
+            &lt;maxHistory&gt;30&lt;/maxHistory&gt;
+            &lt;totalSizeCap&gt;3GB&lt;/totalSizeCap&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;layout&gt;
+            &lt;Pattern&gt;[%X{host}] [%X{ip}] [%X{appName}] %d{yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS} %level ${PID:- } %thread %logger - %msg ##&#39;%ex&#39;%n&lt;/Pattern&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+    &lt;appender name=&quot;errorFile&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;file&gt;${log.path}/error.log&lt;/file&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy&quot;&gt;
+            &lt;!-- 按天轮转 --&gt;
+            &lt;fileNamePattern&gt;${log.path}/error-%d{yyyy-MM-dd}-%i.zip&lt;/fileNamePattern&gt;
+            &lt;!-- 单个文件最大 500M --&gt;
+            &lt;maxFileSize&gt;500MB&lt;/maxFileSize&gt;
+            &lt;!-- 保存 30 天的历史记录，最大大小为 30GB --&gt;
+            &lt;maxHistory&gt;30&lt;/maxHistory&gt;
+            &lt;totalSizeCap&gt;3GB&lt;/totalSizeCap&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;
+            &lt;level&gt;ERROR&lt;/level&gt;
+            &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;
+            &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;
+        &lt;/filter&gt;
+        &lt;layout&gt;
+            &lt;Pattern&gt;[%X{host}] [%X{ip}] [%X{appName}] %d{yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS} %level ${PID:- } %thread %logger - %msg ##&#39;%ex&#39;%n&lt;/Pattern&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+
+    &lt;root level=&quot;info&quot;&gt;
+        &lt;appender-ref ref=&quot;console&quot;/&gt;
+        &lt;appender-ref ref=&quot;infoFile&quot;/&gt;
+        &lt;appender-ref ref=&quot;errorFile&quot;/&gt;
+    &lt;/root&gt;
+
+&lt;/configuration&gt;
+</code></pre><p>这里需要特殊说明的是 Layout.Pattern 。一行日志通过空格分隔，前 3 个是自定义 MDC 属性，第 4 部分是 UTC Timestamp ，第 5 部分是日志级别，第 6 部分是进程号，第 7 部分是线程名字，第 8 部分是类的名字，第 9 部分是日志信息，最后一部分是异常信息。由于异常堆栈是多行，所以通过 ”‘“ 包起来便于后续处理。<br>Logback 更多内容参考 <a href="http://www.logback.cn/" target="_blank" rel="external">http://www.logback.cn/</a> 。</p>
+<h4 id="Filebeat"><a href="#Filebeat" class="headerlink" title="Filebeat"></a>Filebeat</h4><p>Filebeat 用来对文件内容进行收集，将其和应用程序部署在同一台机器。下载解压之后修改配置文件 filebeat.yml 。</p>
+<pre><code>filebeat.inputs:
+
+- type: log
+  enabled: true
+  paths:
+    - /logs/log-collection/app.log     # 指定日志文件
+  document_type: &quot;app-log&quot;
+  multiline:
+    pattern: &#39;^\[&#39;                    # 以 ”[“ 开头，不是 [ 开头则合并到上一行，最大2000行
+    negate: true
+    match: after
+    max_lines: 2000
+    timeout: 2s
+  fields:
+    logbiz: log-collection            # 应用名称
+    log_topic: app-log-collection    # Kafka 的 Topic
+    evn: dev                        # 环境
+
+- type: log
+  enabled: true
+  paths:
+    - /logs/log-collection/error.log
+  document_type: &quot;error-log&quot;
+  multiline:
+    pattern: &#39;^\[&#39;
+    negate: true
+    match: after
+    max_lines: 2000
+    timeout: 2s
+  fields:
+    logbiz: log-collection
+    log_topic: error-log-collection
+    evn: dev
+
+output.kafka:                        # 输出到 Kafka
+  enabled: true
+  hosts: [&quot;192.168.0.106:9092&quot;]        # Kafka Broker 地址
+  topic: &#39;%{[fields.log_topic]}&#39;    # Kafka Topic ，动态获取上边配置的 Topic
+  partition.hash:
+    reachable_only: true
+  compression: gzip
+  max_message_bytes: 1000000
+  required_acks: 1
+logging.to_files: true
+</code></pre><p>启动，带 -e 可以看到日志。</p>
+<pre><code>./filebeat -e
+</code></pre><h4 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h4><p>Kafka 安装配置参考 <a href="../../../../2020/05/02/kafka-quickstart/">Kafka Quickstart</a> 。</p>
+<p>创建 Filebeat 要用到的 Topic 。</p>
+<pre><code>bin/kafka-topics.sh --zookeeper 192.168.0.206:2181 --create --topic app-log-collection --partitions 1 --replication-factor 1
+bin/kafka-topics.sh --zookeeper 192.168.0.206:2181 --create --topic error-log-collection --partitions 1 --replication-factor 1
+</code></pre><p>启动 Filebeat 之后，如果配置正常，在 Kafka 的 logs 目录可以看到对应 topic 的日志。</p>
+<h4 id="Logstash"><a href="#Logstash" class="headerlink" title="Logstash"></a>Logstash</h4><p>Lostash 作用是消费 Kafka 中的日志。下载解压之后修改配置文件 config/logstash.conf 。</p>
+<pre><code># 输入，可以有多个
+input {
+  # Kafka 的配置
+  kafka {
+    topics_pattern =&gt; &quot;app-log-.*&quot;                 # Kafka 的 Topic 模式
+    bootstrap_servers =&gt; &quot;192.168.0.206:9092&quot;    # Kafka broker 地址
+    codec =&gt; json
+    consumer_threads =&gt; 4
+    decorate_events =&gt; true
+    group_id =&gt; &quot;app-log-group&quot;
+  }
+  kafka {
+    topics_pattern =&gt; &quot;error-log-.*&quot;
+    bootstrap_servers =&gt; &quot;192.168.0.206:9092&quot;
+    codec =&gt; json
+    consumer_threads =&gt; 4
+    decorate_events =&gt; true
+    group_id =&gt; &quot;error-log-group&quot;
+  }
+}
+
+filter {
+  ruby {
+    # 将本地时间赋给变量 index_time ，在 ES 中按天创建索引会用到
+    # Logstash 使用的 UTC 时间，所以会比东八区晚 8 小时，这里进行时区转换
+    code =&gt; &quot;event.set(&#39;index_time&#39;, event.timestamp.time.localtime.strftime(&#39;%Y.%m.%d&#39;))&quot;
+  }
+
+  if &quot;app-log&quot; in [fields][log_topic] {     # Filebeat 中的变量
+    grok {
+      # 针对日志格式进行解析，变量名字无所谓，位置需要对应
+      match =&gt; [&quot;message&quot;, &quot;\[%{DATA:host}\] \[%{DATA:ip}\] \[%{DATA:appName}\] %{NOTSPACE:currentDateTime} %{NOTSPACE:level} %{NOTSPACE:pid} %{NOTSPACE:thread} %{NOTSPACE:class} - %{DATA:msgInfo} ##(\&#39;\&#39;|%{QUOTEDSTRING:throwable})&quot;]
+    }
+    # 还是时区的问题，ELK 缺省使用的是 UTC ，所以在这把时区加上，在 ES 和 Kibana 里就都按指定时区了
+    mutate {
+      gsub =&gt; [&quot;currentDateTime&quot;, &quot;[+]&quot;, &quot;T&quot;]
+    } 
+    mutate{
+      replace =&gt; [&quot;currentDateTime&quot;,&quot;%{currentDateTime}+08:00&quot;]
+    }
+  }
+
+  if &quot;error-log&quot; in [fields][log_topic] {
+    grok {
+      match =&gt; [&quot;message&quot;, &quot;\[%{DATA:host}\] \[%{DATA:ip}\] \[%{DATA:appName}\] %{NOTSPACE:currentDateTime} %{NOTSPACE:level} %{NOTSPACE:pid} %{NOTSPACE:thread} %{NOTSPACE:class} - %{DATA:msgInfo} ##(\&#39;\&#39;|%{QUOTEDSTRING:throwable})&quot;]
+    }
+    mutate {
+      gsub =&gt; [&quot;currentDateTime&quot;, &quot;[+]&quot;, &quot;T&quot;]
+    } 
+    mutate{
+      replace =&gt; [&quot;currentDateTime&quot;,&quot;%{currentDateTime}+08:00&quot;]
+    }
+  }
+}
+
+# 输出
+output {
+  # 输出到控制台
+  stdout { 
+    codec =&gt; rubydebug
+  }
+}
+
+output {
+  # 输出到 ES
+  if &quot;app-log&quot; in [fields][log_topic] {
+    elasticsearch {
+      hosts =&gt; [&quot;192.168.0.201:9200&quot;]                        # ES 地址
+      index =&gt; &quot;app-log-%{[fields][logbiz]}-%{index_time}&quot;    # ES 索引的名字，按天生成索引
+      sniffing =&gt; true                                        # 嗅探模式
+      template_overwrite =&gt; true                                  
+    }
+  }
+
+  if &quot;error-log&quot; in [fields][log_topic] {
+    elasticsearch {
+      hosts =&gt; [&quot;192.168.0.201:9200&quot;]
+      index =&gt; &quot;error-log-%{[fields][logbiz]}-%{index_time}&quot;
+      sniffing =&gt; true
+      template_overwrite =&gt; true      
+    }
+  }
+}
+</code></pre><p>配置完成后启动</p>
+<pre><code>./bin/logstash -f ./config/logstash.conf
+</code></pre><p>更多 Logstash 内容参考 <a href="http://doc.yonyoucloud.com/doc/logstash-best-practice-cn/index.html" target="_blank" rel="external">Logstash 最佳实践</a> 。</p>
+<h4 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h4><p>Elasticsearch 集群搭建参考 <a href="../../../../2020/05/02/elasticsearch-quickstart/">Elasticsearch Quickstart</a> 。</p>
+<h4 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h4><p>下载解压之后在 config/kibana.yml 中配置 ES 的地址就可以运行了。</p>
+<pre><code>./bin/kibana
+</code></pre><p>启动之后访问 <a href="http://locahost:5601" target="_blank" rel="external">http://locahost:5601</a> 。<br>先去 Management &gt; Kibana &gt; Advanced Settings 里修改时区为东八区，然后创建 Index Patterns 。<br><img src="https://s1.ax1x.com/2020/05/02/JvOVqH.png" alt="20200502183933" border="0"><br>在 Discover 中就可以看到日志了。</p>
+<h4 id="错误告警"><a href="#错误告警" class="headerlink" title="错误告警"></a>错误告警</h4><p>通过 Elasticsearch Watcher 可以进行错误告警。Watcher 就是一个定时任务，通过 Watcher API 可以创建 Watcher ，比如创建一个 Watcher 每 10s 扫描一次 error-log 索引。</p>
+<pre><code>PUT _xpack/watcher/watch/applog_error_watcher
+{
+  # 触发器
+  &quot;trigger&quot;:{
+    &quot;schedule&quot;:{
+      &quot;interval&quot;:&quot;10s&quot;
+    }
+  },
+  &quot;input&quot;:{
+    &quot;search&quot;:{
+      &quot;request&quot;:{
+        &quot;indices&quot;:[
+          &quot;error-log-*&quot;
+        ],
+        &quot;body&quot;:{
+          &quot;size&quot;:0,
+          &quot;query&quot;:{
+            &quot;bool&quot;:{
+              &quot;must&quot;:{
+                &quot;term&quot;:{
+                  &quot;level.keyword&quot;:&quot;ERROR&quot;
+                }
+              },
+              &quot;filter&quot;:{
+                &quot;range&quot;:{
+                  &quot;currentDateTime&quot;:{
+                    &quot;gt&quot;:&quot;now-30s&quot;,
+                    &quot;lt&quot;:&quot;now&quot;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  # 条件：查询命中条数大于0触发
+  &quot;condition&quot;:{
+      &quot;compare&quot;:{
+          &quot;ctx.payload.hits.total&quot;:{
+              &quot;gt&quot;:0
+          }
+      }
+  },
+  # 查询数据
+  &quot;transform&quot;:{
+    &quot;search&quot;:{
+      &quot;request&quot;:{
+        &quot;indices&quot;:[
+          &quot;error-log-*&quot;
+        ],
+        &quot;body&quot;:{
+          &quot;size&quot;:10,
+          &quot;query&quot;:{
+            &quot;bool&quot;:{
+              &quot;must&quot;:{
+                &quot;term&quot;:{
+                  &quot;level.keyword&quot;:&quot;ERROR&quot;
+                }
+              },
+              &quot;filter&quot;:{
+                &quot;range&quot;:{
+                  &quot;currentDateTime&quot;:{
+                    &quot;gt&quot;:&quot;now-30s&quot;,
+                    &quot;lt&quot;:&quot;now&quot;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  # 处理动作，这里是注册了一个webhook，然后进行回调
+  &quot;actions&quot;:{
+    &quot;test_error&quot;:{
+      &quot;throttle_period&quot;:&quot;1m&quot;,
+      &quot;webhook&quot;:{
+        &quot;method&quot;:&quot;POST&quot;,
+        &quot;url&quot;:&quot;http://192.168.0.106:8080/watch&quot;,
+        &quot;body&quot;:&quot;watcher test&quot;
+      }
+    }
+  }
+}
+</code></pre>
+      
+    </div>
+  </div>
+  
+    
+<div style='border-top:solid 1px #ECEBEB;height:2px;margin-top:40px'>
+<br>
+</div>
+<nav id="article-nav">
+  
+    <a href="/2020/05/02/kafka-quickstart/" id="article-nav-newer" class="article-nav-link-wrap" style="float: left">
+      <div class="article-nav-title" style="margin-bottom: 20px;">
+        
+          Kafka Quickstart
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/27/rabbitmq-cluster/" id="article-nav-older" class="article-nav-link-wrap"  style="float: right;margin-right: 20px;">
+      <div class="article-nav-title">rabbitmq cluster</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/Data-Structure-and-Algorithm/">Data Structure and Algorithm (29)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (100)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Blockchain/">Blockchain (16)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Concurrent/">Concurrent (17)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Guitar/">Guitar (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Architecture/">Architecture (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Linux/">Linux (46)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Wiki/">Wiki (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Cloud/">Spring Cloud (27)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/JVM/">JVM (14)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Docker/">Docker (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/uncategory/">uncategory (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Design-Pattern/">Design Pattern (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Big-Data/">Big Data (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Databases/">Databases (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Cloud/Microservices/">Microservices (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Netty/">Netty (11)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MQ/">MQ (4)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring-Boot/">Spring Boot (7)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MyBatis/">MyBatis (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Scala/">Scala (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spark/">Spark (14)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Spring/">Spring (5)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Microservices/">Microservices (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/"><i class='fa fa-tags'></i>AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/"><i class='fa fa-tags'></i>Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Kylin/"><i class='fa fa-tags'></i>Apache Kylin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/"><i class='fa fa-tags'></i>Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AspectJ/"><i class='fa fa-tags'></i>AspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlackBerry/"><i class='fa fa-tags'></i>BlackBerry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blockchain/"><i class='fa fa-tags'></i>Blockchain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/"><i class='fa fa-tags'></i>CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compass/"><i class='fa fa-tags'></i>Compass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrent/"><i class='fa fa-tags'></i>Concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/"><i class='fa fa-tags'></i>Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structures/"><i class='fa fa-tags'></i>Data Structures</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/"><i class='fa fa-tags'></i>Design Patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Computing/"><i class='fa fa-tags'></i>Distributed Computing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/"><i class='fa fa-tags'></i>Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drools/"><i class='fa fa-tags'></i>Drools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/"><i class='fa fa-tags'></i>ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elastic/"><i class='fa fa-tags'></i>Elastic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ethereum/"><i class='fa fa-tags'></i>Ethereum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/"><i class='fa fa-tags'></i>Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fabric/"><i class='fa fa-tags'></i>Fabric</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/"><i class='fa fa-tags'></i>Feign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GC/"><i class='fa fa-tags'></i>GC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIS/"><i class='fa fa-tags'></i>GIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/"><i class='fa fa-tags'></i>Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guitar/"><i class='fa fa-tags'></i>Guitar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/"><i class='fa fa-tags'></i>Gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/"><i class='fa fa-tags'></i>Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hbase/"><i class='fa fa-tags'></i>Hbase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/"><i class='fa fa-tags'></i>Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/"><i class='fa fa-tags'></i>Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/"><i class='fa fa-tags'></i>IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interview/"><i class='fa fa-tags'></i>Interview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAXB/"><i class='fa fa-tags'></i>JAXB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMS/"><i class='fa fa-tags'></i>JMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/"><i class='fa fa-tags'></i>JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jade/"><i class='fa fa-tags'></i>Jade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/"><i class='fa fa-tags'></i>Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/"><i class='fa fa-tags'></i>Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/"><i class='fa fa-tags'></i>Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/"><i class='fa fa-tags'></i>Kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/"><i class='fa fa-tags'></i>Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/"><i class='fa fa-tags'></i>Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/"><i class='fa fa-tags'></i>Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meven/"><i class='fa fa-tags'></i>Meven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservices/"><i class='fa fa-tags'></i>Microservices</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mock/"><i class='fa fa-tags'></i>Mock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/"><i class='fa fa-tags'></i>MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/"><i class='fa fa-tags'></i>MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/"><i class='fa fa-tags'></i>NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/"><i class='fa fa-tags'></i>Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/"><i class='fa fa-tags'></i>Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/"><i class='fa fa-tags'></i>Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/"><i class='fa fa-tags'></i>Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/"><i class='fa fa-tags'></i>Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/"><i class='fa fa-tags'></i>RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/"><i class='fa fa-tags'></i>RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/"><i class='fa fa-tags'></i>RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reactive/"><i class='fa fa-tags'></i>Reactive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/"><i class='fa fa-tags'></i>Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBT/"><i class='fa fa-tags'></i>SBT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/"><i class='fa fa-tags'></i>Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scss/"><i class='fa fa-tags'></i>Scss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShadowSocks/"><i class='fa fa-tags'></i>ShadowSocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/"><i class='fa fa-tags'></i>Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/"><i class='fa fa-tags'></i>Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/"><i class='fa fa-tags'></i>Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/"><i class='fa fa-tags'></i>Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/"><i class='fa fa-tags'></i>Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/"><i class='fa fa-tags'></i>Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/"><i class='fa fa-tags'></i>Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/"><i class='fa fa-tags'></i>Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/"><i class='fa fa-tags'></i>VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/"><i class='fa fa-tags'></i>Zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/"><i class='fa fa-tags'></i>gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/"><i class='fa fa-tags'></i>jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/"><i class='fa fa-tags'></i>java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/untag/"><i class='fa fa-tags'></i>untag</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+                   
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2020 BSYONLINE<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a href="https://github.com/bsyonline"><i class="fa fa-github"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a href="/"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+<![endif]--> 
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/widgets.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>
